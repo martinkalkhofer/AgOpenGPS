@@ -190,6 +190,8 @@ namespace AgOpenGPS
 
         public bool IsPointInsideHeadLine(vec2 pt)
         {
+            int x = 0;
+
             //if inside outer boundary, then potentially add
             if (headArr.Count > 0 && headArr[0].IsPointInHeadArea(pt))
             {
