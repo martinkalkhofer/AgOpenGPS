@@ -335,23 +335,23 @@ namespace AgOpenGPS
         public void DrawBoundaryLine()
         {
             ////draw the perimeter line so far
-            if (bndLine.Count < 1) return;
+            if (bndLineEar.Count < 1) return;
             //GL.PointSize(2);
-            GL.LineWidth(2);
-            int ptCount = bndLine.Count;
-            //if (isDriveThru) GL.Color3(0.25f, 0.752f, 0.860f);
-            //else 
-            GL.Begin(PrimitiveType.Lines);
-            for (int h = 0; h < ptCount; h++) GL.Vertex3(bndLine[h].easting, bndLine[h].northing, 0);
-            //GL.Color3(0.95f, 0.972f, 0.90f);
-            //GL.Vertex3(bndLine[0].easting, bndLine[0].northing, 0);
-            GL.End();
+            //int ptCount = bndLine.Count;
+            ////if (isDriveThru) GL.Color3(0.25f, 0.752f, 0.860f);
+            ////else 
+            //GL.Begin(PrimitiveType.Lines);
+            //for (int h = 0; h < ptCount; h++) GL.Vertex3(bndLine[h].easting, bndLine[h].northing, 0);
+            ////GL.Color3(0.95f, 0.972f, 0.90f);
+            ////GL.Vertex3(bndLine[0].easting, bndLine[0].northing, 0);
+            //GL.End();
 
             //ptCount = bdList.Count;
             //if (ptCount < 1) return;
-            GL.PointSize(8);
-            GL.Color3(0.19f, 0.932f, 0.70f);
-            GL.Begin(PrimitiveType.Points);
+            //GL.PointSize(8);
+            //GL.Color3(0.19f, 0.932f, 0.70f);
+            GL.LineWidth(2);
+            GL.Begin(PrimitiveType.LineLoop);
             for (int i = 0; i < bndLineEar.Count; i++)
             {
                 GL.Vertex3(bndLineEar[i].easting, bndLineEar[i].northing, 0);

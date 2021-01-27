@@ -83,6 +83,9 @@ namespace AgOpenGPS
         }
         private void btnCycleLines_Click(object sender, EventArgs e)
         {
+            //reset to generate new reference
+            curve.lastSecond = ABLine.lastSecond = 0;
+
             if (ABLine.isBtnABLineOn && ABLine.numABLines > 0)
             {
                 ABLine.moveDistance = 0;

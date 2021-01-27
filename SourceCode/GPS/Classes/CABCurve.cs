@@ -29,6 +29,8 @@ namespace AgOpenGPS
 
         public vec2 boxC = new vec2(1, 1), boxD = new vec2(2, 3);
         private int A, B, C;
+        private int rA, rB;
+
         public int currentLocationIndex;
 
         public double aveLineHeading;
@@ -54,12 +56,315 @@ namespace AgOpenGPS
         public List<vec2> tramArr = new List<vec2>();
         public List<List<vec2>> tramList = new List<List<vec2>>();
 
-        private double lastSecond = 0;
+        public double lastSecond = 0;
 
         public CABCurve(FormGPS _f)
         {
             //constructor
             mf = _f;
+        }
+
+
+        public void BuildCurveCurrentList(vec3 pivot, vec3 steer)
+
+        {
+            double minDistA = 1000000, minDistB;
+            //move the ABLine over based on the overlap amount set in vehicle
+            double widthMinusOverlap = mf.tool.toolWidth - mf.tool.toolOverlap;
+
+
+            int refCount = refList.Count;
+            if (refCount < 5)
+            {
+                curList?.Clear();
+                return;
+            }
+
+            int cc = 0, dd;
+            for (int j = 0; j < refCount; j += 10)
+            {
+                double dist = ((pivot.easting - refList[j].easting) * (pivot.easting - refList[j].easting))
+                                + ((pivot.northing - refList[j].northing) * (pivot.northing - refList[j].northing));
+                if (dist < minDistA)
+                {
+                    minDistA = dist;
+                    cc = j;
+                }
+            }
+
+            minDistA = minDistB = 1000000;
+
+            dd = cc + 7; if (dd > refCount - 1) dd = refCount;
+            cc -= 7; if (cc < 0) cc = 0;
+
+
+            //find the closest 2 points to current close call
+            for (int j = cc; j < dd; j++)
+            {
+                double dist = ((pivot.easting - refList[j].easting) * (pivot.easting - refList[j].easting))
+                                + ((pivot.northing - refList[j].northing) * (pivot.northing - refList[j].northing));
+                if (dist < minDistA)
+                {
+                    minDistB = minDistA;
+                    rB = rA;
+                    minDistA = dist;
+                    rA = j;
+                }
+                else if (dist < minDistB)
+                {
+                    minDistB = dist;
+                    rB = j;
+                }
+            }
+
+            if (rA >= refCount - 1 || rB >= refCount) return;
+
+            if (rA > rB) { C = rA; rA = rB; rB = C; }
+
+            //same way as line creation or not
+            bool isFixHeadingSameWayAsRef = Math.PI - Math.Abs(Math.Abs(pivot.heading - refList[rA].heading) - Math.PI) < glm.PIBy2;
+
+            //which side of the closest point are we on is next
+            //calculate endpoints of reference line based on closest point
+            refPoint1.easting = refList[rA].easting - (Math.Sin(refList[rA].heading) * 100.0);
+            refPoint1.northing = refList[rA].northing - (Math.Cos(refList[rA].heading) * 100.0);
+
+            refPoint2.easting = refList[rA].easting + (Math.Sin(refList[rA].heading) * 100.0);
+            refPoint2.northing = refList[rA].northing + (Math.Cos(refList[rA].heading) * 100.0);
+
+            //x2-x1
+            double dx = refPoint2.easting - refPoint1.easting;
+            //z2-z1
+            double dz = refPoint2.northing - refPoint1.northing;
+
+            //how far are we away from the reference line at 90 degrees - 2D cross product and distance
+            double distanceFromRefLine = ((dz * pivot.easting) - (dx * pivot.northing) + (refPoint2.easting
+                                    * refPoint1.northing) - (refPoint2.northing * refPoint1.easting))
+                                    / Math.Sqrt((dz * dz) + (dx * dx));
+
+            deltaOfRefAndAveHeadings = 1;
+
+            //add or subtract pi by 2 depending on which side of ref line
+            //move the ABLine over based on the overlap amount set in vehicle
+            //if (mf.tool.toolOffset != 0)
+            //{
+            //    widthMinusOverlap = mf.tool.toolWidth / 2 - mf.tool.toolOverlap;
+            //}
+            //else
+            //{
+            //    widthMinusOverlap = mf.tool.toolWidth - mf.tool.toolOverlap;
+            //}
+
+            //determine closest point to vehicle spacing
+            howManyPathsAway = Math.Round(distanceFromRefLine / widthMinusOverlap, 0, MidpointRounding.AwayFromZero);
+
+            //right or left
+            curveNumber = howManyPathsAway;
+
+            //build current list
+            //isCurrentLineValid = true;
+
+            //build the current line
+            curList?.Clear();
+
+            double distSqAway = (widthMinusOverlap * howManyPathsAway * widthMinusOverlap * howManyPathsAway) * 0.999999;
+
+            if (isFixHeadingSameWayAsRef)
+            {
+                for (int i = 0; i < refCount - 1; i++)
+                {
+                    var point = new vec3(
+                    refList[i].easting + (Math.Sin(glm.PIBy2 + refList[i].heading) * widthMinusOverlap * howManyPathsAway),
+                    refList[i].northing + (Math.Cos(glm.PIBy2 + refList[i].heading) * widthMinusOverlap * howManyPathsAway),
+                    refList[i].heading);
+                    bool Add = true;
+                    for (int t = 0; t < refCount; t++)
+                    {
+                        double dist = ((point.easting - refList[t].easting) * (point.easting - refList[t].easting)) 
+                            + ((point.northing - refList[t].northing) * (point.northing - refList[t].northing));
+                        if (dist < distSqAway)
+                        {
+                            Add = false;
+                            break;
+                        }
+                    }
+                    if (Add)
+                    {
+                        if (curList.Count > 0)
+                        {
+                            double dist = ((point.easting - curList[curList.Count - 1].easting) * (point.easting - curList[curList.Count - 1].easting)) 
+                                + ((point.northing - curList[curList.Count - 1].northing) * (point.northing - curList[curList.Count - 1].northing));
+                            if (dist > 1)
+                                curList.Add(point);
+                        }
+                        else curList.Add(point);
+                    }
+                }
+            }
+            else  //going opposite direction of refList creation
+            {
+                for (int i = refCount - 1; i >= 0; i--)
+                {
+                    var point = new vec3(
+                    refList[i].easting + (Math.Sin(glm.PIBy2 + refList[i].heading) * widthMinusOverlap * howManyPathsAway),
+                    refList[i].northing + (Math.Cos(glm.PIBy2 + refList[i].heading) * widthMinusOverlap * howManyPathsAway),
+                    refList[i].heading);
+                    bool Add = true;
+                    for (int t = refCount - 1; t >= 0; t--)
+                    {
+                        double dist = ((point.easting - refList[t].easting) * (point.easting - refList[t].easting)) 
+                            + ((point.northing - refList[t].northing) * (point.northing - refList[t].northing));
+                        if (dist < distSqAway)
+                        {
+                            Add = false;
+                            break;
+                        }
+                    }
+                    if (Add)
+                    {
+                        if (curList.Count > 0)
+                        {
+                            double dist = ((point.easting - curList[curList.Count - 1].easting) * (point.easting - curList[curList.Count - 1].easting)) 
+                                + ((point.northing - curList[curList.Count - 1].northing) * (point.northing - curList[curList.Count - 1].northing));
+                            if (dist > 1)
+                                curList.Add(point);
+                        }
+                        else curList.Add(point);
+                    }
+                }
+            }
+
+            //we are always building in the direction of travel
+            isSameWay = true;
+
+            //int cnt;
+            //if (style == 1)
+            //{
+            //    cnt = curList.Count;
+            //    vec3[] arr = new vec3[cnt];
+            //    cnt--;
+            //    curList.CopyTo(arr);
+            //    curList.Clear();
+
+            //    //middle points
+            //    for (int i = 1; i < cnt; i++)
+            //    {
+            //        vec3 pt3 = arr[i];
+            //        pt3.heading = Math.Atan2(arr[i + 1].easting - arr[i - 1].easting, arr[i + 1].northing - arr[i - 1].northing);
+            //        if (pt3.heading < 0) pt3.heading += glm.twoPI;
+            //        curList.Add(pt3);
+            //    }
+
+            //    return;
+            //}
+
+            int cnt = curList.Count;
+            if (cnt > 6)
+            {
+                vec3[] arr = new vec3[cnt];
+                curList.CopyTo(arr);
+
+                for (int i = 1; i < (curList.Count - 1); i++)
+                {
+                    arr[i].easting = (curList[i - 1].easting + curList[i].easting + curList[i + 1].easting) / 3;
+                    arr[i].northing = (curList[i - 1].northing + curList[i].northing + curList[i + 1].northing) / 3;
+                }
+                curList.Clear();
+
+                for (int i = 0; i < (arr.Length - 1); i++)
+                {
+                    arr[i].heading = Math.Atan2(arr[i + 1].easting - arr[i].easting, arr[i + 1].northing - arr[i].northing);
+                    if (arr[i].heading < 0) arr[i].heading += glm.twoPI;
+                    if (arr[i].heading >= glm.twoPI) arr[i].heading -= glm.twoPI;
+                }
+
+                arr[arr.Length - 1].heading = arr[arr.Length - 2].heading;
+
+
+                if (mf.tool.isToolTrailing)
+                {
+                    //depending on hitch is different profile of draft
+                    double hitch;
+                    if (mf.tool.isToolTBT && mf.tool.toolTankTrailingHitchLength < 0)
+                    {
+                        hitch = mf.tool.toolTankTrailingHitchLength * 0.85;
+                        hitch += mf.tool.toolTrailingHitchLength * 0.65;
+                    }
+                    else hitch = mf.tool.toolTrailingHitchLength * 1.0;// - mf.vehicle.wheelbase;
+
+                    //move the line forward based on hitch length ratio
+                    for (int i = 0; i < arr.Length; i++)
+                    {
+                        arr[i].easting -= Math.Sin(arr[i].heading) * (hitch);
+                        arr[i].northing -= Math.Cos(arr[i].heading) * (hitch);
+                    }
+
+                    ////average the points over 3, center weighted
+                    //for (int i = 1; i < arr.Length - 2; i++)
+                    //{
+                    //    arr2[i].easting = (arr[i - 1].easting + arr[i].easting + arr[i + 1].easting) / 3;
+                    //    arr2[i].northing = (arr[i - 1].northing + arr[i].northing + arr[i + 1].northing) / 3;
+                    //}
+
+                    //recalculate the heading
+                    for (int i = 0; i < (arr.Length - 1); i++)
+                    {
+                        arr[i].heading = Math.Atan2(arr[i + 1].easting - arr[i].easting, arr[i + 1].northing - arr[i].northing);
+                        if (arr[i].heading < 0) arr[i].heading += glm.twoPI;
+                        if (arr[i].heading >= glm.twoPI) arr[i].heading -= glm.twoPI;
+                    }
+
+                    arr[arr.Length - 1].heading = arr[arr.Length - 2].heading;
+                }
+
+                //replace the array 
+                //curList.AddRange(arr);
+                cnt = arr.Length;
+                double distance;
+                double spacing = 0.5;
+
+                //add the first point of loop - it will be p1
+                curList.Add(arr[0]);
+                curList.Add(arr[1]);
+
+                for (int i = 0; i < cnt - 3; i++)
+                {
+                    // add p1
+                    curList.Add(arr[i + 1]);
+
+                    distance = glm.Distance(arr[i + 1], arr[i + 2]);
+
+                    if (distance > spacing)
+                    {
+                        int loopTimes = (int)(distance / spacing + 1);
+                        for (int j = 1; j < loopTimes; j++)
+                        {
+                            vec3 pos = new vec3(glm.Catmull(j / (double)(loopTimes), arr[i], arr[i + 1], arr[i + 2], arr[i + 3]));
+                            curList.Add(pos);
+                        }
+                    }
+                }
+
+                curList.Add(arr[cnt - 2]);
+                curList.Add(arr[cnt - 1]);
+
+
+                //to calc heading based on next and previous points to give an average heading.
+                cnt = curList.Count;
+                arr = new vec3[cnt];
+                cnt--;
+                curList.CopyTo(arr);
+                curList.Clear();
+
+                //middle points
+                for (int i = 1; i < cnt; i++)
+                {
+                    vec3 pt3 = arr[i];
+                    pt3.heading = Math.Atan2(arr[i + 1].easting - arr[i - 1].easting, arr[i + 1].northing - arr[i - 1].northing);
+                    if (pt3.heading < 0) pt3.heading += glm.twoPI;
+                    curList.Add(pt3);
+                }
+            }
         }
         public void GetCurrentCurveLine(vec3 pivot, vec3 steer)
         {
@@ -74,104 +379,107 @@ namespace AgOpenGPS
             {
                 lastSecond = mf.secondsSinceStart;
 
-                boxA.easting = pivot.easting - (Math.Sin(aveLineHeading + glm.PIBy2) * 2000);
-                boxA.northing = pivot.northing - (Math.Cos(aveLineHeading + glm.PIBy2) * 2000);
-
-                boxB.easting = pivot.easting + (Math.Sin(aveLineHeading + glm.PIBy2) * 2000);
-                boxB.northing = pivot.northing + (Math.Cos(aveLineHeading + glm.PIBy2) * 2000);
-
-                boxC.easting = boxB.easting + (Math.Sin(aveLineHeading) * 1.0);
-                boxC.northing = boxB.northing + (Math.Cos(aveLineHeading) * 1.0);
-
-                boxD.easting = boxA.easting + (Math.Sin(aveLineHeading) * 1.0);
-                boxD.northing = boxA.northing + (Math.Cos(aveLineHeading) * 1.0);
-
-                boxA.easting -= (Math.Sin(aveLineHeading) * 1.0);
-                boxA.northing -= (Math.Cos(aveLineHeading) * 1.0);
-
-                boxB.easting -= (Math.Sin(aveLineHeading) * 1.0);
-                boxB.northing -= (Math.Cos(aveLineHeading) * 1.0);
-
-                //determine if point are in frustum box
-                for (int s = 0; s < ptCnt; s++)
-                {
-                    if ((((boxB.easting - boxA.easting) * (refList[s].northing - boxA.northing))
-                            - ((boxB.northing - boxA.northing) * (refList[s].easting - boxA.easting))) < 0) { continue; }
-
-                    if ((((boxD.easting - boxC.easting) * (refList[s].northing - boxC.northing))
-                            - ((boxD.northing - boxC.northing) * (refList[s].easting - boxC.easting))) < 0) { continue; }
-
-                    closestRefIndex = s;
-                    break;
-                }
-
-                dist = ((pivot.easting - refList[closestRefIndex].easting) * (pivot.easting - refList[closestRefIndex].easting))
-                                + ((pivot.northing - refList[closestRefIndex].northing) * (pivot.northing - refList[closestRefIndex].northing));
-
-                //determine closest point
-                double minDistance = Math.Sqrt(dist);
-
-                //grab the heading at the closest point
-                refHeading = refList[closestRefIndex].heading;
-
-                //which side of the patch are we on is next
-                //calculate endpoints of reference line based on closest point
-                refPoint1.easting = refList[closestRefIndex].easting - (Math.Sin(refHeading) * 50.0);
-                refPoint1.northing = refList[closestRefIndex].northing - (Math.Cos(refHeading) * 50.0);
-
-                refPoint2.easting = refList[closestRefIndex].easting + (Math.Sin(refHeading) * 50.0);
-                refPoint2.northing = refList[closestRefIndex].northing + (Math.Cos(refHeading) * 50.0);
-
-                //x2-x1
-                dx = refPoint2.easting - refPoint1.easting;
-                //z2-z1
-                dz = refPoint2.northing - refPoint1.northing;
-
-                //how far are we away from the reference line at 90 degrees - 2D cross product and distance
-                double distanceFromRefLine = ((dz * pivot.easting) - (dx * pivot.northing) + (refPoint2.easting
-                                        * refPoint1.northing) - (refPoint2.northing * refPoint1.easting));
-                //   / Math.Sqrt((dz * dz) + (dx * dx));
-                //are we going same direction as stripList was created?
-                isSameWay = Math.PI - Math.Abs(Math.Abs(pivot.heading - refHeading) - Math.PI) < glm.PIBy2;
-                deltaOfRefAndAveHeadings = Math.PI - Math.Abs(Math.Abs(aveLineHeading - refHeading) - Math.PI);
-                deltaOfRefAndAveHeadings = Math.Cos(deltaOfRefAndAveHeadings);
-
-                //add or subtract pi by 2 depending on which side of ref line
-                double piSide;
-
-                //sign of distance determines which side of line we are on
-                if (distanceFromRefLine > 0) piSide = glm.PIBy2;
-                else piSide = -glm.PIBy2;
-                double widthMinusOverlap;
-                //move the ABLine over based on the overlap amount set in vehicle
-                if (mf.tool.toolOffset != 0)
-                {
-                    widthMinusOverlap = mf.tool.toolWidth / 2 - mf.tool.toolOverlap;
-                }
-                else
-                {
-                    widthMinusOverlap = mf.tool.toolWidth - mf.tool.toolOverlap;
-                }
-
-
-                howManyPathsAway = Math.Round(minDistance / widthMinusOverlap, 0, MidpointRounding.AwayFromZero);
-
-                curveNumber = howManyPathsAway;
-                if (distanceFromRefLine < 0) curveNumber = -curveNumber;
-
-                //double toolOffset = mf.tool.toolOffset;
-
-                //build the current line
-                curList?.Clear();
-                for (int i = 0; i < ptCount; i++)
-                {
-                    var point = new vec3(
-                        refList[i].easting + (Math.Sin(piSide + aveLineHeading) * ((widthMinusOverlap * howManyPathsAway))),
-                        refList[i].northing + (Math.Cos(piSide + aveLineHeading) * ((widthMinusOverlap * howManyPathsAway))),
-                        refList[i].heading);
-                    curList.Add(point);
-                }
+                BuildCurveCurrentList(pivot,steer);      
             }
+
+            //
+                //    boxA.easting = pivot.easting - (Math.Sin(aveLineHeading + glm.PIBy2) * 2000);
+                //    boxA.northing = pivot.northing - (Math.Cos(aveLineHeading + glm.PIBy2) * 2000);
+
+                //    boxB.easting = pivot.easting + (Math.Sin(aveLineHeading + glm.PIBy2) * 2000);
+                //    boxB.northing = pivot.northing + (Math.Cos(aveLineHeading + glm.PIBy2) * 2000);
+
+                //    boxC.easting = boxB.easting + (Math.Sin(aveLineHeading) * 1.0);
+                //    boxC.northing = boxB.northing + (Math.Cos(aveLineHeading) * 1.0);
+
+                //    boxD.easting = boxA.easting + (Math.Sin(aveLineHeading) * 1.0);
+                //    boxD.northing = boxA.northing + (Math.Cos(aveLineHeading) * 1.0);
+
+                //    boxA.easting -= (Math.Sin(aveLineHeading) * 1.0);
+                //    boxA.northing -= (Math.Cos(aveLineHeading) * 1.0);
+
+                //    boxB.easting -= (Math.Sin(aveLineHeading) * 1.0);
+                //    boxB.northing -= (Math.Cos(aveLineHeading) * 1.0);
+
+                //    //determine if point are in frustum box
+                //    for (int s = 0; s < ptCnt; s++)
+                //    {
+                //        if ((((boxB.easting - boxA.easting) * (refList[s].northing - boxA.northing))
+                //                - ((boxB.northing - boxA.northing) * (refList[s].easting - boxA.easting))) < 0) { continue; }
+
+                //        if ((((boxD.easting - boxC.easting) * (refList[s].northing - boxC.northing))
+                //                - ((boxD.northing - boxC.northing) * (refList[s].easting - boxC.easting))) < 0) { continue; }
+
+                //        closestRefIndex = s;
+                //        break;
+                //    }
+
+                //    dist = ((pivot.easting - refList[closestRefIndex].easting) * (pivot.easting - refList[closestRefIndex].easting))
+                //                    + ((pivot.northing - refList[closestRefIndex].northing) * (pivot.northing - refList[closestRefIndex].northing));
+
+                //    //determine closest point
+                //    double minDistance = Math.Sqrt(dist);
+
+                //    //grab the heading at the closest point
+                //    refHeading = refList[closestRefIndex].heading;
+
+                //    //which side of the patch are we on is next
+                //    //calculate endpoints of reference line based on closest point
+                //    refPoint1.easting = refList[closestRefIndex].easting - (Math.Sin(refHeading) * 50.0);
+                //    refPoint1.northing = refList[closestRefIndex].northing - (Math.Cos(refHeading) * 50.0);
+
+                //    refPoint2.easting = refList[closestRefIndex].easting + (Math.Sin(refHeading) * 50.0);
+                //    refPoint2.northing = refList[closestRefIndex].northing + (Math.Cos(refHeading) * 50.0);
+
+                //    //x2-x1
+                //    dx = refPoint2.easting - refPoint1.easting;
+                //    //z2-z1
+                //    dz = refPoint2.northing - refPoint1.northing;
+
+                //    //how far are we away from the reference line at 90 degrees - 2D cross product and distance
+                //    double distanceFromRefLine = ((dz * pivot.easting) - (dx * pivot.northing) + (refPoint2.easting
+                //                            * refPoint1.northing) - (refPoint2.northing * refPoint1.easting));
+                //    //   / Math.Sqrt((dz * dz) + (dx * dx));
+                //    //are we going same direction as stripList was created?
+                //    isSameWay = Math.PI - Math.Abs(Math.Abs(pivot.heading - refHeading) - Math.PI) < glm.PIBy2;
+                //    deltaOfRefAndAveHeadings = Math.PI - Math.Abs(Math.Abs(aveLineHeading - refHeading) - Math.PI);
+                //    deltaOfRefAndAveHeadings = Math.Cos(deltaOfRefAndAveHeadings);
+
+                //    //add or subtract pi by 2 depending on which side of ref line
+                //    double piSide;
+
+                //    //sign of distance determines which side of line we are on
+                //    if (distanceFromRefLine > 0) piSide = glm.PIBy2;
+                //    else piSide = -glm.PIBy2;
+                //    double widthMinusOverlap;
+                //    //move the ABLine over based on the overlap amount set in vehicle
+                //    if (mf.tool.toolOffset != 0)
+                //    {
+                //        widthMinusOverlap = mf.tool.toolWidth / 2 - mf.tool.toolOverlap;
+                //    }
+                //    else
+                //    {
+                //        widthMinusOverlap = mf.tool.toolWidth - mf.tool.toolOverlap;
+                //    }
+
+
+                //    howManyPathsAway = Math.Round(minDistance / widthMinusOverlap, 0, MidpointRounding.AwayFromZero);
+
+                //    curveNumber = howManyPathsAway;
+                //    if (distanceFromRefLine < 0) curveNumber = -curveNumber;
+
+                //    //double toolOffset = mf.tool.toolOffset;
+
+                //    //build the current line
+                //    curList?.Clear();
+                //    for (int i = 0; i < ptCount; i++)
+                //    {
+                //        var point = new vec3(
+                //            refList[i].easting + (Math.Sin(piSide + aveLineHeading) * ((widthMinusOverlap * howManyPathsAway))),
+                //            refList[i].northing + (Math.Cos(piSide + aveLineHeading) * ((widthMinusOverlap * howManyPathsAway))),
+                //            refList[i].heading);
+                //        curList.Add(point);
+                //    }
 
             double minDistA = 1000000, minDistB = 1000000;
             ptCount = curList.Count;

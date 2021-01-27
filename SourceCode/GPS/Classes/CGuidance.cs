@@ -521,8 +521,5 @@ namespace AgOpenGPS
                 mf.guidanceLineDistanceOff = 32000;
             }
         }
-
-
-
     }
 }
