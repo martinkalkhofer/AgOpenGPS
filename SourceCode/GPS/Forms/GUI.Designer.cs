@@ -10,7 +10,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
-
+using System.IO;
+using System.Media;
 
 namespace AgOpenGPS
 {
@@ -317,18 +318,8 @@ namespace AgOpenGPS
             isDay = (DateTime.Now.Ticks < sunset.Ticks && DateTime.Now.Ticks > sunrise.Ticks);
         }
 
-        private void LoadGUI()
+        public void LoadSettings()
         {
-            isSkyOn = Settings.Default.setMenu_isSkyOn;
-            isGridOn = Settings.Default.setMenu_isGridOn;
-            isCompassOn = Settings.Default.setMenu_isCompassOn;
-            isSpeedoOn = Settings.Default.setMenu_isSpeedoOn;
-            isAutoDayNight = Settings.Default.setDisplay_isAutoDayNight;
-            isSideGuideLines = Settings.Default.setMenu_isSideGuideLines;
-            isLogNMEA = Settings.Default.setMenu_isLogNMEA;
-            isPureDisplayOn = Settings.Default.setMenu_isPureOn;
-            isUTurnAlwaysOn = Settings.Default.setMenu_isUTurnAlwaysOn;                                         
-
             //set the language to last used
             SetLanguage(Settings.Default.setF_culture);
 
@@ -341,6 +332,107 @@ namespace AgOpenGPS
             inoVersionInt = inoV;
             inoVersionStr = inoV.ToString();
 
+            isSkyOn = Settings.Default.setMenu_isSkyOn;
+            isGridOn = Settings.Default.setMenu_isGridOn;
+            isCompassOn = Settings.Default.setMenu_isCompassOn;
+            isSpeedoOn = Settings.Default.setMenu_isSpeedoOn;
+            isAutoDayNight = Settings.Default.setDisplay_isAutoDayNight;
+            isSideGuideLines = Settings.Default.setMenu_isSideGuideLines;
+            isLogNMEA = Settings.Default.setMenu_isLogNMEA;
+            isPureDisplayOn = Settings.Default.setMenu_isPureOn;
+            isUTurnAlwaysOn = Settings.Default.setMenu_isUTurnAlwaysOn;
+
+            if (Settings.Default.setF_workingDirectory == "Default")
+                baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AgOpenGPS\\";
+            else baseDirectory = Settings.Default.setF_workingDirectory + "\\AgOpenGPS\\";
+
+            //get the fields directory, if not exist, create
+            fieldsDirectory = baseDirectory + "Fields\\";
+            string dir = Path.GetDirectoryName(fieldsDirectory);
+            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
+
+            //get the fields directory, if not exist, create
+            vehiclesDirectory = baseDirectory + "Vehicles\\";
+            dir = Path.GetDirectoryName(vehiclesDirectory);
+            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
+
+            //get the tools directory, if not exist, create
+            toolsDirectory = baseDirectory + "Tools\\";
+            dir = Path.GetDirectoryName(toolsDirectory);
+            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
+
+            //get the tools directory, if not exist, create
+            envDirectory = baseDirectory + "Environments\\";
+            dir = Path.GetDirectoryName(envDirectory);
+            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
+
+
+            //make sure current field directory exists, null if not
+            currentFieldDirectory = Settings.Default.setF_CurrentDir;
+
+            string curDir;
+            if (currentFieldDirectory != "")
+            {
+                curDir = fieldsDirectory + currentFieldDirectory + "//";
+                dir = Path.GetDirectoryName(curDir);
+                if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
+                {
+                    currentFieldDirectory = "";
+                    Settings.Default.setF_CurrentDir = "";
+                    Settings.Default.Save();
+                }
+            }
+
+            string directoryName = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+            string wave = Path.Combine(directoryName, "Dependencies\\Audio", "Boundary.Wav");
+            if (File.Exists(wave))
+            {
+                sndBoundaryAlarm = new SoundPlayer(wave);
+            }
+            else
+            {
+                sndBoundaryAlarm = new SoundPlayer(Properties.Resources.Alarm10);
+            }
+
+            //grab the current vehicle filename - make sure it exists
+            vehicleFileName = Vehicle.Default.setVehicle_vehicleName;
+            toolFileName = Vehicle.Default.setVehicle_toolName;
+            envFileName = Vehicle.Default.setVehicle_envName;
+
+
+            //get the abLines directory, if not exist, create
+            ablinesDirectory = baseDirectory + "ABLines\\";
+            dir = Path.GetDirectoryName(fieldsDirectory);
+            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
+
+            //set baud and port from last time run
+            baudRateGPS = Settings.Default.setPort_baudRate;
+            portNameGPS = Settings.Default.setPort_portNameGPS;
+
+            //try and open
+            SerialPortOpenGPS();
+
+            if (spGPS.IsOpen)
+            {
+                simulatorOnToolStripMenuItem.Checked = false;
+                panelSim.Visible = false;
+                timerSim.Enabled = false;
+
+                Settings.Default.setMenu_isSimulatorOn = simulatorOnToolStripMenuItem.Checked;
+                Settings.Default.Save();
+            }
+
+
+            //same for SectionMachine port
+            portNameMachine = Settings.Default.setPort_portNameMachine;
+            wasRateMachineConnectedLastRun = Settings.Default.setPort_wasMachineConnected;
+            if (wasRateMachineConnectedLastRun) SerialPortMachineOpen();
+
+            //same for AutoSteer port
+            portNameAutoSteer = Settings.Default.setPort_portNameAutoSteer;
+            wasAutoSteerConnectedLastRun = Settings.Default.setPort_wasAutoSteerConnected;
+            if (wasAutoSteerConnectedLastRun) SerialPortAutoSteerOpen();
+            
             simulatorOnToolStripMenuItem.Checked = Settings.Default.setMenu_isSimulatorOn;
             if (simulatorOnToolStripMenuItem.Checked)
             {
@@ -353,17 +445,11 @@ namespace AgOpenGPS
                 timerSim.Enabled = false;
             }
 
-            fixUpdateHz = Properties.Settings.Default.setPort_NMEAHz;
             if (timerSim.Enabled) fixUpdateHz = 10;
             fixUpdateTime = 1 / (double)fixUpdateHz;
 
             //set the flag mark button to red dot
             btnFlag.Image = Properties.Resources.FlagRed;
-
-            //night mode
-            //isDay = Properties.Settings.Default.setDisplay_isDayMode;
-            isDay = !isDay;
-            SwapDayNightMode();
 
             //load the string of custom colors
             string[] words = Properties.Settings.Default.setDisplay_customColors.Split(',');
@@ -393,7 +479,6 @@ namespace AgOpenGPS
             isKeyboardOn = Settings.Default.setDisplay_isKeyboardOn;
             keyboardToolStripMenuItem1.Checked = isKeyboardOn;
 
-
             if (Settings.Default.setMenu_isOGLZoomOn == 1)
                 topFieldViewToolStripMenuItem.Checked = true;
             else topFieldViewToolStripMenuItem.Checked = false;
@@ -404,22 +489,18 @@ namespace AgOpenGPS
             oglZoom.Left = 300;
             oglZoom.Top = 80;
 
-            oglZoom.SendToBack();
+            if (!topFieldViewToolStripMenuItem.Checked)
+                oglZoom.SendToBack();
 
-
-            LineUpManualBtns();
 
             yt.rowSkipsWidth = Properties.Vehicle.Default.set_youSkipWidth;
             cboxpRowWidth.SelectedIndex = yt.rowSkipsWidth - 1;
 
             //default to come up in mini panel, exit remembers 
-
             SwapBatmanPanels();
 
             if (Properties.Settings.Default.setAS_isAutoSteerAutoOn) btnAutoSteer.Text = "R";
             else btnAutoSteer.Text = "M";
-
-            //panelSim.Location = Settings.Default.setDisplay_panelSimLocation;
 
             FixPanelsAndMenus();
 
@@ -480,6 +561,99 @@ namespace AgOpenGPS
 
             //update the field data areas
             fd.UpdateFieldBoundaryGUIAreas();
+
+            vehicle = new CVehicle(this);
+
+            tool = new CTool(this);
+
+            section = new CSection[MAXSECTIONS];
+            for (int j = 0; j < MAXSECTIONS; j++) section[j] = new CSection(this);
+
+            //Set width of section and positions for each section
+            SectionSetPosition();
+
+
+            //Calculate total width and each section width
+            SectionCalcWidths();
+            LineUpManualBtns();
+
+            //instance of tram
+            tram = new CTram(this);
+
+
+            //set the correct zoom and grid
+            camera.camSetDistance = camera.zoomValue * camera.zoomValue * -1;
+            SetZoom();
+
+            //which heading source is being used
+            headingFromSource = Settings.Default.setGPS_headingFromWhichSource;
+
+            //start udp server if required
+            if (Properties.Settings.Default.setUDP_isOn
+                && !Properties.Settings.Default.setUDP_isInterAppOn) StartUDPServer();
+
+            if (Properties.Settings.Default.setUDP_isInterAppOn) StartLocalUDPServer();
+
+            //start NTRIP if required
+            if (Properties.Settings.Default.setNTRIP_isOn)
+            {
+                isNTRIP_RequiredOn = true;
+            }
+            else
+            {
+                isNTRIP_RequiredOn = false;
+            }
+
+            //remembered window position
+            if (Settings.Default.setWindow_Maximized)
+            {
+                WindowState = FormWindowState.Normal;
+                Location = Settings.Default.setWindow_Location;
+                Size = Settings.Default.setWindow_Size;
+            }
+            else if (Settings.Default.setWindow_Minimized)
+            {
+                //WindowState = FormWindowState.Minimized;
+                Location = Settings.Default.setWindow_Location;
+                Size = Settings.Default.setWindow_Size;
+            }
+            else
+            {
+                Location = Settings.Default.setWindow_Location;
+                Size = Settings.Default.setWindow_Size;
+            }
+
+            //don't draw the back opengl to GDI - it still works tho
+            //openGLControlBack.Visible = false;
+
+            //clear the flags
+            flagPts.Clear();
+            btnFlag.Enabled = false;
+
+            //workswitch stuff
+            mc.isWorkSwitchEnabled = Settings.Default.setF_IsWorkSwitchEnabled;
+            mc.isWorkSwitchActiveLow = Settings.Default.setF_IsWorkSwitchActiveLow;
+            mc.isWorkSwitchManual = Settings.Default.setF_IsWorkSwitchManual;
+
+            minFixStepDist = Settings.Default.setF_minFixStep;
+
+            fd.workedAreaTotalUser = Settings.Default.setF_UserTotalArea;
+
+            //load the last used auto turn shape
+            string fileAndDir = @".\Dependencies\YouTurnShapes\" + Properties.Settings.Default.setAS_youTurnShape;
+            yt.LoadYouTurnShapeFromFile(fileAndDir);
+
+            //load th elightbar resolution
+            lightbarCmPerPixel = Properties.Settings.Default.setDisplay_lightbarCmPerPixel;
+
+
+            //Stanley guidance
+            isStanleyUsed = Properties.Vehicle.Default.setVehicle_isStanleyUsed;
+
+            //night mode
+            //isDay = Properties.Settings.Default.setDisplay_isDayMode;
+            isDay = !isDay;
+            SwapDayNightMode();
 
         }
 

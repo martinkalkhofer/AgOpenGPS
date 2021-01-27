@@ -702,9 +702,6 @@
   <data name="gsLoadTool" xml:space="preserve">
     <value>Načítať náradie</value>
   </data>
-  <data name="gsLoadVehicle" xml:space="preserve">
-    <value>Načítať vozidlo</value>
-  </data>
   <data name="gsLocation" xml:space="preserve">
     <value>Poloha</value>
   </data>
@@ -1013,9 +1010,6 @@
   </data>
   <data name="gsSaveTool" xml:space="preserve">
     <value>Uložiť náradie</value>
-  </data>
-  <data name="gsSaveVehicle" xml:space="preserve">
-    <value>Uložiť vozidlo</value>
   </data>
   <data name="gsSavedInFolder" xml:space="preserve">
     <value>Uložené v súbore: </value>

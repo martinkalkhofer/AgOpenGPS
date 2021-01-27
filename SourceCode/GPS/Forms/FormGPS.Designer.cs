@@ -60,20 +60,11 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
-            this.topMenuLoadVehicle = new System.Windows.Forms.ToolStripMenuItem();
+            this.topMenuLoadAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
-            this.topMenuSaveVehicle = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.topMenuLoadTool = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-            this.topMenuSaveTool = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
-            this.topMenuLoadEnvironment = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
-            this.topMenuSaveEnvironment = new System.Windows.Forms.ToolStripMenuItem();
+            this.topMenuSaveAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.topMenuFileExplorer = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.resetALLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetEverythingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -278,7 +269,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.menuStrip1.Size = new System.Drawing.Size(312, 48);
+            this.menuStrip1.Size = new System.Drawing.Size(334, 48);
             this.menuStrip1.TabIndex = 49;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -479,133 +470,63 @@
             this.toolStripMenuItem1.AutoSize = false;
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator17,
-            this.topMenuLoadVehicle,
+            this.topMenuLoadAll,
             this.toolStripSeparator16,
-            this.topMenuSaveVehicle,
-            this.toolStripSeparator14,
-            this.topMenuLoadTool,
-            this.toolStripSeparator15,
-            this.topMenuSaveTool,
-            this.toolStripSeparator19,
-            this.topMenuLoadEnvironment,
-            this.toolStripSeparator18,
-            this.topMenuSaveEnvironment,
+            this.topMenuSaveAll,
             this.toolStripSeparator20,
             this.topMenuFileExplorer,
-            this.toolStripSeparator21,
             this.toolStripMenuItem4,
             this.resetALLToolStripMenuItem});
             this.toolStripMenuItem1.Image = global::AgOpenGPS.Properties.Resources.FileOpen;
             this.toolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(100, 48);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(122, 48);
             // 
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(422, 6);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(444, 6);
             // 
-            // topMenuLoadVehicle
+            // topMenuLoadAll
             // 
-            this.topMenuLoadVehicle.Image = global::AgOpenGPS.Properties.Resources.Settings64;
-            this.topMenuLoadVehicle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.topMenuLoadVehicle.Name = "topMenuLoadVehicle";
-            this.topMenuLoadVehicle.Size = new System.Drawing.Size(425, 64);
-            this.topMenuLoadVehicle.Text = "Load Vehicle";
-            this.topMenuLoadVehicle.Click += new System.EventHandler(this.topMenuLoadVehicle_Click);
+            this.topMenuLoadAll.Image = global::AgOpenGPS.Properties.Resources.FilePrevious;
+            this.topMenuLoadAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.topMenuLoadAll.Name = "topMenuLoadAll";
+            this.topMenuLoadAll.Size = new System.Drawing.Size(447, 70);
+            this.topMenuLoadAll.Text = "Load All";
+            this.topMenuLoadAll.Click += new System.EventHandler(this.topMenuLoadAll_Click);
             // 
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(422, 6);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(444, 6);
             // 
-            // topMenuSaveVehicle
+            // topMenuSaveAll
             // 
-            this.topMenuSaveVehicle.Image = global::AgOpenGPS.Properties.Resources.FileSave;
-            this.topMenuSaveVehicle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.topMenuSaveVehicle.Name = "topMenuSaveVehicle";
-            this.topMenuSaveVehicle.Size = new System.Drawing.Size(425, 64);
-            this.topMenuSaveVehicle.Text = "Save Vehicle";
-            this.topMenuSaveVehicle.Click += new System.EventHandler(this.topMenuSaveVehicle_Click);
-            // 
-            // toolStripSeparator14
-            // 
-            this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(422, 6);
-            // 
-            // topMenuLoadTool
-            // 
-            this.topMenuLoadTool.Image = global::AgOpenGPS.Properties.Resources.ToolMenu;
-            this.topMenuLoadTool.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.topMenuLoadTool.Name = "topMenuLoadTool";
-            this.topMenuLoadTool.Size = new System.Drawing.Size(425, 64);
-            this.topMenuLoadTool.Text = "Load Tool";
-            this.topMenuLoadTool.Click += new System.EventHandler(this.topMenuLoadTool_Click);
-            // 
-            // toolStripSeparator15
-            // 
-            this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(422, 6);
-            // 
-            // topMenuSaveTool
-            // 
-            this.topMenuSaveTool.Image = global::AgOpenGPS.Properties.Resources.FileSave;
-            this.topMenuSaveTool.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.topMenuSaveTool.Name = "topMenuSaveTool";
-            this.topMenuSaveTool.Size = new System.Drawing.Size(425, 64);
-            this.topMenuSaveTool.Text = "Save Tool";
-            this.topMenuSaveTool.Click += new System.EventHandler(this.topMenuSaveTool_Click);
-            // 
-            // toolStripSeparator19
-            // 
-            this.toolStripSeparator19.Name = "toolStripSeparator19";
-            this.toolStripSeparator19.Size = new System.Drawing.Size(422, 6);
-            // 
-            // topMenuLoadEnvironment
-            // 
-            this.topMenuLoadEnvironment.Image = global::AgOpenGPS.Properties.Resources.displayMenu;
-            this.topMenuLoadEnvironment.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.topMenuLoadEnvironment.Name = "topMenuLoadEnvironment";
-            this.topMenuLoadEnvironment.Size = new System.Drawing.Size(425, 64);
-            this.topMenuLoadEnvironment.Text = "Load Environment";
-            this.topMenuLoadEnvironment.Click += new System.EventHandler(this.topMenuLoadEnvironment_Click);
-            // 
-            // toolStripSeparator18
-            // 
-            this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(422, 6);
-            // 
-            // topMenuSaveEnvironment
-            // 
-            this.topMenuSaveEnvironment.Image = global::AgOpenGPS.Properties.Resources.FileSave;
-            this.topMenuSaveEnvironment.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.topMenuSaveEnvironment.Name = "topMenuSaveEnvironment";
-            this.topMenuSaveEnvironment.Size = new System.Drawing.Size(425, 64);
-            this.topMenuSaveEnvironment.Text = "Save Environment";
-            this.topMenuSaveEnvironment.Click += new System.EventHandler(this.topMenuSaveEnvironment_Click);
+            this.topMenuSaveAll.Image = global::AgOpenGPS.Properties.Resources.FileSave;
+            this.topMenuSaveAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.topMenuSaveAll.Name = "topMenuSaveAll";
+            this.topMenuSaveAll.Size = new System.Drawing.Size(447, 70);
+            this.topMenuSaveAll.Text = "Save All";
+            this.topMenuSaveAll.Click += new System.EventHandler(this.topMenuSaveAll_Click);
             // 
             // toolStripSeparator20
             // 
             this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(422, 6);
+            this.toolStripSeparator20.Size = new System.Drawing.Size(444, 6);
             // 
             // topMenuFileExplorer
             // 
             this.topMenuFileExplorer.Name = "topMenuFileExplorer";
-            this.topMenuFileExplorer.Size = new System.Drawing.Size(425, 64);
+            this.topMenuFileExplorer.Size = new System.Drawing.Size(447, 70);
             this.topMenuFileExplorer.Text = "Windows File Explorer";
             this.topMenuFileExplorer.Click += new System.EventHandler(this.topMenuFileExplorer_Click);
-            // 
-            // toolStripSeparator21
-            // 
-            this.toolStripSeparator21.Name = "toolStripSeparator21";
-            this.toolStripSeparator21.Size = new System.Drawing.Size(422, 6);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(425, 64);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(447, 70);
             this.toolStripMenuItem4.Text = "-------------------------";
             // 
             // resetALLToolStripMenuItem
@@ -613,7 +534,7 @@
             this.resetALLToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.resetEverythingToolStripMenuItem});
             this.resetALLToolStripMenuItem.Name = "resetALLToolStripMenuItem";
-            this.resetALLToolStripMenuItem.Size = new System.Drawing.Size(425, 64);
+            this.resetALLToolStripMenuItem.Size = new System.Drawing.Size(447, 70);
             this.resetALLToolStripMenuItem.Text = "Reset To Default";
             // 
             // resetEverythingToolStripMenuItem
@@ -1019,7 +940,7 @@
             this.btnResetSim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResetSim.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnResetSim.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnResetSim.Location = new System.Drawing.Point(552, 4);
+            this.btnResetSim.Location = new System.Drawing.Point(538, 4);
             this.btnResetSim.Name = "btnResetSim";
             this.btnResetSim.Size = new System.Drawing.Size(53, 31);
             this.btnResetSim.TabIndex = 164;
@@ -1034,7 +955,7 @@
             this.btnResetSteerAngle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResetSteerAngle.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnResetSteerAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnResetSteerAngle.Location = new System.Drawing.Point(468, 4);
+            this.btnResetSteerAngle.Location = new System.Drawing.Point(454, 4);
             this.btnResetSteerAngle.Name = "btnResetSteerAngle";
             this.btnResetSteerAngle.Size = new System.Drawing.Size(58, 31);
             this.btnResetSteerAngle.TabIndex = 162;
@@ -1059,10 +980,10 @@
             this.hsbarSteerAngle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hsbarSteerAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.hsbarSteerAngle.LargeChange = 20;
-            this.hsbarSteerAngle.Location = new System.Drawing.Point(314, 1);
+            this.hsbarSteerAngle.Location = new System.Drawing.Point(307, 1);
             this.hsbarSteerAngle.Maximum = 800;
             this.hsbarSteerAngle.Name = "hsbarSteerAngle";
-            this.hsbarSteerAngle.Size = new System.Drawing.Size(150, 37);
+            this.hsbarSteerAngle.Size = new System.Drawing.Size(143, 37);
             this.hsbarSteerAngle.TabIndex = 179;
             this.hsbarSteerAngle.Value = 400;
             this.hsbarSteerAngle.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarSteerAngle_Scroll);
@@ -1075,7 +996,7 @@
             this.hsbarStepDistance.Location = new System.Drawing.Point(82, 1);
             this.hsbarStepDistance.Minimum = -6;
             this.hsbarStepDistance.Name = "hsbarStepDistance";
-            this.hsbarStepDistance.Size = new System.Drawing.Size(150, 37);
+            this.hsbarStepDistance.Size = new System.Drawing.Size(143, 37);
             this.hsbarStepDistance.TabIndex = 178;
             this.hsbarStepDistance.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarStepDistance_Scroll);
             // 
@@ -1487,7 +1408,7 @@
             // 
             // btnAutoSteer
             // 
-            this.btnAutoSteer.BackColor = System.Drawing.Color.Transparent;
+            this.btnAutoSteer.BackColor = System.Drawing.Color.PaleGreen;
             this.btnAutoSteer.ContextMenuStrip = this.contextAutoSteer;
             this.btnAutoSteer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAutoSteer.Enabled = false;
@@ -1856,7 +1777,7 @@
             // 
             this.SmoothABtoolStripMenu.Image = global::AgOpenGPS.Properties.Resources.ABSmooth;
             this.SmoothABtoolStripMenu.Name = "SmoothABtoolStripMenu";
-            this.SmoothABtoolStripMenu.Size = new System.Drawing.Size(419, 70);
+            this.SmoothABtoolStripMenu.Size = new System.Drawing.Size(424, 70);
             this.SmoothABtoolStripMenu.Text = "Smooth AB Curve";
             this.SmoothABtoolStripMenu.Click += new System.EventHandler(this.SmoothABtoolStripMenu_Click);
             // 
@@ -1865,7 +1786,7 @@
             this.deleteContourPathsToolStripMenuItem.Image = global::AgOpenGPS.Properties.Resources.HideContour;
             this.deleteContourPathsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.deleteContourPathsToolStripMenuItem.Name = "deleteContourPathsToolStripMenuItem";
-            this.deleteContourPathsToolStripMenuItem.Size = new System.Drawing.Size(419, 70);
+            this.deleteContourPathsToolStripMenuItem.Size = new System.Drawing.Size(424, 70);
             this.deleteContourPathsToolStripMenuItem.Text = "Hide Contour Paths";
             this.deleteContourPathsToolStripMenuItem.Click += new System.EventHandler(this.deleteContourPathsToolStripMenuItem_Click_1);
             // 
@@ -1874,7 +1795,7 @@
             this.toolStripBtnMakeBndContour.Image = global::AgOpenGPS.Properties.Resources.MakeBoundaryContour1;
             this.toolStripBtnMakeBndContour.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripBtnMakeBndContour.Name = "toolStripBtnMakeBndContour";
-            this.toolStripBtnMakeBndContour.Size = new System.Drawing.Size(419, 70);
+            this.toolStripBtnMakeBndContour.Size = new System.Drawing.Size(424, 70);
             this.toolStripBtnMakeBndContour.Text = "Contour From Boundary";
             this.toolStripBtnMakeBndContour.Click += new System.EventHandler(this.toolStripBtnMakeBndContour_Click_1);
             // 
@@ -1882,7 +1803,7 @@
             // 
             this.headlandToolStripMenuItem.Image = global::AgOpenGPS.Properties.Resources.HeadlandMenu;
             this.headlandToolStripMenuItem.Name = "headlandToolStripMenuItem";
-            this.headlandToolStripMenuItem.Size = new System.Drawing.Size(419, 70);
+            this.headlandToolStripMenuItem.Size = new System.Drawing.Size(424, 70);
             this.headlandToolStripMenuItem.Text = "Headland";
             this.headlandToolStripMenuItem.Click += new System.EventHandler(this.headlandToolStripMenuItem_Click);
             // 
@@ -1891,7 +1812,7 @@
             this.boundariesToolStripMenuItem.Image = global::AgOpenGPS.Properties.Resources.MakeBoundary;
             this.boundariesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.boundariesToolStripMenuItem.Name = "boundariesToolStripMenuItem";
-            this.boundariesToolStripMenuItem.Size = new System.Drawing.Size(419, 70);
+            this.boundariesToolStripMenuItem.Size = new System.Drawing.Size(424, 70);
             this.boundariesToolStripMenuItem.Text = "Boundary";
             this.boundariesToolStripMenuItem.Click += new System.EventHandler(this.boundariesToolStripMenuItem_Click);
             // 
@@ -2005,7 +1926,7 @@
             this.moduleConfigToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.moduleConfigToolStripMenuItem.Image = global::AgOpenGPS.Properties.Resources.Arduino;
             this.moduleConfigToolStripMenuItem.Name = "moduleConfigToolStripMenuItem";
-            this.moduleConfigToolStripMenuItem.Size = new System.Drawing.Size(384, 86);
+            this.moduleConfigToolStripMenuItem.Size = new System.Drawing.Size(368, 70);
             this.moduleConfigToolStripMenuItem.Text = "Module Config";
             this.moduleConfigToolStripMenuItem.Click += new System.EventHandler(this.moduleConfigToolStripMenuItem_Click);
             // 
@@ -2180,7 +2101,7 @@
             this.lblDateTime.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.lblDateTime.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDateTime.Name = "lblDateTime";
-            this.lblDateTime.Size = new System.Drawing.Size(116, 55);
+            this.lblDateTime.Size = new System.Drawing.Size(147, 55);
             this.lblDateTime.Spring = true;
             this.lblDateTime.Text = "Date Time";
             // 
@@ -2390,7 +2311,7 @@
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 66F));
-            this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
+            this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 96F));
             this.panelSim.Controls.Add(this.btnReverseDirection, 0, 0);
             this.panelSim.Controls.Add(this.btnResetSteerAngle, 4, 0);
             this.panelSim.Controls.Add(this.hsbarSteerAngle, 3, 0);
@@ -2431,7 +2352,7 @@
             this.btnSimSetSpeedToZero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSimSetSpeedToZero.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSimSetSpeedToZero.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSimSetSpeedToZero.Location = new System.Drawing.Point(241, 4);
+            this.btnSimSetSpeedToZero.Location = new System.Drawing.Point(234, 4);
             this.btnSimSetSpeedToZero.Name = "btnSimSetSpeedToZero";
             this.btnSimSetSpeedToZero.Size = new System.Drawing.Size(63, 31);
             this.btnSimSetSpeedToZero.TabIndex = 453;
@@ -2449,7 +2370,7 @@
             0,
             0,
             131072});
-            this.nudPivotOffset.Location = new System.Drawing.Point(619, 4);
+            this.nudPivotOffset.Location = new System.Drawing.Point(605, 4);
             this.nudPivotOffset.Maximum = new decimal(new int[] {
             1,
             0,
@@ -2461,7 +2382,7 @@
             0,
             -2147483648});
             this.nudPivotOffset.Name = "nudPivotOffset";
-            this.nudPivotOffset.Size = new System.Drawing.Size(77, 30);
+            this.nudPivotOffset.Size = new System.Drawing.Size(91, 30);
             this.nudPivotOffset.TabIndex = 453;
             this.nudPivotOffset.ValueChanged += new System.EventHandler(this.nudPivotOffset_ValueChanged);
             // 
@@ -2842,21 +2763,12 @@
         private System.Windows.Forms.ToolStripDropDownButton toolToolbottomStripBtn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
-        private System.Windows.Forms.ToolStripMenuItem topMenuLoadVehicle;
-        private System.Windows.Forms.ToolStripMenuItem topMenuSaveVehicle;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
-        private System.Windows.Forms.ToolStripMenuItem topMenuLoadTool;
-        private System.Windows.Forms.ToolStripMenuItem topMenuSaveTool;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
-        private System.Windows.Forms.ToolStripMenuItem topMenuLoadEnvironment;
-        private System.Windows.Forms.ToolStripMenuItem topMenuSaveEnvironment;
+        private System.Windows.Forms.ToolStripMenuItem topMenuLoadAll;
+        private System.Windows.Forms.ToolStripMenuItem topMenuSaveAll;
         private System.Windows.Forms.ToolStripMenuItem resetALLToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
         private System.Windows.Forms.ToolStripMenuItem resetEverythingToolStripMenuItem;
         private System.Windows.Forms.Button btnFullScreen;
         private System.Windows.Forms.Button btnShutdown;

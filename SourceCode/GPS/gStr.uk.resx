@@ -741,9 +741,6 @@
   <data name="gsLoadTool" xml:space="preserve">
     <value>Завантаж. Агрегат</value>
   </data>
-  <data name="gsLoadVehicle" xml:space="preserve">
-    <value>Завантажити машину</value>
-  </data>
   <data name="gsLocation" xml:space="preserve">
     <value>Роміщення</value>
   </data>
@@ -1091,9 +1088,6 @@
   </data>
   <data name="gsSaveTool" xml:space="preserve">
     <value>Зберег. агрегат </value>
-  </data>
-  <data name="gsSaveVehicle" xml:space="preserve">
-    <value>Зберегти машину</value>
   </data>
   <data name="gsSavedInFolder" xml:space="preserve">
     <value>Збережено в теку:</value>

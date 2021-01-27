@@ -30,9 +30,6 @@ namespace AgOpenGPS
         //maximum sections available
         private const int MAXSECTIONS = 17;
 
-        //How many youturn functions
-        public const int MAXFUNCTIONS = 8;
-
         //How many boundaries allowed
         public const int MAXBOUNDARIES = 6;
 
@@ -255,15 +252,11 @@ namespace AgOpenGPS
 
             setWorkingDirectoryToolStripMenuItem.Text = gStr.gsDirectories;
             enterSimCoordsToolStripMenuItem.Text = gStr.gsEnterSimCoords;
-            topMenuLoadVehicle.Text = gStr.gsLoadVehicle;
-            topMenuSaveVehicle.Text = gStr.gsSaveVehicle;
+            topMenuLoadAll.Text = gStr.gsLoadAll;
+            topMenuSaveAll.Text = gStr.gsSaveAll;
             aboutToolStripMenuItem.Text = gStr.gsAbout;
             shortcutKeysToolStripMenuItem.Text = gStr.gsShortcutKeys;
             menustripLanguage.Text = gStr.gsLanguage;
-            topMenuLoadTool.Text = gStr.gsLoadTool;
-            topMenuSaveTool.Text = gStr.gsSaveTool;
-            topMenuLoadEnvironment.Text = gStr.gsLoadEnvironment;
-            topMenuSaveEnvironment.Text = gStr.gsSaveEnvironment;
             gPSInfoToolStripMenuItem.Text = gStr.gsModuleInfo;
             showStartScreenToolStripMenuItem.Text = gStr.gsShowStartScreen;
             //Display Menu
@@ -329,14 +322,12 @@ namespace AgOpenGPS
             worldGrid = new CWorldGrid(this);
 
             //our vehicle made with gl object and pointer of mainform
-            vehicle = new CVehicle(this);
+            //vehicle = new CVehicle(this);
 
-            tool = new CTool(this);
+            //tool = new CTool(this);
 
             //create a new section and set left and right positions
             //created whether used or not, saves restarting program
-            section = new CSection[MAXSECTIONS];
-            for (int j = 0; j < MAXSECTIONS; j++) section[j] = new CSection(this);
 
             //our NMEA parser
             pn = new CNMEA(this);
@@ -349,9 +340,6 @@ namespace AgOpenGPS
 
             //new instance of contour mode
             curve = new CABCurve(this);
-
-            //instance of tram
-            tram = new CTram(this);
 
             //new instance of auto headland turn
             yt = new CYouTurn(this);
@@ -426,184 +414,12 @@ namespace AgOpenGPS
             this.MouseWheel += ZoomByMouseWheel;
 
 
-            if (Settings.Default.setF_workingDirectory == "Default")
-                baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AgOpenGPS\\";
-            else baseDirectory = Settings.Default.setF_workingDirectory + "\\AgOpenGPS\\";
-
-            //get the fields directory, if not exist, create
-            fieldsDirectory = baseDirectory + "Fields\\";
-            string dir = Path.GetDirectoryName(fieldsDirectory);
-            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
-
-            //get the fields directory, if not exist, create
-            vehiclesDirectory = baseDirectory + "Vehicles\\";
-            dir = Path.GetDirectoryName(vehiclesDirectory);
-            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
-
-            //get the tools directory, if not exist, create
-            toolsDirectory = baseDirectory + "Tools\\";
-            dir = Path.GetDirectoryName(toolsDirectory);
-            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
-
-            //get the tools directory, if not exist, create
-            envDirectory = baseDirectory + "Environments\\";
-            dir = Path.GetDirectoryName(envDirectory);
-            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
-
-
-            //make sure current field directory exists, null if not
-            currentFieldDirectory = Settings.Default.setF_CurrentDir;
-
-            string curDir;
-            if (currentFieldDirectory != "")
-            {
-                curDir = fieldsDirectory + currentFieldDirectory + "//";
-                dir = Path.GetDirectoryName(curDir);
-                if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
-                {
-                    currentFieldDirectory = "";
-                    Settings.Default.setF_CurrentDir = "";
-                    Settings.Default.Save();
-                }
-            }
-
-            string directoryName = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            string wave = Path.Combine(directoryName, "Dependencies\\Audio", "Boundary.Wav");
-            if (File.Exists(wave))
-            {
-                sndBoundaryAlarm = new SoundPlayer(wave);
-            }
-            else
-            {
-                sndBoundaryAlarm = new SoundPlayer(Properties.Resources.Alarm10);
-            }
-
-            //grab the current vehicle filename - make sure it exists
-            vehicleFileName = Vehicle.Default.setVehicle_vehicleName;
-            toolFileName = Vehicle.Default.setVehicle_toolName;
-            envFileName = Vehicle.Default.setVehicle_envName;
-
-
-            //get the abLines directory, if not exist, create
-            ablinesDirectory = baseDirectory + "ABLines\\";
-            dir = Path.GetDirectoryName(fieldsDirectory);
-            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
-
-            //set baud and port from last time run
-            baudRateGPS = Settings.Default.setPort_baudRate;
-            portNameGPS = Settings.Default.setPort_portNameGPS;
-
-            //try and open
-            SerialPortOpenGPS();
-
-            if (spGPS.IsOpen)
-            {
-                simulatorOnToolStripMenuItem.Checked = false;
-                panelSim.Visible = false;
-                timerSim.Enabled = false;
-
-                Settings.Default.setMenu_isSimulatorOn = simulatorOnToolStripMenuItem.Checked;
-                Settings.Default.Save();
-            }
-
-            //same for SectionMachine port
-            portNameMachine = Settings.Default.setPort_portNameMachine;
-            wasRateMachineConnectedLastRun = Settings.Default.setPort_wasMachineConnected;
-            if (wasRateMachineConnectedLastRun) SerialPortMachineOpen();
-
-            //same for AutoSteer port
-            portNameAutoSteer = Settings.Default.setPort_portNameAutoSteer;
-            wasAutoSteerConnectedLastRun = Settings.Default.setPort_wasAutoSteerConnected;
-            if (wasAutoSteerConnectedLastRun) SerialPortAutoSteerOpen();
-
-            //Set width of section and positions for each section
-            SectionSetPosition();
-
-            //Calculate total width and each section width
-            SectionCalcWidths();
-
-            //set the correct zoom and grid
-            camera.camSetDistance = camera.zoomValue * camera.zoomValue * -1;
-            SetZoom();
-
-            //which heading source is being used
-            headingFromSource = Settings.Default.setGPS_headingFromWhichSource;
+            // load all the gui elements in gui.designer.cs
+            LoadSettings();
 
             //triangle resolution is how far to next triangle point trigger distance
             //triangleResolution = Settings.Default.setDisplay_triangleResolution;
 
-            //start udp server if required
-            if (Properties.Settings.Default.setUDP_isOn 
-                && !Properties.Settings.Default.setUDP_isInterAppOn) StartUDPServer();
-
-            if (Properties.Settings.Default.setUDP_isInterAppOn) StartLocalUDPServer();
-
-            //start NTRIP if required
-                if (Properties.Settings.Default.setNTRIP_isOn)
-            {
-                isNTRIP_RequiredOn = true;
-            }
-            else
-            {
-                isNTRIP_RequiredOn = false;
-            }
-
-            //remembered window position
-            if (Settings.Default.setWindow_Maximized)
-            {
-                WindowState = FormWindowState.Normal;
-                Location = Settings.Default.setWindow_Location;
-                Size = Settings.Default.setWindow_Size;
-            }
-            else if (Settings.Default.setWindow_Minimized)
-            {
-                //WindowState = FormWindowState.Minimized;
-                Location = Settings.Default.setWindow_Location;
-                Size = Settings.Default.setWindow_Size;
-            }
-            else
-            {
-                Location = Settings.Default.setWindow_Location;
-                Size = Settings.Default.setWindow_Size;
-            }
-
-            //don't draw the back opengl to GDI - it still works tho
-            //openGLControlBack.Visible = false;
-
-            //clear the flags
-            flagPts.Clear();
-            btnFlag.Enabled = false;
-
-            //workswitch stuff
-            mc.isWorkSwitchEnabled = Settings.Default.setF_IsWorkSwitchEnabled;
-            mc.isWorkSwitchActiveLow = Settings.Default.setF_IsWorkSwitchActiveLow;
-            mc.isWorkSwitchManual = Settings.Default.setF_IsWorkSwitchManual;
-
-            minFixStepDist = Settings.Default.setF_minFixStep;
-
-            fd.workedAreaTotalUser = Settings.Default.setF_UserTotalArea;
-            fd.userSquareMetersAlarm = Settings.Default.setF_UserTripAlarm;
-
-            //space between points while recording a boundary
-            //boundaryTriggerDistance = Settings.Default.setF_boundaryTriggerDistance;
-
-            //load the last used auto turn shape
-            string fileAndDir = @".\Dependencies\YouTurnShapes\" + Properties.Settings.Default.setAS_youTurnShape;
-            yt.LoadYouTurnShapeFromFile(fileAndDir);
-
-            //sim.latitude = Settings.Default.setSim_lastLat;
-            //sim.longitude = Settings.Default.setSim_lastLong;
-
-            //load th elightbar resolution
-            lightbarCmPerPixel = Properties.Settings.Default.setDisplay_lightbarCmPerPixel;
-
-            // load all the gui elements in gui.designer.cs
-            LoadGUI();
-
-            //Stanley guidance
-            isStanleyUsed = Properties.Vehicle.Default.setVehicle_isStanleyUsed;
-
-            isRTK = Properties.Settings.Default.setGPS_isRTK;
         }
 
         //form is closing so tidy up and save settings

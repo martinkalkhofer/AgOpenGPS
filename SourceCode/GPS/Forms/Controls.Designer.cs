@@ -1556,7 +1556,7 @@ namespace AgOpenGPS
                 Environment.Exit(0);
             }
         }
-        private void topMenuLoadVehicle_Click(object sender, EventArgs e)
+        private void topMenuLoadAll_Click(object sender, EventArgs e)
         {
             if (isJobStarted)
             {
@@ -1571,87 +1571,13 @@ namespace AgOpenGPS
                 if (result == DialogResult.OK) { }
             }
         }
-        private void topMenuSaveVehicle_Click(object sender, EventArgs e)
+        private void topMenuSaveAll_Click(object sender, EventArgs e)
         {
             using (var form = new FormVehicleSaver(this))
             {
                 var result = form.ShowDialog();
             }
 
-        }
-        private void topMenuLoadTool_Click(object sender, EventArgs e)
-        {
-            if (isJobStarted)
-            {
-                var form = new FormTimedMessage(2000, gStr.gsFieldIsOpen, gStr.gsCloseFieldFirst);
-                form.Show();
-                return;
-            }
-
-            using (var form = new FormToolPicker(this))
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK) { }
-            }
-
-
-            //if (FileOpenTool())
-            //{
-            //    using (var form = new FormToolSettings(this, 0))
-            //    {
-            //        var result = form.ShowDialog();
-            //        if (result == DialogResult.OK) { }
-            //    }
-
-            //    TimedMessageBox(3000, gStr.gsDidYouMakeChanges, gStr.gsBeSureToSaveIfYouDid);
-            //}
-        }
-        private void topMenuSaveTool_Click(object sender, EventArgs e)
-        {
-            using (var form = new FormToolSaver(this))
-            {
-                var result = form.ShowDialog();
-            }
-        }
-        private void topMenuLoadEnvironment_Click(object sender, EventArgs e)
-        {
-            if (isJobStarted)
-            {
-                var form = new FormTimedMessage(2000, gStr.gsFieldIsOpen, gStr.gsCloseFieldFirst);
-                form.Show();
-                return;
-            }
-
-            using (var form = new FormEnvPicker(this))
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.Cancel)
-                {
-                    MessageBox.Show(gStr.gsRestartRequired,
-                        gStr.gsFileError,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Question,
-                        MessageBoxDefaultButton.Button2);
-                    Application.Restart();
-                    Environment.Exit(0);
-                }
-                else if (result == DialogResult.OK)
-                {
-                    Application.Restart();
-                    Environment.Exit(0);
-                }
-                else if (result == DialogResult.Ignore)
-                {
-                    //Close();
-                }
-            }
-        }
-        private void topMenuSaveEnvironment_Click(object sender, EventArgs e)
-        {
-            using (var form = new FormEnvSaver(this))
-            {
-                var result = form.ShowDialog();
-            }
         }
 
         //Help menu drop down items

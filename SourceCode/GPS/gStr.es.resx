@@ -714,9 +714,6 @@
   <data name="gsLoadTool" xml:space="preserve">
     <value>Cargar Apero</value>
   </data>
-  <data name="gsLoadVehicle" xml:space="preserve">
-    <value>Cargar Vehículo</value>
-  </data>
   <data name="gsLocation" xml:space="preserve">
     <value>Ubicación</value>
   </data>
@@ -1061,9 +1058,6 @@
   </data>
   <data name="gsSaveTool" xml:space="preserve">
     <value>Guardar Apero</value>
-  </data>
-  <data name="gsSaveVehicle" xml:space="preserve">
-    <value>Guardar Vehículo</value>
   </data>
   <data name="gsSavedInFolder" xml:space="preserve">
     <value>Guardado en Carpeta:</value>

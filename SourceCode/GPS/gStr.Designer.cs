@@ -2086,6 +2086,15 @@ namespace AgOpenGPS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load All.
+        /// </summary>
+        public static string gsLoadAll {
+            get {
+                return ResourceManager.GetString("gsLoadAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Load Environment.
         /// </summary>
         public static string gsLoadEnvironment {
@@ -2118,15 +2127,6 @@ namespace AgOpenGPS {
         public static string gsLoadTool {
             get {
                 return ResourceManager.GetString("gsLoadTool", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Load Vehicle.
-        /// </summary>
-        public static string gsLoadVehicle {
-            get {
-                return ResourceManager.GetString("gsLoadVehicle", resourceCulture);
             }
         }
         
@@ -3292,6 +3292,15 @@ namespace AgOpenGPS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save All.
+        /// </summary>
+        public static string gsSaveAll {
+            get {
+                return ResourceManager.GetString("gsSaveAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save And Exit.
         /// </summary>
         public static string gsSaveAndExit {
@@ -3378,15 +3387,6 @@ namespace AgOpenGPS {
         public static string gsSaveTool {
             get {
                 return ResourceManager.GetString("gsSaveTool", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save vehicle.
-        /// </summary>
-        public static string gsSaveVehicle {
-            get {
-                return ResourceManager.GetString("gsSaveVehicle", resourceCulture);
             }
         }
         

@@ -726,9 +726,6 @@
   <data name="gsLoadTool" xml:space="preserve">
     <value>Charger un outil</value>
   </data>
-  <data name="gsLoadVehicle" xml:space="preserve">
-    <value>Charger un véhicule</value>
-  </data>
   <data name="gsLookAheadInSeconds" xml:space="preserve">
     <value>Anticipation (secondes)</value>
   </data>
@@ -1103,9 +1100,6 @@
   </data>
   <data name="gsSaveTool" xml:space="preserve">
     <value>Enregistrer l'outil</value>
-  </data>
-  <data name="gsSaveVehicle" xml:space="preserve">
-    <value>Enregistrer le Véhicule</value>
   </data>
   <data name="gsSavedInFolder" xml:space="preserve">
     <value>Enregistrer dans le dossier :</value>

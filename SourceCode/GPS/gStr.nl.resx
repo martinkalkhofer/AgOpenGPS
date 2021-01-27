@@ -747,9 +747,6 @@
   <data name="gsLoadTool" xml:space="preserve">
     <value>Laad Werktuig</value>
   </data>
-  <data name="gsLoadVehicle" xml:space="preserve">
-    <value>Laad Voertuig</value>
-  </data>
   <data name="gsLocation" xml:space="preserve">
     <value>Locatie</value>
   </data>
@@ -1127,9 +1124,6 @@
   </data>
   <data name="gsSaveTool" xml:space="preserve">
     <value>Opslaan werktuig</value>
-  </data>
-  <data name="gsSaveVehicle" xml:space="preserve">
-    <value>Opslaan voertuig</value>
   </data>
   <data name="gsSavedInFolder" xml:space="preserve">
     <value>Opgeslagen in map:</value>

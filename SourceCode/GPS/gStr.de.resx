@@ -747,9 +747,6 @@
   <data name="gsLoadTool" xml:space="preserve">
     <value>Anbaugerät laden</value>
   </data>
-  <data name="gsLoadVehicle" xml:space="preserve">
-    <value>Fahrzeug laden</value>
-  </data>
   <data name="gsLocation" xml:space="preserve">
     <value>Lage</value>
   </data>
@@ -1079,9 +1076,6 @@
   </data>
   <data name="gsSaveTool" xml:space="preserve">
     <value>Arbeitsgerät speichern</value>
-  </data>
-  <data name="gsSaveVehicle" xml:space="preserve">
-    <value>Fahrzeug speichern</value>
   </data>
   <data name="gsSavedInFolder" xml:space="preserve">
     <value>In Ordner gespeichert:</value>

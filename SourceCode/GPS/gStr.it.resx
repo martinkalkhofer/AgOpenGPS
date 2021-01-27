@@ -552,9 +552,6 @@
   <data name="gsLoadMulti" xml:space="preserve">
     <value>Caricamento Multiplo</value>
   </data>
-  <data name="gsLoadVehicle" xml:space="preserve">
-    <value>Caricamento Veicolo</value>
-  </data>
   <data name="gsLocation" xml:space="preserve">
     <value>Posizione</value>
   </data>
@@ -824,9 +821,6 @@
   </data>
   <data name="gsSaveNames" xml:space="preserve">
     <value>Salva i Nomi</value>
-  </data>
-  <data name="gsSaveVehicle" xml:space="preserve">
-    <value>Salva il Veicolo</value>
   </data>
   <data name="gsSavedInFolder" xml:space="preserve">
     <value>Salvato Nella Cartella:</value>

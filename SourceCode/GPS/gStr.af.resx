@@ -801,8 +801,8 @@
   <data name="gsLoadTool" xml:space="preserve">
     <value>zLoad Tool</value>
   </data>
-  <data name="gsLoadVehicle" xml:space="preserve">
-    <value>zLoad Vehicle</value>
+  <data name="gsLoadAll" xml:space="preserve">
+    <value>zLoad All</value>
   </data>
   <data name="gsLocation" xml:space="preserve">
     <value>zLocation</value>
@@ -1218,8 +1218,8 @@
   <data name="gsSaveTool" xml:space="preserve">
     <value>zSave Tool</value>
   </data>
-  <data name="gsSaveVehicle" xml:space="preserve">
-    <value>zSave vehicle</value>
+  <data name="gsSaveAll" xml:space="preserve">
+    <value>zSave All</value>
   </data>
   <data name="gsSavedInFolder" xml:space="preserve">
     <value>zSaved In Folder: </value>

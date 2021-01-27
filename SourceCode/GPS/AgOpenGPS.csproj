@@ -91,6 +91,7 @@
       <HintPath>References\RepeatButtonControl.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -100,6 +101,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="Tinkerforge, Version=2.1.16.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Tinkerforge.dll</HintPath>
@@ -111,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CGuidance.cs" />
+    <Compile Include="Classes\CSettings.cs" />
     <Compile Include="Classes\CSunTimes.cs" />
     <Compile Include="Classes\CFieldData.cs" />
     <Compile Include="Classes\CBoundaryLines.cs" />
@@ -182,41 +185,17 @@
     <Compile Include="Forms\Pickers\FormTouchPick.Designer.cs">
       <DependentUpon>FormTouchPick.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Pickers\FormToolPicker.cs">
+    <Compile Include="Forms\Pickers\FormSettingsSaver.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Pickers\FormToolPicker.Designer.cs">
-      <DependentUpon>FormToolPicker.cs</DependentUpon>
+    <Compile Include="Forms\Pickers\FormSettingsSaver.Designer.cs">
+      <DependentUpon>FormSettingsSaver.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Pickers\FormEnvPicker.cs">
+    <Compile Include="Forms\Pickers\FormSettingsPicker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Pickers\FormEnvPicker.Designer.cs">
-      <DependentUpon>FormEnvPicker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Pickers\FormEnvSaver.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Pickers\FormEnvSaver.Designer.cs">
-      <DependentUpon>FormEnvSaver.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Pickers\FormToolSaver.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Pickers\FormToolSaver.Designer.cs">
-      <DependentUpon>FormToolSaver.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Pickers\FormVehicleSaver.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Pickers\FormVehicleSaver.Designer.cs">
-      <DependentUpon>FormVehicleSaver.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Pickers\FormVehiclePicker.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Pickers\FormVehiclePicker.Designer.cs">
-      <DependentUpon>FormVehiclePicker.cs</DependentUpon>
+    <Compile Include="Forms\Pickers\FormSettingsPicker.Designer.cs">
+      <DependentUpon>FormSettingsPicker.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormModules.cs">
       <SubType>Form</SubType>
@@ -583,23 +562,11 @@
     <EmbeddedResource Include="Forms\Pickers\FormTouchPick.resx">
       <DependentUpon>FormTouchPick.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Pickers\FormToolPicker.resx">
-      <DependentUpon>FormToolPicker.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Pickers\FormSettingsSaver.resx">
+      <DependentUpon>FormSettingsSaver.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Pickers\FormEnvPicker.resx">
-      <DependentUpon>FormEnvPicker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Pickers\FormEnvSaver.resx">
-      <DependentUpon>FormEnvSaver.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Pickers\FormToolSaver.resx">
-      <DependentUpon>FormToolSaver.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Pickers\FormVehicleSaver.resx">
-      <DependentUpon>FormVehicleSaver.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Pickers\FormVehiclePicker.resx">
-      <DependentUpon>FormVehiclePicker.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Pickers\FormSettingsPicker.resx">
+      <DependentUpon>FormSettingsPicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormModules.resx">
       <DependentUpon>FormModules.cs</DependentUpon>

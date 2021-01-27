@@ -750,9 +750,6 @@
   <data name="gsLoadTool" xml:space="preserve">
     <value>Załaduj narzędzie</value>
   </data>
-  <data name="gsLoadVehicle" xml:space="preserve">
-    <value>Załaduj pojazd</value>
-  </data>
   <data name="gsLocation" xml:space="preserve">
     <value>Lokalizacja</value>
   </data>
@@ -1127,9 +1124,6 @@
   </data>
   <data name="gsSaveTool" xml:space="preserve">
     <value>Zapisz narzędzie</value>
-  </data>
-  <data name="gsSaveVehicle" xml:space="preserve">
-    <value>Zapisz pojazd</value>
   </data>
   <data name="gsSavedInFolder" xml:space="preserve">
     <value>Zapisane w folderze:</value>

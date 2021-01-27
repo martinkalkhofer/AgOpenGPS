@@ -804,8 +804,8 @@
   <data name="gsLoadTool" xml:space="preserve">
     <value>Load Tool</value>
   </data>
-  <data name="gsLoadVehicle" xml:space="preserve">
-    <value>Load Vehicle</value>
+  <data name="gsLoadAll" xml:space="preserve">
+    <value>Load All</value>
   </data>
   <data name="gsLocation" xml:space="preserve">
     <value>Location</value>
@@ -1221,8 +1221,8 @@
   <data name="gsSaveTool" xml:space="preserve">
     <value>Save Tool</value>
   </data>
-  <data name="gsSaveVehicle" xml:space="preserve">
-    <value>Save vehicle</value>
+  <data name="gsSaveAll" xml:space="preserve">
+    <value>Save All</value>
   </data>
   <data name="gsSavedInFolder" xml:space="preserve">
     <value>Saved In Folder: </value>
