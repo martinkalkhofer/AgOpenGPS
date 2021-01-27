@@ -161,10 +161,10 @@
     <Setting Name="set_geoFenceDistance" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="setVehicle_stanleyGain" Type="System.Double" Scope="User">
+    <Setting Name="stanleyDistanceErrorGain" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="setVehicle_stanleyHeadingErrorGain" Type="System.Double" Scope="User">
+    <Setting Name="stanleyHeadingErrorGain" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="setVehicle_isStanleyUsed" Type="System.Boolean" Scope="User">
@@ -250,6 +250,12 @@
     </Setting>
     <Setting Name="setArdSteer_setting2" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="stanleyIntegralGainAB" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="stanleyIntegralDistanceAwayTriggerAB" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.3</Value>
     </Setting>
   </Settings>
 </SettingsFile>

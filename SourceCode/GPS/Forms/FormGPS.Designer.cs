@@ -197,6 +197,7 @@
             this.threeDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.north2DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dNorthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.integralStatusLeftSide = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripBtnDrag = new System.Windows.Forms.ToolStripSplitButton();
             this.distanceToolBtn = new System.Windows.Forms.ToolStripDropDownButton();
             this.simplifyToolStrip = new System.Windows.Forms.ToolStripDropDownButton();
@@ -224,6 +225,7 @@
             this.btnFullScreen = new System.Windows.Forms.Button();
             this.btnZoomIn = new ProXoft.WinForms.RepeatButton();
             this.btnZoomOut = new ProXoft.WinForms.RepeatButton();
+            this.nudPivotOffset = new System.Windows.Forms.NumericUpDown();
             this.contextMenuStripOpenGL.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripFlag.SuspendLayout();
@@ -235,6 +237,7 @@
             this.statusStripLeft.SuspendLayout();
             this.panelSim.SuspendLayout();
             this.contextManualColor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPivotOffset)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenuStripOpenGL
@@ -731,7 +734,7 @@
             // 
             // tmrWatchdog
             // 
-            this.tmrWatchdog.Interval = 15;
+            this.tmrWatchdog.Interval = 40;
             this.tmrWatchdog.Tick += new System.EventHandler(this.tmrWatchdog_tick);
             // 
             // lblSpeed
@@ -809,7 +812,7 @@
             this.toolStripMenuFlagForm.Image = global::AgOpenGPS.Properties.Resources.OK64;
             this.toolStripMenuFlagForm.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuFlagForm.Name = "toolStripMenuFlagForm";
-            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(250, 70);
+            this.toolStripMenuFlagForm.Size = new System.Drawing.Size(267, 70);
             this.toolStripMenuFlagForm.Text = "toolStripMenuItem3";
             this.toolStripMenuFlagForm.Click += new System.EventHandler(this.toolStripMenuFlagForm_Click);
             // 
@@ -1016,7 +1019,7 @@
             this.btnResetSim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResetSim.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnResetSim.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnResetSim.Location = new System.Drawing.Point(577, 4);
+            this.btnResetSim.Location = new System.Drawing.Point(569, 4);
             this.btnResetSim.Name = "btnResetSim";
             this.btnResetSim.Size = new System.Drawing.Size(52, 31);
             this.btnResetSim.TabIndex = 164;
@@ -1032,7 +1035,7 @@
             this.btnResetSteerAngle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResetSteerAngle.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnResetSteerAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnResetSteerAngle.Location = new System.Drawing.Point(512, 4);
+            this.btnResetSteerAngle.Location = new System.Drawing.Point(504, 4);
             this.btnResetSteerAngle.Name = "btnResetSteerAngle";
             this.btnResetSteerAngle.Size = new System.Drawing.Size(58, 31);
             this.btnResetSteerAngle.TabIndex = 162;
@@ -1057,10 +1060,10 @@
             this.hsbarSteerAngle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hsbarSteerAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.hsbarSteerAngle.LargeChange = 20;
-            this.hsbarSteerAngle.Location = new System.Drawing.Point(328, 1);
+            this.hsbarSteerAngle.Location = new System.Drawing.Point(324, 1);
             this.hsbarSteerAngle.Maximum = 800;
             this.hsbarSteerAngle.Name = "hsbarSteerAngle";
-            this.hsbarSteerAngle.Size = new System.Drawing.Size(164, 37);
+            this.hsbarSteerAngle.Size = new System.Drawing.Size(160, 37);
             this.hsbarSteerAngle.TabIndex = 179;
             this.hsbarSteerAngle.Value = 400;
             this.hsbarSteerAngle.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarSteerAngle_Scroll);
@@ -1073,7 +1076,7 @@
             this.hsbarStepDistance.Location = new System.Drawing.Point(82, 1);
             this.hsbarStepDistance.Minimum = -6;
             this.hsbarStepDistance.Name = "hsbarStepDistance";
-            this.hsbarStepDistance.Size = new System.Drawing.Size(164, 37);
+            this.hsbarStepDistance.Size = new System.Drawing.Size(160, 37);
             this.hsbarStepDistance.TabIndex = 178;
             this.hsbarStepDistance.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hsbarStepDistance_Scroll);
             // 
@@ -1473,14 +1476,14 @@
             this.contextMenuABLine.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editABToolStripMenuItem});
             this.contextMenuABLine.Name = "contextMenuABLine";
-            this.contextMenuABLine.Size = new System.Drawing.Size(119, 28);
+            this.contextMenuABLine.Size = new System.Drawing.Size(126, 30);
             // 
             // editABToolStripMenuItem
             // 
             this.editABToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.editABToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.editABToolStripMenuItem.Name = "editABToolStripMenuItem";
-            this.editABToolStripMenuItem.Size = new System.Drawing.Size(118, 24);
+            this.editABToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
             this.editABToolStripMenuItem.Text = "EditAB";
             // 
             // btnAutoSteer
@@ -2196,6 +2199,7 @@
             this.statusStripLeft.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuRecPath,
             this.cameraDropDown,
+            this.integralStatusLeftSide,
             this.toolStripBtnDrag,
             this.distanceToolBtn,
             this.simplifyToolStrip,
@@ -2268,6 +2272,13 @@
             this.dNorthToolStripMenuItem.Size = new System.Drawing.Size(235, 62);
             this.dNorthToolStripMenuItem.Text = "North 3D";
             this.dNorthToolStripMenuItem.Click += new System.EventHandler(this.dNorthToolStripMenuItem_Click);
+            // 
+            // integralStatusLeftSide
+            // 
+            this.integralStatusLeftSide.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.integralStatusLeftSide.Name = "integralStatusLeftSide";
+            this.integralStatusLeftSide.Size = new System.Drawing.Size(44, 19);
+            this.integralStatusLeftSide.Text = "0.12";
             // 
             // toolStripBtnDrag
             // 
@@ -2378,7 +2389,7 @@
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 136F));
+            this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 144F));
             this.panelSim.Controls.Add(this.btnReverseDirection, 0, 0);
             this.panelSim.Controls.Add(this.btnResetSteerAngle, 4, 0);
             this.panelSim.Controls.Add(this.hsbarSteerAngle, 3, 0);
@@ -2418,7 +2429,7 @@
             this.btnSimSetSpeedToZero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSimSetSpeedToZero.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSimSetSpeedToZero.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSimSetSpeedToZero.Location = new System.Drawing.Point(255, 4);
+            this.btnSimSetSpeedToZero.Location = new System.Drawing.Point(251, 4);
             this.btnSimSetSpeedToZero.Name = "btnSimSetSpeedToZero";
             this.btnSimSetSpeedToZero.Size = new System.Drawing.Size(63, 31);
             this.btnSimSetSpeedToZero.TabIndex = 453;
@@ -2605,12 +2616,44 @@
             this.btnZoomOut.UseVisualStyleBackColor = false;
             this.btnZoomOut.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnZoomOut_MouseDown);
             // 
+            // nudPivotOffset
+            // 
+            this.nudPivotOffset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudPivotOffset.DecimalPlaces = 2;
+            this.nudPivotOffset.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudPivotOffset.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.nudPivotOffset.Location = new System.Drawing.Point(81, 500);
+            this.nudPivotOffset.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudPivotOffset.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.nudPivotOffset.Name = "nudPivotOffset";
+            this.nudPivotOffset.Size = new System.Drawing.Size(83, 36);
+            this.nudPivotOffset.TabIndex = 453;
+            this.nudPivotOffset.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudPivotOffset.ValueChanged += new System.EventHandler(this.nudPivotOffset_ValueChanged);
+            // 
             // FormGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1302, 691);
+            this.Controls.Add(this.nudPivotOffset);
             this.Controls.Add(this.btnDayNightMode);
             this.Controls.Add(this.btnSection13Man);
             this.Controls.Add(this.btnSection14Man);
@@ -2668,6 +2711,7 @@
             this.statusStripLeft.PerformLayout();
             this.panelSim.ResumeLayout(false);
             this.contextManualColor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudPivotOffset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2868,6 +2912,8 @@
         public System.Windows.Forms.ToolStripMenuItem steerChartStripMenu;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
         public System.Windows.Forms.Button btnDayNightMode;
+        private System.Windows.Forms.ToolStripStatusLabel integralStatusLeftSide;
+        private System.Windows.Forms.NumericUpDown nudPivotOffset;
     }
 }
 

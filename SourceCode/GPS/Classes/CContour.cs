@@ -754,7 +754,7 @@ namespace AgOpenGPS
                     if (abFixHeadingDelta > 0.74) abFixHeadingDelta = 0.74;
                     if (abFixHeadingDelta < -0.74) abFixHeadingDelta = -0.74;
 
-                    steerAngleCT = Math.Atan((distanceFromCurrentLine * mf.vehicle.stanleyGain) 
+                    steerAngleCT = Math.Atan((distanceFromCurrentLine * mf.vehicle.stanleyDistanceErrorGain) 
                         / ((Math.Abs(mf.pn.speed) * 0.277777) + 1));
 
                     if (steerAngleCT > 0.74) steerAngleCT = 0.74;
@@ -991,7 +991,7 @@ namespace AgOpenGPS
                 }
 
                 //fill in the autosteer variables
-                mf.guidanceLineDistanceOff = mf.distanceDisplay = (Int16)distanceFromCurrentLine;
+                mf.guidanceLineDistanceOff = mf.distanceDisplayPivot = (Int16)distanceFromCurrentLine;
                 mf.guidanceLineSteerAngle = (Int16)(steerAngleCT * 100);
             }
             else

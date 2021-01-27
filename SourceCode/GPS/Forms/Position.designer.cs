@@ -15,7 +15,7 @@ namespace AgOpenGPS
         public StringBuilder sbFix = new StringBuilder();
 
         // autosteer variables for sending serial
-        public Int16 guidanceLineDistanceOff, guidanceLineSteerAngle, distanceDisplay;
+        public Int16 guidanceLineDistanceOff, guidanceLineSteerAngle, distanceDisplayPivot , distanceDisplaySteer;
 
         //how many fix updates per sec
         public int fixUpdateHz = 5;
@@ -87,6 +87,9 @@ namespace AgOpenGPS
         public bool isRTK;
 
         //called by watchdog timer every 10 ms, returns true if new valid fix
+
+
+
         private bool ScanForNMEA()
         {
             //update the recv string so it can display at least something

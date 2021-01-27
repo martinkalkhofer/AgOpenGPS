@@ -25,7 +25,7 @@ namespace AgOpenGPS
         //autosteer values
         public double goalPointLookAheadSeconds, goalPointLookAheadMinimumDistance, goalPointDistanceMultiplier, goalPointLookAheadUturnMult;
 
-        public double stanleyGain, stanleyHeadingErrorGain;
+        public double stanleyDistanceErrorGain, stanleyHeadingErrorGain;
         public double minLookAheadDistance = 2.0;
         public double maxSteerAngle;
         public double maxAngularVelocity;
@@ -35,6 +35,8 @@ namespace AgOpenGPS
         public double hydLiftLookAheadDistanceLeft, hydLiftLookAheadDistanceRight;
 
         public bool isHydLiftOn;
+        public double stanleyIntegralDistanceAwayTriggerAB, stanleyIntegralGainAB;
+
 
         public CVehicle(FormGPS _f)
         {
@@ -57,13 +59,16 @@ namespace AgOpenGPS
             goalPointDistanceMultiplier = Properties.Vehicle.Default.setVehicle_lookAheadDistanceFromLine;
             goalPointLookAheadUturnMult = Properties.Vehicle.Default.setVehicle_goalPointLookAheadUturnMult;
 
-            stanleyGain = Properties.Vehicle.Default.setVehicle_stanleyGain;
-            stanleyHeadingErrorGain = Properties.Vehicle.Default.setVehicle_stanleyHeadingErrorGain;
+            stanleyDistanceErrorGain = Properties.Vehicle.Default.stanleyDistanceErrorGain;
+            stanleyHeadingErrorGain = Properties.Vehicle.Default.stanleyHeadingErrorGain;
 
             maxAngularVelocity = Properties.Vehicle.Default.setVehicle_maxAngularVelocity;
             maxSteerAngle = Properties.Vehicle.Default.setVehicle_maxSteerAngle;
 
             isHydLiftOn = false;
+
+            stanleyIntegralGainAB = Properties.Vehicle.Default.stanleyIntegralGainAB;
+            stanleyIntegralDistanceAwayTriggerAB = Properties.Vehicle.Default.stanleyIntegralDistanceAwayTriggerAB;
 
             //treeSpacing = Properties.Settings.Default.setDistance_TreeSpacing;
             treeSpacing = 0;
@@ -137,47 +142,47 @@ namespace AgOpenGPS
 
             ////draw the vehicle Body
 
-            if (!mf.vehicle.isHydLiftOn)
-            {
-                GL.Color3(0.9, 0.90, 0.0);
-                GL.Begin(PrimitiveType.TriangleFan);
-                GL.Vertex3(0, antennaPivot, -0.0);
-                GL.Vertex3(1.0, -0, 0.0);
-                GL.Color3(0.0, 0.90, 0.92);
-                GL.Vertex3(0, wheelbase, 0.0);
-                GL.Color3(0.920, 0.0, 0.9);
-                GL.Vertex3(-1.0, -0, 0.0);
-                GL.Vertex3(1.0, -0, 0.0);
-                GL.End();
-            }
-            else
-            {
-                if (mf.hd.isToolUp)
-                {
-                    GL.Color3(0.0, 0.950, 0.0);
-                    GL.Begin(PrimitiveType.TriangleFan);
-                    GL.Vertex3(0, antennaPivot, -0.0);
-                    GL.Vertex3(1.0, -0, 0.0);
-                    GL.Vertex3(0, wheelbase, 0.0);
-                    GL.Vertex3(-1.0, -0, 0.0);
-                    GL.Vertex3(1.0, -0, 0.0);
-                    GL.End();
-                }
-                else
-                {
-                    GL.Color3(0.950, 0.0, 0.0);
-                    GL.Begin(PrimitiveType.TriangleFan);
-                    GL.Vertex3(0, antennaPivot, -0.0);
-                    GL.Vertex3(1.0, -0, 0.0);
-                    GL.Vertex3(0, wheelbase, 0.0);
-                    GL.Vertex3(-1.0, -0, 0.0);
-                    GL.Vertex3(1.0, -0, 0.0);
-                    GL.End();
-                }
-            }
+            //if (!mf.vehicle.isHydLiftOn)
+            //{
+            //    GL.Color3(0.9, 0.90, 0.0);
+            //    GL.Begin(PrimitiveType.TriangleFan);
+            //    GL.Vertex3(0, antennaPivot, -0.0);
+            //    GL.Vertex3(1.0, -0, 0.0);
+            //    GL.Color3(0.0, 0.90, 0.92);
+            //    GL.Vertex3(0, wheelbase, 0.0);
+            //    GL.Color3(0.920, 0.0, 0.9);
+            //    GL.Vertex3(-1.0, -0, 0.0);
+            //    GL.Vertex3(1.0, -0, 0.0);
+            //    GL.End();
+            //}
+            //else
+            //{
+                //if (mf.hd.isToolUp)
+                //{
+                //    GL.Color3(0.0, 0.950, 0.0);
+                //    GL.Begin(PrimitiveType.TriangleFan);
+                //    GL.Vertex3(0, antennaPivot, -0.0);
+                //    GL.Vertex3(1.0, -0, 0.0);
+                //    GL.Vertex3(0, wheelbase, 0.0);
+                //    GL.Vertex3(-1.0, -0, 0.0);
+                //    GL.Vertex3(1.0, -0, 0.0);
+                //    GL.End();
+                //}
+                //else
+                //{
+                //    GL.Color3(0.950, 0.0, 0.0);
+                //    GL.Begin(PrimitiveType.TriangleFan);
+                //    GL.Vertex3(0, antennaPivot, -0.0);
+                //    GL.Vertex3(1.0, -0, 0.0);
+                //    GL.Vertex3(0, wheelbase, 0.0);
+                //    GL.Vertex3(-1.0, -0, 0.0);
+                //    GL.Vertex3(1.0, -0, 0.0);
+                //    GL.End();
+                //}
+            //}
 
             GL.LineWidth(3);
-            GL.Color3(0.0, 0.0, 0.0);
+            GL.Color3(0.80, 0.80, 0.99);
             GL.Begin(PrimitiveType.LineLoop);
             {
                 GL.Vertex3(-1.0, 0, 0);

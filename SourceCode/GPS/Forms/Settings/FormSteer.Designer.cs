@@ -80,6 +80,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblHeadingErrorGain = new System.Windows.Forms.Label();
+            this.tabInt = new System.Windows.Forms.TabPage();
+            this.hsbarIntegral = new System.Windows.Forms.HScrollBar();
+            this.label15 = new System.Windows.Forms.Label();
+            this.lblIntegralPercent = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblSteerAngle = new System.Windows.Forms.Label();
             this.lblRecd = new System.Windows.Forms.Label();
@@ -96,11 +100,15 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.nudIntDistance = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabGain.SuspendLayout();
             this.tabSteer.SuspendLayout();
             this.tabLook.SuspendLayout();
             this.tabStan.SuspendLayout();
+            this.tabInt.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIntDistance)).BeginInit();
             this.SuspendLayout();
             // 
             // btnFreeDrive
@@ -121,8 +129,9 @@
             this.tabControl1.Controls.Add(this.tabSteer);
             this.tabControl1.Controls.Add(this.tabLook);
             this.tabControl1.Controls.Add(this.tabStan);
+            this.tabControl1.Controls.Add(this.tabInt);
             this.tabControl1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.ItemSize = new System.Drawing.Size(92, 44);
+            this.tabControl1.ItemSize = new System.Drawing.Size(72, 44);
             this.tabControl1.Location = new System.Drawing.Point(2, 4);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
@@ -576,6 +585,7 @@
             // 
             // tabStan
             // 
+            this.tabStan.AutoScroll = true;
             this.tabStan.BackColor = System.Drawing.Color.PowderBlue;
             this.tabStan.Controls.Add(this.btnStanley);
             this.tabStan.Controls.Add(this.label1);
@@ -600,9 +610,9 @@
             this.btnStanley.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStanley.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStanley.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnStanley.Location = new System.Drawing.Point(218, 188);
+            this.btnStanley.Location = new System.Drawing.Point(218, 210);
             this.btnStanley.Name = "btnStanley";
-            this.btnStanley.Size = new System.Drawing.Size(129, 69);
+            this.btnStanley.Size = new System.Drawing.Size(129, 47);
             this.btnStanley.TabIndex = 302;
             this.btnStanley.Text = "Stanley";
             this.btnStanley.UseVisualStyleBackColor = false;
@@ -611,7 +621,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(183, 158);
+            this.label1.Location = new System.Drawing.Point(174, 180);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(201, 27);
             this.label1.TabIndex = 300;
@@ -640,9 +650,9 @@
             this.btnChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChart.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChart.ForeColor = System.Drawing.Color.Black;
-            this.btnChart.Location = new System.Drawing.Point(17, 188);
+            this.btnChart.Location = new System.Drawing.Point(49, 224);
             this.btnChart.Name = "btnChart";
-            this.btnChart.Size = new System.Drawing.Size(125, 69);
+            this.btnChart.Size = new System.Drawing.Size(125, 47);
             this.btnChart.TabIndex = 234;
             this.btnChart.Text = "Steer Chart";
             this.btnChart.UseVisualStyleBackColor = true;
@@ -699,6 +709,50 @@
             this.lblHeadingErrorGain.Size = new System.Drawing.Size(91, 39);
             this.lblHeadingErrorGain.TabIndex = 295;
             this.lblHeadingErrorGain.Text = "-888";
+            // 
+            // tabInt
+            // 
+            this.tabInt.BackColor = System.Drawing.Color.PowderBlue;
+            this.tabInt.Controls.Add(this.label16);
+            this.tabInt.Controls.Add(this.nudIntDistance);
+            this.tabInt.Controls.Add(this.hsbarIntegral);
+            this.tabInt.Controls.Add(this.label15);
+            this.tabInt.Controls.Add(this.lblIntegralPercent);
+            this.tabInt.Location = new System.Drawing.Point(4, 48);
+            this.tabInt.Name = "tabInt";
+            this.tabInt.Size = new System.Drawing.Size(376, 267);
+            this.tabInt.TabIndex = 16;
+            this.tabInt.Text = "Int";
+            // 
+            // hsbarIntegral
+            // 
+            this.hsbarIntegral.LargeChange = 1;
+            this.hsbarIntegral.Location = new System.Drawing.Point(6, 150);
+            this.hsbarIntegral.Name = "hsbarIntegral";
+            this.hsbarIntegral.Size = new System.Drawing.Size(260, 47);
+            this.hsbarIntegral.TabIndex = 297;
+            this.hsbarIntegral.Value = 5;
+            this.hsbarIntegral.ValueChanged += new System.EventHandler(this.hsbarIntegral_ValueChanged);
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(13, 118);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(241, 23);
+            this.label15.TabIndex = 299;
+            this.label15.Text = "Integral";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblIntegralPercent
+            // 
+            this.lblIntegralPercent.AutoSize = true;
+            this.lblIntegralPercent.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIntegralPercent.Location = new System.Drawing.Point(277, 154);
+            this.lblIntegralPercent.Name = "lblIntegralPercent";
+            this.lblIntegralPercent.Size = new System.Drawing.Size(91, 39);
+            this.lblIntegralPercent.TabIndex = 298;
+            this.lblIntegralPercent.Text = "-888";
             // 
             // timer1
             // 
@@ -881,12 +935,51 @@
             this.label14.Text = "Or +5";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // label16
+            // 
+            this.label16.BackColor = System.Drawing.Color.Transparent;
+            this.label16.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(47, 12);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(182, 23);
+            this.label16.TabIndex = 340;
+            this.label16.Text = "Integral Starts (cm)";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudIntDistance
+            // 
+            this.nudIntDistance.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudIntDistance.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudIntDistance.InterceptArrowKeys = false;
+            this.nudIntDistance.Location = new System.Drawing.Point(75, 38);
+            this.nudIntDistance.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.nudIntDistance.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudIntDistance.Name = "nudIntDistance";
+            this.nudIntDistance.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.nudIntDistance.Size = new System.Drawing.Size(94, 46);
+            this.nudIntDistance.TabIndex = 339;
+            this.nudIntDistance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudIntDistance.Value = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.nudIntDistance.Enter += new System.EventHandler(this.nudIntDistance_Enter);
+            // 
             // FormSteer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(388, 423);
+            this.ClientSize = new System.Drawing.Size(395, 447);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -924,6 +1017,9 @@
             this.tabLook.PerformLayout();
             this.tabStan.ResumeLayout(false);
             this.tabStan.PerformLayout();
+            this.tabInt.ResumeLayout(false);
+            this.tabInt.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIntDistance)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -997,5 +1093,11 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TabPage tabInt;
+        private System.Windows.Forms.HScrollBar hsbarIntegral;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label lblIntegralPercent;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.NumericUpDown nudIntDistance;
     }
 }

@@ -73,6 +73,8 @@ namespace AgOpenGPS
         //create instance of a stopwatch for timing of frames and NMEA hz determination
         private readonly Stopwatch swFrame = new Stopwatch();
 
+        public double secondsSinceStart;
+
         //private readonly Stopwatch swDraw = new Stopwatch();
         //swDraw.Reset();
         //swDraw.Start();
@@ -234,6 +236,11 @@ namespace AgOpenGPS
         /// </summary>
         public CFont font;
 
+        /// <summary>
+        /// The new steer algorithms
+        /// </summary>
+        public CGuidance gyd;
+
         #endregion // Class Props and instances
 
         // Constructor, Initializes a new instance of the "FormGPS" class.
@@ -312,6 +319,9 @@ namespace AgOpenGPS
             this.lblWatch.Text = "Wait GPS";
             NTRIPStartStopStrip.Text = gStr.gsNTRIPOff;
 
+            //time keeper
+            secondsSinceStart = (DateTime.Now - Process.GetCurrentProcess().StartTime).TotalSeconds;
+
             //build the gesture structures
             SetupStructSizes();
 
@@ -384,6 +394,9 @@ namespace AgOpenGPS
 
             //access to font class
             font = new CFont(this);
+
+            //the new steer algorithms
+            gyd = new CGuidance(this);
         }
 
         private void ZoomByMouseWheel(object sender, MouseEventArgs e)
@@ -1128,6 +1141,12 @@ namespace AgOpenGPS
             }
         }
 
+        public double nudOffset = 0;
+        private void nudPivotOffset_ValueChanged(object sender, EventArgs e)
+        {
+            nudOffset = (double)nudPivotOffset.Value;
+        }
+
         private void stripSectionColor_Click(object sender, EventArgs e)
         {
             using (var form = new FormColorPicker(this, sectionColorDay))
@@ -1173,7 +1192,7 @@ namespace AgOpenGPS
             if (ABLine.isBtnABLineOn) btnCycleLines.Text = "AB-" + ABLine.numABLineSelected;
         }
 
-        public void KeypadToNUD(NumericUpDown sender)
+        public bool KeypadToNUD(NumericUpDown sender)
         {
             NumericUpDown nud = (NumericUpDown)sender;
             nud.BackColor = System.Drawing.Color.Red;
@@ -1183,9 +1202,15 @@ namespace AgOpenGPS
                 if (result == DialogResult.OK)
                 {
                     nud.Value = (decimal)form.ReturnValue;
+                    nud.BackColor = System.Drawing.Color.AliceBlue;
+                    return true;
                 }
+                else if (result == DialogResult.Cancel)
+                {
+                    nud.BackColor = System.Drawing.Color.AliceBlue;
+                }
+                return false;
             }
-            nud.BackColor = System.Drawing.Color.AliceBlue;
         }
 
         public void KeyboardToText(TextBox sender)

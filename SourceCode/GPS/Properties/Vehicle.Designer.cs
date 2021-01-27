@@ -12,7 +12,7 @@ namespace AgOpenGPS.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
     internal sealed partial class Vehicle : global::System.Configuration.ApplicationSettingsBase {
         
         private static Vehicle defaultInstance = ((Vehicle)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Vehicle())));
@@ -662,24 +662,24 @@ namespace AgOpenGPS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double setVehicle_stanleyGain {
+        public double stanleyDistanceErrorGain {
             get {
-                return ((double)(this["setVehicle_stanleyGain"]));
+                return ((double)(this["stanleyDistanceErrorGain"]));
             }
             set {
-                this["setVehicle_stanleyGain"] = value;
+                this["stanleyDistanceErrorGain"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double setVehicle_stanleyHeadingErrorGain {
+        public double stanleyHeadingErrorGain {
             get {
-                return ((double)(this["setVehicle_stanleyHeadingErrorGain"]));
+                return ((double)(this["stanleyHeadingErrorGain"]));
             }
             set {
-                this["setVehicle_stanleyHeadingErrorGain"] = value;
+                this["stanleyHeadingErrorGain"] = value;
             }
         }
         
@@ -1016,6 +1016,30 @@ namespace AgOpenGPS.Properties {
             }
             set {
                 this["setArdSteer_setting2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double stanleyIntegralGainAB {
+            get {
+                return ((double)(this["stanleyIntegralGainAB"]));
+            }
+            set {
+                this["stanleyIntegralGainAB"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.3")]
+        public double stanleyIntegralDistanceAwayTriggerAB {
+            get {
+                return ((double)(this["stanleyIntegralDistanceAwayTriggerAB"]));
+            }
+            set {
+                this["stanleyIntegralDistanceAwayTriggerAB"] = value;
             }
         }
     }

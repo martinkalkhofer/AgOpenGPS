@@ -1873,17 +1873,20 @@ namespace AgOpenGPS
 
             if (ct.isContourBtnOn || ABLine.isBtnABLineOn || curve.isBtnCurveOn)
             {
-                double dist = distanceDisplay * 0.1;
+                double dist = distanceDisplayPivot;
 
-                if (!isMetric) dist *= 0.3937;
-
-                DrawLightBar(oglMain.Width, oglMain.Height, dist);
-
-                double size = 1.5;
-                string hede;
-
-                if (dist != 3200 && dist != 3202)
+                if (dist != 32000 && dist != 32020)
                 {
+                    if (!isMetric) dist *= 0.3937;
+
+                    //dist *= 0.1;
+
+                    double distSteer = distanceDisplaySteer;
+                    double size = 1.5;
+                    string hede;
+
+                    DrawLightBar(oglMain.Width, oglMain.Height, dist);
+
                     if (dist > 0.0)
                     {
                         GL.Color3(0.9752f, 0.50f, 0.3f);
@@ -1894,82 +1897,97 @@ namespace AgOpenGPS
                         GL.Color3(0.50f, 0.952f, 0.3f);
                         hede = (Math.Abs(dist)).ToString("N0") + " >";
                     }
+
                     int center = -(int)(((double)(hede.Length) * 0.5) * 16 * size);
-                    font.DrawText(center, 36, hede, size);
+                    font.DrawText(center, 56, hede, size);
+
+                    if (distSteer > 0.0)
+                    {
+                        GL.Color3(0.9752f, 0.50f, 0.3f);
+                        hede = "< " + (Math.Abs(distSteer)).ToString("N0");
+                    }
+                    else
+                    {
+                        GL.Color3(0.50f, 0.952f, 0.3f);
+                        hede = (Math.Abs(distSteer)).ToString("N0") + " >";
+                    }
+                    center = -(int)(((double)(hede.Length) * 0.5) * 16);
+                    font.DrawText(center, 26, hede, 1);
+
+                    //if (ct.isContourBtnOn)
+                    //{
+                    //    string dist;
+                    //    lblDistanceOffLine.Visible = true;
+                    //    //lblDelta.Visible = true;
+                    //    if (ct.distanceFromCurrentLine == 32000) ct.distanceFromCurrentLine = 0;
+
+                    //    DrawLightBar(oglMain.Width, oglMain.Height, ct.distanceFromCurrentLine * 0.1);
+
+                    //    if ((ct.distanceFromCurrentLine) < 0.0)
+                    //    {
+                    //        lblDistanceOffLine.ForeColor = Color.Green;
+                    //        if (isMetric) dist = ((int)Math.Abs(ct.distanceFromCurrentLine * 0.1)) + " ->";
+                    //        else dist = ((int)Math.Abs(ct.distanceFromCurrentLine / 2.54 * 0.1)) + " ->";
+                    //        lblDistanceOffLine.Text = dist;
+                    //    }
+                    //    else
+                    //    {
+                    //        lblDistanceOffLine.ForeColor = Color.Red;
+                    //        if (isMetric) dist = "<- " + ((int)Math.Abs(ct.distanceFromCurrentLine * 0.1));
+                    //        else dist = "<- " + ((int)Math.Abs(ct.distanceFromCurrentLine / 2.54 * 0.1));
+                    //        lblDistanceOffLine.Text = dist;
+                    //    }
+                    //}
+
+                    //else if (ABLine.isABLineSet | ABLine.isABLineBeingSet)
+                    //{
+                    //    string dist;
+                    //    lblDistanceOffLine.Visible = true;
+                    //    //lblDelta.Visible = true;
+                    //    DrawLightBar(oglMain.Width, oglMain.Height, ABLine.distanceFromCurrentLine * 0.1);
+                    //    if ((ABLine.distanceFromCurrentLine) < 0.0)
+                    //    {
+                    //        // --->
+                    //        lblDistanceOffLine.ForeColor = Color.Green;
+                    //        if (isMetric) dist = ((int)Math.Abs(ABLine.distanceFromCurrentLine * 0.1)) + " ->";
+                    //        else dist = ((int)Math.Abs(ABLine.distanceFromCurrentLine / 2.54 * 0.1)) + " ->";
+                    //        lblDistanceOffLine.Text = dist;
+                    //    }
+                    //    else
+                    //    {
+                    //        // <----
+                    //        lblDistanceOffLine.ForeColor = Color.Red;
+                    //        if (isMetric) dist = "<- " + ((int)Math.Abs(ABLine.distanceFromCurrentLine * 0.1));
+                    //        else dist = "<- " + ((int)Math.Abs(ABLine.distanceFromCurrentLine / 2.54 * 0.1));
+                    //        lblDistanceOffLine.Text = dist;
+                    //    }
+                    //}
+
+                    //else if (curve.isBtnCurveOn)
+                    //{
+                    //    string dist;
+                    //    lblDistanceOffLine.Visible = true;
+                    //    //lblDelta.Visible = true;
+                    //    if (curve.distanceFromCurrentLine == 32000) curve.distanceFromCurrentLine = 0;
+
+                    //    DrawLightBar(oglMain.Width, oglMain.Height, curve.distanceFromCurrentLine * 0.1);
+                    //    if ((curve.distanceFromCurrentLine) < 0.0)
+                    //    {
+                    //        lblDistanceOffLine.ForeColor = Color.Green;
+                    //        if (isMetric) dist = ((int)Math.Abs(curve.distanceFromCurrentLine * 0.1)) + " ->";
+                    //        else dist = ((int)Math.Abs(curve.distanceFromCurrentLine / 2.54 * 0.1)) + " ->";
+                    //        lblDistanceOffLine.Text = dist;
+                    //    }
+                    //    else
+                    //    {
+                    //        lblDistanceOffLine.ForeColor = Color.Red;
+                    //        if (isMetric) dist = "<- " + ((int)Math.Abs(curve.distanceFromCurrentLine * 0.1));
+                    //        else dist = "<- " + ((int)Math.Abs(curve.distanceFromCurrentLine / 2.54 * 0.1));
+                    //        lblDistanceOffLine.Text = dist;
+                    //    }
+                    //}
                 }
             }
-            //if (ct.isContourBtnOn)
-            //{
-            //    string dist;
-            //    lblDistanceOffLine.Visible = true;
-            //    //lblDelta.Visible = true;
-            //    if (ct.distanceFromCurrentLine == 32000) ct.distanceFromCurrentLine = 0;
-
-            //    DrawLightBar(oglMain.Width, oglMain.Height, ct.distanceFromCurrentLine * 0.1);
-
-            //    if ((ct.distanceFromCurrentLine) < 0.0)
-            //    {
-            //        lblDistanceOffLine.ForeColor = Color.Green;
-            //        if (isMetric) dist = ((int)Math.Abs(ct.distanceFromCurrentLine * 0.1)) + " ->";
-            //        else dist = ((int)Math.Abs(ct.distanceFromCurrentLine / 2.54 * 0.1)) + " ->";
-            //        lblDistanceOffLine.Text = dist;
-            //    }
-            //    else
-            //    {
-            //        lblDistanceOffLine.ForeColor = Color.Red;
-            //        if (isMetric) dist = "<- " + ((int)Math.Abs(ct.distanceFromCurrentLine * 0.1));
-            //        else dist = "<- " + ((int)Math.Abs(ct.distanceFromCurrentLine / 2.54 * 0.1));
-            //        lblDistanceOffLine.Text = dist;
-            //    }
-            //}
-
-            //else if (ABLine.isABLineSet | ABLine.isABLineBeingSet)
-            //{
-            //    string dist;
-            //    lblDistanceOffLine.Visible = true;
-            //    //lblDelta.Visible = true;
-            //    DrawLightBar(oglMain.Width, oglMain.Height, ABLine.distanceFromCurrentLine * 0.1);
-            //    if ((ABLine.distanceFromCurrentLine) < 0.0)
-            //    {
-            //        // --->
-            //        lblDistanceOffLine.ForeColor = Color.Green;
-            //        if (isMetric) dist = ((int)Math.Abs(ABLine.distanceFromCurrentLine * 0.1)) + " ->";
-            //        else dist = ((int)Math.Abs(ABLine.distanceFromCurrentLine / 2.54 * 0.1)) + " ->";
-            //        lblDistanceOffLine.Text = dist;
-            //    }
-            //    else
-            //    {
-            //        // <----
-            //        lblDistanceOffLine.ForeColor = Color.Red;
-            //        if (isMetric) dist = "<- " + ((int)Math.Abs(ABLine.distanceFromCurrentLine * 0.1));
-            //        else dist = "<- " + ((int)Math.Abs(ABLine.distanceFromCurrentLine / 2.54 * 0.1));
-            //        lblDistanceOffLine.Text = dist;
-            //    }
-            //}
-
-            //else if (curve.isBtnCurveOn)
-            //{
-            //    string dist;
-            //    lblDistanceOffLine.Visible = true;
-            //    //lblDelta.Visible = true;
-            //    if (curve.distanceFromCurrentLine == 32000) curve.distanceFromCurrentLine = 0;
-
-            //    DrawLightBar(oglMain.Width, oglMain.Height, curve.distanceFromCurrentLine * 0.1);
-            //    if ((curve.distanceFromCurrentLine) < 0.0)
-            //    {
-            //        lblDistanceOffLine.ForeColor = Color.Green;
-            //        if (isMetric) dist = ((int)Math.Abs(curve.distanceFromCurrentLine * 0.1)) + " ->";
-            //        else dist = ((int)Math.Abs(curve.distanceFromCurrentLine / 2.54 * 0.1)) + " ->";
-            //        lblDistanceOffLine.Text = dist;
-            //    }
-            //    else
-            //    {
-            //        lblDistanceOffLine.ForeColor = Color.Red;
-            //        if (isMetric) dist = "<- " + ((int)Math.Abs(curve.distanceFromCurrentLine * 0.1));
-            //        else dist = "<- " + ((int)Math.Abs(curve.distanceFromCurrentLine / 2.54 * 0.1));
-            //        lblDistanceOffLine.Text = dist;
-            //    }
-            //}
         }
 
         private void DrawRollBar()

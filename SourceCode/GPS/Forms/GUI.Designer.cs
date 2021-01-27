@@ -285,10 +285,12 @@ namespace AgOpenGPS
                         btnContour.Text = InchXTE; //cross track error
                     }
 
-                    lblHz.Text = fixUpdateHz + "Hz  ms:" + (frameTime.ToString("N1")) + "\r\n" + 
+                    lblHz.Text = fixUpdateHz + "Hz ~ " + (frameTime.ToString("N1")) + "\r\n" + 
                         FixQuality;
 
-                    AutoSteerToolBtn.Text = SetSteerAngle + "\r\n" + ActualSteerAngle;
+
+                    secondsSinceStart = (DateTime.Now - Process.GetCurrentProcess().StartTime).TotalSeconds;
+
                 } //end every 1/2 second
 
                 //every fifth second update  ///////////////////////////   FIFTH Fifth ////////////////////////////
@@ -296,6 +298,10 @@ namespace AgOpenGPS
                 {
                     //reset the counter
                     displayUpdateOneFifthCounter = oneFifthSecond;
+
+                    AutoSteerToolBtn.Text = SetSteerAngle + "\r\n" + ActualSteerAngle;
+
+                    integralStatusLeftSide.Text = "I: " + gyd.inty.ToString("N3");
                 }
 
             } //there was a new GPS update

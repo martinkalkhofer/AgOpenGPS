@@ -96,13 +96,18 @@ namespace AgOpenGPS
             hsbarLookAheadUturnMult.Value = (Int16)(mf.vehicle.goalPointLookAheadUturnMult * 10);
             lblLookAheadUturnMult.Text = mf.vehicle.goalPointLookAheadUturnMult.ToString();
 
-            mf.vehicle.stanleyGain = Properties.Vehicle.Default.setVehicle_stanleyGain;
-            hsbarStanleyGain.Value = (Int16)(mf.vehicle.stanleyGain * 10);
-            lblStanleyGain.Text = mf.vehicle.stanleyGain.ToString();
+            mf.vehicle.stanleyDistanceErrorGain = Properties.Vehicle.Default.stanleyDistanceErrorGain;
+            hsbarStanleyGain.Value = (Int16)(mf.vehicle.stanleyDistanceErrorGain * 10);
+            lblStanleyGain.Text = mf.vehicle.stanleyDistanceErrorGain.ToString();
 
-            mf.vehicle.stanleyHeadingErrorGain = Properties.Vehicle.Default.setVehicle_stanleyHeadingErrorGain;
+            mf.vehicle.stanleyHeadingErrorGain = Properties.Vehicle.Default.stanleyHeadingErrorGain;
             hsbarHeadingErrorGain.Value = (Int16)(mf.vehicle.stanleyHeadingErrorGain * 10);
             lblHeadingErrorGain.Text = mf.vehicle.stanleyHeadingErrorGain.ToString();
+
+            hsbarIntegral.Value = (int)(Properties.Vehicle.Default.stanleyIntegralGainAB * 100);
+            lblIntegralPercent.Text = ((int)(mf.vehicle.stanleyIntegralGainAB * 100)).ToString();
+
+            nudIntDistance.Value = (int)(Properties.Vehicle.Default.stanleyIntegralDistanceAwayTriggerAB * 100);
 
             //make sure free drive is off
             btnFreeDrive.BackColor = Color.Red;
@@ -128,16 +133,23 @@ namespace AgOpenGPS
         //Stanley Page tab
         private void hsbarStanleyGain_ValueChanged(object sender, EventArgs e)
         {
-            mf.vehicle.stanleyGain = hsbarStanleyGain.Value * 0.1;
-            lblStanleyGain.Text = mf.vehicle.stanleyGain.ToString();
-            Properties.Vehicle.Default.setVehicle_stanleyGain = mf.vehicle.stanleyGain;
+            mf.vehicle.stanleyDistanceErrorGain = hsbarStanleyGain.Value * 0.1;
+            lblStanleyGain.Text = mf.vehicle.stanleyDistanceErrorGain.ToString();
+            Properties.Vehicle.Default.stanleyDistanceErrorGain = mf.vehicle.stanleyDistanceErrorGain;
         }
 
         private void hsbarHeadingErrorGain_ValueChanged(object sender, EventArgs e)
         {
             mf.vehicle.stanleyHeadingErrorGain = hsbarHeadingErrorGain.Value * 0.1;
             lblHeadingErrorGain.Text = mf.vehicle.stanleyHeadingErrorGain.ToString();
-            Properties.Vehicle.Default.setVehicle_stanleyHeadingErrorGain = mf.vehicle.stanleyHeadingErrorGain;
+            Properties.Vehicle.Default.stanleyHeadingErrorGain = mf.vehicle.stanleyHeadingErrorGain;
+        }
+
+        private void hsbarIntegral_ValueChanged(object sender, EventArgs e)
+        {
+            mf.vehicle.stanleyIntegralGainAB = (double)hsbarIntegral.Value * 0.01;
+            lblIntegralPercent.Text = hsbarIntegral.Value.ToString();
+            Properties.Vehicle.Default.stanleyIntegralGainAB = mf.vehicle.stanleyIntegralGainAB;
         }
 
         //Scrollbars
@@ -369,6 +381,15 @@ namespace AgOpenGPS
         {
             mf.ast.driveFreeSteerAngle--;
             if (mf.ast.driveFreeSteerAngle < -40) mf.ast.driveFreeSteerAngle = -40;
+        }
+
+        private void nudIntDistance_Enter(object sender, EventArgs e)
+        {
+            if (mf.KeypadToNUD((NumericUpDown)sender))
+            {
+                mf.vehicle.stanleyIntegralDistanceAwayTriggerAB = ((double)nudIntDistance.Value)*0.01;
+                Properties.Vehicle.Default.stanleyIntegralDistanceAwayTriggerAB = mf.vehicle.stanleyIntegralDistanceAwayTriggerAB;
+            }
         }
     }
 }
