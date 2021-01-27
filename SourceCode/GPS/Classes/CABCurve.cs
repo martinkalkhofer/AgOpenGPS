@@ -180,110 +180,112 @@ namespace AgOpenGPS
             {
                 if (mf.isStanleyUsed)
                 {
-                    //find the closest 2 points to current fix
-                    for (int t = 0; t < ptCount; t++)
-                    {
-                        dist = ((steer.easting - curList[t].easting) * (steer.easting - curList[t].easting))
-                                        + ((steer.northing - curList[t].northing) * (steer.northing - curList[t].northing));
-                        if (dist < minDistA)
-                        {
-                            minDistB = minDistA;
-                            B = A;
-                            minDistA = dist;
-                            A = t;
-                        }
-                        else if (dist < minDistB)
-                        {
-                            minDistB = dist;
-                            B = t;
-                        }
-                    }
+                    mf.gyd.StanleyGuidanceCurve(pivot, steer, ref curList);
 
-                    //just need to make sure the points continue ascending or heading switches all over the place
-                    if (A > B) { C = A; A = B; B = C; }
+                    ////find the closest 2 points to current fix
+                    //for (int t = 0; t < ptCount; t++)
+                    //{
+                    //    dist = ((steer.easting - curList[t].easting) * (steer.easting - curList[t].easting))
+                    //                    + ((steer.northing - curList[t].northing) * (steer.northing - curList[t].northing));
+                    //    if (dist < minDistA)
+                    //    {
+                    //        minDistB = minDistA;
+                    //        B = A;
+                    //        minDistA = dist;
+                    //        A = t;
+                    //    }
+                    //    else if (dist < minDistB)
+                    //    {
+                    //        minDistB = dist;
+                    //        B = t;
+                    //    }
+                    //}
 
-                    currentLocationIndex = A;
+                    ////just need to make sure the points continue ascending or heading switches all over the place
+                    //if (A > B) { C = A; A = B; B = C; }
 
-                    //get the distance from currently active AB line
-                    dx = curList[B].easting - curList[A].easting;
-                    dz = curList[B].northing - curList[A].northing;
+                    //currentLocationIndex = A;
 
-                    if (Math.Abs(dx) < Double.Epsilon && Math.Abs(dz) < Double.Epsilon) return;
+                    ////get the distance from currently active AB line
+                    //dx = curList[B].easting - curList[A].easting;
+                    //dz = curList[B].northing - curList[A].northing;
 
-                    //abHeading = Math.Atan2(dz, dx);
-                    double abHeading = curList[A].heading;
+                    //if (Math.Abs(dx) < Double.Epsilon && Math.Abs(dz) < Double.Epsilon) return;
 
-                    //how far from current AB Line is fix
-                    distanceFromCurrentLine = ((dz * steer.easting) - (dx * steer.northing) + (curList[B].easting
-                                * curList[A].northing) - (curList[B].northing * curList[A].easting))
-                                    / Math.Sqrt((dz * dz) + (dx * dx));
+                    ////abHeading = Math.Atan2(dz, dx);
+                    //double abHeading = curList[A].heading;
 
-                    //are we on the right side or not
-                    isOnRightSideCurrentLine = distanceFromCurrentLine > 0;
+                    ////how far from current AB Line is fix
+                    //distanceFromCurrentLine = ((dz * steer.easting) - (dx * steer.northing) + (curList[B].easting
+                    //            * curList[A].northing) - (curList[B].northing * curList[A].easting))
+                    //                / Math.Sqrt((dz * dz) + (dx * dx));
 
-                    //absolute the distance
-                    distanceFromCurrentLine = Math.Abs(distanceFromCurrentLine);
+                    ////are we on the right side or not
+                    //isOnRightSideCurrentLine = distanceFromCurrentLine > 0;
 
-                    //Subtract the two headings, if > 1.57 its going the opposite heading as refAB
-                    double abFixHeadingDelta = (Math.Abs(mf.fixHeading - abHeading));
-                    if (abFixHeadingDelta >= Math.PI) abFixHeadingDelta = Math.Abs(abFixHeadingDelta - glm.twoPI);
-                    isABSameAsVehicleHeading = abFixHeadingDelta < glm.PIBy2;
+                    ////absolute the distance
+                    //distanceFromCurrentLine = Math.Abs(distanceFromCurrentLine);
 
-                    // calc point on ABLine closest to current position
-                    double U = (((steer.easting - curList[A].easting) * dx)
-                                + ((steer.northing - curList[A].northing) * dz))
-                                / ((dx * dx) + (dz * dz));
+                    ////Subtract the two headings, if > 1.57 its going the opposite heading as refAB
+                    //double abFixHeadingDelta = (Math.Abs(mf.fixHeading - abHeading));
+                    //if (abFixHeadingDelta >= Math.PI) abFixHeadingDelta = Math.Abs(abFixHeadingDelta - glm.twoPI);
+                    //isABSameAsVehicleHeading = abFixHeadingDelta < glm.PIBy2;
 
-                    rEastCu = curList[A].easting + (U * dx);
-                    rNorthCu = curList[A].northing + (U * dz);
+                    //// calc point on ABLine closest to current position
+                    //double U = (((steer.easting - curList[A].easting) * dx)
+                    //            + ((steer.northing - curList[A].northing) * dz))
+                    //            / ((dx * dx) + (dz * dz));
 
-                    //distance is negative if on left, positive if on right
-                    if (isABSameAsVehicleHeading)
-                    {
-                        if (!isOnRightSideCurrentLine)
-                        {
-                            distanceFromCurrentLine *= -1.0;
-                        }
-                        abFixHeadingDelta = (steer.heading - abHeading);
-                    }
+                    //rEastCu = curList[A].easting + (U * dx);
+                    //rNorthCu = curList[A].northing + (U * dz);
 
-                    //opposite way so right is left
-                    else
-                    {
-                        if (isOnRightSideCurrentLine)
-                        {
-                            distanceFromCurrentLine *= -1.0;
-                        }
-                        abFixHeadingDelta = (steer.heading - abHeading + Math.PI);
-                    }
+                    ////distance is negative if on left, positive if on right
+                    //if (isABSameAsVehicleHeading)
+                    //{
+                    //    if (!isOnRightSideCurrentLine)
+                    //    {
+                    //        distanceFromCurrentLine *= -1.0;
+                    //    }
+                    //    abFixHeadingDelta = (steer.heading - abHeading);
+                    //}
 
-                    //Fix the circular error
-                    if (abFixHeadingDelta > Math.PI) abFixHeadingDelta -= Math.PI;
-                    else if (abFixHeadingDelta < Math.PI) abFixHeadingDelta += Math.PI;
+                    ////opposite way so right is left
+                    //else
+                    //{
+                    //    if (isOnRightSideCurrentLine)
+                    //    {
+                    //        distanceFromCurrentLine *= -1.0;
+                    //    }
+                    //    abFixHeadingDelta = (steer.heading - abHeading + Math.PI);
+                    //}
 
-                    if (abFixHeadingDelta > glm.PIBy2) abFixHeadingDelta -= Math.PI;
-                    else if (abFixHeadingDelta < -glm.PIBy2) abFixHeadingDelta += Math.PI;
+                    ////Fix the circular error
+                    //if (abFixHeadingDelta > Math.PI) abFixHeadingDelta -= Math.PI;
+                    //else if (abFixHeadingDelta < Math.PI) abFixHeadingDelta += Math.PI;
 
-                    abFixHeadingDelta *= mf.vehicle.stanleyHeadingErrorGain;
-                    if (abFixHeadingDelta > 0.74) abFixHeadingDelta = 0.74;
-                    if (abFixHeadingDelta < -0.74) abFixHeadingDelta = -0.74;
+                    //if (abFixHeadingDelta > glm.PIBy2) abFixHeadingDelta -= Math.PI;
+                    //else if (abFixHeadingDelta < -glm.PIBy2) abFixHeadingDelta += Math.PI;
 
-                    steerAngleCu = Math.Atan((distanceFromCurrentLine * mf.vehicle.stanleyDistanceErrorGain) 
-                        / ((Math.Abs(mf.pn.speed) * 0.277777) + 1));
+                    //abFixHeadingDelta *= mf.vehicle.stanleyHeadingErrorGain;
+                    //if (abFixHeadingDelta > 0.74) abFixHeadingDelta = 0.74;
+                    //if (abFixHeadingDelta < -0.74) abFixHeadingDelta = -0.74;
 
-                    if (steerAngleCu > 0.74) steerAngleCu = 0.74;
-                    if (steerAngleCu < -0.74) steerAngleCu = -0.74;
+                    //steerAngleCu = Math.Atan((distanceFromCurrentLine * mf.vehicle.stanleyDistanceErrorGain)
+                    //    / ((Math.Abs(mf.pn.speed) * 0.277777) + 1));
 
-                    if (mf.pn.speed > -0.1)
-                        steerAngleCu = glm.toDegrees((steerAngleCu + abFixHeadingDelta) * -1.0);
-                    else
-                        steerAngleCu = glm.toDegrees((steerAngleCu - abFixHeadingDelta) * -1.0);
+                    //if (steerAngleCu > 0.74) steerAngleCu = 0.74;
+                    //if (steerAngleCu < -0.74) steerAngleCu = -0.74;
 
-                    if (steerAngleCu < -mf.vehicle.maxSteerAngle) steerAngleCu = -mf.vehicle.maxSteerAngle;
-                    if (steerAngleCu > mf.vehicle.maxSteerAngle) steerAngleCu = mf.vehicle.maxSteerAngle;
+                    //if (mf.pn.speed > -0.1)
+                    //    steerAngleCu = glm.toDegrees((steerAngleCu + abFixHeadingDelta) * -1.0);
+                    //else
+                    //    steerAngleCu = glm.toDegrees((steerAngleCu - abFixHeadingDelta) * -1.0);
 
-                    //Convert to millimeters
-                    distanceFromCurrentLine = Math.Round(distanceFromCurrentLine * 1000.0, MidpointRounding.AwayFromZero);
+                    //if (steerAngleCu < -mf.vehicle.maxSteerAngle) steerAngleCu = -mf.vehicle.maxSteerAngle;
+                    //if (steerAngleCu > mf.vehicle.maxSteerAngle) steerAngleCu = mf.vehicle.maxSteerAngle;
+
+                    ////Convert to millimeters
+                    //distanceFromCurrentLine = Math.Round(distanceFromCurrentLine * 1000.0, MidpointRounding.AwayFromZero);
                 }
                 else    // Pure Pursuit ------------------------------------------
                 {
@@ -494,10 +496,10 @@ namespace AgOpenGPS
                         //temp = glm.toDegrees(temp);
                         if (isOnRightSideCurrentLine) distanceFromCurrentLine *= -1.0;
                     }
-                }
 
-                mf.guidanceLineDistanceOff = mf.distanceDisplayPivot = (Int16)distanceFromCurrentLine;
-                mf.guidanceLineSteerAngle = (Int16)(steerAngleCu * 100);
+                    mf.guidanceLineDistanceOff = mf.distanceDisplayPivot = (Int16)distanceFromCurrentLine;
+                    mf.guidanceLineSteerAngle = (Int16)(steerAngleCu * 100);
+                }
 
                 if (mf.yt.isYouTurnTriggered)
                 {
@@ -538,11 +540,20 @@ namespace AgOpenGPS
                     GL.Color3(0.930f, 0.0692f, 0.260f);
                     ptCount--;
                     GL.Vertex3(refList[ptCount].easting, refList[ptCount].northing, 0);
-                    #pragma warning disable CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
                     GL.Vertex3(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, 0);
-                    #pragma warning restore CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
                 }
                 GL.End();
+
+                GL.PointSize(8.0f);
+                GL.Begin(PrimitiveType.Points);
+                GL.Color3(1.0f, 1.0f, 0.0f);
+                //GL.Vertex3(goalPointAB.easting, goalPointAB.northing, 0.0);
+                GL.Vertex3(mf.gyd.rEastSteer, mf.gyd.rNorthSteer, 0.0);
+                GL.Color3(1.0f, 0.0f, 1.0f);
+                GL.Vertex3(mf.gyd.rEastPivot, mf.gyd.rNorthPivot, 0.0);
+                GL.End();
+                GL.PointSize(1.0f);
+
 
                 if (mf.font.isFontOn && refList.Count > 410)
                 {
@@ -571,7 +582,7 @@ namespace AgOpenGPS
                         GL.PointSize(2);
 
                         GL.Color3(0.95f, 0.2f, 0.95f);
-                        GL.Begin(PrimitiveType.LineStrip);
+                        GL.Begin(PrimitiveType.Lines);
                         for (int h = 0; h < ptCount; h++) GL.Vertex3(curList[h].easting, curList[h].northing, 0);
                         GL.End();
 

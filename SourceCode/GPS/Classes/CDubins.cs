@@ -15,7 +15,7 @@ namespace AgOpenGPS
     public class CDubins
     {
         //How far we are driving each update, the accuracy will improve if we lower the driveDistance
-        public static readonly double driveDistance = 0.1;
+        public static readonly double driveDistance = 0.05;
 
         //The radius the car can turn 360 degrees with
         public static double turningRadius = Properties.Vehicle.Default.setVehicle_minTurningRadius;

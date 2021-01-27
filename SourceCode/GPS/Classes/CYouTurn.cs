@@ -268,8 +268,8 @@ namespace AgOpenGPS
             }
         }
 
-        //list of points of collision path avoidance
-        public List<vec3> mazeList = new List<vec3>();
+        ////list of points of collision path avoidance
+        //public List<vec3> mazeList = new List<vec3>();
 
         //public bool BuildDriveAround()
         //{
@@ -1402,8 +1402,6 @@ namespace AgOpenGPS
             }
         }
 
-        //Resets the drawn YOuTurn and set diagPhase to 0
-
         //build the points and path of youturn to be scaled and transformed
         public void BuildManualYouTurn(bool isTurnRight, bool isTurnButtonTriggered)
         {
@@ -1809,15 +1807,15 @@ namespace AgOpenGPS
         public void DrawYouTurn()
         {
             {
-                //GL.PointSize(8);
-                //GL.Begin(PrimitiveType.Points);
-                //{
-                //    GL.Color3(0.95f, 0.05f, 0.05f);
-                //    GL.Vertex3(crossingCurvePoint.easting, crossingCurvePoint.northing, 0);
-                //    GL.Color3(0.05f, 9, 0.05f);
-                //    GL.Vertex3(crossingTurnLinePoint.easting, crossingTurnLinePoint.northing, 0);
-                //}
-                //GL.End();
+                GL.PointSize(8);
+                GL.Begin(PrimitiveType.Points);
+                {
+                    GL.Color3(0.95f, 0.05f, 0.05f);
+                    GL.Vertex3(crossingCurvePoint.easting, crossingCurvePoint.northing, 0);
+                    GL.Color3(0.05f, 9, 0.05f);
+                    GL.Vertex3(crossingTurnLinePoint.easting, crossingTurnLinePoint.northing, 0);
+                }
+                GL.End();
 
                 int ptCount = ytList.Count;
                 if (ptCount < 3) return;
@@ -1825,7 +1823,7 @@ namespace AgOpenGPS
 
                 if (isYouTurnTriggered)
                 {
-                    GL.Color3(0.95f, 0.95f, 0.25f);
+                    GL.Color3(0.95f, 0.5f, 0.95f);
                     GL.Begin(PrimitiveType.Points);
                     for (int i = 0; i < ptCount; i++)
                     {

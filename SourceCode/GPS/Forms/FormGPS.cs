@@ -412,8 +412,8 @@ namespace AgOpenGPS
             else
             {
                 if (camera.zoomValue <= 20)
-                { if ((camera.zoomValue -= camera.zoomValue * 0.02) < 6.0) camera.zoomValue = 6.0; }
-                else { if ((camera.zoomValue -= camera.zoomValue * 0.01) < 6.0) camera.zoomValue = 6.0; }
+                { if ((camera.zoomValue -= camera.zoomValue * 0.02) < 3.0) camera.zoomValue = 3.0; }
+                else { if ((camera.zoomValue -= camera.zoomValue * 0.01) < 3.0) camera.zoomValue = 3.0; }
 
                 camera.camSetDistance = camera.zoomValue * camera.zoomValue * -1;
                 SetZoom();

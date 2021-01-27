@@ -393,18 +393,22 @@ namespace AgOpenGPS
                     if (flagPts.Count > 0) DrawFlags();
 
                     //Direct line to flag if flag selected
-                    if (flagNumberPicked > 0)
+                    try
                     {
-                        GL.LineWidth(ABLine.lineWidth);
-                        GL.Enable(EnableCap.LineStipple);
-                        GL.LineStipple(1, 0x0707);
-                        GL.Begin(PrimitiveType.Lines);
-                        GL.Color3(0.930f, 0.72f, 0.32f);
-                        GL.Vertex3(pivotAxlePos.easting, pivotAxlePos.northing, 0);
-                        GL.Vertex3(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing, 0);
-                        GL.End();
-                        GL.Disable(EnableCap.LineStipple);
+                        if (flagNumberPicked > 0)
+                        {
+                            GL.LineWidth(ABLine.lineWidth);
+                            GL.Enable(EnableCap.LineStipple);
+                            GL.LineStipple(1, 0x0707);
+                            GL.Begin(PrimitiveType.Lines);
+                            GL.Color3(0.930f, 0.72f, 0.32f);
+                            GL.Vertex3(pivotAxlePos.easting, pivotAxlePos.northing, 0);
+                            GL.Vertex3(flagPts[flagNumberPicked - 1].easting, flagPts[flagNumberPicked - 1].northing, 0);
+                            GL.End();
+                            GL.Disable(EnableCap.LineStipple);
+                        }
                     }
+                    catch { }
 
                     //if (flagDubinsList.Count > 1)
                     //{
@@ -542,7 +546,7 @@ namespace AgOpenGPS
             GL.Color3(0.0f, 0.5f, 0.0f);
 
             //calculate the frustum for the section control window
-            CalcFrustum();
+            //CalcFrustum();
 
             //to draw or not the triangle patch
             bool isDraw;
@@ -563,14 +567,14 @@ namespace AgOpenGPS
                         for (int i = 1; i < count2; i += 3)
                         {
                             //determine if point is in frustum or not
-                            if (frustum[0] * triList[i].easting + frustum[1] * triList[i].northing + frustum[3] <= 0)
-                                continue;//right
-                            if (frustum[4] * triList[i].easting + frustum[5] * triList[i].northing + frustum[7] <= 0)
-                                continue;//left
-                            if (frustum[16] * triList[i].easting + frustum[17] * triList[i].northing + frustum[19] <= 0)
-                                continue;//bottom
-                            if (frustum[20] * triList[i].easting + frustum[21] * triList[i].northing + frustum[23] <= 0)
-                                continue;//top
+                            if (triList[i].easting > pivotAxlePos.easting + 50)
+                                continue;
+                            if (triList[i].easting < pivotAxlePos.easting - 50)
+                                continue;
+                            if (triList[i].northing > pivotAxlePos.northing + 50)
+                                continue;
+                            if (triList[i].northing < pivotAxlePos.northing - 50)
+                                continue;
 
                             //point is in frustum so draw the entire patch
                             isDraw = true;
@@ -1873,29 +1877,29 @@ namespace AgOpenGPS
 
             if (ct.isContourBtnOn || ABLine.isBtnABLineOn || curve.isBtnCurveOn)
             {
-                double dist = distanceDisplayPivot;
+                double distPivot = distanceDisplayPivot;
 
-                if (dist != 32000 && dist != 32020)
+                if (distPivot != 32000 && distPivot != 32020)
                 {
-                    if (!isMetric) dist *= 0.3937;
+                    if (!isMetric) distPivot *= 0.3937;
 
-                    //dist *= 0.1;
+                    distPivot *= 0.1;
 
-                    double distSteer = distanceDisplaySteer;
-                    double size = 1.5;
+                    double distSteer = distanceDisplaySteer*0.1;
+                    double size = 1;
                     string hede;
 
-                    DrawLightBar(oglMain.Width, oglMain.Height, dist);
+                    DrawLightBar(oglMain.Width, oglMain.Height, distPivot);
 
-                    if (dist > 0.0)
+                    if (distPivot > 0.0)
                     {
                         GL.Color3(0.9752f, 0.50f, 0.3f);
-                        hede = "< " + (Math.Abs(dist)).ToString("N0");
+                        hede = "< " + (Math.Abs(distPivot)).ToString("N0");
                     }
                     else
                     {
                         GL.Color3(0.50f, 0.952f, 0.3f);
-                        hede = (Math.Abs(dist)).ToString("N0") + " >";
+                        hede = (Math.Abs(distPivot)).ToString("N0") + " >";
                     }
 
                     int center = -(int)(((double)(hede.Length) * 0.5) * 16 * size);

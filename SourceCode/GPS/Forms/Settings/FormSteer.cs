@@ -17,28 +17,27 @@ namespace AgOpenGPS
             InitializeComponent();
 
             this.btnFreeDrive.Text = gStr.gsDrive;
-            this.tabGain.Text = gStr.gsGain;
-            this.label29.Text = gStr.gsSidehillDraftGain;
+            //this.tabGain.Text = gStr.gsGain;
             //this.label22.Text = gStr.gsOutputGain;
             this.label41.Text = gStr.gsMinimumPWMDrive;
             this.label7.Text = gStr.gsProportionalGain;
-            label1.Text = gStr.gsChooseType;
+            //label1.Text = gStr.gsChooseType;
 
-            this.tabSteer.Text = gStr.gsSteer;
+            //this.tabSteer.Text = gStr.gsSteer;
             this.label25.Text = gStr.gsCountsPerDegree;
             //this.label45.Text = gStr.gsMaxIntegralValue;
             this.label19.Text = gStr.gsMaxSteerAngleInDegrees;
             //this.label33.Text = gStr.gsIntegralGain;
             this.label10.Text = gStr.gsWheelAngleSensorZero;
 
-            this.tabLook.Text = "Pure P";
+            //this.tabLook.Text = "Pure P";
             this.label2.Text = gStr.gsUTurnLookAheadMultiplier;
             this.label37.Text = gStr.gsLookAheadInSeconds;
             this.label4.Text = gStr.gsLookAheadOfflineMultiplier;
             this.label6.Text = gStr.gsMinLookAheadInMeters;
 
-            this.tabStan.Text = "Stanley";
-            this.btnChart.Text = gStr.gsSteerChart;
+            //this.tabStan.Text = "Stanley";
+            //this.btnChart.Text = gStr.gsSteerChart;
             this.label3.Text = gStr.gsAgressiveness;
             this.label5.Text = gStr.gsOvershootReduction;
             this.Text = gStr.gsAutoSteerConfiguration;
@@ -60,9 +59,6 @@ namespace AgOpenGPS
 
             //hsbarOutputGain.Value = Properties.Settings.Default.setAS_Ko;
             //lblOutputGain.Text = hsbarOutputGain.Value.ToString();
-
-            hsbarSidehillDraftGain.Value = Properties.Settings.Default.setAS_Kd;
-            lblSidehillDraftGain.Text = hsbarSidehillDraftGain.Value.ToString();
 
             hsbarLowSteerPWM.ValueChanged -= hsbarLowSteerPWM_ValueChanged;
             hsbarHighSteerPWM.ValueChanged -= hsbarMinPWM_ValueChanged;
@@ -231,14 +227,6 @@ namespace AgOpenGPS
         //    toSend = true;
         //}
 
-        private void hsbarSidehillDraftGain_ValueChanged(object sender, EventArgs e)
-        {
-            mf.mc.autoSteerSettings[mf.mc.ssKd] = unchecked((byte)hsbarSidehillDraftGain.Value);
-            lblSidehillDraftGain.Text = (mf.mc.autoSteerSettings[mf.mc.ssKd]).ToString();
-            Properties.Settings.Default.setAS_Kd = mf.mc.autoSteerSettings[mf.mc.ssKd];
-            toSend = true;
-        }
-
         private void hsbarLowSteerPWM_ValueChanged(object sender, EventArgs e)
         {
             if (hsbarLowSteerPWM.Value > hsbarHighSteerPWM.Value) hsbarHighSteerPWM.Value = hsbarLowSteerPWM.Value;
@@ -256,13 +244,6 @@ namespace AgOpenGPS
             Properties.Settings.Default.setAS_highSteerPWM = mf.mc.autoSteerSettings[mf.mc.ssHighPWM];
             toSend = true;
         }
-
-        //FREE DRIVE SECTION
-
-        //private void hSBarFreeDrive_ValueChanged(object sender, EventArgs e)
-        //{
-        //    mf.ast.driveFreeSteerAngle = (Int16)hSBarFreeDrive.Value;
-        //}
 
         private void btnFreeDrive_Click(object sender, EventArgs e)
         {
