@@ -543,13 +543,13 @@ namespace AgOpenGPS
             }
             else
             {
-                if (curve.isCurveSet)
+                if (curve.isCurveSet && curve.isBtnCurveOn)
                 {
                     //do the calcs for AB Curve
                     curve.GetCurrentCurveLine(pivotAxlePos, steerAxlePos);
                 }
 
-                if (ABLine.isABLineSet)
+                if (ABLine.isABLineSet && ABLine.isBtnABLineOn)
                 {
                     ABLine.GetCurrentABLine(pivotAxlePos, steerAxlePos);
                     if (yt.isRecordingCustomYouTurn)
