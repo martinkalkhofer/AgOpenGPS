@@ -80,6 +80,7 @@ namespace AgOpenGPS
             nudOffset.Controls[0].Enabled = false;
 
             nudOverlap.Controls[0].Enabled = false;
+
             nudSection1.Controls[0].Enabled = false;
             nudSection2.Controls[0].Enabled = false;
             nudSection3.Controls[0].Enabled = false;
@@ -96,6 +97,7 @@ namespace AgOpenGPS
             nudSection14.Controls[0].Enabled = false;
             nudSection15.Controls[0].Enabled = false;
             nudSection16.Controls[0].Enabled = false;
+
             nudTankHitch.Controls[0].Enabled = false;
 
             if (mf.isMetric)
@@ -175,7 +177,7 @@ namespace AgOpenGPS
             numberOfSections = Properties.Vehicle.Default.setVehicle_numSections;
             temp = numberOfSections;
             
-            isToolBehindPivot = Properties.Vehicle.Default.setTool_isToolBehindPivot;
+            isToolBehindPivot = Properties.Vehicle.Default.setTool_isToolRearFixed;
             isToolTrailing = Properties.Vehicle.Default.setTool_isToolTrailing;
             isToolTBT = Properties.Vehicle.Default.setTool_isToolTBT;
 
@@ -407,8 +409,8 @@ namespace AgOpenGPS
             mf.tool.isToolTrailing = isToolTrailing;
             Properties.Vehicle.Default.setTool_isToolTrailing = mf.tool.isToolTrailing;
 
-            mf.tool.isToolBehindPivot = isToolBehindPivot;
-            Properties.Vehicle.Default.setTool_isToolBehindPivot = mf.tool.isToolBehindPivot;
+            //mf.tool.isToolBehindPivot = isToolBehindPivot;
+            //Properties.Vehicle.Default.setTool_isToolRearFixed = mf.tool.isToolBehindPivot;
 
             mf.tool.isToolTBT = isToolTBT;
             Properties.Vehicle.Default.setTool_isToolTBT = mf.tool.isToolTBT;

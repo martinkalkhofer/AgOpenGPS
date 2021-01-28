@@ -245,6 +245,28 @@
     <Compile Include="Forms\Settings\FormColor.Designer.cs">
       <DependentUpon>FormColor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Settings\FormConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Settings\FormConfig.Designer.cs">
+      <DependentUpon>FormConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Settings\ConfigMenu.Designer.cs">
+      <SubType>Form</SubType>
+      <DependentUpon>FormConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Settings\ConfigVehicle.Designer.cs">
+      <SubType>Form</SubType>
+      <DependentUpon>FormConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Settings\ConfigTool.Designer.cs">
+      <SubType>Form</SubType>
+      <DependentUpon>FormConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Settings\ConfigData.Designer.cs">
+      <SubType>Form</SubType>
+      <DependentUpon>FormConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Settings\FormDisplayOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -594,6 +616,9 @@
       <DependentUpon>FormColor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Settings\FormConfig.resx">
+      <DependentUpon>FormConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Settings\FormDisplayOptions.resx">
       <DependentUpon>FormDisplayOptions.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -868,6 +893,10 @@
     <None Include="btnImages\Sort.png" />
     <None Include="btnImages\FileSaveAs.png" />
     <None Include="btnImages\ColorBackGnd.png" />
+    <None Include="btnImages\ToolHitchPageFront.png" />
+    <None Include="btnImages\ToolHitchPageRear.png" />
+    <None Include="btnImages\ToolHitchPageTBT.png" />
+    <None Include="btnImages\ToolHitchPageTrailing.png" />
     <Content Include="Dependencies\Audio\Boundary.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

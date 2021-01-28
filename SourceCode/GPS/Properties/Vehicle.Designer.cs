@@ -193,13 +193,13 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool setTool_isToolBehindPivot {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setTool_isToolRearFixed {
             get {
-                return ((bool)(this["setTool_isToolBehindPivot"]));
+                return ((bool)(this["setTool_isToolRearFixed"]));
             }
             set {
-                this["setTool_isToolBehindPivot"] = value;
+                this["setTool_isToolRearFixed"] = value;
             }
         }
         
@@ -1040,6 +1040,18 @@ namespace AgOpenGPS.Properties {
             }
             set {
                 this["stanleyIntegralDistanceAwayTriggerAB"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setTool_isToolFront {
+            get {
+                return ((bool)(this["setTool_isToolFront"]));
+            }
+            set {
+                this["setTool_isToolFront"] = value;
             }
         }
     }

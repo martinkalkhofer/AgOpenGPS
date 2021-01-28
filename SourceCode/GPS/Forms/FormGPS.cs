@@ -963,6 +963,20 @@ namespace AgOpenGPS
             nudOffset = (double)nudPivotOffset.Value;
         }
 
+        private void lblHz_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormConfig(this, 0))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    if (Properties.Settings.Default.setAS_isAutoSteerAutoOn) btnAutoSteer.Text = "A";
+                    else btnAutoSteer.Text = "M";
+                }
+            }
+
+        }
+
         private void stripSectionColor_Click(object sender, EventArgs e)
         {
             using (var form = new FormColorPicker(this, sectionColorDay))

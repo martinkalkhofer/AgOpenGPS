@@ -354,15 +354,15 @@ namespace AgOpenGPS
         //Send machine info out to machine board
         public void SendOutUSBMachinePort(byte[] items, int numItems)
         {
-            //load the uturn byte with the accumulated spacing
-            if (vehicle.treeSpacing != 0) mc.machineData[mc.mdTree] = unchecked((byte)treeTrigger);
-
-            //speed
-            mc.machineData[mc.mdSpeedXFour] = unchecked((byte)(pn.speed * 4));
-            
-            //Tell Arduino to turn section on or off accordingly
             if (spMachine.IsOpen)
             {
+                //load the uturn byte with the accumulated spacing
+                if (vehicle.treeSpacing != 0) mc.machineData[mc.mdTree] = unchecked((byte)treeTrigger);
+
+                //speed
+                mc.machineData[mc.mdSpeedXFour] = unchecked((byte)(pn.speed * 4));
+
+                //Tell Arduino to turn section on or off accordingly
                 try { spMachine.Write(items, 0, numItems); }
                 catch (Exception e)
                 {

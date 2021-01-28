@@ -44,8 +44,8 @@
     <Setting Name="setVehicle_toolOffset" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="setTool_isToolBehindPivot" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="setTool_isToolRearFixed" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="setVehicle_antennaPivot" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.1</Value>
@@ -256,6 +256,9 @@
     </Setting>
     <Setting Name="stanleyIntegralDistanceAwayTriggerAB" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.3</Value>
+    </Setting>
+    <Setting Name="setTool_isToolFront" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

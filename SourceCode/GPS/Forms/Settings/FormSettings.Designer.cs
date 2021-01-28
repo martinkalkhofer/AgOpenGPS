@@ -508,7 +508,7 @@
             // 
             this.groupBox4.Controls.Add(this.nudLineWidth);
             this.groupBox4.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(714, 59);
+            this.groupBox4.Location = new System.Drawing.Point(697, 53);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(232, 172);
             this.groupBox4.TabIndex = 124;
@@ -520,7 +520,7 @@
             this.nudLineWidth.BackColor = System.Drawing.Color.AliceBlue;
             this.nudLineWidth.Font = new System.Drawing.Font("Tahoma", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudLineWidth.InterceptArrowKeys = false;
-            this.nudLineWidth.Location = new System.Drawing.Point(44, 76);
+            this.nudLineWidth.Location = new System.Drawing.Point(43, 73);
             this.nudLineWidth.Maximum = new decimal(new int[] {
             8,
             0,
@@ -546,7 +546,7 @@
             // 
             this.groupBox2.Controls.Add(this.nudLightbarCmPerPixel);
             this.groupBox2.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(394, 59);
+            this.groupBox2.Location = new System.Drawing.Point(377, 53);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(250, 172);
             this.groupBox2.TabIndex = 123;
@@ -613,7 +613,7 @@
             // 
             this.groupBox1.Controls.Add(this.nudSnapDistance);
             this.groupBox1.Font = new System.Drawing.Font("Tahoma", 15.75F);
-            this.groupBox1.Location = new System.Drawing.Point(34, 63);
+            this.groupBox1.Location = new System.Drawing.Point(17, 57);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(279, 168);
             this.groupBox1.TabIndex = 90;

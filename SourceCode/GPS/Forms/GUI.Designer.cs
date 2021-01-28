@@ -531,17 +531,6 @@ namespace AgOpenGPS
 
             stripSectionColor.BackColor = sectionColorDay;
 
-            if (Properties.Settings.Default.setDisplay_isTermsOn)
-            {
-                using (var form = new Form_First())
-                {
-                    var result = form.ShowDialog();
-                    if (result != DialogResult.OK)
-                    {
-                        Close();
-                    }
-                }
-            }
 
             if (Properties.Settings.Default.setDisplay_isStartFullScreen)
             {
@@ -654,6 +643,18 @@ namespace AgOpenGPS
             //isDay = Properties.Settings.Default.setDisplay_isDayMode;
             isDay = !isDay;
             SwapDayNightMode();
+
+            if (Properties.Settings.Default.setDisplay_isTermsOn)
+            {
+                using (var form = new Form_First())
+                {
+                    var result = form.ShowDialog();
+                    if (result != DialogResult.OK)
+                    {
+                        Close();
+                    }
+                }
+            }
 
         }
 

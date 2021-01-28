@@ -1382,9 +1382,29 @@ namespace AgOpenGPS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ToolHitchPageFront1 {
+            get {
+                object obj = ResourceManager.GetObject("ToolHitchPageFront1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ToolHitchPageRear {
             get {
                 object obj = ResourceManager.GetObject("ToolHitchPageRear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ToolHitchPageRear1 {
+            get {
+                object obj = ResourceManager.GetObject("ToolHitchPageRear1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1402,9 +1422,29 @@ namespace AgOpenGPS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ToolHitchPageTBT1 {
+            get {
+                object obj = ResourceManager.GetObject("ToolHitchPageTBT1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ToolHitchPageTrailing {
             get {
                 object obj = ResourceManager.GetObject("ToolHitchPageTrailing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ToolHitchPageTrailing1 {
+            get {
+                object obj = ResourceManager.GetObject("ToolHitchPageTrailing1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

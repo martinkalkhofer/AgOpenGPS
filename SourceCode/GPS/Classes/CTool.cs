@@ -30,7 +30,9 @@ namespace AgOpenGPS
         public double lookAheadDistanceOffPixelsLeft, lookAheadDistanceOffPixelsRight;
 
         public bool isToolTrailing, isToolTBT;
-        public bool isToolBehindPivot;
+        public bool isToolRearFixed, isToolFrontFixed;
+
+
         public string toolAttachType;
 
         public double hitchLength;
@@ -68,9 +70,10 @@ namespace AgOpenGPS
             toolTankTrailingHitchLength = Properties.Vehicle.Default.setVehicle_tankTrailingHitchLength;
             hitchLength = Properties.Vehicle.Default.setVehicle_hitchLength;
 
-            isToolBehindPivot = Properties.Vehicle.Default.setTool_isToolBehindPivot;
+            isToolRearFixed = Properties.Vehicle.Default.setTool_isToolRearFixed;
             isToolTrailing = Properties.Vehicle.Default.setTool_isToolTrailing;
             isToolTBT = Properties.Vehicle.Default.setTool_isToolTBT;
+            isToolFrontFixed = Properties.Vehicle.Default.setTool_isToolFront;
 
             lookAheadOnSetting = Properties.Vehicle.Default.setVehicle_toolLookAheadOn;
             lookAheadOffSetting = Properties.Vehicle.Default.setVehicle_toolLookAheadOff;
