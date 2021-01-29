@@ -332,6 +332,22 @@ namespace AgOpenGPS
             inoVersionInt = inoV;
             inoVersionStr = inoV.ToString();
 
+            //metric settings
+            isMetric = Settings.Default.setMenu_isMetric;
+
+            if (isMetric)
+            {
+                inchOrCm2m = 0.01;
+                m2InchOrCm = 100.0;
+            }
+            else
+            {
+                inchOrCm2m = glm.in2m;
+                m2InchOrCm = glm.m2in;
+            }
+
+            startSpeed = Vehicle.Default.setVehicle_startSpeed;
+
             isSkyOn = Settings.Default.setMenu_isSkyOn;
             isGridOn = Settings.Default.setMenu_isGridOn;
             isCompassOn = Settings.Default.setMenu_isCompassOn;
@@ -460,8 +476,6 @@ namespace AgOpenGPS
 
             isSimple = Properties.Settings.Default.setDisplay_isSimple;
 
-            //metric settings
-            isMetric = Settings.Default.setMenu_isMetric;
 
             //load up colors
             fieldColorDay = (Settings.Default.setDisplay_colorFieldDay);
@@ -507,6 +521,15 @@ namespace AgOpenGPS
             layoutPanelRight.Enabled = false;
             //boundaryToolStripBtn.Enabled = false;
             toolStripBtnDropDownBoundaryTools.Enabled = false;
+
+            if (Properties.Settings.Default.setNTRIP_isOn)
+            {
+                isNTRIP_RequiredOn = true;
+            }
+            else
+            {
+                isNTRIP_RequiredOn = false;
+            }
 
             if (isNTRIP_RequiredOn)
             {
@@ -584,15 +607,6 @@ namespace AgOpenGPS
             if (Properties.Settings.Default.setUDP_isInterAppOn) StartLocalUDPServer();
 
             //start NTRIP if required
-            if (Properties.Settings.Default.setNTRIP_isOn)
-            {
-                isNTRIP_RequiredOn = true;
-            }
-            else
-            {
-                isNTRIP_RequiredOn = false;
-            }
-
             //remembered window position
             if (Settings.Default.setWindow_Maximized)
             {

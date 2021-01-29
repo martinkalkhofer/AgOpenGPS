@@ -198,6 +198,8 @@
             this.btnSerialCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSerialCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSerialCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnSerialCancel.FlatAppearance.BorderSize = 0;
+            this.btnSerialCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSerialCancel.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSerialCancel.Image = global::AgOpenGPS.Properties.Resources.Cancel64;
             this.btnSerialCancel.Location = new System.Drawing.Point(310, 459);
@@ -210,6 +212,8 @@
             // 
             this.btnSerialOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSerialOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSerialOK.FlatAppearance.BorderSize = 0;
+            this.btnSerialOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSerialOK.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSerialOK.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnSerialOK.Image = global::AgOpenGPS.Properties.Resources.OK64;

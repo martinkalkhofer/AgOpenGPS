@@ -74,12 +74,13 @@ namespace AgOpenGPS
             nudLookAheadOff.Controls[0].Enabled = false;
             nudTurnOffDelay.Controls[0].Enabled = false;
 
-            nudMinApplied.Controls[0].Enabled = false;
-            nudDefaultSectionWidth.Controls[0].Enabled = false;
 
             nudOffset.Controls[0].Enabled = false;
 
             nudOverlap.Controls[0].Enabled = false;
+
+            nudMinApplied.Controls[0].Enabled = false;
+            nudDefaultSectionWidth.Controls[0].Enabled = false;
 
             nudSection1.Controls[0].Enabled = false;
             nudSection2.Controls[0].Enabled = false;

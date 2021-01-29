@@ -146,6 +146,7 @@
             // 
             this.btnAddAndGo.BackColor = System.Drawing.Color.Transparent;
             this.btnAddAndGo.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnAddAndGo.FlatAppearance.BorderSize = 0;
             this.btnAddAndGo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddAndGo.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnAddAndGo.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -179,6 +180,7 @@
             // btnListUse
             // 
             this.btnListUse.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnListUse.FlatAppearance.BorderSize = 0;
             this.btnListUse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnListUse.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnListUse.Image = global::AgOpenGPS.Properties.Resources.FileUse;
@@ -195,6 +197,7 @@
             // btnListDelete
             // 
             this.btnListDelete.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnListDelete.FlatAppearance.BorderSize = 0;
             this.btnListDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnListDelete.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnListDelete.Image = global::AgOpenGPS.Properties.Resources.FileDelete;
@@ -211,6 +214,7 @@
             // 
             this.btnAddToFile.BackColor = System.Drawing.Color.Transparent;
             this.btnAddToFile.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnAddToFile.FlatAppearance.BorderSize = 0;
             this.btnAddToFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddToFile.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnAddToFile.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -245,6 +249,7 @@
             // 
             this.btnBPoint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBPoint.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnBPoint.FlatAppearance.BorderSize = 0;
             this.btnBPoint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBPoint.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnBPoint.Image = global::AgOpenGPS.Properties.Resources.LetterBBlue;
@@ -260,6 +265,7 @@
             // 
             this.btnAPoint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAPoint.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnAPoint.FlatAppearance.BorderSize = 0;
             this.btnAPoint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAPoint.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnAPoint.Image = global::AgOpenGPS.Properties.Resources.LetterABlue;
@@ -313,7 +319,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(732, 360);
+            this.ClientSize = new System.Drawing.Size(728, 356);
             this.ControlBox = false;
             this.Controls.Add(this.cboxHeading);
             this.Controls.Add(this.btnCancel);

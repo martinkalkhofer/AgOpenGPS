@@ -320,5 +320,8 @@
     <Setting Name="setIMU_fusionWeight" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.25</Value>
     </Setting>
+    <Setting Name="setIMU_rollFilter" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

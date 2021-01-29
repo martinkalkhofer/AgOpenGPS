@@ -1054,5 +1054,17 @@ namespace AgOpenGPS.Properties {
                 this["setTool_isToolFront"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
+        public double setVehicle_startSpeed {
+            get {
+                return ((double)(this["setVehicle_startSpeed"]));
+            }
+            set {
+                this["setVehicle_startSpeed"] = value;
+            }
+        }
     }
 }

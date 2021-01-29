@@ -243,9 +243,11 @@
             this.btnSerialCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSerialCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSerialCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnSerialCancel.FlatAppearance.BorderSize = 0;
+            this.btnSerialCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSerialCancel.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSerialCancel.Image = global::AgOpenGPS.Properties.Resources.Cancel64;
-            this.btnSerialCancel.Location = new System.Drawing.Point(910, 436);
+            this.btnSerialCancel.Location = new System.Drawing.Point(883, 413);
             this.btnSerialCancel.Name = "btnSerialCancel";
             this.btnSerialCancel.Size = new System.Drawing.Size(88, 76);
             this.btnSerialCancel.TabIndex = 95;
@@ -256,6 +258,8 @@
             this.btnSerialOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSerialOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSerialOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnSerialOK.FlatAppearance.BorderSize = 0;
+            this.btnSerialOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSerialOK.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSerialOK.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnSerialOK.Image = global::AgOpenGPS.Properties.Resources.OK64;
@@ -590,7 +594,7 @@
             this.label1.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(746, 348);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(244, 78);
+            this.label1.Size = new System.Drawing.Size(244, 62);
             this.label1.TabIndex = 129;
             this.label1.Text = "*Restart Required";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;

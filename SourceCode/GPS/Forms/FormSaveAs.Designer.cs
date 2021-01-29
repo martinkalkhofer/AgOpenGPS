@@ -85,6 +85,8 @@
             this.btnSerialCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSerialCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSerialCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnSerialCancel.FlatAppearance.BorderSize = 0;
+            this.btnSerialCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSerialCancel.Font = new System.Drawing.Font("Tahoma", 12F);
             this.btnSerialCancel.Image = global::AgOpenGPS.Properties.Resources.Cancel64;
             this.btnSerialCancel.Location = new System.Drawing.Point(539, 299);
@@ -122,6 +124,8 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Image = global::AgOpenGPS.Properties.Resources.OK64;
             this.btnSave.Location = new System.Drawing.Point(655, 299);
             this.btnSave.Name = "btnSave";

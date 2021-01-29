@@ -109,6 +109,8 @@ namespace AgOpenGPS
 
         public double nudNumber = 0;
 
+        public double m2InchOrCm, inchOrCm2m;
+
         //used by filePicker Form to return picked file and directory
         public string filePickerFileAndDirectory;
 

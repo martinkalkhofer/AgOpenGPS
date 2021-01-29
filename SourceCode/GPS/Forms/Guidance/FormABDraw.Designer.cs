@@ -81,24 +81,29 @@
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.BackColor = System.Drawing.Color.Transparent;
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnExit.Image = global::AgOpenGPS.Properties.Resources.OK64;
+            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExit.Location = new System.Drawing.Point(875, 637);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(123, 70);
             this.btnExit.TabIndex = 234;
-            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnMakeABLine
             // 
             this.btnMakeABLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMakeABLine.BackColor = System.Drawing.Color.Lavender;
+            this.btnMakeABLine.BackColor = System.Drawing.Color.Transparent;
             this.btnMakeABLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMakeABLine.Enabled = false;
             this.btnMakeABLine.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnMakeABLine.FlatAppearance.BorderSize = 0;
             this.btnMakeABLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMakeABLine.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnMakeABLine.Image = global::AgOpenGPS.Properties.Resources.ABLineOn;
@@ -113,10 +118,11 @@
             // btnMakeCurve
             // 
             this.btnMakeCurve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMakeCurve.BackColor = System.Drawing.Color.Lavender;
+            this.btnMakeCurve.BackColor = System.Drawing.Color.Transparent;
             this.btnMakeCurve.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMakeCurve.Enabled = false;
             this.btnMakeCurve.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnMakeCurve.FlatAppearance.BorderSize = 0;
             this.btnMakeCurve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMakeCurve.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnMakeCurve.Image = global::AgOpenGPS.Properties.Resources.CurveOn;
@@ -131,9 +137,10 @@
             // btnSelectCurve
             // 
             this.btnSelectCurve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelectCurve.BackColor = System.Drawing.Color.Lavender;
+            this.btnSelectCurve.BackColor = System.Drawing.Color.Transparent;
             this.btnSelectCurve.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSelectCurve.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnSelectCurve.FlatAppearance.BorderSize = 0;
             this.btnSelectCurve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelectCurve.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnSelectCurve.Image = global::AgOpenGPS.Properties.Resources.CurveOn;
@@ -148,9 +155,10 @@
             // btnSelectABLine
             // 
             this.btnSelectABLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelectABLine.BackColor = System.Drawing.Color.Lavender;
+            this.btnSelectABLine.BackColor = System.Drawing.Color.Transparent;
             this.btnSelectABLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSelectABLine.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnSelectABLine.FlatAppearance.BorderSize = 0;
             this.btnSelectABLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelectABLine.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnSelectABLine.Image = global::AgOpenGPS.Properties.Resources.ABLineOn;
@@ -173,14 +181,15 @@
             // btnDeleteCurve
             // 
             this.btnDeleteCurve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteCurve.BackColor = System.Drawing.Color.Lavender;
+            this.btnDeleteCurve.BackColor = System.Drawing.Color.Transparent;
             this.btnDeleteCurve.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnDeleteCurve.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnDeleteCurve.FlatAppearance.BorderSize = 0;
             this.btnDeleteCurve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteCurve.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnDeleteCurve.Image = global::AgOpenGPS.Properties.Resources.FileDelete;
             this.btnDeleteCurve.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnDeleteCurve.Location = new System.Drawing.Point(910, 319);
+            this.btnDeleteCurve.Location = new System.Drawing.Point(910, 313);
             this.btnDeleteCurve.Name = "btnDeleteCurve";
             this.btnDeleteCurve.Size = new System.Drawing.Size(88, 78);
             this.btnDeleteCurve.TabIndex = 325;
@@ -190,14 +199,15 @@
             // btnDeleteABLine
             // 
             this.btnDeleteABLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteABLine.BackColor = System.Drawing.Color.Lavender;
+            this.btnDeleteABLine.BackColor = System.Drawing.Color.Transparent;
             this.btnDeleteABLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnDeleteABLine.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnDeleteABLine.FlatAppearance.BorderSize = 0;
             this.btnDeleteABLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteABLine.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnDeleteABLine.Image = global::AgOpenGPS.Properties.Resources.FileDelete;
             this.btnDeleteABLine.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnDeleteABLine.Location = new System.Drawing.Point(910, 498);
+            this.btnDeleteABLine.Location = new System.Drawing.Point(910, 491);
             this.btnDeleteABLine.Name = "btnDeleteABLine";
             this.btnDeleteABLine.Size = new System.Drawing.Size(88, 78);
             this.btnDeleteABLine.TabIndex = 326;
@@ -255,10 +265,11 @@
             // btnCancelTouch
             // 
             this.btnCancelTouch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancelTouch.BackColor = System.Drawing.Color.Lavender;
+            this.btnCancelTouch.BackColor = System.Drawing.Color.Transparent;
             this.btnCancelTouch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnCancelTouch.Enabled = false;
             this.btnCancelTouch.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnCancelTouch.FlatAppearance.BorderSize = 0;
             this.btnCancelTouch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelTouch.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnCancelTouch.Image = global::AgOpenGPS.Properties.Resources.Cancel64;

@@ -54,6 +54,8 @@
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnOK.FlatAppearance.BorderSize = 0;
+            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOK.Image = global::AgOpenGPS.Properties.Resources.OK64;
             this.btnOK.Location = new System.Drawing.Point(480, 387);
@@ -183,6 +185,8 @@
             // btnYouTurnRecord
             // 
             this.btnYouTurnRecord.BackColor = System.Drawing.Color.Transparent;
+            this.btnYouTurnRecord.FlatAppearance.BorderSize = 0;
+            this.btnYouTurnRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnYouTurnRecord.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnYouTurnRecord.Image = global::AgOpenGPS.Properties.Resources.BoundaryRecord;
             this.btnYouTurnRecord.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -199,6 +203,8 @@
             // btnYouTurnCustom
             // 
             this.btnYouTurnCustom.BackColor = System.Drawing.Color.Silver;
+            this.btnYouTurnCustom.FlatAppearance.BorderSize = 0;
+            this.btnYouTurnCustom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnYouTurnCustom.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnYouTurnCustom.Image = global::AgOpenGPS.Properties.Resources.Custom;
             this.btnYouTurnCustom.Location = new System.Drawing.Point(381, 39);
@@ -237,6 +243,8 @@
             // btnDistanceDn
             // 
             this.btnDistanceDn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDistanceDn.FlatAppearance.BorderSize = 0;
+            this.btnDistanceDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDistanceDn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDistanceDn.Image = global::AgOpenGPS.Properties.Resources.DnArrow64;
             this.btnDistanceDn.Location = new System.Drawing.Point(249, 386);
@@ -262,6 +270,8 @@
             // btnDistanceUp
             // 
             this.btnDistanceUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDistanceUp.FlatAppearance.BorderSize = 0;
+            this.btnDistanceUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDistanceUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDistanceUp.Image = global::AgOpenGPS.Properties.Resources.UpArrow64;
             this.btnDistanceUp.Location = new System.Drawing.Point(342, 386);
@@ -286,6 +296,8 @@
             // btnTriggerDistanceUp
             // 
             this.btnTriggerDistanceUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnTriggerDistanceUp.FlatAppearance.BorderSize = 0;
+            this.btnTriggerDistanceUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTriggerDistanceUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTriggerDistanceUp.Image = global::AgOpenGPS.Properties.Resources.UpArrow64;
             this.btnTriggerDistanceUp.Location = new System.Drawing.Point(126, 386);
@@ -299,6 +311,8 @@
             // btnTriggerDistanceDn
             // 
             this.btnTriggerDistanceDn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnTriggerDistanceDn.FlatAppearance.BorderSize = 0;
+            this.btnTriggerDistanceDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTriggerDistanceDn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTriggerDistanceDn.Image = global::AgOpenGPS.Properties.Resources.DnArrow64;
             this.btnTriggerDistanceDn.Location = new System.Drawing.Point(36, 386);

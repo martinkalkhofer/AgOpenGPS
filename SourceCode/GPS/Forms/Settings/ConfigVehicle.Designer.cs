@@ -10,13 +10,20 @@ namespace AgOpenGPS
 {
     public partial class FormConfig
     {
+        #region summary Page
+        private void tabSummary_Enter(object sender, EventArgs e)
+        {
+        }
+
+        #endregion
+
 
         #region Vehicle Save---------------------------------------------
         private void btnVehicleSave_Click(object sender, EventArgs e)
         {
             if (tboxVehicleNameSave.Text.Trim().Length > 0)
             {
-                //SettingsIO.Export(mf.vehiclesDirectory + tboxVehicleNameSave.Text.Trim() + ".XML");
+                SettingsIO.ExportAll(mf.vehiclesDirectory + tboxVehicleNameSave.Text.Trim() + ".XML");
                 UpdateVehicleListView();
                 tboxVehicleNameSave.Text = "";
 
@@ -36,7 +43,7 @@ namespace AgOpenGPS
                     MessageBoxDefaultButton.Button2);
                 if (result3 == DialogResult.Yes)
                 {
-                    //SettingsIO.Export(mf.vehiclesDirectory + lvVehicles.SelectedItems[0].SubItems[0].Text + ".XML");
+                    SettingsIO.ExportAll(mf.vehiclesDirectory + lvVehicles.SelectedItems[0].SubItems[0].Text + ".XML");
                 }
                 UpdateVehicleListView();
             }
@@ -70,12 +77,14 @@ namespace AgOpenGPS
                     MessageBoxDefaultButton.Button2);
                 if (result3 == DialogResult.Yes)
                 {
-                    //SettingsIO.Import("Vehicle", mf.vehiclesDirectory + lvVehicles.SelectedItems[0].SubItems[0].Text + ".XML");
+                    SettingsIO.ImportAll(mf.vehiclesDirectory + lvVehicles.SelectedItems[0].SubItems[0].Text + ".XML");
+
 
                 }
                 UpdateVehicleListView();
             }
 
+            mf.LoadSettings();
         }
 
         private void btnVehicleDelete_Click(object sender, EventArgs e)
@@ -149,11 +158,11 @@ namespace AgOpenGPS
         #region Antenna Enter/Leave
         private void tabVAntenna_Enter(object sender, EventArgs e)
         {
-            nudAntennaHeight.Value = (decimal)Properties.Vehicle.Default.setVehicle_antennaHeight*100;
+            nudAntennaHeight.Value = (decimal)(Properties.Vehicle.Default.setVehicle_antennaHeight* mf.inchOrCm2m);
 
-            nudAntennaPivot.Value = (decimal)Math.Abs(Properties.Vehicle.Default.setVehicle_antennaPivot)*100;
+            nudAntennaPivot.Value = (decimal)(Math.Abs(Properties.Vehicle.Default.setVehicle_antennaPivot)* mf.inchOrCm2m);
 
-            nudAntennaOffset.Value = (decimal)Properties.Vehicle.Default.setVehicle_antennaOffset*100;
+            nudAntennaOffset.Value = (decimal)(Properties.Vehicle.Default.setVehicle_antennaOffset* mf.inchOrCm2m);
 
             btnNext.Focus();
         }
@@ -161,13 +170,13 @@ namespace AgOpenGPS
         private void tabVAntenna_Leave(object sender, EventArgs e)
         {
 
-            Properties.Vehicle.Default.setVehicle_antennaHeight = (double)nudAntennaHeight.Value * 0.01;
+            Properties.Vehicle.Default.setVehicle_antennaHeight = (double)nudAntennaHeight.Value * mf.inchOrCm2m;
 
 
-            Properties.Vehicle.Default.setVehicle_antennaPivot = (double)nudAntennaPivot.Value * 0.01;
+            Properties.Vehicle.Default.setVehicle_antennaPivot = (double)nudAntennaPivot.Value * mf.inchOrCm2m;
 
 
-            Properties.Vehicle.Default.setVehicle_antennaOffset = (double)nudAntennaOffset.Value * 0.01;
+            Properties.Vehicle.Default.setVehicle_antennaOffset = (double)nudAntennaOffset.Value * mf.inchOrCm2m;
 
 
             Properties.Vehicle.Default.Save();
@@ -177,7 +186,7 @@ namespace AgOpenGPS
         {
             if (mf.KeypadToNUD((NumericUpDown)sender))
             {
-                mf.vehicle.antennaPivot = (double)nudAntennaHeight.Value * 0.01;
+                mf.vehicle.antennaPivot = (double)nudAntennaHeight.Value * mf.inchOrCm2m;
             }
             btnNext.Focus();
         }
@@ -186,7 +195,7 @@ namespace AgOpenGPS
         {
             if (mf.KeypadToNUD((NumericUpDown)sender))
             {
-                mf.vehicle.antennaOffset = (double)nudAntennaHeight.Value * 0.01;
+                mf.vehicle.antennaOffset = (double)nudAntennaHeight.Value * mf.inchOrCm2m;
             }
             btnNext.Focus();
         }
@@ -195,7 +204,7 @@ namespace AgOpenGPS
         {
             if (mf.KeypadToNUD((NumericUpDown)sender))
             {
-                mf.vehicle.antennaHeight = (double)nudAntennaHeight.Value * 0.01;
+                mf.vehicle.antennaHeight = (double)nudAntennaHeight.Value * mf.inchOrCm2m;
             }
             btnNext.Focus();
         }
@@ -205,15 +214,15 @@ namespace AgOpenGPS
         #region Vehicle Dimensions
         private void tabVDimensions_Enter(object sender, EventArgs e)
         {
-            nudMinTurnRadius.Value = (decimal)Properties.Vehicle.Default.setVehicle_minTurningRadius * 100;
-            nudWheelbase.Value = (decimal)Math.Abs(Properties.Vehicle.Default.setVehicle_wheelbase) * 100; ;
+            nudMinTurnRadius.Value = (decimal)(Properties.Vehicle.Default.setVehicle_minTurningRadius * mf.m2InchOrCm);
+            nudWheelbase.Value = (decimal)(Math.Abs(Properties.Vehicle.Default.setVehicle_wheelbase) * mf.m2InchOrCm);
 
         }
 
         private void tabVDimensions_Leave(object sender, EventArgs e)
         {
-            Properties.Vehicle.Default.setVehicle_minTurningRadius = (double)nudMinTurnRadius.Value * 0.01;
-            Properties.Vehicle.Default.setVehicle_wheelbase = (double)nudWheelbase.Value * 0.01;
+            Properties.Vehicle.Default.setVehicle_minTurningRadius = (double)nudMinTurnRadius.Value * mf.inchOrCm2m;
+            Properties.Vehicle.Default.setVehicle_wheelbase = (double)nudWheelbase.Value * mf.inchOrCm2m;
 
             Properties.Vehicle.Default.Save();
         }
@@ -222,7 +231,7 @@ namespace AgOpenGPS
         {
             if (mf.KeypadToNUD((NumericUpDown)sender))
             {
-                mf.vehicle.minTurningRadius = (double)nudMinTurnRadius.Value * 0.01;
+                mf.vehicle.minTurningRadius = (double)nudMinTurnRadius.Value * mf.inchOrCm2m;
             }
             btnNextDim.Focus();
 
@@ -232,7 +241,7 @@ namespace AgOpenGPS
         {
             if (mf.KeypadToNUD((NumericUpDown)sender))
             {
-                mf.vehicle.wheelbase = (double)nudWheelbase.Value * 0.01;
+                mf.vehicle.wheelbase = (double)nudWheelbase.Value * mf.inchOrCm2m;
             }
             btnNextDim.Focus();
         }

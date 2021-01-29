@@ -87,6 +87,8 @@
             // 
             this.btnSerialOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSerialOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSerialOK.FlatAppearance.BorderSize = 0;
+            this.btnSerialOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSerialOK.Font = new System.Drawing.Font("Tahoma", 12F);
             this.btnSerialOK.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnSerialOK.Image = global::AgOpenGPS.Properties.Resources.OK64;

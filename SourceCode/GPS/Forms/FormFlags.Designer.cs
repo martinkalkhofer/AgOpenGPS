@@ -54,6 +54,7 @@
             // btnSouth
             // 
             this.btnSouth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSouth.FlatAppearance.BorderSize = 0;
             this.btnSouth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSouth.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
             this.btnSouth.Image = global::AgOpenGPS.Properties.Resources.DnArrow64;
@@ -68,6 +69,7 @@
             // btnNorth
             // 
             this.btnNorth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnNorth.FlatAppearance.BorderSize = 0;
             this.btnNorth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNorth.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
             this.btnNorth.Image = global::AgOpenGPS.Properties.Resources.UpArrow64;
@@ -214,6 +216,7 @@
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnExit.FlatAppearance.BorderSize = 0;
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnExit.Image = global::AgOpenGPS.Properties.Resources.OK64;
@@ -231,6 +234,7 @@
             // 
             this.btnDeleteFlag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteFlag.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDeleteFlag.FlatAppearance.BorderSize = 0;
             this.btnDeleteFlag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteFlag.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnDeleteFlag.Image = global::AgOpenGPS.Properties.Resources.FlagDelete;
@@ -248,6 +252,7 @@
             this.btnDriveToFlag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDriveToFlag.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnDriveToFlag.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnDriveToFlag.FlatAppearance.BorderSize = 0;
             this.btnDriveToFlag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDriveToFlag.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnDriveToFlag.Image = global::AgOpenGPS.Properties.Resources.AutoSteerConf;

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AgOpenGPS
@@ -44,13 +45,150 @@ namespace AgOpenGPS
             nudSnapDistance.Controls[0].Enabled = false;
             nudWheelbase.Controls[0].Enabled = false;
             nudLineWidth.Controls[0].Enabled = false;
+
+            nudMinApplied.Controls[0].Enabled = false;
+            nudDefaultSectionWidth.Controls[0].Enabled = false;
+
+            nudSection1.Controls[0].Enabled = false;
+            nudSection2.Controls[0].Enabled = false;
+            nudSection3.Controls[0].Enabled = false;
+            nudSection4.Controls[0].Enabled = false;
+            nudSection5.Controls[0].Enabled = false;
+            nudSection6.Controls[0].Enabled = false;
+            nudSection7.Controls[0].Enabled = false;
+            nudSection8.Controls[0].Enabled = false;
+            nudSection9.Controls[0].Enabled = false;
+            nudSection10.Controls[0].Enabled = false;
+            nudSection11.Controls[0].Enabled = false;
+            nudSection12.Controls[0].Enabled = false;
+            nudSection13.Controls[0].Enabled = false;
+            nudSection14.Controls[0].Enabled = false;
+            nudSection15.Controls[0].Enabled = false;
+            nudSection16.Controls[0].Enabled = false;
+
+            nudMinFixStepDistance.Controls[0].Enabled = false;
+            nudStartSpeed.Controls[0].Enabled = false;
+
             //nudHydLiftSecs.Controls[0].Enabled = false;
         }
 
         private void FormConfig_Load(object sender, EventArgs e)
         {
             UpdateSummary();
+
+            if (mf.isMetric)
+            {
+                lblInchesCm.Text = gStr.gsCentimeters;
+                lblSecTotalWidthFeet.Visible = false;
+                lblSecTotalWidthInches.Visible = false;
+                lblSecTotalWidthMeters.Visible = true;
+                lblDoNotExceed.Text = "* < 5000 cm*";
+                maxWidth = 5000;
+            }
+            else
+            {
+                lblInchesCm.Text = gStr.gsInches;
+                lblSecTotalWidthFeet.Visible = true;
+                lblSecTotalWidthInches.Visible = true;
+                lblSecTotalWidthMeters.Visible = false;
+                lblDoNotExceed.Text = "* < 1968 inches *";
+                maxWidth = 1968;
+            }
+
+            FixMinMaxSpinners();
+
+            UpdateVehicleListView();
+        }
+        private void FixMinMaxSpinners()
+        {
+            if (!mf.isMetric)
+            {
+                nudTankHitch.Maximum /= 2.54M;
+                nudTankHitch.Minimum /= 2.54M;
+
+                nudDrawbarLength.Maximum /= 2.54M;
+                nudDrawbarLength.Minimum /= 2.54M;
+
+                nudTrailingHitchLength.Maximum /= 2.54M;
+                nudTrailingHitchLength.Minimum /= 2.54M;
+
+                nudSnapDistance.Maximum /= 2.54M;
+                nudSnapDistance.Minimum /= 2.54M;
+
+                nudLightbarCmPerPixel.Maximum /= 2.54M;
+                nudLightbarCmPerPixel.Minimum /= 2.54M;
+
+                //.Maximum /= 2.54M;
+                //.Minimum /= 2.54M;
+
+                //.Maximum /= 2.54M;
+                //.Minimum /= 2.54M;
+
+                nudOverlap.Maximum /= 2.54M;
+                nudOverlap.Minimum /= 2.54M;
+
+                nudOffset.Maximum /= 2.54M;
+                nudOffset.Minimum /= 2.54M;
+
+                nudCutoffSpeed.Maximum /= 1.60934M;
+                nudCutoffSpeed.Minimum /= 1.60934M;
+
+                nudDefaultSectionWidth.Maximum /= 2.54M;
+                nudDefaultSectionWidth.Minimum /= 2.54M;
+
+                nudSection1.Maximum /= 2.54M;
+                nudSection1.Minimum /= 2.54M;
+                nudSection2.Maximum /= 2.54M;
+                nudSection2.Minimum /= 2.54M;
+                nudSection3.Maximum /= 2.54M;
+                nudSection3.Minimum /= 2.54M;
+                nudSection4.Maximum /= 2.54M;
+                nudSection4.Minimum /= 2.54M;
+                nudSection5.Maximum /= 2.54M;
+                nudSection5.Minimum /= 2.54M;
+                nudSection6.Maximum /= 2.54M;
+                nudSection6.Minimum /= 2.54M;
+                nudSection7.Maximum /= 2.54M;
+                nudSection7.Minimum /= 2.54M;
+                nudSection8.Maximum /= 2.54M;
+                nudSection8.Minimum /= 2.54M;
+                nudSection9.Maximum /= 2.54M;
+                nudSection9.Minimum /= 2.54M;
+                nudSection10.Maximum /= 2.54M;
+                nudSection10.Minimum /= 2.54M;
+                nudSection11.Maximum /= 2.54M;
+                nudSection11.Minimum /= 2.54M;
+                nudSection12.Maximum /= 2.54M;
+                nudSection12.Minimum /= 2.54M;
+                nudSection13.Maximum /= 2.54M;
+                nudSection13.Minimum /= 2.54M;
+                nudSection14.Maximum /= 2.54M;
+                nudSection14.Minimum /= 2.54M;
+                nudSection15.Maximum /= 2.54M;
+                nudSection15.Minimum /= 2.54M;
+                nudSection16.Maximum /= 2.54M;
+                nudSection16.Minimum /= 2.54M;
+
+                nudDefaultSectionWidth.Maximum /= 2.54M;
+                nudDefaultSectionWidth.Minimum /= 2.54M;
+
+                lblTurnOffBelowUnits.Text = gStr.gsMPH;
+                //cutoffMetricImperial = 1.60934;
+
+            }
+            else
+            {
+                lblTurnOffBelowUnits.Text = gStr.gsKMH;
+                //cutoffMetricImperial = 1;
+            }
+
+        }
+
+        private void FormConfig_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            mf.LoadSettings();
         }
 
     }
 }
+

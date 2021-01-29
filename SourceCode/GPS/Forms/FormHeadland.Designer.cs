@@ -124,6 +124,7 @@
             this.btnDeletePoints.BackColor = System.Drawing.Color.Transparent;
             this.btnDeletePoints.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnDeletePoints.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnDeletePoints.FlatAppearance.BorderSize = 0;
             this.btnDeletePoints.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeletePoints.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnDeletePoints.Image = global::AgOpenGPS.Properties.Resources.HeadlandDeletePoints;
@@ -141,6 +142,7 @@
             this.btnMakeFixedHeadland.BackColor = System.Drawing.Color.Transparent;
             this.btnMakeFixedHeadland.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnMakeFixedHeadland.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnMakeFixedHeadland.FlatAppearance.BorderSize = 0;
             this.btnMakeFixedHeadland.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMakeFixedHeadland.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnMakeFixedHeadland.Image = global::AgOpenGPS.Properties.Resources.OK64;
@@ -157,6 +159,7 @@
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.BackColor = System.Drawing.Color.Transparent;
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnExit.FlatAppearance.BorderSize = 0;
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
@@ -228,6 +231,7 @@
             this.btnSetDistance.BackColor = System.Drawing.Color.Transparent;
             this.btnSetDistance.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnSetDistance.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnSetDistance.FlatAppearance.BorderSize = 0;
             this.btnSetDistance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSetDistance.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnSetDistance.Image = global::AgOpenGPS.Properties.Resources.HeadlandTouchSave;
@@ -245,6 +249,7 @@
             this.btnReset.BackColor = System.Drawing.Color.Transparent;
             this.btnReset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnReset.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnReset.FlatAppearance.BorderSize = 0;
             this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReset.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnReset.Image = global::AgOpenGPS.Properties.Resources.back_button;
@@ -265,6 +270,7 @@
             this.btnTurnOffHeadland.BackColor = System.Drawing.Color.Transparent;
             this.btnTurnOffHeadland.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnTurnOffHeadland.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnTurnOffHeadland.FlatAppearance.BorderSize = 0;
             this.btnTurnOffHeadland.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTurnOffHeadland.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnTurnOffHeadland.Image = global::AgOpenGPS.Properties.Resources.SwitchOff;
@@ -383,6 +389,7 @@
             this.btnDoneManualMove.BackColor = System.Drawing.Color.Transparent;
             this.btnDoneManualMove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnDoneManualMove.FlatAppearance.BorderColor = System.Drawing.SystemColors.HotTrack;
+            this.btnDoneManualMove.FlatAppearance.BorderSize = 0;
             this.btnDoneManualMove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDoneManualMove.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnDoneManualMove.Image = global::AgOpenGPS.Properties.Resources.HeadlandTouchSave;

@@ -56,12 +56,6 @@
             this.tabSections = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.nudSection16 = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.nudSection15 = new System.Windows.Forms.NumericUpDown();
-            this.nudSection14 = new System.Windows.Forms.NumericUpDown();
-            this.nudSection13 = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.nudDefaultSectionWidth = new System.Windows.Forms.NumericUpDown();
             this.cboxNumSections = new System.Windows.Forms.ComboBox();
@@ -69,29 +63,17 @@
             this.label41 = new System.Windows.Forms.Label();
             this.nudMinApplied = new System.Windows.Forms.NumericUpDown();
             this.label31 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.nudSection12 = new System.Windows.Forms.NumericUpDown();
             this.nudSection11 = new System.Windows.Forms.NumericUpDown();
             this.nudSection10 = new System.Windows.Forms.NumericUpDown();
-            this.nudSection9 = new System.Windows.Forms.NumericUpDown();
-            this.nudSection8 = new System.Windows.Forms.NumericUpDown();
-            this.nudSection7 = new System.Windows.Forms.NumericUpDown();
             this.nudSection6 = new System.Windows.Forms.NumericUpDown();
             this.nudSection5 = new System.Windows.Forms.NumericUpDown();
             this.nudSection4 = new System.Windows.Forms.NumericUpDown();
-            this.nudSection3 = new System.Windows.Forms.NumericUpDown();
-            this.nudSection2 = new System.Windows.Forms.NumericUpDown();
-            this.nudSection1 = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.tabWorkSwitch = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -107,6 +89,24 @@
             this.lblInchesCm = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.bntOK = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.nudSection14 = new System.Windows.Forms.NumericUpDown();
+            this.nudSection13 = new System.Windows.Forms.NumericUpDown();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.nudSection9 = new System.Windows.Forms.NumericUpDown();
+            this.nudSection8 = new System.Windows.Forms.NumericUpDown();
+            this.nudSection7 = new System.Windows.Forms.NumericUpDown();
+            this.nudSection3 = new System.Windows.Forms.NumericUpDown();
+            this.nudSection2 = new System.Windows.Forms.NumericUpDown();
+            this.nudSection1 = new System.Windows.Forms.NumericUpDown();
+            this.nudSection15 = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabConfig.SuspendLayout();
             this.gboxAttachment.SuspendLayout();
@@ -123,25 +123,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudOverlap)).BeginInit();
             this.tabSections.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection16)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSection15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSection14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSection13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDefaultSectionWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinApplied)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSection9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSection8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSection7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection4)).BeginInit();
+            this.tabWorkSwitch.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSection14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSection13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSection9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSection8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSection7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection1)).BeginInit();
-            this.tabWorkSwitch.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSection15)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -676,27 +676,28 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label7.Location = new System.Drawing.Point(536, 301);
+            this.label7.Location = new System.Drawing.Point(455, 305);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(43, 29);
+            this.label7.Size = new System.Drawing.Size(38, 25);
             this.label7.TabIndex = 258;
             this.label7.Text = "16";
             // 
             // nudSection16
             // 
             this.nudSection16.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection16.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection16.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSection16.InterceptArrowKeys = false;
-            this.nudSection16.Location = new System.Drawing.Point(508, 333);
+            this.nudSection16.Location = new System.Drawing.Point(396, 333);
             this.nudSection16.Maximum = new decimal(new int[] {
             4000,
             0,
             0,
             0});
             this.nudSection16.Name = "nudSection16";
-            this.nudSection16.Size = new System.Drawing.Size(120, 52);
+            this.nudSection16.Size = new System.Drawing.Size(100, 46);
             this.nudSection16.TabIndex = 257;
             this.nudSection16.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudSection16.Value = new decimal(new int[] {
@@ -706,108 +707,6 @@
             0});
             this.nudSection16.ValueChanged += new System.EventHandler(this.nudSection16_ValueChanged);
             this.nudSection16.Enter += new System.EventHandler(this.nudSection16_Enter);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(371, 302);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 29);
-            this.label1.TabIndex = 256;
-            this.label1.Text = "15";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label5.Location = new System.Drawing.Point(206, 301);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 29);
-            this.label5.TabIndex = 255;
-            this.label5.Text = "14";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label6.Location = new System.Drawing.Point(41, 303);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(43, 29);
-            this.label6.TabIndex = 254;
-            this.label6.Text = "13";
-            // 
-            // nudSection15
-            // 
-            this.nudSection15.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection15.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudSection15.InterceptArrowKeys = false;
-            this.nudSection15.Location = new System.Drawing.Point(341, 333);
-            this.nudSection15.Maximum = new decimal(new int[] {
-            4000,
-            0,
-            0,
-            0});
-            this.nudSection15.Name = "nudSection15";
-            this.nudSection15.Size = new System.Drawing.Size(120, 52);
-            this.nudSection15.TabIndex = 253;
-            this.nudSection15.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudSection15.Value = new decimal(new int[] {
-            92,
-            0,
-            0,
-            0});
-            this.nudSection15.ValueChanged += new System.EventHandler(this.nudSection15_ValueChanged);
-            this.nudSection15.Enter += new System.EventHandler(this.nudSection15_Enter);
-            // 
-            // nudSection14
-            // 
-            this.nudSection14.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection14.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudSection14.InterceptArrowKeys = false;
-            this.nudSection14.Location = new System.Drawing.Point(174, 333);
-            this.nudSection14.Maximum = new decimal(new int[] {
-            4000,
-            0,
-            0,
-            0});
-            this.nudSection14.Name = "nudSection14";
-            this.nudSection14.Size = new System.Drawing.Size(120, 52);
-            this.nudSection14.TabIndex = 252;
-            this.nudSection14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudSection14.Value = new decimal(new int[] {
-            92,
-            0,
-            0,
-            0});
-            this.nudSection14.ValueChanged += new System.EventHandler(this.nudSection14_ValueChanged);
-            this.nudSection14.Enter += new System.EventHandler(this.nudSection14_Enter);
-            // 
-            // nudSection13
-            // 
-            this.nudSection13.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection13.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudSection13.InterceptArrowKeys = false;
-            this.nudSection13.Location = new System.Drawing.Point(7, 332);
-            this.nudSection13.Maximum = new decimal(new int[] {
-            4000,
-            0,
-            0,
-            0});
-            this.nudSection13.Name = "nudSection13";
-            this.nudSection13.Size = new System.Drawing.Size(120, 52);
-            this.nudSection13.TabIndex = 251;
-            this.nudSection13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudSection13.Value = new decimal(new int[] {
-            92,
-            0,
-            0,
-            0});
-            this.nudSection13.ValueChanged += new System.EventHandler(this.nudSection13_ValueChanged);
-            this.nudSection13.Enter += new System.EventHandler(this.nudSection13_Enter);
             // 
             // label4
             // 
@@ -924,148 +823,88 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label31.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label31.Location = new System.Drawing.Point(884, 22);
+            this.label31.Location = new System.Drawing.Point(688, 26);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(28, 29);
+            this.label31.Size = new System.Drawing.Size(25, 25);
             this.label31.TabIndex = 40;
             this.label31.Text = "6";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label21.Location = new System.Drawing.Point(216, 22);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(28, 29);
-            this.label21.TabIndex = 39;
-            this.label21.Text = "2";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label20.Location = new System.Drawing.Point(383, 22);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(28, 29);
-            this.label20.TabIndex = 38;
-            this.label20.Text = "3";
             // 
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label40.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label40.Location = new System.Drawing.Point(874, 161);
+            this.label40.Location = new System.Drawing.Point(678, 165);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(43, 29);
+            this.label40.Size = new System.Drawing.Size(38, 25);
             this.label40.TabIndex = 46;
             this.label40.Text = "12";
             // 
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label39.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label39.Location = new System.Drawing.Point(708, 161);
+            this.label39.Location = new System.Drawing.Point(553, 165);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(43, 29);
+            this.label39.Size = new System.Drawing.Size(38, 25);
             this.label39.TabIndex = 45;
             this.label39.Text = "11";
             // 
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label38.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label38.Location = new System.Drawing.Point(538, 161);
+            this.label38.Location = new System.Drawing.Point(457, 165);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(43, 29);
+            this.label38.Size = new System.Drawing.Size(38, 25);
             this.label38.TabIndex = 44;
             this.label38.Text = "10";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label37.Location = new System.Drawing.Point(381, 161);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(28, 29);
-            this.label37.TabIndex = 43;
-            this.label37.Text = "9";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label33.Location = new System.Drawing.Point(213, 161);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(28, 29);
-            this.label33.TabIndex = 42;
-            this.label33.Text = "8";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label32.Location = new System.Drawing.Point(49, 161);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(28, 29);
-            this.label32.TabIndex = 41;
-            this.label32.Text = "7";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label14.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label14.Location = new System.Drawing.Point(550, 22);
+            this.label14.Location = new System.Drawing.Point(469, 26);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(28, 29);
+            this.label14.Size = new System.Drawing.Size(25, 25);
             this.label14.TabIndex = 37;
             this.label14.Text = "4";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label11.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label11.Location = new System.Drawing.Point(717, 22);
+            this.label11.Location = new System.Drawing.Point(562, 26);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(28, 29);
+            this.label11.Size = new System.Drawing.Size(25, 25);
             this.label11.TabIndex = 36;
             this.label11.Text = "5";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label10.Location = new System.Drawing.Point(49, 22);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(28, 29);
-            this.label10.TabIndex = 35;
-            this.label10.Text = "1";
             // 
             // nudSection12
             // 
             this.nudSection12.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection12.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection12.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSection12.InterceptArrowKeys = false;
-            this.nudSection12.Location = new System.Drawing.Point(842, 193);
+            this.nudSection12.Location = new System.Drawing.Point(654, 193);
             this.nudSection12.Maximum = new decimal(new int[] {
             4000,
             0,
             0,
             0});
             this.nudSection12.Name = "nudSection12";
-            this.nudSection12.Size = new System.Drawing.Size(120, 52);
+            this.nudSection12.Size = new System.Drawing.Size(100, 46);
             this.nudSection12.TabIndex = 34;
             this.nudSection12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudSection12.Value = new decimal(new int[] {
@@ -1079,16 +918,16 @@
             // nudSection11
             // 
             this.nudSection11.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection11.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection11.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSection11.InterceptArrowKeys = false;
-            this.nudSection11.Location = new System.Drawing.Point(675, 193);
+            this.nudSection11.Location = new System.Drawing.Point(528, 193);
             this.nudSection11.Maximum = new decimal(new int[] {
             4000,
             0,
             0,
             0});
             this.nudSection11.Name = "nudSection11";
-            this.nudSection11.Size = new System.Drawing.Size(120, 52);
+            this.nudSection11.Size = new System.Drawing.Size(100, 46);
             this.nudSection11.TabIndex = 33;
             this.nudSection11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudSection11.Value = new decimal(new int[] {
@@ -1102,16 +941,16 @@
             // nudSection10
             // 
             this.nudSection10.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection10.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection10.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSection10.InterceptArrowKeys = false;
-            this.nudSection10.Location = new System.Drawing.Point(508, 193);
+            this.nudSection10.Location = new System.Drawing.Point(396, 193);
             this.nudSection10.Maximum = new decimal(new int[] {
             4000,
             0,
             0,
             0});
             this.nudSection10.Name = "nudSection10";
-            this.nudSection10.Size = new System.Drawing.Size(120, 52);
+            this.nudSection10.Size = new System.Drawing.Size(100, 46);
             this.nudSection10.TabIndex = 32;
             this.nudSection10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudSection10.Value = new decimal(new int[] {
@@ -1122,88 +961,19 @@
             this.nudSection10.ValueChanged += new System.EventHandler(this.nudSection10_ValueChanged);
             this.nudSection10.Enter += new System.EventHandler(this.NudSection10_Enter);
             // 
-            // nudSection9
-            // 
-            this.nudSection9.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection9.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudSection9.InterceptArrowKeys = false;
-            this.nudSection9.Location = new System.Drawing.Point(341, 193);
-            this.nudSection9.Maximum = new decimal(new int[] {
-            4000,
-            0,
-            0,
-            0});
-            this.nudSection9.Name = "nudSection9";
-            this.nudSection9.Size = new System.Drawing.Size(120, 52);
-            this.nudSection9.TabIndex = 31;
-            this.nudSection9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudSection9.Value = new decimal(new int[] {
-            92,
-            0,
-            0,
-            0});
-            this.nudSection9.ValueChanged += new System.EventHandler(this.nudSection9_ValueChanged);
-            this.nudSection9.Enter += new System.EventHandler(this.NudSection9_Enter);
-            // 
-            // nudSection8
-            // 
-            this.nudSection8.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection8.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudSection8.InterceptArrowKeys = false;
-            this.nudSection8.Location = new System.Drawing.Point(174, 193);
-            this.nudSection8.Maximum = new decimal(new int[] {
-            4000,
-            0,
-            0,
-            0});
-            this.nudSection8.Name = "nudSection8";
-            this.nudSection8.Size = new System.Drawing.Size(120, 52);
-            this.nudSection8.TabIndex = 27;
-            this.nudSection8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudSection8.Value = new decimal(new int[] {
-            92,
-            0,
-            0,
-            0});
-            this.nudSection8.ValueChanged += new System.EventHandler(this.nudSection8_ValueChanged);
-            this.nudSection8.Enter += new System.EventHandler(this.NudSection8_Enter);
-            // 
-            // nudSection7
-            // 
-            this.nudSection7.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection7.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudSection7.InterceptArrowKeys = false;
-            this.nudSection7.Location = new System.Drawing.Point(7, 193);
-            this.nudSection7.Maximum = new decimal(new int[] {
-            4000,
-            0,
-            0,
-            0});
-            this.nudSection7.Name = "nudSection7";
-            this.nudSection7.Size = new System.Drawing.Size(120, 52);
-            this.nudSection7.TabIndex = 26;
-            this.nudSection7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudSection7.Value = new decimal(new int[] {
-            93,
-            0,
-            0,
-            0});
-            this.nudSection7.ValueChanged += new System.EventHandler(this.nudSection7_ValueChanged);
-            this.nudSection7.Enter += new System.EventHandler(this.NudSection7_Enter);
-            // 
             // nudSection6
             // 
             this.nudSection6.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection6.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection6.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSection6.InterceptArrowKeys = false;
-            this.nudSection6.Location = new System.Drawing.Point(842, 54);
+            this.nudSection6.Location = new System.Drawing.Point(654, 54);
             this.nudSection6.Maximum = new decimal(new int[] {
             4000,
             0,
             0,
             0});
             this.nudSection6.Name = "nudSection6";
-            this.nudSection6.Size = new System.Drawing.Size(120, 52);
+            this.nudSection6.Size = new System.Drawing.Size(100, 46);
             this.nudSection6.TabIndex = 25;
             this.nudSection6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudSection6.Value = new decimal(new int[] {
@@ -1217,16 +987,16 @@
             // nudSection5
             // 
             this.nudSection5.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection5.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection5.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSection5.InterceptArrowKeys = false;
-            this.nudSection5.Location = new System.Drawing.Point(675, 54);
+            this.nudSection5.Location = new System.Drawing.Point(528, 54);
             this.nudSection5.Maximum = new decimal(new int[] {
             4000,
             0,
             0,
             0});
             this.nudSection5.Name = "nudSection5";
-            this.nudSection5.Size = new System.Drawing.Size(120, 52);
+            this.nudSection5.Size = new System.Drawing.Size(100, 46);
             this.nudSection5.TabIndex = 13;
             this.nudSection5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudSection5.Value = new decimal(new int[] {
@@ -1240,16 +1010,16 @@
             // nudSection4
             // 
             this.nudSection4.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection4.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection4.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSection4.InterceptArrowKeys = false;
-            this.nudSection4.Location = new System.Drawing.Point(508, 54);
+            this.nudSection4.Location = new System.Drawing.Point(396, 54);
             this.nudSection4.Maximum = new decimal(new int[] {
             4000,
             0,
             0,
             0});
             this.nudSection4.Name = "nudSection4";
-            this.nudSection4.Size = new System.Drawing.Size(120, 52);
+            this.nudSection4.Size = new System.Drawing.Size(100, 46);
             this.nudSection4.TabIndex = 12;
             this.nudSection4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudSection4.Value = new decimal(new int[] {
@@ -1259,75 +1029,6 @@
             0});
             this.nudSection4.ValueChanged += new System.EventHandler(this.nudSection4_ValueChanged);
             this.nudSection4.Enter += new System.EventHandler(this.NudSection4_Enter);
-            // 
-            // nudSection3
-            // 
-            this.nudSection3.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection3.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudSection3.InterceptArrowKeys = false;
-            this.nudSection3.Location = new System.Drawing.Point(341, 54);
-            this.nudSection3.Maximum = new decimal(new int[] {
-            4000,
-            0,
-            0,
-            0});
-            this.nudSection3.Name = "nudSection3";
-            this.nudSection3.Size = new System.Drawing.Size(120, 52);
-            this.nudSection3.TabIndex = 11;
-            this.nudSection3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudSection3.Value = new decimal(new int[] {
-            97,
-            0,
-            0,
-            0});
-            this.nudSection3.ValueChanged += new System.EventHandler(this.nudSection3_ValueChanged);
-            this.nudSection3.Enter += new System.EventHandler(this.NudSection3_Enter);
-            // 
-            // nudSection2
-            // 
-            this.nudSection2.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection2.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudSection2.InterceptArrowKeys = false;
-            this.nudSection2.Location = new System.Drawing.Point(174, 54);
-            this.nudSection2.Maximum = new decimal(new int[] {
-            4000,
-            0,
-            0,
-            0});
-            this.nudSection2.Name = "nudSection2";
-            this.nudSection2.Size = new System.Drawing.Size(120, 52);
-            this.nudSection2.TabIndex = 10;
-            this.nudSection2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudSection2.Value = new decimal(new int[] {
-            98,
-            0,
-            0,
-            0});
-            this.nudSection2.ValueChanged += new System.EventHandler(this.nudSection2_ValueChanged);
-            this.nudSection2.Enter += new System.EventHandler(this.NudSection2_Enter);
-            // 
-            // nudSection1
-            // 
-            this.nudSection1.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudSection1.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudSection1.InterceptArrowKeys = false;
-            this.nudSection1.Location = new System.Drawing.Point(7, 54);
-            this.nudSection1.Maximum = new decimal(new int[] {
-            4000,
-            0,
-            0,
-            0});
-            this.nudSection1.Name = "nudSection1";
-            this.nudSection1.Size = new System.Drawing.Size(120, 52);
-            this.nudSection1.TabIndex = 9;
-            this.nudSection1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudSection1.Value = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.nudSection1.ValueChanged += new System.EventHandler(this.nudSection1_ValueChanged);
-            this.nudSection1.Enter += new System.EventHandler(this.NudSection1_Enter);
             // 
             // label2
             // 
@@ -1511,6 +1212,321 @@
             this.bntOK.UseVisualStyleBackColor = true;
             this.bntOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label1.Location = new System.Drawing.Point(290, 306);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 25);
+            this.label1.TabIndex = 256;
+            this.label1.Text = "15";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label5.Location = new System.Drawing.Point(156, 305);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 25);
+            this.label5.TabIndex = 255;
+            this.label5.Text = "14";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label6.Location = new System.Drawing.Point(33, 307);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 25);
+            this.label6.TabIndex = 254;
+            this.label6.Text = "13";
+            // 
+            // nudSection14
+            // 
+            this.nudSection14.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudSection14.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection14.InterceptArrowKeys = false;
+            this.nudSection14.Location = new System.Drawing.Point(132, 333);
+            this.nudSection14.Maximum = new decimal(new int[] {
+            4000,
+            0,
+            0,
+            0});
+            this.nudSection14.Name = "nudSection14";
+            this.nudSection14.Size = new System.Drawing.Size(100, 46);
+            this.nudSection14.TabIndex = 252;
+            this.nudSection14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudSection14.Value = new decimal(new int[] {
+            92,
+            0,
+            0,
+            0});
+            this.nudSection14.ValueChanged += new System.EventHandler(this.nudSection14_ValueChanged);
+            this.nudSection14.Enter += new System.EventHandler(this.nudSection14_Enter);
+            // 
+            // nudSection13
+            // 
+            this.nudSection13.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudSection13.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection13.InterceptArrowKeys = false;
+            this.nudSection13.Location = new System.Drawing.Point(7, 332);
+            this.nudSection13.Maximum = new decimal(new int[] {
+            4000,
+            0,
+            0,
+            0});
+            this.nudSection13.Name = "nudSection13";
+            this.nudSection13.Size = new System.Drawing.Size(100, 46);
+            this.nudSection13.TabIndex = 251;
+            this.nudSection13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudSection13.Value = new decimal(new int[] {
+            92,
+            0,
+            0,
+            0});
+            this.nudSection13.ValueChanged += new System.EventHandler(this.nudSection13_ValueChanged);
+            this.nudSection13.Enter += new System.EventHandler(this.nudSection13_Enter);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label21.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label21.Location = new System.Drawing.Point(166, 26);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(25, 25);
+            this.label21.TabIndex = 39;
+            this.label21.Text = "2";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label20.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label20.Location = new System.Drawing.Point(302, 26);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(25, 25);
+            this.label20.TabIndex = 38;
+            this.label20.Text = "3";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label37.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label37.Location = new System.Drawing.Point(300, 165);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(25, 25);
+            this.label37.TabIndex = 43;
+            this.label37.Text = "9";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label33.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label33.Location = new System.Drawing.Point(205, 165);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(25, 25);
+            this.label33.TabIndex = 42;
+            this.label33.Text = "8";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label32.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label32.Location = new System.Drawing.Point(41, 165);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(25, 25);
+            this.label32.TabIndex = 41;
+            this.label32.Text = "7";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label10.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label10.Location = new System.Drawing.Point(41, 26);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(25, 25);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "1";
+            // 
+            // nudSection9
+            // 
+            this.nudSection9.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudSection9.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection9.InterceptArrowKeys = false;
+            this.nudSection9.Location = new System.Drawing.Point(268, 193);
+            this.nudSection9.Maximum = new decimal(new int[] {
+            4000,
+            0,
+            0,
+            0});
+            this.nudSection9.Name = "nudSection9";
+            this.nudSection9.Size = new System.Drawing.Size(100, 46);
+            this.nudSection9.TabIndex = 31;
+            this.nudSection9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudSection9.Value = new decimal(new int[] {
+            92,
+            0,
+            0,
+            0});
+            this.nudSection9.ValueChanged += new System.EventHandler(this.nudSection9_ValueChanged);
+            this.nudSection9.Enter += new System.EventHandler(this.NudSection9_Enter);
+            // 
+            // nudSection8
+            // 
+            this.nudSection8.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudSection8.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection8.InterceptArrowKeys = false;
+            this.nudSection8.Location = new System.Drawing.Point(132, 193);
+            this.nudSection8.Maximum = new decimal(new int[] {
+            4000,
+            0,
+            0,
+            0});
+            this.nudSection8.Name = "nudSection8";
+            this.nudSection8.Size = new System.Drawing.Size(100, 46);
+            this.nudSection8.TabIndex = 27;
+            this.nudSection8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudSection8.Value = new decimal(new int[] {
+            92,
+            0,
+            0,
+            0});
+            this.nudSection8.ValueChanged += new System.EventHandler(this.nudSection8_ValueChanged);
+            this.nudSection8.Enter += new System.EventHandler(this.NudSection8_Enter);
+            // 
+            // nudSection7
+            // 
+            this.nudSection7.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudSection7.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection7.InterceptArrowKeys = false;
+            this.nudSection7.Location = new System.Drawing.Point(7, 193);
+            this.nudSection7.Maximum = new decimal(new int[] {
+            4000,
+            0,
+            0,
+            0});
+            this.nudSection7.Name = "nudSection7";
+            this.nudSection7.Size = new System.Drawing.Size(100, 46);
+            this.nudSection7.TabIndex = 26;
+            this.nudSection7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudSection7.Value = new decimal(new int[] {
+            93,
+            0,
+            0,
+            0});
+            this.nudSection7.ValueChanged += new System.EventHandler(this.nudSection7_ValueChanged);
+            this.nudSection7.Enter += new System.EventHandler(this.NudSection7_Enter);
+            // 
+            // nudSection3
+            // 
+            this.nudSection3.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudSection3.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection3.InterceptArrowKeys = false;
+            this.nudSection3.Location = new System.Drawing.Point(268, 54);
+            this.nudSection3.Maximum = new decimal(new int[] {
+            4000,
+            0,
+            0,
+            0});
+            this.nudSection3.Name = "nudSection3";
+            this.nudSection3.Size = new System.Drawing.Size(100, 46);
+            this.nudSection3.TabIndex = 11;
+            this.nudSection3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudSection3.Value = new decimal(new int[] {
+            97,
+            0,
+            0,
+            0});
+            this.nudSection3.ValueChanged += new System.EventHandler(this.nudSection3_ValueChanged);
+            this.nudSection3.Enter += new System.EventHandler(this.NudSection3_Enter);
+            // 
+            // nudSection2
+            // 
+            this.nudSection2.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudSection2.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection2.InterceptArrowKeys = false;
+            this.nudSection2.Location = new System.Drawing.Point(132, 54);
+            this.nudSection2.Maximum = new decimal(new int[] {
+            4000,
+            0,
+            0,
+            0});
+            this.nudSection2.Name = "nudSection2";
+            this.nudSection2.Size = new System.Drawing.Size(100, 46);
+            this.nudSection2.TabIndex = 10;
+            this.nudSection2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudSection2.Value = new decimal(new int[] {
+            98,
+            0,
+            0,
+            0});
+            this.nudSection2.ValueChanged += new System.EventHandler(this.nudSection2_ValueChanged);
+            this.nudSection2.Enter += new System.EventHandler(this.NudSection2_Enter);
+            // 
+            // nudSection1
+            // 
+            this.nudSection1.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudSection1.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection1.InterceptArrowKeys = false;
+            this.nudSection1.Location = new System.Drawing.Point(7, 54);
+            this.nudSection1.Maximum = new decimal(new int[] {
+            4000,
+            0,
+            0,
+            0});
+            this.nudSection1.Name = "nudSection1";
+            this.nudSection1.Size = new System.Drawing.Size(100, 46);
+            this.nudSection1.TabIndex = 9;
+            this.nudSection1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudSection1.Value = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.nudSection1.ValueChanged += new System.EventHandler(this.nudSection1_ValueChanged);
+            this.nudSection1.Enter += new System.EventHandler(this.NudSection1_Enter);
+            // 
+            // nudSection15
+            // 
+            this.nudSection15.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudSection15.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection15.InterceptArrowKeys = false;
+            this.nudSection15.Location = new System.Drawing.Point(268, 333);
+            this.nudSection15.Maximum = new decimal(new int[] {
+            4000,
+            0,
+            0,
+            0});
+            this.nudSection15.Name = "nudSection15";
+            this.nudSection15.Size = new System.Drawing.Size(100, 46);
+            this.nudSection15.TabIndex = 253;
+            this.nudSection15.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudSection15.Value = new decimal(new int[] {
+            92,
+            0,
+            0,
+            0});
+            this.nudSection15.ValueChanged += new System.EventHandler(this.nudSection15_ValueChanged);
+            this.nudSection15.Enter += new System.EventHandler(this.nudSection15_Enter);
+            // 
             // FormToolSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1557,26 +1573,26 @@
             this.tabSections.ResumeLayout(false);
             this.tabSections.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection16)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSection15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSection14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSection13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDefaultSectionWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinApplied)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSection9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSection8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSection7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSection3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSection2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSection1)).EndInit();
             this.tabWorkSwitch.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSection14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSection13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSection9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSection8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSection7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSection3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSection2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSection1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSection15)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1592,9 +1608,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.NumericUpDown nudSection5;
         private System.Windows.Forms.NumericUpDown nudSection4;
-        private System.Windows.Forms.NumericUpDown nudSection3;
-        private System.Windows.Forms.NumericUpDown nudSection2;
-        private System.Windows.Forms.NumericUpDown nudSection1;
         private System.Windows.Forms.Label lblSecTotalWidthInches;
         private System.Windows.Forms.Label lblSecTotalWidthFeet;
         private System.Windows.Forms.Label label17;
@@ -1615,27 +1628,18 @@
         private System.Windows.Forms.CheckBox checkWorkSwitchManual;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label lblDoNotExceed;
-        private System.Windows.Forms.NumericUpDown nudSection8;
-        private System.Windows.Forms.NumericUpDown nudSection7;
         private System.Windows.Forms.NumericUpDown nudSection6;
         private System.Windows.Forms.Label lblInchesCm;
         private System.Windows.Forms.NumericUpDown nudTankHitch;
         private System.Windows.Forms.NumericUpDown nudSection12;
         private System.Windows.Forms.NumericUpDown nudSection11;
         private System.Windows.Forms.NumericUpDown nudSection10;
-        private System.Windows.Forms.NumericUpDown nudSection9;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.NumericUpDown nudMinApplied;
         private System.Windows.Forms.Label lblVehicleToolWidth;
@@ -1652,16 +1656,28 @@
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown nudSection16;
+        private System.Windows.Forms.NumericUpDown nudCutoffSpeed;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label lblTurnOffBelowUnits;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown nudLookAheadOff;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown nudSection15;
         private System.Windows.Forms.NumericUpDown nudSection14;
         private System.Windows.Forms.NumericUpDown nudSection13;
-        private System.Windows.Forms.NumericUpDown nudCutoffSpeed;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label lblTurnOffBelowUnits;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown nudLookAheadOff;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown nudSection9;
+        private System.Windows.Forms.NumericUpDown nudSection8;
+        private System.Windows.Forms.NumericUpDown nudSection7;
+        private System.Windows.Forms.NumericUpDown nudSection3;
+        private System.Windows.Forms.NumericUpDown nudSection2;
+        private System.Windows.Forms.NumericUpDown nudSection1;
     }
 }

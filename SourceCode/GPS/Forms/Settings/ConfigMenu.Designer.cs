@@ -51,25 +51,29 @@ namespace AgOpenGPS
         private void btnTool_Click(object sender, EventArgs e)
         {
             ShowSubMenu(panelToolSubMenu);
-            tab1.SelectedTab = tabTool;
-            //UpdateToolListView();
+            tab1.SelectedTab = tabSummary;
+            UpdateVehicleListView();
+            UpdateSummary();
+
         }
 
         private void btnDataSources_Click(object sender, EventArgs e)
         {
             ShowSubMenu(panelDataSourcesSubMenu);
-            tab1.SelectedTab = tabData;
+            tab1.SelectedTab = tabSummary;
             //lblCurrentData.Text = gStr.gsCurrent + mf.dataSourceFileName;
-            //UpdateDataSourceListView();
+            UpdateVehicleListView();
+            UpdateSummary();
         }
 
         private void btnVehicle_Click(object sender, EventArgs e)
         {
             ShowSubMenu(panelVehicleSubMenu);
-            tab1.SelectedTab = tabVehicle;
+            tab1.SelectedTab = tabSummary;
 
             lblCurrentVehicle.Text = gStr.gsCurrent + mf.vehicleFileName;
             UpdateVehicleListView();
+            UpdateSummary();
         }
 
         private void btnExit_Click(object sender, EventArgs e)

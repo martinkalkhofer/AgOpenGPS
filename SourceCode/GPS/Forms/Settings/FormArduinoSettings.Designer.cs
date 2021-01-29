@@ -377,6 +377,7 @@
             // 
             this.btnChangeAttachment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnChangeAttachment.BackColor = System.Drawing.Color.Transparent;
+            this.btnChangeAttachment.FlatAppearance.BorderSize = 0;
             this.btnChangeAttachment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangeAttachment.Image = global::AgOpenGPS.Properties.Resources.ToolAcceptChange;
             this.btnChangeAttachment.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -775,6 +776,8 @@
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnCancel.Image = global::AgOpenGPS.Properties.Resources.Cancel64;
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -789,6 +792,8 @@
             // 
             this.bntOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bntOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bntOK.FlatAppearance.BorderSize = 0;
+            this.bntOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bntOK.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.bntOK.Image = global::AgOpenGPS.Properties.Resources.OK64;
             this.bntOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;

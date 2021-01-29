@@ -91,6 +91,8 @@
             // btnSaveAs
             // 
             this.btnSaveAs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSaveAs.FlatAppearance.BorderSize = 0;
+            this.btnSaveAs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveAs.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btnSaveAs.Image = global::AgOpenGPS.Properties.Resources.FileSaveAs;
             this.btnSaveAs.Location = new System.Drawing.Point(262, 51);
@@ -103,6 +105,8 @@
             // btnReturn
             // 
             this.btnReturn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnReturn.FlatAppearance.BorderSize = 0;
+            this.btnReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReturn.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btnReturn.Image = global::AgOpenGPS.Properties.Resources.back_button;
             this.btnReturn.Location = new System.Drawing.Point(25, 51);
@@ -115,6 +119,8 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnOk.FlatAppearance.BorderSize = 0;
+            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btnOk.Image = global::AgOpenGPS.Properties.Resources.OK64;
             this.btnOk.Location = new System.Drawing.Point(154, 204);
