@@ -901,6 +901,7 @@
     <None Include="btnImages\VehFileLoad.png" />
     <None Include="btnImages\VehFileSave.png" />
     <None Include="btnImages\VehFileSaveAs.png" />
+    <None Include="btnImages\SnapToPivot.png" />
     <Content Include="Dependencies\Audio\Boundary.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
