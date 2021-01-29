@@ -21,6 +21,10 @@ namespace AgOpenGPS
             mf = callingForm as FormGPS;
             InitializeComponent();
 
+            tab1.Appearance = TabAppearance.FlatButtons;
+            tab1.ItemSize = new Size(0, 1);
+            tab1.SizeMode = TabSizeMode.Fixed;
+
             HideSubMenu();
 
             nudTrailingHitchLength.Controls[0].Enabled = false;
@@ -188,7 +192,6 @@ namespace AgOpenGPS
         {
             mf.LoadSettings();
         }
-
     }
 }
 

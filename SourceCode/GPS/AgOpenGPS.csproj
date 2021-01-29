@@ -897,6 +897,10 @@
     <None Include="btnImages\ToolHitchPageRear.png" />
     <None Include="btnImages\ToolHitchPageTBT.png" />
     <None Include="btnImages\ToolHitchPageTrailing.png" />
+    <None Include="btnImages\VehFileDelete.png" />
+    <None Include="btnImages\VehFileLoad.png" />
+    <None Include="btnImages\VehFileSave.png" />
+    <None Include="btnImages\VehFileSaveAs.png" />
     <Content Include="Dependencies\Audio\Boundary.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
