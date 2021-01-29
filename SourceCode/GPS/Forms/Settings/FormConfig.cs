@@ -78,7 +78,6 @@ namespace AgOpenGPS
 
         private void FormConfig_Load(object sender, EventArgs e)
         {
-            UpdateSummary();
 
             if (mf.isMetric)
             {
@@ -99,10 +98,36 @@ namespace AgOpenGPS
                 maxWidth = 1968;
             }
 
+            //update the first child form summary data items
+            UpdateSummary();
+
+            //metric or imp on spinners min/maxes
             FixMinMaxSpinners();
 
+            //the pick a saved vehicle box
             UpdateVehicleListView();
+
+            //the tool size in bottom panel
+            if (mf.isMetric)
+            {
+                lblSecTotalWidthMeters.Text = (mf.tool.toolWidth * 100) + " cm";
+            }
+            else
+            {
+                double toFeet = mf.tool.toolWidth * 0.08334;
+                lblSecTotalWidthFeet.Text = Convert.ToString((int)toFeet) + "'";
+                double temp = Math.Round((toFeet - Math.Truncate(toFeet)) * 12, 0);
+                lblSecTotalWidthInches.Text = Convert.ToString(temp) + '"';
+            }
+
         }
+
+        private void FormConfig_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //reload all the settings from default and user.config
+            mf.LoadSettings();
+        }
+
         private void FixMinMaxSpinners()
         {
             if (!mf.isMetric)
@@ -188,10 +213,7 @@ namespace AgOpenGPS
 
         }
 
-        private void FormConfig_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            mf.LoadSettings();
-        }
+
     }
 }
 

@@ -22,15 +22,23 @@ namespace AgOpenGPS
             if (Properties.Settings.Default.setGPS_fixFromWhichSentence == "GGA") rbtnGGA.Checked = true;
             else if (Properties.Settings.Default.setGPS_fixFromWhichSentence == "RMC") rbtnRMC.Checked = true;
             else if (Properties.Settings.Default.setGPS_fixFromWhichSentence == "OGI") rbtnOGI.Checked = true;
-
         }
 
         private void tabDFix_Leave(object sender, EventArgs e)
         {
 
+            Properties.Settings.Default.setGPS_isRTK = cboxIsRTK.Checked;
+            mf.isRTK = cboxIsRTK.Checked;
+
+            Properties.Settings.Default.Save();
         }
 
-
+        private void rbtnGGA_CheckedChanged(object sender, EventArgs e)
+        {
+            var checkedButton = groupBox4.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked);
+            Properties.Settings.Default.setGPS_fixFromWhichSentence = checkedButton.Text;
+            mf.pn.fixFrom = checkedButton.Text;
+        }
 
         #endregion
 
@@ -137,10 +145,7 @@ namespace AgOpenGPS
             lblRollZeroOffset.Text = "0.00";
             Properties.Settings.Default.setIMU_rollZeroX16 = 0;
             Properties.Settings.Default.Save();
-
         }
-
-
 
         #endregion 
 

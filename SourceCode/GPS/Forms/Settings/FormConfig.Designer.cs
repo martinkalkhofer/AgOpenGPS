@@ -782,7 +782,6 @@
             this.tabSummary.Size = new System.Drawing.Size(788, 602);
             this.tabSummary.TabIndex = 0;
             this.tabSummary.Text = "Summ";
-            this.tabSummary.Enter += new System.EventHandler(this.tabSummary_Enter);
             // 
             // btnVehicleSave
             // 
@@ -3009,6 +3008,7 @@
             this.rbtnGGA.Text = "GGA";
             this.rbtnGGA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtnGGA.UseVisualStyleBackColor = true;
+            this.rbtnGGA.CheckedChanged += new System.EventHandler(this.rbtnGGA_CheckedChanged);
             // 
             // lblSimGGA
             // 
@@ -3375,6 +3375,7 @@
             this.btnRollZero.Controls.Add(this.lblRollZeroOffset);
             this.btnRollZero.Controls.Add(this.btnZeroRoll);
             this.btnRollZero.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRollZero.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnRollZero.Location = new System.Drawing.Point(39, 52);
             this.btnRollZero.Name = "btnRollZero";
             this.btnRollZero.Size = new System.Drawing.Size(314, 227);
@@ -3498,7 +3499,7 @@
             this.lblRollFilterPercent.AutoSize = true;
             this.lblRollFilterPercent.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRollFilterPercent.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblRollFilterPercent.Location = new System.Drawing.Point(169, 459);
+            this.lblRollFilterPercent.Location = new System.Drawing.Point(169, 451);
             this.lblRollFilterPercent.Name = "lblRollFilterPercent";
             this.lblRollFilterPercent.Size = new System.Drawing.Size(95, 39);
             this.lblRollFilterPercent.TabIndex = 344;
@@ -3522,7 +3523,7 @@
             this.hsbarRollFilter.Maximum = 98;
             this.hsbarRollFilter.Minimum = 2;
             this.hsbarRollFilter.Name = "hsbarRollFilter";
-            this.hsbarRollFilter.Size = new System.Drawing.Size(335, 54);
+            this.hsbarRollFilter.Size = new System.Drawing.Size(335, 43);
             this.hsbarRollFilter.TabIndex = 343;
             this.hsbarRollFilter.Value = 5;
             this.hsbarRollFilter.ValueChanged += new System.EventHandler(this.hsbarRollFilter_ValueChanged);
@@ -3592,21 +3593,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(997, 716);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.panelChildForm);
             this.Controls.Add(this.panelLeftSideMenu);
             this.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(986, 706);
             this.Name = "FormConfig";
             this.ShowInTaskbar = false;
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormConfig_FormClosing);
             this.Load += new System.EventHandler(this.FormConfig_Load);
             this.panelLeftSideMenu.ResumeLayout(false);

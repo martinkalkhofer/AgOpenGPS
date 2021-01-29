@@ -29,6 +29,13 @@ namespace AgOpenGPS
         //polygon mode for section drawing
         public bool isDrawPolygons;
 
+        public Color dayColor;
+        public Color nightColor;
+        public Color sectionColorDay;
+        public Color sectionColorNight;
+        public Color fieldColorDay;
+        public Color fieldColorNight;
+
         //Is it in 2D or 3D, metric or imperial, display lightbar, display grid etc
         public bool isMetric = true, isLightbarOn = true, isGridOn, isFullScreen;
         public bool isUTurnAlwaysOn, isCompassOn, isSpeedoOn, isAutoDayNight, isSideGuideLines = true;
@@ -40,13 +47,6 @@ namespace AgOpenGPS
         public enum btnStates { Off, Auto, On }
         public btnStates manualBtnState = btnStates.Off;
         public btnStates autoBtnState = btnStates.Off;
-
-        public Color dayColor = Properties.Settings.Default.setDisplay_colorDayMode;
-        public Color nightColor = Properties.Settings.Default.setDisplay_colorNightMode;
-        public Color sectionColorDay = Properties.Settings.Default.setDisplay_colorSectionsDay;
-        public Color sectionColorNight = Properties.Settings.Default.setDisplay_colorSectionsNight;
-        public Color fieldColorDay = Properties.Settings.Default.setDisplay_colorFieldDay;
-        public Color fieldColorNight = Properties.Settings.Default.setDisplay_colorFieldNight;
 
         public int[] customColorsList = new int[16];
 
@@ -170,7 +170,7 @@ namespace AgOpenGPS
                     if (curve.isBtnCurveOn) btnCurve.Text = "# " + CurveNumber;
                     else btnCurve.Text = "";
 
-                    lblDateTime.Text = DateTime.Now.ToString("HH:mm:ss") + "\n\r" + DateTime.Now.ToString("ddd, MMMM dd, yyyy");
+                    //lblDateTime.Text = DateTime.Now.ToString("HH:mm:ss") + "\n\r" + DateTime.Now.ToString("ddd, MMMM dd, yyyy");
                 }//end every 3 seconds
 
                 //every second update all status ///////////////////////////   1 1 1 1 1 1 ////////////////////////////
@@ -348,7 +348,16 @@ namespace AgOpenGPS
 
             startSpeed = Vehicle.Default.setVehicle_startSpeed;
 
-            isSkyOn = Settings.Default.setMenu_isSkyOn;
+        dayColor = Properties.Settings.Default.setDisplay_colorDayMode;
+        nightColor = Properties.Settings.Default.setDisplay_colorNightMode;
+        sectionColorDay = Properties.Settings.Default.setDisplay_colorSectionsDay;
+        sectionColorNight = Properties.Settings.Default.setDisplay_colorSectionsNight;
+        fieldColorDay = Properties.Settings.Default.setDisplay_colorFieldDay;
+        fieldColorNight = Properties.Settings.Default.setDisplay_colorFieldNight;
+
+
+
+        isSkyOn = Settings.Default.setMenu_isSkyOn;
             isGridOn = Settings.Default.setMenu_isGridOn;
             isCompassOn = Settings.Default.setMenu_isCompassOn;
             isSpeedoOn = Settings.Default.setMenu_isSpeedoOn;
@@ -483,7 +492,6 @@ namespace AgOpenGPS
             fieldColorNight = (Settings.Default.setDisplay_colorFieldNight);
             sectionColorNight = (Settings.Default.setDisplay_colorSectionsNight);
 
-            DisableYouTurnButtons();
 
             isLightbarOn = Settings.Default.setMenu_isLightbarOn;
             lightbarToolStripMenuItem.Checked = isLightbarOn;
@@ -506,9 +514,6 @@ namespace AgOpenGPS
             if (!topFieldViewToolStripMenuItem.Checked)
                 oglZoom.SendToBack();
 
-
-            yt.rowSkipsWidth = Properties.Vehicle.Default.set_youSkipWidth;
-            cboxpRowWidth.SelectedIndex = yt.rowSkipsWidth - 1;
 
             //default to come up in mini panel, exit remembers 
             SwapBatmanPanels();
@@ -584,15 +589,23 @@ namespace AgOpenGPS
             //Set width of section and positions for each section
             SectionSetPosition();
 
-
             //Calculate total width and each section width
             SectionCalcWidths();
             LineUpManualBtns();
 
+            //new instance of auto headland turn
+            yt = new CYouTurn(this);
+
             //instance of tram
             tram = new CTram(this);
 
+            yt.rowSkipsWidth = Properties.Vehicle.Default.set_youSkipWidth;
+            cboxpRowWidth.SelectedIndex = yt.rowSkipsWidth - 1;
 
+            //all the attitude, heading, roll, pitch reference system
+            ahrs = new CAHRS(this);
+
+            DisableYouTurnButtons();
             //set the correct zoom and grid
             camera.camSetDistance = camera.zoomValue * camera.zoomValue * -1;
             SetZoom();
@@ -719,50 +732,32 @@ namespace AgOpenGPS
 
             if (!isSimple)
             {
-                toolToolbottomStripBtn.Visible = true;
-                vehicleToolStripBtn.Visible = true;
                 AutoSteerToolBtn.Visible = true;
 
-                lblDateTime.Visible = false;
-                snapLeftBigStrip.Visible = false;
-                snapRightBigStrip.Visible = false;
+                //lblDateTime.Visible = false;
+                //snapLeftBigStrip.Visible = false;
+                //snapRightBigStrip.Visible = false;
 
             }
 
-            if (Width > 1100)
-            {
-                snapLeftBigStrip.Visible = true;
-                snapRightBigStrip.Visible = true;
-            }
-            else
-            {
-                snapLeftBigStrip.Visible = false;
-                snapRightBigStrip.Visible = false;
-            }
+            //if (Width > 1100)
+            //{
+            //    snapLeftBigStrip.Visible = true;
+            //    snapRightBigStrip.Visible = true;
+            //}
+            //else
+            //{
+            //    snapLeftBigStrip.Visible = false;
+            //    snapRightBigStrip.Visible = false;
+            //}
 
 
-            if (Width > 1300)
-            {
-                lblDateTime.Visible = true;
-            }
-            else
-            {
-                lblDateTime.Visible = false;
-            }
-            if (Width > 1400)
-            {
-            }
-            else
-            {
-            }
 
             if (isSimple)
             {
-                toolToolbottomStripBtn.Visible = false;
-                vehicleToolStripBtn.Visible = false;
                 AutoSteerToolBtn.Visible = false;
 
-                lblDateTime.Visible = true;
+                //lblDateTime.Visible = true;
                 snapLeftBigStrip.Visible = true;
                 snapRightBigStrip.Visible = true;
             }

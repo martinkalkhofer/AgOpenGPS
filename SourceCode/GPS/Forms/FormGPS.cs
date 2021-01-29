@@ -343,8 +343,8 @@ namespace AgOpenGPS
             //new instance of contour mode
             curve = new CABCurve(this);
 
-            //new instance of auto headland turn
-            yt = new CYouTurn(this);
+            ////new instance of auto headland turn
+            //yt = new CYouTurn(this);
 
             //module communication
             mc = new CModuleComm(this);
@@ -364,8 +364,8 @@ namespace AgOpenGPS
             //all the autosteer objects
             ast = new CAutoSteer(this);
 
-            //all the attitude, heading, roll, pitch reference system
-            ahrs = new CAHRS(this);
+            ////all the attitude, heading, roll, pitch reference system
+            //ahrs = new CAHRS(this);
 
             //fieldData all in one place
             fd = new CFieldData(this);

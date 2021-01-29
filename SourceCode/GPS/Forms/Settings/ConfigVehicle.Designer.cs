@@ -11,9 +11,6 @@ namespace AgOpenGPS
     public partial class FormConfig
     {
         #region summary Page
-        private void tabSummary_Enter(object sender, EventArgs e)
-        {
-        }
 
         #endregion
 
@@ -79,12 +76,12 @@ namespace AgOpenGPS
                 {
                     SettingsIO.ImportAll(mf.vehiclesDirectory + lvVehicles.SelectedItems[0].SubItems[0].Text + ".XML");
 
+                    //reset AOG
+                    mf.LoadSettings();
 
                 }
                 UpdateVehicleListView();
             }
-
-            mf.LoadSettings();
         }
 
         private void btnVehicleDelete_Click(object sender, EventArgs e)

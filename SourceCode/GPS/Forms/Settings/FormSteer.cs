@@ -113,10 +113,46 @@ namespace AgOpenGPS
             //hSBarFreeDrive.Value = 0;
             mf.ast.driveFreeSteerAngle = 0;
 
-            if (mf.isStanleyUsed) btnStanley.Text = "Stanley";
-            else btnStanley.Text = "Pure P";
+            if (mf.isStanleyUsed)
+            {
+                hsbarLookAhead.Visible = false;
+                hsbarDistanceFromLine.Visible = false;
+                hsbarLookAheadMin.Visible = false;
+                hsbarLookAheadUturnMult.Visible = false;
+                label37.Visible = false;
+                label4.Visible = false;
+                label6.Visible = false;
+                label2.Visible = false;
+                label21.Visible = false;
+                label1.Visible = false;
+                lblLookAhead.Visible = false;
+                lblDistanceFromLine.Visible = false;
+                lblLookAheadMinimum.Visible = false;
+                lblLookAheadUturnMult.Visible = false;
+                btnStanley.Text = "Stanley";
+            }
+            else
+            {
+                btnStanley.Text = "Pure P";
+
+                hsbarLookAhead.Visible = true;
+                hsbarDistanceFromLine.Visible = true;
+                hsbarLookAheadMin.Visible = true;
+                hsbarLookAheadUturnMult.Visible = true;
+                label37.Visible = true;
+                label4.Visible = true;
+                label6.Visible = true;
+                label2.Visible = true;
+                label21.Visible = true;
+                label1.Visible = true;
+                lblLookAhead.Visible = true;
+                lblDistanceFromLine.Visible = true;
+                lblLookAheadMinimum.Visible = true;
+                lblLookAheadUturnMult.Visible = true;
+            }
 
             toSend = false;
+
         }
 
         private void FormSteer_FormClosing(object sender, FormClosingEventArgs e)
@@ -297,8 +333,44 @@ namespace AgOpenGPS
         private void BtnStanley_Click(object sender, EventArgs e)
         {
             mf.isStanleyUsed = !mf.isStanleyUsed;
-            if (mf.isStanleyUsed) btnStanley.Text = "Stanley";
-            else btnStanley.Text = "Pure P";
+
+            if (mf.isStanleyUsed)
+            {
+                hsbarLookAhead.Visible = false;
+                hsbarDistanceFromLine.Visible = false;
+                hsbarLookAheadMin.Visible = false;
+                hsbarLookAheadUturnMult.Visible = false;
+                label37.Visible = false;
+                label4.Visible = false;
+                label6.Visible = false;
+                label2.Visible = false;
+                label21.Visible = false;
+                label1.Visible = false;
+                lblLookAhead.Visible = false;
+                lblDistanceFromLine.Visible = false;
+                lblLookAheadMinimum.Visible = false;
+                lblLookAheadUturnMult.Visible = false;
+                btnStanley.Text = "Stanley";
+            }
+            else
+            {
+                btnStanley.Text = "Pure P";
+
+                hsbarLookAhead.Visible = true;
+                hsbarDistanceFromLine.Visible = true;
+                hsbarLookAheadMin.Visible = true;
+                hsbarLookAheadUturnMult.Visible = true;
+                label37.Visible = true;
+                label4.Visible = true;
+                label6.Visible = true;
+                label2.Visible = true;
+                label21.Visible = true;
+                label1.Visible = true;
+                lblLookAhead.Visible = true;
+                lblDistanceFromLine.Visible = true;
+                lblLookAheadMinimum.Visible = true;
+                lblLookAheadUturnMult.Visible = true;
+            }
             Properties.Vehicle.Default.setVehicle_isStanleyUsed = mf.isStanleyUsed;
             Properties.Vehicle.Default.Save();
         }
@@ -312,8 +384,8 @@ namespace AgOpenGPS
 
             double err = (mf.actualSteerAngleDisp * 0.01 - mf.guidanceLineSteerAngle * 0.01);
             lblError.Text = Math.Abs(err).ToString("N1") + "\u00B0";
-            if (err > 0) lblError.ForeColor = Color.DarkRed;
-            else lblError.ForeColor = Color.DarkGreen;
+            if (err > 0) lblError.ForeColor = Color.OrangeRed;
+            else lblError.ForeColor = Color.LightGreen;
             
             lblPWMDisplay.Text = mf.mc.pwmDisplay.ToString();
 
@@ -341,8 +413,8 @@ namespace AgOpenGPS
             lblSent.Text = mf.checksumSent.ToString();
             lblRecd.Text = mf.checksumRecd.ToString();
 
-            if (hsbarMinPWM.Value > hsbarLowSteerPWM.Value) lblMinPWM.ForeColor = Color.Red;
-            else lblMinPWM.ForeColor = Color.Black;
+            if (hsbarMinPWM.Value > hsbarLowSteerPWM.Value) lblMinPWM.ForeColor = Color.OrangeRed;
+            else lblMinPWM.ForeColor = SystemColors.ButtonFace;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
