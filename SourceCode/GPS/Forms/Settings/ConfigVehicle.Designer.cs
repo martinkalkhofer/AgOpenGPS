@@ -123,12 +123,12 @@ namespace AgOpenGPS
             if (rbtnHarvester.Checked)
             {
                 mf.vehicle.vehicleType = 1;
-                Properties.Vehicle.Default.setVehicle_vehicleType = 0;
+                Properties.Vehicle.Default.setVehicle_vehicleType = 1;
             }
             if (rbtn4WD.Checked)
             {
                 mf.vehicle.vehicleType = 2;
-                Properties.Vehicle.Default.setVehicle_vehicleType = 0;
+                Properties.Vehicle.Default.setVehicle_vehicleType = 2;
             }
 
             if (mf.vehicle.vehicleType == 0) //2WD tractor
@@ -160,6 +160,15 @@ namespace AgOpenGPS
             nudAntennaPivot.Value = (decimal)(Math.Abs(Properties.Vehicle.Default.setVehicle_antennaPivot)* mf.inchOrCm2m);
 
             nudAntennaOffset.Value = (decimal)(Properties.Vehicle.Default.setVehicle_antennaOffset* mf.inchOrCm2m);
+
+            if (Properties.Vehicle.Default.setVehicle_vehicleType == 0)
+                pboxAntenna.Image = Properties.Resources.VehicleAntennaTractor;
+
+            else if (Properties.Vehicle.Default.setVehicle_vehicleType == 1)
+                pboxAntenna.Image = Properties.Resources.VehicleAntennaHarvestor;
+
+            else if (Properties.Vehicle.Default.setVehicle_vehicleType == 2)
+                pboxAntenna.Image = Properties.Resources.VehicleAntenna4WD;
 
             btnNext.Focus();
         }

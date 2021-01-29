@@ -902,6 +902,9 @@
     <None Include="btnImages\VehFileSave.png" />
     <None Include="btnImages\VehFileSaveAs.png" />
     <None Include="btnImages\SnapToPivot.png" />
+    <None Include="btnImages\VehicleAntennaTractor.png" />
+    <None Include="btnImages\VehicleAntenna4WD.png" />
+    <None Include="btnImages\VehicleAntennaHarvestor.png" />
     <Content Include="Dependencies\Audio\Boundary.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

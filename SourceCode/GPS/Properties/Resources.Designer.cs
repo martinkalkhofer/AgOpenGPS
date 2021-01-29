@@ -1592,6 +1592,36 @@ namespace AgOpenGPS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap VehicleAntenna4WD {
+            get {
+                object obj = ResourceManager.GetObject("VehicleAntenna4WD", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap VehicleAntennaHarvestor {
+            get {
+                object obj = ResourceManager.GetObject("VehicleAntennaHarvestor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap VehicleAntennaTractor {
+            get {
+                object obj = ResourceManager.GetObject("VehicleAntennaTractor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap vehiclePage4WD {
             get {
                 object obj = ResourceManager.GetObject("vehiclePage4WD", resourceCulture);

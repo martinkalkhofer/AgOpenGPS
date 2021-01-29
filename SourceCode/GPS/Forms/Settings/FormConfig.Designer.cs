@@ -87,7 +87,7 @@
             this.nudAntennaPivot = new System.Windows.Forms.NumericUpDown();
             this.label22 = new System.Windows.Forms.Label();
             this.nudAntennaOffset = new System.Windows.Forms.NumericUpDown();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pboxAntenna = new System.Windows.Forms.PictureBox();
             this.tabVDimensions = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.nudWheelbase = new System.Windows.Forms.NumericUpDown();
@@ -240,7 +240,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaPivot)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaOffset)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxAntenna)).BeginInit();
             this.tabVDimensions.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudWheelbase)).BeginInit();
@@ -1164,7 +1164,7 @@
             this.tabVAntenna.Controls.Add(this.nudAntennaPivot);
             this.tabVAntenna.Controls.Add(this.label22);
             this.tabVAntenna.Controls.Add(this.nudAntennaOffset);
-            this.tabVAntenna.Controls.Add(this.pictureBox2);
+            this.tabVAntenna.Controls.Add(this.pboxAntenna);
             this.tabVAntenna.Location = new System.Drawing.Point(4, 44);
             this.tabVAntenna.Name = "tabVAntenna";
             this.tabVAntenna.Size = new System.Drawing.Size(788, 602);
@@ -1190,7 +1190,7 @@
             this.label17.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.label17.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label17.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label17.Location = new System.Drawing.Point(535, 240);
+            this.label17.Location = new System.Drawing.Point(535, 168);
             this.label17.Name = "label17";
             this.label17.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label17.Size = new System.Drawing.Size(199, 23);
@@ -1203,7 +1203,7 @@
             this.nudAntennaHeight.BackColor = System.Drawing.Color.AliceBlue;
             this.nudAntennaHeight.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudAntennaHeight.InterceptArrowKeys = false;
-            this.nudAntennaHeight.Location = new System.Drawing.Point(563, 369);
+            this.nudAntennaHeight.Location = new System.Drawing.Point(554, 326);
             this.nudAntennaHeight.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1227,7 +1227,7 @@
             this.label20.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.label20.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label20.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label20.Location = new System.Drawing.Point(537, 432);
+            this.label20.Location = new System.Drawing.Point(521, 300);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(196, 23);
             this.label20.TabIndex = 43;
@@ -1240,7 +1240,7 @@
             this.label21.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.label21.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label21.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label21.Location = new System.Drawing.Point(518, 160);
+            this.label21.Location = new System.Drawing.Point(518, 88);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(216, 23);
             this.label21.TabIndex = 45;
@@ -1252,7 +1252,7 @@
             this.nudAntennaPivot.BackColor = System.Drawing.Color.AliceBlue;
             this.nudAntennaPivot.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudAntennaPivot.InterceptArrowKeys = false;
-            this.nudAntennaPivot.Location = new System.Drawing.Point(144, 63);
+            this.nudAntennaPivot.Location = new System.Drawing.Point(257, 78);
             this.nudAntennaPivot.Maximum = new decimal(new int[] {
             999,
             0,
@@ -1276,19 +1276,19 @@
             this.label22.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.label22.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label22.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label22.Location = new System.Drawing.Point(304, 68);
+            this.label22.Location = new System.Drawing.Point(91, 71);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(160, 56);
             this.label22.TabIndex = 41;
             this.label22.Text = "Distance";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // nudAntennaOffset
             // 
             this.nudAntennaOffset.BackColor = System.Drawing.Color.AliceBlue;
             this.nudAntennaOffset.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudAntennaOffset.InterceptArrowKeys = false;
-            this.nudAntennaOffset.Location = new System.Drawing.Point(554, 191);
+            this.nudAntennaOffset.Location = new System.Drawing.Point(554, 119);
             this.nudAntennaOffset.Maximum = new decimal(new int[] {
             500,
             0,
@@ -1305,15 +1305,15 @@
             this.nudAntennaOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudAntennaOffset.Enter += new System.EventHandler(this.nudAntennaOffset_Enter);
             // 
-            // pictureBox2
+            // pboxAntenna
             // 
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox2.Image = global::AgOpenGPS.Properties.Resources.VehicleSettingsTractor;
-            this.pictureBox2.Location = new System.Drawing.Point(18, 146);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(494, 401);
-            this.pictureBox2.TabIndex = 48;
-            this.pictureBox2.TabStop = false;
+            this.pboxAntenna.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pboxAntenna.Image = global::AgOpenGPS.Properties.Resources.VehicleAntennaTractor;
+            this.pboxAntenna.Location = new System.Drawing.Point(18, 146);
+            this.pboxAntenna.Name = "pboxAntenna";
+            this.pboxAntenna.Size = new System.Drawing.Size(500, 350);
+            this.pboxAntenna.TabIndex = 48;
+            this.pboxAntenna.TabStop = false;
             // 
             // tabVDimensions
             // 
@@ -3622,7 +3622,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaPivot)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaOffset)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxAntenna)).EndInit();
             this.tabVDimensions.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudWheelbase)).EndInit();
@@ -3777,7 +3777,7 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.CheckBox cboxAutoSteerAuto;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pboxAntenna;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rbtnHarvester;
         private System.Windows.Forms.RadioButton rbtn4WD;

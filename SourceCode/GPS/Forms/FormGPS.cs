@@ -254,8 +254,8 @@ namespace AgOpenGPS
 
             setWorkingDirectoryToolStripMenuItem.Text = gStr.gsDirectories;
             enterSimCoordsToolStripMenuItem.Text = gStr.gsEnterSimCoords;
-            topMenuLoadAll.Text = gStr.gsLoadAll;
-            topMenuSaveAll.Text = gStr.gsSaveAll;
+            //topMenuLoadAll.Text = gStr.gsLoadAll;
+            //topMenuSaveAll.Text = gStr.gsSaveAll;
             aboutToolStripMenuItem.Text = gStr.gsAbout;
             shortcutKeysToolStripMenuItem.Text = gStr.gsShortcutKeys;
             menustripLanguage.Text = gStr.gsLanguage;
@@ -264,18 +264,18 @@ namespace AgOpenGPS
             //Display Menu
 
             //settingsToolStripMenuItem.Text = gStr.gsDisplay;
-            topMenuFileExplorer.Text = gStr.gsWindowsFileExplorer;
+            //topMenuFileExplorer.Text = gStr.gsWindowsFileExplorer;
             optionsToolStripMenuItem.Text = gStr.gsOptions;
 
             simulatorOnToolStripMenuItem.Text = gStr.gsSimulatorOn;
 
-            resetALLToolStripMenuItem.Text = gStr.gsResetAll;
+            //resetALLToolStripMenuItem.Text = gStr.gsResetAll;
             colorsToolStripMenuItem.Text = gStr.gsColors;
             lightbarToolStripMenuItem.Text = gStr.gsLightbarOn;
             topFieldViewToolStripMenuItem.Text = gStr.gsTopFieldView;
             toolToolStripMenu.Text = gStr.gsTool;
 
-            resetEverythingToolStripMenuItem.Text = gStr.gsResetAllForSure;
+            //resetEverythingToolStripMenuItem.Text = gStr.gsResetAllForSure;
             fileExplorerToolStripMenuItem.Text = gStr.gsWindowsFileExplorer;
 
             //Settings Menu
@@ -418,10 +418,6 @@ namespace AgOpenGPS
 
             // load all the gui elements in gui.designer.cs
             LoadSettings();
-
-            //triangle resolution is how far to next triangle point trigger distance
-            //triangleResolution = Settings.Default.setDisplay_triangleResolution;
-
         }
 
         //form is closing so tidy up and save settings

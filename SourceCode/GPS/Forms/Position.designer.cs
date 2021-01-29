@@ -679,7 +679,10 @@ namespace AgOpenGPS
                                 {
                                     if (yt.isUsingDubinsTurn)
                                     {
-                                        if (ABLine.isABLineSet) yt.BuildABLineDubinsYouTurn(yt.isYouTurnRight);
+                                        if (ABLine.isABLineSet)
+                                        {
+                                            yt.BuildABLineDubinsYouTurn(yt.isYouTurnRight);
+                                        }
                                         else yt.BuildCurveDubinsYouTurn(yt.isYouTurnRight, pivotAxlePos);
                                     }
                                     else
@@ -688,6 +691,8 @@ namespace AgOpenGPS
                                         else yt.BuildCurvePatternYouTurn(yt.isYouTurnRight, pivotAxlePos);
                                     }
                                 }
+
+                                if (yt.youTurnPhase == 3) yt.SmoothYouTurn(14);
                             }
                             else //wait to trigger the actual turn since its made and waiting
                             {

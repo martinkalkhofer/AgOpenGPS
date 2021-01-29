@@ -233,8 +233,8 @@ namespace AgOpenGPS
             vec3 pt;
             for (int a = 0; a < youTurnStartOffset*2; a++)
             {
-                pt.easting = ytList[0].easting + (Math.Sin(head)*0.5);
-                pt.northing = ytList[0].northing + (Math.Cos(head) * 0.5);
+                pt.easting = ytList[0].easting + (Math.Sin(head)*0.2);
+                pt.northing = ytList[0].northing + (Math.Cos(head) * 0.2);
                 pt.heading = ytList[0].heading;
                 ytList.Insert(0, pt);
             }
@@ -243,8 +243,8 @@ namespace AgOpenGPS
 
             for (int i = 1; i <= youTurnStartOffset*2; i++)
             {
-                pt.easting = ytList[count - 1].easting + (Math.Sin(head) * i * 0.5);
-                pt.northing = ytList[count - 1].northing + (Math.Cos(head) * i * 0.5);
+                pt.easting = ytList[count - 1].easting + (Math.Sin(head) * i * 0.2);
+                pt.northing = ytList[count - 1].northing + (Math.Cos(head) * i * 0.2);
                 pt.heading = head;
                 ytList.Add(pt);
             }
@@ -585,12 +585,12 @@ namespace AgOpenGPS
 
                     for (int i = 0; i < cnt; i++)
                     {
-                        arr2[i].easting -= (sinHead);
-                        arr2[i].northing -= (cosHead);
+                        arr2[i].easting -= (sinHead*0.5);
+                        arr2[i].northing -= (cosHead*0.5);
                         ytList.Add(arr2[i]);
                     }
 
-                    for (int j = 0; j < cnt; j += 2)
+                    for (int j = 0; j < cnt; j += 4)
                     {
                         if (!mf.turn.turnArr[0].IsPointInTurnWorkArea(ytList[j])) isOutOfBounds = true;
                         if (isOutOfBounds) break;
@@ -1317,6 +1317,53 @@ namespace AgOpenGPS
                     break;
             }
             return true;
+        }
+
+        public void SmoothYouTurn(int smPts)
+        {
+            //count the reference list of original curve
+            int cnt = ytList.Count;
+
+            //the temp array
+            vec3[] arr = new vec3[cnt];
+
+            //read the points before and after the setpoint
+            for (int s = 0; s < smPts / 2; s++)
+            {
+                arr[s].easting = ytList[s].easting;
+                arr[s].northing = ytList[s].northing;
+                arr[s].heading = ytList[s].heading;
+            }
+
+            for (int s = cnt - (smPts / 2); s < cnt; s++)
+            {
+                arr[s].easting = ytList[s].easting;
+                arr[s].northing = ytList[s].northing;
+                arr[s].heading = ytList[s].heading;
+            }
+
+            //average them - center weighted average
+            for (int i = smPts / 2; i < cnt - (smPts / 2); i++)
+            {
+                for (int j = -smPts / 2; j < smPts / 2; j++)
+                {
+                    arr[i].easting += ytList[j + i].easting;
+                    arr[i].northing += ytList[j + i].northing;
+                }
+                arr[i].easting /= smPts;
+                arr[i].northing /= smPts;
+                arr[i].heading = ytList[i].heading;
+            }
+
+            ytList?.Clear();
+
+            //calculate new headings on smoothed line
+            for (int i = 1; i < cnt - 1; i++)
+            {
+                arr[i].heading = Math.Atan2(arr[i + 1].easting - arr[i].easting, arr[i + 1].northing - arr[i].northing);
+                if (arr[i].heading < 0) arr[i].heading += glm.twoPI;
+                ytList.Add(arr[i]);
+            }
         }
 
         //called to initiate turn

@@ -86,7 +86,7 @@ namespace AgOpenGPS
                     dy = refABLineP2.northing - refABLineP1.northing;
 
                     //how far are we away from the reference line at 90 degrees
-                    distanceFromRefLine = ((dy * pivot.easting) - (dx * pivot.northing) + (refABLineP2.easting
+                    distanceFromRefLine = ((dy * steer.easting) - (dx * steer.northing) + (refABLineP2.easting
                                             * refABLineP1.northing) - (refABLineP2.northing * refABLineP1.easting))
                                                 / Math.Sqrt((dy * dy) + (dx * dx));
 
