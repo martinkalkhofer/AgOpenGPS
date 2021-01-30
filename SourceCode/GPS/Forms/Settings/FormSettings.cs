@@ -369,19 +369,19 @@ namespace AgOpenGPS
             if (rbtnTractor.Checked)
             {
                 vehicleType = 0;
-                tabSettings.BackgroundImage = Properties.Resources.VehicleSettingsTractor;
+                tabSettings.BackgroundImage = Properties.Resources.VehicleAntennaTractor;
 
             }
             else if (rbtnHarvester.Checked)
             {
                 vehicleType = 1;
-                tabSettings.BackgroundImage = Properties.Resources.VehicleSettingsHarvester;
+                tabSettings.BackgroundImage = Properties.Resources.VehicleAntennaHarvestor;
 
             }
             else if (rbtn4WD.Checked)
             {
                 vehicleType = 2;
-                tabSettings.BackgroundImage = Properties.Resources.VehicleSettings4WD;
+                tabSettings.BackgroundImage = Properties.Resources.VehicleAntenna4WD;
             }
         }
 

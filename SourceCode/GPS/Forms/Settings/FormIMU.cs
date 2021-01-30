@@ -63,25 +63,6 @@ namespace AgOpenGPS
             mf.minFixStepDist = (double)minFixStepDistance;
             Properties.Settings.Default.setF_minFixStep = mf.minFixStepDist;
 
-            Properties.Settings.Default.setIMU_isHeadingCorrectionFromAutoSteer = rbtnHeadingCorrAutoSteer.Checked;
-            mf.ahrs.isHeadingCorrectionFromAutoSteer =  rbtnHeadingCorrAutoSteer.Checked;
-
-            Properties.Settings.Default.setIMU_isHeadingCorrectionFromBrick =  rbtnHeadingCorrBrick.Checked;
-            mf.ahrs.isHeadingCorrectionFromBrick = rbtnHeadingCorrBrick.Checked;
-
-            //Properties.Settings.Default.setIMU_isHeadingCorrectionFromExtUDP = rbtnHeadingCorrUDP.Checked;
-            //mf.ahrs.isHeadingCorrectionFromExtUDP = rbtnHeadingCorrUDP.Checked;
-
-
-            Properties.Settings.Default.setIMU_isRollFromAutoSteer = rbtnRollAutoSteer.Checked;
-            mf.ahrs.isRollFromAutoSteer = rbtnRollAutoSteer.Checked;
-
-            Properties.Settings.Default.setIMU_isRollFromAVR = rbtnRollAVR.Checked;
-            mf.ahrs.isRollFromAVR = rbtnRollAVR.Checked;
-
-            Properties.Settings.Default.setIMU_isRollFromOGI = rbtnRollOGI.Checked;
-            mf.ahrs.isRollFromOGI = rbtnRollOGI.Checked;
-
             Properties.Settings.Default.setGPS_isRTK = cboxIsRTK.Checked;
             mf.isRTK = cboxIsRTK.Checked;
 
@@ -124,7 +105,7 @@ namespace AgOpenGPS
             rbtnRollOGI.Checked = Properties.Settings.Default.setIMU_isRollFromOGI;
             if (!rbtnRollAutoSteer.Checked && !rbtnRollAVR.Checked && !rbtnRollOGI.Checked) rbtnRollNone.Checked = true;
 
-            lblRollZeroOffset.Text = ((double)Properties.Settings.Default.setIMU_rollZeroX16 / 16).ToString("N2");
+            lblRollZeroOffset.Text = ((double)Properties.Settings.Default.setIMU_rollZero).ToString("N2");
 
             //Fix
             if (Properties.Settings.Default.setGPS_fixFromWhichSentence == "GGA") rbtnGGA.Checked = true;
@@ -147,9 +128,9 @@ namespace AgOpenGPS
 
         private void btnRemoveZeroOffset_Click(object sender, EventArgs e)
         {
-            mf.ahrs.rollZeroX16 = 0;
+            mf.ahrs.rollZero = 0;
             lblRollZeroOffset.Text = "0.00";
-            Properties.Settings.Default.setIMU_rollZeroX16 = 0;
+            Properties.Settings.Default.setIMU_rollZero = 0;
             Properties.Settings.Default.Save();
         }
 
@@ -163,12 +144,11 @@ namespace AgOpenGPS
 
         private void btnZeroRoll_Click(object sender, EventArgs e)
         {
-            if ((mf.ahrs.isRollFromAutoSteer || mf.ahrs.isRollFromAVR || mf.ahrs.isRollFromOGI))
+            if (mf.ahrs.imuRoll != 88888)
             {
-                mf.ahrs.rollZeroX16 = mf.ahrs.rollX16;
-                lblRollZeroOffset.Text = ((double)mf.ahrs.rollZeroX16 / 16).ToString("N2");
-                Properties.Settings.Default.setIMU_rollZeroX16 = mf.ahrs.rollX16;
-                Properties.Settings.Default.Save();
+                mf.ahrs.imuRoll += mf.ahrs.rollZero;
+                mf.ahrs.rollZero = mf.ahrs.imuRoll;
+                lblRollZeroOffset.Text = (mf.ahrs.rollZero).ToString("N2");
             }
             else
             {

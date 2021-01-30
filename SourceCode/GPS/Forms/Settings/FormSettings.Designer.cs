@@ -198,7 +198,7 @@
             // tabSettings
             // 
             this.tabSettings.BackColor = System.Drawing.SystemColors.Window;
-            this.tabSettings.BackgroundImage = global::AgOpenGPS.Properties.Resources.VehicleSettingsTractor;
+            this.tabSettings.BackgroundImage = global::AgOpenGPS.Properties.Resources.VehicleAntennaTractor;
             this.tabSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.tabSettings.Controls.Add(this.btnNext);
             this.tabSettings.Controls.Add(this.label9);

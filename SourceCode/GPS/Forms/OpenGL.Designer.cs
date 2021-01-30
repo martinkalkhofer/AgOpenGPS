@@ -447,7 +447,7 @@ namespace AgOpenGPS
                         DrawLightBarText();
                     }
 
-                    if ((ahrs.isRollFromAutoSteer || ahrs.isRollFromAVR || ahrs.isRollFromOGI))
+                    if ((ahrs.imuRoll != 88888))
                         DrawRollBar();
 
                     if (bnd.bndArr.Count > 0 && yt.isYouTurnBtnOn) DrawUTurnBtn();
@@ -2016,7 +2016,7 @@ namespace AgOpenGPS
             GL.Vertex2(wiid + 30, 0);
             GL.End();
 
-            GL.Rotate(((ahrs.rollX16 - ahrs.rollZeroX16) * 0.0625f), 0.0f, 0.0f, 1.0f);
+            GL.Rotate(ahrs.imuRoll, 0.0f, 0.0f, 1.0f);
 
             GL.Color3(0.74f, 0.74f, 0.14f);
             GL.LineWidth(2);
@@ -2028,7 +2028,7 @@ namespace AgOpenGPS
             GL.Vertex2(wiid - 10, 15);
             GL.End();
 
-            string head = Math.Round((ahrs.rollX16 - ahrs.rollZeroX16) * 0.0625, 1).ToString();
+            string head = Math.Round(ahrs.imuRoll, 1).ToString();
             int center = -(int)(((head.Length) * 6));
 
             font.DrawText(center, 0, head, 0.8);
@@ -2154,11 +2154,11 @@ namespace AgOpenGPS
 
             font.DrawText(center, 10, (fixHeading * 57.2957795).ToString("N1"), 1.2);
 
-            if (isCompassOn && ( ahrs.isHeadingCorrectionFromBrick | ahrs.isHeadingCorrectionFromAutoSteer))
+            if (ahrs.imuHeading != 99999)
             {
-                font.DrawText(center, 50, "G:"+(gpsHeading * 57.2957795).ToString("N1"), 0.8);
+                font.DrawText(center, 50, "G:" + (gpsHeading * 57.2957795).ToString("N1"), 0.8);
 
-                font.DrawText(center, 80, "I:" + Math.Round(ahrs.correctionHeadingX16 * 0.0625, 1).ToString(), 0.8);
+                font.DrawText(center, 80, "I:" + Math.Round(ahrs.imuHeading, 1).ToString(), 0.8);
             }
 
             //if (isFixHolding) font.DrawText(center, 110, "Holding", 0.8);
@@ -2261,7 +2261,7 @@ namespace AgOpenGPS
                 angle = (aveSpd - 10) * 15;
             }
 
-            if (pn.speed > -0.1) GL.Color3(0.0f, 0.950f, 0.0f);
+            if (pn.speed > -0.1) GL.Color3(0.850f, 0.950f, 0.30f);
             else GL.Color3(0.952f, 0.0f, 0.0f);
 
             GL.Rotate(angle, 0, 0, 1);

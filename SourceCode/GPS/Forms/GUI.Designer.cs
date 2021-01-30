@@ -1666,8 +1666,8 @@ namespace AgOpenGPS
         {
             get
             {
-                if (ahrs.correctionHeadingX16 != 9999)
-                    return Math.Round(ahrs.correctionHeadingX16 * 0.0625, 1) + "\u00B0";
+                if (ahrs.imuHeading != 99999)
+                    return Math.Round(ahrs.imuHeading, 1) + "\u00B0";
                 else return "-";
             }
         }
@@ -1675,8 +1675,8 @@ namespace AgOpenGPS
         {
             get
             {
-                if (ahrs.isRollFromAutoSteer || ahrs.isRollFromAVR)
-                    return Math.Round((ahrs.rollX16 - ahrs.rollZeroX16) * 0.0625, 1) + "\u00B0";
+                if (ahrs.imuRoll != 88888)
+                    return Math.Round((ahrs.imuRoll), 1) + "\u00B0";
                 else return "-";
             }
         }

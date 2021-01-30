@@ -254,12 +254,12 @@ namespace AgOpenGPS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int setIMU_rollZeroX16 {
+        public double setIMU_rollZero {
             get {
-                return ((int)(this["setIMU_rollZeroX16"]));
+                return ((double)(this["setIMU_rollZero"]));
             }
             set {
-                this["setIMU_rollZeroX16"] = value;
+                this["setIMU_rollZero"] = value;
             }
         }
         

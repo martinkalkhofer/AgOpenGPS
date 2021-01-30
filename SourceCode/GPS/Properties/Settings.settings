@@ -59,7 +59,7 @@
     <Setting Name="setIMU_pitchZeroX16" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="setIMU_rollZeroX16" Type="System.Int32" Scope="User">
+    <Setting Name="setIMU_rollZero" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="setMenu_isLogNMEA" Type="System.Boolean" Scope="User">

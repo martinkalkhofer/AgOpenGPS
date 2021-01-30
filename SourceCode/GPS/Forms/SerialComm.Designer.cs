@@ -75,13 +75,19 @@ namespace AgOpenGPS
                         double.TryParse(words[2], NumberStyles.Float, CultureInfo.InvariantCulture, out actualSteerAngleDisp);
 
                         //first 2 used for display mainly in autosteer window chart as strings
-                        //parse the values
-                        if (ahrs.isHeadingCorrectionFromAutoSteer)
-                        {
-                            int.TryParse(words[4], NumberStyles.Float, CultureInfo.InvariantCulture, out ahrs.correctionHeadingX16);
-                        }
 
-                        if (ahrs.isRollFromAutoSteer) int.TryParse(words[5], NumberStyles.Float, CultureInfo.InvariantCulture, out ahrs.rollX16);
+                        double temp;
+                        double.TryParse(words[4], NumberStyles.Float, CultureInfo.InvariantCulture, out temp);
+
+                        if (temp != 9999) ahrs.imuHeading = temp * 0.1;
+
+                        double.TryParse(words[5], NumberStyles.Float, CultureInfo.InvariantCulture, out temp);
+
+                        if (temp != 8888)
+                        {
+                            temp *= 0.1;
+                            ahrs.imuRoll = ahrs.imuRoll * ahrs.rollFilter + temp * (1 - ahrs.rollFilter);
+                        }
 
                         int.TryParse(words[6], out mc.steerSwitchValue);
                         mc.workSwitchValue = mc.steerSwitchValue & 1;

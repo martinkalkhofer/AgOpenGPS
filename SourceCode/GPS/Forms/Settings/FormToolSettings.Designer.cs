@@ -274,7 +274,7 @@
             // 
             // tabHitch
             // 
-            this.tabHitch.BackgroundImage = global::AgOpenGPS.Properties.Resources.ToolHitchPageTBT;
+            this.tabHitch.BackgroundImage = global::AgOpenGPS.Properties.Resources.ToolHitchPageTBT1;
             this.tabHitch.Controls.Add(this.btnNext);
             this.tabHitch.Controls.Add(this.nudForeAft);
             this.tabHitch.Controls.Add(this.nudHitchLength);

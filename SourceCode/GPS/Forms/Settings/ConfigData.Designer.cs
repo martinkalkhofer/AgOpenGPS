@@ -109,13 +109,14 @@ namespace AgOpenGPS
         private void tabDRoll_Enter(object sender, EventArgs e)
         {
             //Roll
-            lblRollZeroOffset.Text = ((double)Properties.Settings.Default.setIMU_rollZeroX16 / 16).ToString("N2");
+            lblRollZeroOffset.Text = ((double)Properties.Settings.Default.setIMU_rollZero).ToString("N2");
             hsbarRollFilter.Value = (int)(Properties.Settings.Default.setIMU_rollFilter * 100);
         }
 
         private void tabDRoll_Leave(object sender, EventArgs e)
         {
             Properties.Settings.Default.setIMU_rollFilter = (double)hsbarRollFilter.Value * 0.01;
+            Properties.Settings.Default.setIMU_rollZero = mf.ahrs.rollZero;
             Properties.Settings.Default.Save();
 
         }
@@ -126,12 +127,11 @@ namespace AgOpenGPS
 
         private void btnZeroRoll_Click(object sender, EventArgs e)
         {
-            if ((mf.ahrs.isRollFromAutoSteer || mf.ahrs.isRollFromAVR || mf.ahrs.isRollFromOGI))
+            if (mf.ahrs.imuRoll != 88888)
             {
-                mf.ahrs.rollZeroX16 = mf.ahrs.rollX16;
-                lblRollZeroOffset.Text = ((double)mf.ahrs.rollZeroX16 / 16).ToString("N2");
-                Properties.Settings.Default.setIMU_rollZeroX16 = mf.ahrs.rollX16;
-                Properties.Settings.Default.Save();
+                mf.ahrs.imuRoll += mf.ahrs.rollZero;
+                mf.ahrs.rollZero = mf.ahrs.imuRoll;
+                lblRollZeroOffset.Text = (mf.ahrs.rollZero).ToString("N2");
             }
             else
             {
@@ -141,13 +141,16 @@ namespace AgOpenGPS
 
         private void btnRemoveZeroOffset_Click(object sender, EventArgs e)
         {
-            mf.ahrs.rollZeroX16 = 0;
+            mf.ahrs.rollZero = 0;
             lblRollZeroOffset.Text = "0.00";
-            Properties.Settings.Default.setIMU_rollZeroX16 = 0;
-            Properties.Settings.Default.Save();
+        }
+         
+        private void btnResetIMU_Click(object sender, EventArgs e)
+        {
+            mf.ahrs.imuHeading = 99999;
+            mf.ahrs.imuRoll = 88888;
         }
 
         #endregion 
-
     }
 }

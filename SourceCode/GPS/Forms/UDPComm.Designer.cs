@@ -82,15 +82,21 @@ namespace AgOpenGPS
 
                             //build string for display
                             double setSteerAngle = guidanceLineSteerAngle;
+                            actualSteerAngleDisp = actualSteerAngle;
 
-                            if (ahrs.isHeadingCorrectionFromAutoSteer)
+                            double head = (Int16)((data[4] << 8) + data[5]);
+                            if ( head != 9999)
                             {
-                                ahrs.correctionHeadingX16 = (Int16)((data[4] << 8) + data[5]);
+                                ahrs.imuHeading = (Int16)((data[4] << 8) + data[5]);
+                                ahrs.imuHeading *= 0.1;
                             }
 
-                            if (ahrs.isRollFromAutoSteer)
+                            //for CMPS or BNO085
+                            double rollK = (Int16)((data[6] << 8) + data[7]);
+                            if (rollK != 8888)
                             {
-                                ahrs.rollX16 = (Int16)((data[6] << 8) + data[7]);
+                                rollK *= 0.1;
+                                ahrs.imuRoll = ahrs.imuRoll * ahrs.rollFilter + rollK * (1 - ahrs.rollFilter);
                             }
 
                             mc.steerSwitchValue = data[8];
@@ -99,7 +105,6 @@ namespace AgOpenGPS
 
                             mc.pwmDisplay = data[9];
 
-                            actualSteerAngleDisp = actualSteerAngle;
 
                             autoSteerUDPActivity++;
 
@@ -157,25 +162,6 @@ namespace AgOpenGPS
                         {
                             mc.lidarDistance = (Int16)((data[2] << 8) + data[3]);
                             //mc.recvUDPSentence = DateTime.Now.ToString() + "," + mc.lidarDistance.ToString();
-                            break;
-                        }
-
-                    //Ext UDP IMU
-                    case 238:
-                        {
-                            //by Matthias Hammer Jan 2019
-                            //if ((data[0] == 127) & (data[1] == 238))
-
-                            //if (ahrs.isHeadingCorrectionFromExtUDP)
-                            //{
-                            //    ahrs.correctionHeadingX16 = (Int16)((data[4] << 8) + data[5]);
-                            //}
-
-                            if (ahrs.isRollFromOGI)
-                            {
-                                ahrs.rollX16 = (Int16)((data[6] << 8) + data[7]);
-                            }
-
                             break;
                         }
 

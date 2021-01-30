@@ -711,7 +711,7 @@ namespace AgOpenGPS
                 nudHitchLength.Left = 384;
                 nudTankHitch.Left = 0;
 
-                tabHitch.BackgroundImage = Properties.Resources.ToolHitchPageTrailing;
+                tabHitch.BackgroundImage = Properties.Resources.ToolHitchPageTrailing1;
 
             }
             else if (rbtnFixedRear.Checked)
@@ -728,7 +728,7 @@ namespace AgOpenGPS
                 nudHitchLength.Left = 443;
                 nudTankHitch.Left = 0;
 
-                tabHitch.BackgroundImage = Properties.Resources.ToolHitchPageRear;
+                tabHitch.BackgroundImage = Properties.Resources.ToolHitchPageRear1;
 
             }
             else if (rbtnFront.Checked)
@@ -745,7 +745,7 @@ namespace AgOpenGPS
                 nudHitchLength.Left = 384;
                 nudTankHitch.Left = 0;
 
-                tabHitch.BackgroundImage = Properties.Resources.ToolHitchPageFront;
+                tabHitch.BackgroundImage = Properties.Resources.ToolHitchPageFront1;
 
             }
             else //TBT
@@ -762,7 +762,7 @@ namespace AgOpenGPS
                 nudHitchLength.Left = 283;
                 nudTankHitch.Left = 486;
 
-                tabHitch.BackgroundImage = Properties.Resources.ToolHitchPageTBT;
+                tabHitch.BackgroundImage = Properties.Resources.ToolHitchPageTBT1;
             }
         }
 

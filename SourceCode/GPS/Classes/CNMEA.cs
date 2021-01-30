@@ -365,8 +365,6 @@ Field	Meaning
                     double.TryParse(words[5], NumberStyles.Float, CultureInfo.InvariantCulture, out nRoll);
 
                 //input to the kalman filter
-                if (mf.ahrs.isRollFromAVR)
-                {
                     //added by Andreas Ortner
                     rollK = nRoll;
 
@@ -378,8 +376,7 @@ Field	Meaning
                     Zp = Xp;
                     XeRoll = (G * (rollK - Zp)) + Xp;
 
-                    mf.ahrs.rollX16 = (int)(XeRoll * 16);
-                }
+                    mf.ahrs.imuRoll = XeRoll - mf.ahrs.rollZero;
             }
                 //True heading
                 // 0 1 2 3 4 5 6 7 8 9
@@ -480,19 +477,8 @@ Field	Meaning
                 //roll
                 double.TryParse(words[13], NumberStyles.Float, CultureInfo.InvariantCulture, out nRoll);
 
-                //used only for sidehill correction - position is compensated in Lat/Lon of Dual module
-                if (mf.ahrs.isRollFromOGI)
-                {
-                    rollK = nRoll; //input to the kalman filter
-                    Pc = P + varProcess;
-                    G = Pc / (Pc + varRoll);
-                    P = (1 - G) * Pc;
-                    Xp = XeRoll;
-                    Zp = Xp;
-                    XeRoll = (G * (rollK - Zp)) + Xp;//result
-
-                    mf.ahrs.rollX16 = (int)(XeRoll * 16);
-                }
+                //used only for ????
+                mf.ahrs.imuRoll = nRoll - mf.ahrs.rollZero;
 
                 //pitch
                 double.TryParse(words[14], NumberStyles.Float, CultureInfo.InvariantCulture, out nPitch);
@@ -559,21 +545,17 @@ Field	Meaning
                 double.TryParse(words[9], NumberStyles.Float, CultureInfo.InvariantCulture, out baselineLength); //distance between kinematic base and rover
                 nRoll = Math.Atan(upProjection / baselineLength) * 180 / Math.PI; //roll to the right is positiv (rover left, kinematic base right!)
 
-                if (mf.ahrs.isRollFromAVR)
-                //input to the kalman filter
-                {
-                    rollK = nRoll;
+                rollK = nRoll;
 
-                    //Kalman filter
-                    Pc = P + varProcess;
-                    G = Pc / (Pc + varRoll);
-                    P = (1 - G) * Pc;
-                    Xp = XeRoll;
-                    Zp = Xp;
-                    XeRoll = (G * (rollK - Zp)) + Xp;
+                //Kalman filter
+                Pc = P + varProcess;
+                G = Pc / (Pc + varRoll);
+                P = (1 - G) * Pc;
+                Xp = XeRoll;
+                Zp = Xp;
+                XeRoll = (G * (rollK - Zp)) + Xp;
 
-                    mf.ahrs.rollX16 = (int)(XeRoll * 16);
-                }
+                mf.ahrs.imuRoll = nRoll - mf.ahrs.rollZero;
             }
 
             /*
@@ -610,10 +592,14 @@ Field	Meaning
                 int trasolution;
 
                 int.TryParse(words[5], NumberStyles.Float, CultureInfo.InvariantCulture, out trasolution);
-                if (trasolution != 4) nRoll = 0;
-
-                if (mf.ahrs.isRollFromAVR)
-                mf.ahrs.rollX16 =  (int)(nRoll * 16);
+                if (trasolution != 4)
+                {
+                    mf.ahrs.imuRoll = 88888;
+                }
+                else
+                {
+                    mf.ahrs.imuRoll = nRoll - mf.ahrs.rollZero;
+                }
             }
         }
 

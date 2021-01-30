@@ -161,6 +161,8 @@ namespace AgOpenGPS
 
             nudAntennaOffset.Value = (decimal)(Properties.Vehicle.Default.setVehicle_antennaOffset* mf.inchOrCm2m);
 
+            nudWheelbase.Value = (decimal)(Math.Abs(Properties.Vehicle.Default.setVehicle_wheelbase) * mf.m2InchOrCm);
+
             if (Properties.Vehicle.Default.setVehicle_vehicleType == 0)
                 pboxAntenna.Image = Properties.Resources.VehicleAntennaTractor;
 
@@ -178,12 +180,11 @@ namespace AgOpenGPS
 
             Properties.Vehicle.Default.setVehicle_antennaHeight = (double)nudAntennaHeight.Value * mf.inchOrCm2m;
 
-
             Properties.Vehicle.Default.setVehicle_antennaPivot = (double)nudAntennaPivot.Value * mf.inchOrCm2m;
-
 
             Properties.Vehicle.Default.setVehicle_antennaOffset = (double)nudAntennaOffset.Value * mf.inchOrCm2m;
 
+            Properties.Vehicle.Default.setVehicle_wheelbase = (double)nudWheelbase.Value * mf.inchOrCm2m;
 
             Properties.Vehicle.Default.Save();
         }
@@ -215,20 +216,27 @@ namespace AgOpenGPS
             btnNext.Focus();
         }
 
+        private void nudWheelbase_Enter(object sender, EventArgs e)
+        {
+            if (mf.KeypadToNUD((NumericUpDown)sender))
+            {
+                mf.vehicle.wheelbase = (double)nudWheelbase.Value * mf.inchOrCm2m;
+            }
+            btnNextDim.Focus();
+        }
+
         #endregion
 
         #region Vehicle Dimensions
         private void tabVDimensions_Enter(object sender, EventArgs e)
         {
             nudMinTurnRadius.Value = (decimal)(Properties.Vehicle.Default.setVehicle_minTurningRadius * mf.m2InchOrCm);
-            nudWheelbase.Value = (decimal)(Math.Abs(Properties.Vehicle.Default.setVehicle_wheelbase) * mf.m2InchOrCm);
 
         }
 
         private void tabVDimensions_Leave(object sender, EventArgs e)
         {
             Properties.Vehicle.Default.setVehicle_minTurningRadius = (double)nudMinTurnRadius.Value * mf.inchOrCm2m;
-            Properties.Vehicle.Default.setVehicle_wheelbase = (double)nudWheelbase.Value * mf.inchOrCm2m;
 
             Properties.Vehicle.Default.Save();
         }
@@ -238,16 +246,6 @@ namespace AgOpenGPS
             if (mf.KeypadToNUD((NumericUpDown)sender))
             {
                 mf.vehicle.minTurningRadius = (double)nudMinTurnRadius.Value * mf.inchOrCm2m;
-            }
-            btnNextDim.Focus();
-
-        }
-
-        private void nudWheelbase_Enter(object sender, EventArgs e)
-        {
-            if (mf.KeypadToNUD((NumericUpDown)sender))
-            {
-                mf.vehicle.wheelbase = (double)nudWheelbase.Value * mf.inchOrCm2m;
             }
             btnNextDim.Focus();
         }
