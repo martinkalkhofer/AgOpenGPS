@@ -273,7 +273,7 @@ namespace AgOpenGPS
             colorsToolStripMenuItem.Text = gStr.gsColors;
             lightbarToolStripMenuItem.Text = gStr.gsLightbarOn;
             topFieldViewToolStripMenuItem.Text = gStr.gsTopFieldView;
-            toolToolStripMenu.Text = gStr.gsTool;
+            //toolToolStripMenu.Text = gStr.gsTool;
 
             //resetEverythingToolStripMenuItem.Text = gStr.gsResetAllForSure;
             fileExplorerToolStripMenuItem.Text = gStr.gsWindowsFileExplorer;
@@ -282,8 +282,8 @@ namespace AgOpenGPS
             toolstripYouTurnConfig.Text = gStr.gsUTurn;
             toolstripAutoSteerConfig.Text = gStr.gsAutoSteer;
             steerChartStripMenu.Text = gStr.gsSteerChart;
-            toolstripVehicleConfig.Text = gStr.gsVehicle;
-            toolstripDisplayConfig.Text = gStr.gsDataSources;
+            //toolstripVehicleConfig.Text = gStr.gsVehicle;
+            //toolstripDisplayConfig.Text = gStr.gsDataSources;
             toolstripUSBPortsConfig.Text = gStr.gsSerialPorts;
             toolstripUDPConfig.Text = gStr.gsUDP;
             toolStripNTRIPConfig.Text = gStr.gsNTRIP;

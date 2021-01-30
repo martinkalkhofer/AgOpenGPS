@@ -297,12 +297,6 @@
     <Compile Include="Forms\FormFlags.Designer.cs">
       <DependentUpon>FormFlags.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Settings\FormToolSettings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Settings\FormToolSettings.Designer.cs">
-      <DependentUpon>FormToolSettings.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormShortcutKeys.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -326,12 +320,6 @@
     </Compile>
     <Compile Include="Forms\Guidance\FormSmoothAB.Designer.cs">
       <DependentUpon>FormSmoothAB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Settings\FormIMU.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Settings\FormIMU.Designer.cs">
-      <DependentUpon>FormIMU.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Guidance\FormABCurve.cs">
       <SubType>Form</SubType>
@@ -502,12 +490,6 @@
       <DependentUpon>FormGPSData.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\CGLM.cs" />
-    <Compile Include="Forms\Settings\FormSettings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Settings\FormSettings.Designer.cs">
-      <DependentUpon>FormSettings.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\OpenGL.Designer.cs">
       <SubType>Form</SubType>
       <DependentUpon>FormGPS.cs</DependentUpon>
@@ -639,18 +621,11 @@
     <EmbeddedResource Include="Forms\FormFlags.resx">
       <DependentUpon>FormFlags.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormToolSettings.resx">
-      <DependentUpon>FormToolSettings.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormShortcutKeys.resx">
       <DependentUpon>FormShortcutKeys.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormShiftPos.resx">
       <DependentUpon>FormShiftPos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormIMU.resx">
-      <DependentUpon>FormIMU.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Guidance\FormABCurve.resx">
       <DependentUpon>FormABCurve.cs</DependentUpon>
@@ -685,10 +660,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSaveOrNot.resx">
       <DependentUpon>FormSaveOrNot.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormSettings.resx">
-      <DependentUpon>FormSettings.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Settings\FormSimCoords.resx">
       <DependentUpon>FormSimCoords.cs</DependentUpon>

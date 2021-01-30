@@ -1192,32 +1192,32 @@ namespace AgOpenGPS
                 else TimedMessageBox(2000, gStr.gsCurveNotOn, gStr.gsTurnABCurveOn);
             }
         }
-        private void toolstripDisplayConfig_Click_1(object sender, EventArgs e)
-        {
-            if (isJobStarted)
-            {
-                var form = new FormTimedMessage(2000, gStr.gsFieldIsOpen, gStr.gsCloseFieldFirst);
-                form.Show();
-                return;
-            }
+        //private void toolstripDisplayConfig_Click_1(object sender, EventArgs e)
+        //{
+        //    if (isJobStarted)
+        //    {
+        //        var form = new FormTimedMessage(2000, gStr.gsFieldIsOpen, gStr.gsCloseFieldFirst);
+        //        form.Show();
+        //        return;
+        //    }
 
-            using (var form = new FormIMU(this))
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK) 
-                { 
-                    if (Properties.Settings.Default.setAS_isAutoSteerAutoOn) btnAutoSteer.Text = "R";
-                    else btnAutoSteer.Text = "M";
+        //    using (var form = new FormIMU(this))
+        //    {
+        //        var result = form.ShowDialog();
+        //        if (result == DialogResult.OK) 
+        //        { 
+        //            if (Properties.Settings.Default.setAS_isAutoSteerAutoOn) btnAutoSteer.Text = "R";
+        //            else btnAutoSteer.Text = "M";
 
-                    ////MessageBox.Show(gStr.gsProgramWillExitPleaseRestart);
-                    //Close();
-                    Application.Restart();
-                    Environment.Exit(0);
+        //            ////MessageBox.Show(gStr.gsProgramWillExitPleaseRestart);
+        //            //Close();
+        //            Application.Restart();
+        //            Environment.Exit(0);
 
-                }
-            }
+        //        }
+        //    }
 
-        }
+        //}
         private void toolstripUSBPortsConfig_Click_1(object sender, EventArgs e)
         {
             if (isJobStarted)
@@ -1243,18 +1243,18 @@ namespace AgOpenGPS
         {
             SettingsNTRIP();
         }
-        private void toolstripVehicleConfig_Click_1(object sender, EventArgs e)
-        {
-            using (var form = new FormSettings(this, 0))
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    if (Properties.Settings.Default.setAS_isAutoSteerAutoOn) btnAutoSteer.Text = "A";
-                    else btnAutoSteer.Text = "M";
-                }
-            }
-        }
+        //private void toolstripVehicleConfig_Click_1(object sender, EventArgs e)
+        //{
+        //    using (var form = new FormSettings(this, 0))
+        //    {
+        //        var result = form.ShowDialog();
+        //        if (result == DialogResult.OK)
+        //        {
+        //            if (Properties.Settings.Default.setAS_isAutoSteerAutoOn) btnAutoSteer.Text = "A";
+        //            else btnAutoSteer.Text = "M";
+        //        }
+        //    }
+        //}
         private void toolstripYouTurnConfig_Click_1(object sender, EventArgs e)
         {
             var form = new FormYouTurn(this);
@@ -1376,27 +1376,18 @@ namespace AgOpenGPS
             Form form = new FormSteer(this);
             form.Show();
         }
-        private void vehicleToolStripBtn_Click(object sender, EventArgs e)
-        {
-            using (var form = new FormSettings(this, 0))
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    if (Properties.Settings.Default.setAS_isAutoSteerAutoOn) btnAutoSteer.Text = "R";
-                    else btnAutoSteer.Text = "M";
-                }
-            }
-        }
-        private void youTurnStripBtn_Click(object sender, EventArgs e)
-        {
-            var form = new FormYouTurn(this);
-            form.ShowDialog();
-            cboxpRowWidth.SelectedIndex = yt.rowSkipsWidth - 1;
-        }
-        private void toolStripBtnGPSStength_Click(object sender, EventArgs e)
-        {
-        }
+        //private void vehicleToolStripBtn_Click(object sender, EventArgs e)
+        //{
+        //    using (var form = new FormSettings(this, 0))
+        //    {
+        //        var result = form.ShowDialog();
+        //        if (result == DialogResult.OK)
+        //        {
+        //            if (Properties.Settings.Default.setAS_isAutoSteerAutoOn) btnAutoSteer.Text = "R";
+        //            else btnAutoSteer.Text = "M";
+        //        }
+        //    }
+        //}
         private void toolStripBtnDrag_ButtonClick(object sender, EventArgs e)
         {
             if (panelDrag.Visible)
@@ -1452,16 +1443,6 @@ namespace AgOpenGPS
             }
 
             GetHeadland();
-        }
-        private void toolToolStripMenu_Click(object sender, EventArgs e)
-        {
-            using (var form = new FormToolSettings(this, 0))
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                }
-            }
         }
         private void moduleConfigToolStripMenuItem_Click(object sender, EventArgs e)
         {

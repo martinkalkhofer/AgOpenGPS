@@ -499,7 +499,7 @@ namespace AgOpenGPS
 
             if (keyData == (Keys.V)) //open the vehicle Settings
             {
-                toolstripVehicleConfig.PerformClick();
+                //lblHz.Per.PerformClick();
                 return true;    // indicate that you handled this keystroke
             }
 

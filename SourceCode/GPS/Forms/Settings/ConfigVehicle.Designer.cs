@@ -155,11 +155,11 @@ namespace AgOpenGPS
         #region Antenna Enter/Leave
         private void tabVAntenna_Enter(object sender, EventArgs e)
         {
-            nudAntennaHeight.Value = (decimal)(Properties.Vehicle.Default.setVehicle_antennaHeight* mf.inchOrCm2m);
+            nudAntennaHeight.Value = (decimal)(Properties.Vehicle.Default.setVehicle_antennaHeight* mf.m2InchOrCm);
 
-            nudAntennaPivot.Value = (decimal)(Math.Abs(Properties.Vehicle.Default.setVehicle_antennaPivot)* mf.inchOrCm2m);
+            nudAntennaPivot.Value = (decimal)(Math.Abs(Properties.Vehicle.Default.setVehicle_antennaPivot)* mf.m2InchOrCm);
 
-            nudAntennaOffset.Value = (decimal)(Properties.Vehicle.Default.setVehicle_antennaOffset* mf.inchOrCm2m);
+            nudAntennaOffset.Value = (decimal)(Properties.Vehicle.Default.setVehicle_antennaOffset* mf.m2InchOrCm);
 
             nudWheelbase.Value = (decimal)(Math.Abs(Properties.Vehicle.Default.setVehicle_wheelbase) * mf.m2InchOrCm);
 
