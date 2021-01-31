@@ -180,6 +180,7 @@ namespace AgOpenGPS
 
             Properties.Settings.Default.Save();
             Close();
+            mf.LoadNTRIPSettings();
         }
 
         private void btnSetManualPosition_Click(object sender, EventArgs e)

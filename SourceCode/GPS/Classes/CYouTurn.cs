@@ -37,7 +37,7 @@ namespace AgOpenGPS
         public double boundaryAngleOffPerpendicular;
         public double distanceTurnBeforeLine = 0, tangencyAngle;
 
-        public int rowSkipsWidth = 1;
+        public int rowSkipsWidth = 1, uTurnSmoothing = 10;
 
         /// <summary>  /// distance from headland as offset where to start turn shape /// </summary>
         public int youTurnStartOffset;

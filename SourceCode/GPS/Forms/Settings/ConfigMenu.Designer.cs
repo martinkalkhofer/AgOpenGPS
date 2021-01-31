@@ -13,6 +13,7 @@ namespace AgOpenGPS
             panelVehicleSubMenu.Visible = false;
             panelToolSubMenu.Visible = false;
             panelDataSourcesSubMenu.Visible = false;
+            panelArduino.Visible = false;
         }
 
         private void ShowSubMenu(Panel subMenu)
@@ -80,6 +81,24 @@ namespace AgOpenGPS
         {
             Close();
         }
+
+        private void btnUTurn_Click(object sender, EventArgs e)
+        {
+            HideSubMenu();
+            tab1.SelectedTab = tabUTurn;
+
+        }
+
+        private void btnArduino_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(panelArduino);
+            tab1.SelectedTab = tabSummary;
+
+            lblCurrentVehicle.Text = gStr.gsCurrent + mf.vehicleFileName;
+            UpdateVehicleListView();
+            UpdateSummary();
+        }
+
 
         #endregion
 
@@ -150,7 +169,22 @@ namespace AgOpenGPS
             tab1.SelectedTab = tabDFix;
         }
 
-        #endregion        
+        #endregion
+
+        #region Module
+
+        private void btnSteerModule_Click(object sender, EventArgs e)
+        {
+            tab1.SelectedTab = tabASteer;
+        }
+
+        private void btnMachineModule_Click(object sender, EventArgs e)
+        {
+            tab1.SelectedTab = tabAMachine;
+        }
+
+
+        #endregion
 
     }
 }

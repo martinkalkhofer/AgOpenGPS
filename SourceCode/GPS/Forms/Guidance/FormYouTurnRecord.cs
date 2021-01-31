@@ -96,6 +96,7 @@ namespace AgOpenGPS
             }
 
             Close();
+            mf.LoadSettings();
         }
 
         private void FormYouTurnRecord_Load(object sender, EventArgs e)

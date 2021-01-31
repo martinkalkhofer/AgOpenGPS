@@ -547,13 +547,6 @@ namespace AgOpenGPS
             // If Drive button enabled be normal, or just fool the autosteer and fill values
             if (!ast.isInFreeDriveMode)
             {
-                //sidehill draft compensation
-                if (rollUsed != 0)
-                {
-                    guidanceLineSteerAngle = (Int16)(guidanceLineSteerAngle +
-                        ((-rollUsed) * ((double)mc.autoSteerSettings[mc.ssKd] / 50)) * 500);
-                }
-
                 //fill up0 the appropriate arrays with new values
                 mc.autoSteerData[mc.sdSpeed] = unchecked((byte)(Math.Abs(pn.speed) * 4.0));
                 //mc.machineControlData[mc.cnSpeed] = mc.autoSteerData[mc.sdSpeed];
@@ -660,7 +653,7 @@ namespace AgOpenGPS
                                     }
                                 }
 
-                                if (yt.youTurnPhase == 3) yt.SmoothYouTurn(14);
+                                if (yt.youTurnPhase == 3) yt.SmoothYouTurn(yt.uTurnSmoothing);
                             }
                             else //wait to trigger the actual turn since its made and waiting
                             {

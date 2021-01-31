@@ -97,9 +97,6 @@ namespace AgOpenGPS
             }
         }
 
-        #region Procedures
-
-        #endregion Procedures
 
         #region YouTurn
 
@@ -236,8 +233,6 @@ namespace AgOpenGPS
             Properties.Vehicle.Default.set_youTurnDistance = mf.yt.youTurnStartOffset;
             Properties.Vehicle.Default.set_youTriggerDistance = mf.yt.triggerDistanceOffset;
 
-            StringBuilder sbEntry = new StringBuilder();
-            StringBuilder sbExit = new StringBuilder();
 
             //save it all
             Properties.Vehicle.Default.Save();

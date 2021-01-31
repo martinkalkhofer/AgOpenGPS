@@ -337,13 +337,13 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("127")]
-        public byte setAS_steerAngleOffset {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int setAS_wasOffset {
             get {
-                return ((byte)(this["setAS_steerAngleOffset"]));
+                return ((int)(this["setAS_wasOffset"]));
             }
             set {
-                this["setAS_steerAngleOffset"] = value;
+                this["setAS_wasOffset"] = value;
             }
         }
         
@@ -1305,6 +1305,30 @@ namespace AgOpenGPS.Properties {
             }
             set {
                 this["setIMU_rollFilter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int setAS_uTurnSmoothing {
+            get {
+                return ((int)(this["setAS_uTurnSmoothing"]));
+            }
+            set {
+                this["setAS_uTurnSmoothing"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setIMU_invertRoll {
+            get {
+                return ((bool)(this["setIMU_invertRoll"]));
+            }
+            set {
+                this["setIMU_invertRoll"] = value;
             }
         }
     }

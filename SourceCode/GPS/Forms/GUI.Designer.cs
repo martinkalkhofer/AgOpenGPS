@@ -348,16 +348,16 @@ namespace AgOpenGPS
 
             startSpeed = Vehicle.Default.setVehicle_startSpeed;
 
-        dayColor = Properties.Settings.Default.setDisplay_colorDayMode;
-        nightColor = Properties.Settings.Default.setDisplay_colorNightMode;
-        sectionColorDay = Properties.Settings.Default.setDisplay_colorSectionsDay;
-        sectionColorNight = Properties.Settings.Default.setDisplay_colorSectionsNight;
-        fieldColorDay = Properties.Settings.Default.setDisplay_colorFieldDay;
-        fieldColorNight = Properties.Settings.Default.setDisplay_colorFieldNight;
+            dayColor = Properties.Settings.Default.setDisplay_colorDayMode;
+            nightColor = Properties.Settings.Default.setDisplay_colorNightMode;
+            sectionColorDay = Properties.Settings.Default.setDisplay_colorSectionsDay;
+            sectionColorNight = Properties.Settings.Default.setDisplay_colorSectionsNight;
+            fieldColorDay = Properties.Settings.Default.setDisplay_colorFieldDay;
+            fieldColorNight = Properties.Settings.Default.setDisplay_colorFieldNight;
 
 
 
-        isSkyOn = Settings.Default.setMenu_isSkyOn;
+            isSkyOn = Settings.Default.setMenu_isSkyOn;
             isGridOn = Settings.Default.setMenu_isGridOn;
             isCompassOn = Settings.Default.setMenu_isCompassOn;
             isSpeedoOn = Settings.Default.setMenu_isSpeedoOn;
@@ -457,7 +457,7 @@ namespace AgOpenGPS
             portNameAutoSteer = Settings.Default.setPort_portNameAutoSteer;
             wasAutoSteerConnectedLastRun = Settings.Default.setPort_wasAutoSteerConnected;
             if (wasAutoSteerConnectedLastRun) SerialPortAutoSteerOpen();
-            
+
             simulatorOnToolStripMenuItem.Checked = Settings.Default.setMenu_isSimulatorOn;
             if (simulatorOnToolStripMenuItem.Checked)
             {
@@ -523,35 +523,13 @@ namespace AgOpenGPS
 
             FixPanelsAndMenus();
 
+            if (!isJobStarted)
             layoutPanelRight.Enabled = false;
+
             //boundaryToolStripBtn.Enabled = false;
             toolStripBtnDropDownBoundaryTools.Enabled = false;
 
-            if (Properties.Settings.Default.setNTRIP_isOn)
-            {
-                isNTRIP_RequiredOn = true;
-            }
-            else
-            {
-                isNTRIP_RequiredOn = false;
-            }
-
-            if (isNTRIP_RequiredOn)
-            {
-                //btnStartStopNtrip.Visible = true;
-                NTRIPStartStopStrip.Visible = true;
-                lblWatch.Visible = true;
-                NTRIPBytesMenu.Visible = true;
-                pbarNtripMenu.Visible = true;
-            }
-            else
-            {
-                //btnStartStopNtrip.Visible = false;
-                NTRIPStartStopStrip.Visible = false;
-                lblWatch.Visible = false;
-                NTRIPBytesMenu.Visible = false;
-                pbarNtripMenu.Visible = false;
-            }
+            LoadNTRIPSettings();
 
             if (hd.isOn) btnHeadlandOnOff.Image = Properties.Resources.HeadlandOn;
             else btnHeadlandOnOff.Image = Properties.Resources.HeadlandOff;
@@ -582,9 +560,6 @@ namespace AgOpenGPS
             vehicle = new CVehicle(this);
 
             tool = new CTool(this);
-
-            section = new CSection[MAXSECTIONS];
-            for (int j = 0; j < MAXSECTIONS; j++) section[j] = new CSection(this);
 
             //Set width of section and positions for each section
             SectionSetPosition();
@@ -619,8 +594,32 @@ namespace AgOpenGPS
 
             if (Properties.Settings.Default.setUDP_isInterAppOn) StartLocalUDPServer();
 
-            //start NTRIP if required
-            //remembered window position
+            //clear the flags
+            flagPts.Clear();
+            btnFlag.Enabled = false;
+
+            //workswitch stuff
+            mc.isWorkSwitchEnabled = Settings.Default.setF_IsWorkSwitchEnabled;
+            mc.isWorkSwitchActiveLow = Settings.Default.setF_IsWorkSwitchActiveLow;
+            mc.isWorkSwitchManual = Settings.Default.setF_IsWorkSwitchManual;
+
+            minFixStepDist = Settings.Default.setF_minFixStep;
+
+            fd.workedAreaTotalUser = Settings.Default.setF_UserTotalArea;
+
+            //load the last used auto turn shape
+            string fileAndDir = @".\Dependencies\YouTurnShapes\" + Properties.Settings.Default.setAS_youTurnShape;
+            yt.LoadYouTurnShapeFromFile(fileAndDir);
+
+            yt.uTurnSmoothing = Settings.Default.setAS_uTurnSmoothing;
+
+            //load th elightbar resolution
+            lightbarCmPerPixel = Properties.Settings.Default.setDisplay_lightbarCmPerPixel;
+
+            //Stanley guidance
+            isStanleyUsed = Properties.Vehicle.Default.setVehicle_isStanleyUsed;
+
+            //main window first
             if (Settings.Default.setWindow_Maximized)
             {
                 WindowState = FormWindowState.Normal;
@@ -639,33 +638,6 @@ namespace AgOpenGPS
                 Size = Settings.Default.setWindow_Size;
             }
 
-            //don't draw the back opengl to GDI - it still works tho
-            //openGLControlBack.Visible = false;
-
-            //clear the flags
-            flagPts.Clear();
-            btnFlag.Enabled = false;
-
-            //workswitch stuff
-            mc.isWorkSwitchEnabled = Settings.Default.setF_IsWorkSwitchEnabled;
-            mc.isWorkSwitchActiveLow = Settings.Default.setF_IsWorkSwitchActiveLow;
-            mc.isWorkSwitchManual = Settings.Default.setF_IsWorkSwitchManual;
-
-            minFixStepDist = Settings.Default.setF_minFixStep;
-
-            fd.workedAreaTotalUser = Settings.Default.setF_UserTotalArea;
-
-            //load the last used auto turn shape
-            string fileAndDir = @".\Dependencies\YouTurnShapes\" + Properties.Settings.Default.setAS_youTurnShape;
-            yt.LoadYouTurnShapeFromFile(fileAndDir);
-
-            //load th elightbar resolution
-            lightbarCmPerPixel = Properties.Settings.Default.setDisplay_lightbarCmPerPixel;
-
-
-            //Stanley guidance
-            isStanleyUsed = Properties.Vehicle.Default.setVehicle_isStanleyUsed;
-
             //night mode
             //isDay = Properties.Settings.Default.setDisplay_isDayMode;
             isDay = !isDay;
@@ -683,6 +655,35 @@ namespace AgOpenGPS
                 }
             }
 
+        }
+
+        public void LoadNTRIPSettings()
+        {
+            if (Properties.Settings.Default.setNTRIP_isOn)
+            {
+                isNTRIP_RequiredOn = true;
+            }
+            else
+            {
+                isNTRIP_RequiredOn = false;
+            }
+
+            if (isNTRIP_RequiredOn)
+            {
+                //btnStartStopNtrip.Visible = true;
+                NTRIPStartStopStrip.Visible = true;
+                lblWatch.Visible = true;
+                NTRIPBytesMenu.Visible = true;
+                pbarNtripMenu.Visible = true;
+            }
+            else
+            {
+                //btnStartStopNtrip.Visible = false;
+                NTRIPStartStopStrip.Visible = false;
+                lblWatch.Visible = false;
+                NTRIPBytesMenu.Visible = false;
+                pbarNtripMenu.Visible = false;
+            }
         }
 
         public void SwapDayNightMode()
@@ -1552,7 +1553,7 @@ namespace AgOpenGPS
         public void DisableYouTurnButtons()
         {
 
-            btnAutoYouTurn.Enabled = false;
+            //btnAutoYouTurn.Enabled = false;
             yt.isYouTurnBtnOn = false;
             btnAutoYouTurn.Image = Properties.Resources.YouTurnNo;
             yt.ResetYouTurn();

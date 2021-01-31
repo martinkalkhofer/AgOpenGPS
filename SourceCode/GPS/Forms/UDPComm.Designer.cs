@@ -95,7 +95,8 @@ namespace AgOpenGPS
                             double rollK = (Int16)((data[6] << 8) + data[7]);
                             if (rollK != 8888)
                             {
-                                rollK *= 0.1;
+                                if (ahrs.isRollInvert) rollK *= -0.1;
+                                else rollK *= 0.1;
                                 ahrs.imuRoll = ahrs.imuRoll * ahrs.rollFilter + rollK * (1 - ahrs.rollFilter);
                             }
 

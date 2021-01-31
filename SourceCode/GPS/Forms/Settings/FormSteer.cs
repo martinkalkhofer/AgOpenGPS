@@ -45,11 +45,10 @@ namespace AgOpenGPS
 
         private void FormSteer_Load(object sender, EventArgs e)
         {
-            hsbarSteerAngleSensorZero.Value = Properties.Settings.Default.setAS_steerAngleOffset - 127;
-            lblSteerAngleSensorZero.Text = hsbarSteerAngleSensorZero.Value.ToString();
-
+            hsbarWasOffset.Value = Properties.Settings.Default.setAS_wasOffset;
             hsbarCountsPerDegree.Value = Properties.Settings.Default.setAS_countsPerDegree;
             lblCountsPerDegree.Text = hsbarCountsPerDegree.Value.ToString();
+            lblSteerAngleSensorZero.Text = ((double)(hsbarWasOffset.Value) / (double)(hsbarCountsPerDegree.Value * 4)).ToString("N2");
 
             hsbarMinPWM.Value = Properties.Settings.Default.setAS_minSteerPWM;
             lblMinPWM.Text = hsbarMinPWM.Value.ToString();
@@ -115,40 +114,20 @@ namespace AgOpenGPS
 
             if (mf.isStanleyUsed)
             {
-                hsbarLookAhead.Visible = false;
-                hsbarDistanceFromLine.Visible = false;
-                hsbarLookAheadMin.Visible = false;
-                hsbarLookAheadUturnMult.Visible = false;
-                label37.Visible = false;
-                label4.Visible = false;
-                label6.Visible = false;
-                label2.Visible = false;
-                label21.Visible = false;
-                label1.Visible = false;
-                lblLookAhead.Visible = false;
-                lblDistanceFromLine.Visible = false;
-                lblLookAheadMinimum.Visible = false;
-                lblLookAheadUturnMult.Visible = false;
+                hsbarLookAhead.Enabled = false;
+                hsbarDistanceFromLine.Enabled = false;
+                hsbarLookAheadMin.Enabled = false;
+                hsbarLookAheadUturnMult.Enabled = false;
                 btnStanley.Text = "Stanley";
             }
             else
             {
                 btnStanley.Text = "Pure P";
 
-                hsbarLookAhead.Visible = true;
-                hsbarDistanceFromLine.Visible = true;
-                hsbarLookAheadMin.Visible = true;
-                hsbarLookAheadUturnMult.Visible = true;
-                label37.Visible = true;
-                label4.Visible = true;
-                label6.Visible = true;
-                label2.Visible = true;
-                label21.Visible = true;
-                label1.Visible = true;
-                lblLookAhead.Visible = true;
-                lblDistanceFromLine.Visible = true;
-                lblLookAheadMinimum.Visible = true;
-                lblLookAheadUturnMult.Visible = true;
+                hsbarLookAhead.Enabled = true;
+                hsbarDistanceFromLine.Enabled = true;
+                hsbarLookAheadMin.Enabled = true;
+                hsbarLookAheadUturnMult.Enabled = true;
             }
 
             toSend = false;
@@ -218,6 +197,7 @@ namespace AgOpenGPS
         {
             mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree] = unchecked((byte)hsbarCountsPerDegree.Value);
             lblCountsPerDegree.Text = (mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree]).ToString();
+            lblSteerAngleSensorZero.Text = ((double)(hsbarWasOffset.Value) / (double)(hsbarCountsPerDegree.Value * 4)).ToString("N2");
             Properties.Settings.Default.setAS_countsPerDegree = mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree];
             toSend = true;
         }
@@ -231,9 +211,10 @@ namespace AgOpenGPS
 
         private void hsbarSteerAngleSensorZero_ValueChanged(object sender, EventArgs e)
         {
-            lblSteerAngleSensorZero.Text = hsbarSteerAngleSensorZero.Value.ToString();
-            mf.mc.autoSteerSettings[mf.mc.ssSteerOffset] = unchecked((byte)(127 + hsbarSteerAngleSensorZero.Value));
-            Properties.Settings.Default.setAS_steerAngleOffset = mf.mc.autoSteerSettings[mf.mc.ssSteerOffset];
+            lblSteerAngleSensorZero.Text = ((double)(hsbarWasOffset.Value) / (double)(hsbarCountsPerDegree.Value * 4)).ToString("N2");
+            mf.mc.autoSteerSettings[mf.mc.ssWASOffsetHi] = unchecked((byte)(hsbarWasOffset.Value >> 8));
+            mf.mc.autoSteerSettings[mf.mc.ssWASOffsetLo] = unchecked((byte)(hsbarWasOffset.Value));
+            Properties.Settings.Default.setAS_wasOffset = hsbarWasOffset.Value;
             toSend = true;
         }
 
@@ -336,41 +317,22 @@ namespace AgOpenGPS
 
             if (mf.isStanleyUsed)
             {
-                hsbarLookAhead.Visible = false;
-                hsbarDistanceFromLine.Visible = false;
-                hsbarLookAheadMin.Visible = false;
-                hsbarLookAheadUturnMult.Visible = false;
-                label37.Visible = false;
-                label4.Visible = false;
-                label6.Visible = false;
-                label2.Visible = false;
-                label21.Visible = false;
-                label1.Visible = false;
-                lblLookAhead.Visible = false;
-                lblDistanceFromLine.Visible = false;
-                lblLookAheadMinimum.Visible = false;
-                lblLookAheadUturnMult.Visible = false;
+                hsbarLookAhead.Enabled = false;
+                hsbarDistanceFromLine.Enabled = false;
+                hsbarLookAheadMin.Enabled = false;
+                hsbarLookAheadUturnMult.Enabled = false;
                 btnStanley.Text = "Stanley";
             }
             else
             {
                 btnStanley.Text = "Pure P";
 
-                hsbarLookAhead.Visible = true;
-                hsbarDistanceFromLine.Visible = true;
-                hsbarLookAheadMin.Visible = true;
-                hsbarLookAheadUturnMult.Visible = true;
-                label37.Visible = true;
-                label4.Visible = true;
-                label6.Visible = true;
-                label2.Visible = true;
-                label21.Visible = true;
-                label1.Visible = true;
-                lblLookAhead.Visible = true;
-                lblDistanceFromLine.Visible = true;
-                lblLookAheadMinimum.Visible = true;
-                lblLookAheadUturnMult.Visible = true;
+                hsbarLookAhead.Enabled = true;
+                hsbarDistanceFromLine.Enabled = true;
+                hsbarLookAheadMin.Enabled = true;
+                hsbarLookAheadUturnMult.Enabled = true;
             }
+
             Properties.Vehicle.Default.setVehicle_isStanleyUsed = mf.isStanleyUsed;
             Properties.Vehicle.Default.Save();
         }

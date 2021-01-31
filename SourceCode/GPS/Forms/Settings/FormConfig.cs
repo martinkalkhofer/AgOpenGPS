@@ -78,6 +78,15 @@ namespace AgOpenGPS
 
         private void FormConfig_Load(object sender, EventArgs e)
         {
+            if (mf.isJobStarted)
+            {
+                if (mf.autoBtnState == FormGPS.btnStates.Auto)
+                    mf.btnSectionOffAutoOn.PerformClick();
+
+                if (mf.manualBtnState == FormGPS.btnStates.On)
+                    mf.btnManualOffOn.PerformClick();
+            }
+
 
             if (mf.isMetric)
             {
@@ -212,6 +221,12 @@ namespace AgOpenGPS
             }
 
         }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
     }
 }
 

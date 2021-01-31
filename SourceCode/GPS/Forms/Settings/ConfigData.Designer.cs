@@ -111,12 +111,14 @@ namespace AgOpenGPS
             //Roll
             lblRollZeroOffset.Text = ((double)Properties.Settings.Default.setIMU_rollZero).ToString("N2");
             hsbarRollFilter.Value = (int)(Properties.Settings.Default.setIMU_rollFilter * 100);
+            cboxDataInvertRoll.Checked = Properties.Settings.Default.setIMU_invertRoll;
         }
 
         private void tabDRoll_Leave(object sender, EventArgs e)
         {
             Properties.Settings.Default.setIMU_rollFilter = (double)hsbarRollFilter.Value * 0.01;
             Properties.Settings.Default.setIMU_rollZero = mf.ahrs.rollZero;
+            Properties.Settings.Default.setIMU_invertRoll = cboxDataInvertRoll.Checked;
             Properties.Settings.Default.Save();
 
         }

@@ -85,7 +85,8 @@ namespace AgOpenGPS
 
                         if (temp != 8888)
                         {
-                            temp *= 0.1;
+                            if (ahrs.isRollInvert) temp *= -0.1;
+                            else temp *= 0.1;
                             ahrs.imuRoll = ahrs.imuRoll * ahrs.rollFilter + temp * (1 - ahrs.rollFilter);
                         }
 

@@ -80,8 +80,8 @@
     <Setting Name="setAS_Kd" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="setAS_steerAngleOffset" Type="System.Byte" Scope="User">
-      <Value Profile="(Default)">127</Value>
+    <Setting Name="setAS_wasOffset" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="setF_UserTripAlarm" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -322,6 +322,12 @@
     </Setting>
     <Setting Name="setIMU_rollFilter" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="setAS_uTurnSmoothing" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="setIMU_invertRoll" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

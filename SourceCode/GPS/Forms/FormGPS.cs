@@ -331,6 +331,9 @@ namespace AgOpenGPS
             //create a new section and set left and right positions
             //created whether used or not, saves restarting program
 
+            section = new CSection[MAXSECTIONS];
+            for (int j = 0; j < MAXSECTIONS; j++) section[j] = new CSection(this);
+
             //our NMEA parser
             pn = new CNMEA(this);
 
@@ -1091,7 +1094,6 @@ namespace AgOpenGPS
             }
         }
 
-        //show the UDP ethernet settings page
         private void SettingsNTRIP()
         {
             using (var form = new FormNtrip(this))
