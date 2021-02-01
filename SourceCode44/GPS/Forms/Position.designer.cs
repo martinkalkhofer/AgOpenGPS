@@ -701,6 +701,7 @@ namespace AgOpenGPS
             //stop the timer and calc how long it took to do calcs and draw
             frameTimeRough = (double)swFrame.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency * 1000;
 
+            if (frameTimeRough > 30) frameTimeRough = 30;
             frameTime = frameTime * 0.99 + frameTimeRough * 0.01;
         }
 

@@ -1528,7 +1528,7 @@ namespace AgOpenGPS
 
                     //keep setting the timer so full when ready to turn off
                     if (!section[j].mappingOffRequest)
-                        section[j].mappingOffTimer = (int)(fixUpdateHz * 1 * sped + ((double)fixUpdateHz * tool.turnOffDelay));
+                        section[j].mappingOffTimer = (int)(fixUpdateHz * 0.5 * sped + ((double)fixUpdateHz * tool.turnOffDelay));
 
                     //decrement the off timer
                     if (section[j].mappingOffTimer > 0) section[j].mappingOffTimer--;

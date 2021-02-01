@@ -450,8 +450,21 @@ namespace AgOpenGPS
 
                     if (leftMouseDownOnOpenGL) MakeFlagMark();
 
+                    
+                    if (bbCounter++ > 1) bbCounter = 0;
+
+                    bool isOn = false;
+                    for (int j = 0; j < tool.numOfSections; j++)
+                    {
+
+                        if (section[j].manBtnState == manBtn.Auto || section[j].manBtnState == manBtn.On)
+                        {
+                            //isOn = true;
+                        }
+                    }
+
                     //draw the section control window off screen buffer
-                    if (isJobStarted)
+                    if (isJobStarted && bbCounter == 0)
                         oglBack.Refresh();
 
                     //draw the zoom window
@@ -466,6 +479,8 @@ namespace AgOpenGPS
                 }
             }
         }
+
+        private int bbCounter = 0;
 
         private void oglBack_Load(object sender, EventArgs e)
         {
@@ -791,7 +806,7 @@ namespace AgOpenGPS
                     section[j].isMappingRequiredOn = false;
 
                     //calculate slope
-                    mOn = (tool.lookAheadDistanceOnPixelsRight - tool.lookAheadDistanceOnPixelsLeft) / tool.rpWidth;
+                    //mOn = (tool.lookAheadDistanceOnPixelsRight - tool.lookAheadDistanceOnPixelsLeft) / tool.rpWidth;
 
                     //start and end point to scan across buffer
                     start = section[j].rpSectionPosition - section[0].rpSectionPosition;
@@ -804,7 +819,7 @@ namespace AgOpenGPS
                     for (int pos = start; pos <= end; pos++)
                     {
                         //block 5 pixels high (50 cm look ahead)
-                        endHeight = 5 * tool.rpWidth + pos;
+                        endHeight = 10 * tool.rpWidth + pos;
 
                         for (int a = pos; a <= endHeight; a += tool.rpWidth)
                         {
