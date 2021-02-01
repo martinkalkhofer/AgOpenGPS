@@ -73,6 +73,12 @@ namespace AgOpenGPS
             nudMinFixStepDistance.Controls[0].Enabled = false;
             nudStartSpeed.Controls[0].Enabled = false;
 
+            nudMaxCounts.Controls[0].Enabled = false;
+            nudRaiseTime.Controls[0].Enabled = false;
+            nudLowerTime.Controls[0].Enabled = false;
+            nudAckerman.Controls[0].Enabled = false;
+
+
             //nudHydLiftSecs.Controls[0].Enabled = false;
         }
 

@@ -32,6 +32,7 @@
             this.panelLeftSideMenu = new System.Windows.Forms.Panel();
             this.panelArduino = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
+            this.btn3 = new System.Windows.Forms.Button();
             this.btnMachineModule = new System.Windows.Forms.Button();
             this.btnSteerModule = new System.Windows.Forms.Button();
             this.btnArduino = new System.Windows.Forms.Button();
@@ -174,6 +175,8 @@
             this.chkWorkSwActiveLow = new System.Windows.Forms.CheckBox();
             this.chkEnableWorkSwitch = new System.Windows.Forms.CheckBox();
             this.tabTSettings = new System.Windows.Forms.TabPage();
+            this.label69 = new System.Windows.Forms.Label();
+            this.nudHydLiftLookAhead = new System.Windows.Forms.NumericUpDown();
             this.btnNext3 = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.nudLookAheadOff = new System.Windows.Forms.NumericUpDown();
@@ -254,7 +257,7 @@
             this.tabASteer = new System.Windows.Forms.TabPage();
             this.chkSteerInvertRelays = new System.Windows.Forms.CheckBox();
             this.label68 = new System.Windows.Forms.Label();
-            this.btnSendToSteerArduino = new System.Windows.Forms.Button();
+            this.btnSendSteerConfigPGN = new System.Windows.Forms.Button();
             this.cboxMotorDrive = new System.Windows.Forms.ComboBox();
             this.cboxSteerEnable = new System.Windows.Forms.ComboBox();
             this.label62 = new System.Windows.Forms.Label();
@@ -271,10 +274,8 @@
             this.label55 = new System.Windows.Forms.Label();
             this.tabAMachine = new System.Windows.Forms.TabPage();
             this.label67 = new System.Windows.Forms.Label();
-            this.btnChangeAttachment = new System.Windows.Forms.Button();
+            this.btnSendMachinePGN = new System.Windows.Forms.Button();
             this.cboxMachInvertRelays = new System.Windows.Forms.CheckBox();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.cboxIsSendMachineControlToAutoSteer = new System.Windows.Forms.CheckBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.nudLowerTime = new System.Windows.Forms.NumericUpDown();
             this.nudRaiseTime = new System.Windows.Forms.NumericUpDown();
@@ -345,6 +346,7 @@
             this.tabTSwitches.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabTSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHydLiftLookAhead)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLookAheadOff)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTurnOffDelay)).BeginInit();
@@ -365,7 +367,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudAckerman)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaxCounts)).BeginInit();
             this.tabAMachine.SuspendLayout();
-            this.groupBox10.SuspendLayout();
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLowerTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRaiseTime)).BeginInit();
@@ -388,19 +389,20 @@
             this.panelLeftSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeftSideMenu.Location = new System.Drawing.Point(2, 2);
             this.panelLeftSideMenu.Name = "panelLeftSideMenu";
-            this.panelLeftSideMenu.Size = new System.Drawing.Size(201, 985);
+            this.panelLeftSideMenu.Size = new System.Drawing.Size(201, 736);
             this.panelLeftSideMenu.TabIndex = 110;
             // 
             // panelArduino
             // 
             this.panelArduino.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
             this.panelArduino.Controls.Add(this.button2);
+            this.panelArduino.Controls.Add(this.btn3);
             this.panelArduino.Controls.Add(this.btnMachineModule);
             this.panelArduino.Controls.Add(this.btnSteerModule);
             this.panelArduino.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelArduino.Location = new System.Drawing.Point(0, 997);
+            this.panelArduino.Location = new System.Drawing.Point(0, 535);
             this.panelArduino.Name = "panelArduino";
-            this.panelArduino.Size = new System.Drawing.Size(184, 141);
+            this.panelArduino.Size = new System.Drawing.Size(201, 89);
             this.panelArduino.TabIndex = 116;
             // 
             // button2
@@ -424,6 +426,26 @@
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseVisualStyleBackColor = false;
             // 
+            // btn3
+            // 
+            this.btn3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(50)))));
+            this.btn3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn3.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btn3.FlatAppearance.BorderSize = 0;
+            this.btn3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(38)))), ((int)(((byte)(46)))));
+            this.btn3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(38)))), ((int)(((byte)(46)))));
+            this.btn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn3.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn3.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btn3.Location = new System.Drawing.Point(0, 50);
+            this.btn3.Name = "btn3";
+            this.btn3.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
+            this.btn3.Size = new System.Drawing.Size(201, 25);
+            this.btn3.TabIndex = 0;
+            this.btn3.Text = "Btn3";
+            this.btn3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn3.UseVisualStyleBackColor = false;
+            // 
             // btnMachineModule
             // 
             this.btnMachineModule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(50)))));
@@ -435,10 +457,10 @@
             this.btnMachineModule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMachineModule.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMachineModule.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnMachineModule.Location = new System.Drawing.Point(0, 54);
+            this.btnMachineModule.Location = new System.Drawing.Point(0, 25);
             this.btnMachineModule.Name = "btnMachineModule";
             this.btnMachineModule.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnMachineModule.Size = new System.Drawing.Size(184, 54);
+            this.btnMachineModule.Size = new System.Drawing.Size(201, 25);
             this.btnMachineModule.TabIndex = 1;
             this.btnMachineModule.Text = "Machine";
             this.btnMachineModule.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -459,7 +481,7 @@
             this.btnSteerModule.Location = new System.Drawing.Point(0, 0);
             this.btnSteerModule.Name = "btnSteerModule";
             this.btnSteerModule.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSteerModule.Size = new System.Drawing.Size(184, 54);
+            this.btnSteerModule.Size = new System.Drawing.Size(201, 25);
             this.btnSteerModule.TabIndex = 2;
             this.btnSteerModule.Text = "Steer";
             this.btnSteerModule.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -477,10 +499,10 @@
             this.btnArduino.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnArduino.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnArduino.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnArduino.Location = new System.Drawing.Point(0, 937);
+            this.btnArduino.Location = new System.Drawing.Point(0, 497);
             this.btnArduino.Name = "btnArduino";
             this.btnArduino.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btnArduino.Size = new System.Drawing.Size(184, 60);
+            this.btnArduino.Size = new System.Drawing.Size(201, 38);
             this.btnArduino.TabIndex = 115;
             this.btnArduino.Text = "Module";
             this.btnArduino.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -499,10 +521,10 @@
             this.btnUTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUTurn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnUTurn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUTurn.Location = new System.Drawing.Point(0, 877);
+            this.btnUTurn.Location = new System.Drawing.Point(0, 459);
             this.btnUTurn.Name = "btnUTurn";
             this.btnUTurn.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btnUTurn.Size = new System.Drawing.Size(184, 60);
+            this.btnUTurn.Size = new System.Drawing.Size(201, 38);
             this.btnUTurn.TabIndex = 116;
             this.btnUTurn.Text = "UTurn";
             this.btnUTurn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -517,9 +539,9 @@
             this.panelDataSourcesSubMenu.Controls.Add(this.btnSubHeading);
             this.panelDataSourcesSubMenu.Controls.Add(this.btnSubFix);
             this.panelDataSourcesSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelDataSourcesSubMenu.Location = new System.Drawing.Point(0, 696);
+            this.panelDataSourcesSubMenu.Location = new System.Drawing.Point(0, 366);
             this.panelDataSourcesSubMenu.Name = "panelDataSourcesSubMenu";
-            this.panelDataSourcesSubMenu.Size = new System.Drawing.Size(184, 181);
+            this.panelDataSourcesSubMenu.Size = new System.Drawing.Size(201, 93);
             this.panelDataSourcesSubMenu.TabIndex = 7;
             // 
             // btnSubRoll
@@ -533,10 +555,10 @@
             this.btnSubRoll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubRoll.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubRoll.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubRoll.Location = new System.Drawing.Point(0, 108);
+            this.btnSubRoll.Location = new System.Drawing.Point(0, 50);
             this.btnSubRoll.Name = "btnSubRoll";
             this.btnSubRoll.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubRoll.Size = new System.Drawing.Size(184, 54);
+            this.btnSubRoll.Size = new System.Drawing.Size(201, 25);
             this.btnSubRoll.TabIndex = 0;
             this.btnSubRoll.Text = "Roll";
             this.btnSubRoll.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -554,10 +576,10 @@
             this.btnSubHeading.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubHeading.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubHeading.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubHeading.Location = new System.Drawing.Point(0, 54);
+            this.btnSubHeading.Location = new System.Drawing.Point(0, 25);
             this.btnSubHeading.Name = "btnSubHeading";
             this.btnSubHeading.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubHeading.Size = new System.Drawing.Size(184, 54);
+            this.btnSubHeading.Size = new System.Drawing.Size(201, 25);
             this.btnSubHeading.TabIndex = 1;
             this.btnSubHeading.Text = "Heading";
             this.btnSubHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -578,7 +600,7 @@
             this.btnSubFix.Location = new System.Drawing.Point(0, 0);
             this.btnSubFix.Name = "btnSubFix";
             this.btnSubFix.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubFix.Size = new System.Drawing.Size(184, 54);
+            this.btnSubFix.Size = new System.Drawing.Size(201, 25);
             this.btnSubFix.TabIndex = 2;
             this.btnSubFix.Text = "Fix Source";
             this.btnSubFix.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -596,10 +618,10 @@
             this.btnDataSources.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDataSources.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnDataSources.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDataSources.Location = new System.Drawing.Point(0, 636);
+            this.btnDataSources.Location = new System.Drawing.Point(0, 328);
             this.btnDataSources.Name = "btnDataSources";
             this.btnDataSources.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btnDataSources.Size = new System.Drawing.Size(184, 60);
+            this.btnDataSources.Size = new System.Drawing.Size(201, 38);
             this.btnDataSources.TabIndex = 114;
             this.btnDataSources.Text = "Sources";
             this.btnDataSources.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -616,9 +638,9 @@
             this.panelToolSubMenu.Controls.Add(this.btnSubHitch);
             this.panelToolSubMenu.Controls.Add(this.btnSubToolConfig);
             this.panelToolSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelToolSubMenu.Location = new System.Drawing.Point(0, 351);
+            this.panelToolSubMenu.Location = new System.Drawing.Point(0, 189);
             this.panelToolSubMenu.Name = "panelToolSubMenu";
-            this.panelToolSubMenu.Size = new System.Drawing.Size(184, 285);
+            this.panelToolSubMenu.Size = new System.Drawing.Size(201, 139);
             this.panelToolSubMenu.TabIndex = 4;
             // 
             // btnSubSwitches
@@ -632,10 +654,10 @@
             this.btnSubSwitches.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubSwitches.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubSwitches.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubSwitches.Location = new System.Drawing.Point(0, 216);
+            this.btnSubSwitches.Location = new System.Drawing.Point(0, 100);
             this.btnSubSwitches.Name = "btnSubSwitches";
             this.btnSubSwitches.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubSwitches.Size = new System.Drawing.Size(184, 54);
+            this.btnSubSwitches.Size = new System.Drawing.Size(201, 25);
             this.btnSubSwitches.TabIndex = 1;
             this.btnSubSwitches.Text = "Switches";
             this.btnSubSwitches.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -653,10 +675,10 @@
             this.btnSubToolSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubToolSettings.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubToolSettings.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubToolSettings.Location = new System.Drawing.Point(0, 162);
+            this.btnSubToolSettings.Location = new System.Drawing.Point(0, 75);
             this.btnSubToolSettings.Name = "btnSubToolSettings";
             this.btnSubToolSettings.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubToolSettings.Size = new System.Drawing.Size(184, 54);
+            this.btnSubToolSettings.Size = new System.Drawing.Size(201, 25);
             this.btnSubToolSettings.TabIndex = 4;
             this.btnSubToolSettings.Text = "Settings";
             this.btnSubToolSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -674,10 +696,10 @@
             this.btnSubSections.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubSections.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubSections.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubSections.Location = new System.Drawing.Point(0, 108);
+            this.btnSubSections.Location = new System.Drawing.Point(0, 50);
             this.btnSubSections.Name = "btnSubSections";
             this.btnSubSections.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubSections.Size = new System.Drawing.Size(184, 54);
+            this.btnSubSections.Size = new System.Drawing.Size(201, 25);
             this.btnSubSections.TabIndex = 0;
             this.btnSubSections.Text = "Sections";
             this.btnSubSections.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -695,10 +717,10 @@
             this.btnSubHitch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubHitch.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubHitch.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubHitch.Location = new System.Drawing.Point(0, 54);
+            this.btnSubHitch.Location = new System.Drawing.Point(0, 25);
             this.btnSubHitch.Name = "btnSubHitch";
             this.btnSubHitch.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubHitch.Size = new System.Drawing.Size(184, 54);
+            this.btnSubHitch.Size = new System.Drawing.Size(201, 25);
             this.btnSubHitch.TabIndex = 5;
             this.btnSubHitch.Text = "Hitch";
             this.btnSubHitch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -719,7 +741,7 @@
             this.btnSubToolConfig.Location = new System.Drawing.Point(0, 0);
             this.btnSubToolConfig.Name = "btnSubToolConfig";
             this.btnSubToolConfig.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubToolConfig.Size = new System.Drawing.Size(184, 54);
+            this.btnSubToolConfig.Size = new System.Drawing.Size(201, 25);
             this.btnSubToolConfig.TabIndex = 6;
             this.btnSubToolConfig.Text = "Configuration";
             this.btnSubToolConfig.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -737,10 +759,10 @@
             this.btnTool.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTool.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnTool.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTool.Location = new System.Drawing.Point(0, 291);
+            this.btnTool.Location = new System.Drawing.Point(0, 151);
             this.btnTool.Name = "btnTool";
             this.btnTool.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnTool.Size = new System.Drawing.Size(184, 60);
+            this.btnTool.Size = new System.Drawing.Size(201, 38);
             this.btnTool.TabIndex = 3;
             this.btnTool.Text = "Tool";
             this.btnTool.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -757,9 +779,9 @@
             this.panelVehicleSubMenu.Controls.Add(this.btnSubAntenna);
             this.panelVehicleSubMenu.Controls.Add(this.btnSubVehicleConfig);
             this.panelVehicleSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelVehicleSubMenu.Location = new System.Drawing.Point(0, 60);
+            this.panelVehicleSubMenu.Location = new System.Drawing.Point(0, 38);
             this.panelVehicleSubMenu.Name = "panelVehicleSubMenu";
-            this.panelVehicleSubMenu.Size = new System.Drawing.Size(184, 231);
+            this.panelVehicleSubMenu.Size = new System.Drawing.Size(201, 113);
             this.panelVehicleSubMenu.TabIndex = 2;
             // 
             // button1
@@ -789,10 +811,10 @@
             this.btnSubGuidance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubGuidance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubGuidance.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubGuidance.Location = new System.Drawing.Point(0, 162);
+            this.btnSubGuidance.Location = new System.Drawing.Point(0, 75);
             this.btnSubGuidance.Name = "btnSubGuidance";
             this.btnSubGuidance.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubGuidance.Size = new System.Drawing.Size(184, 54);
+            this.btnSubGuidance.Size = new System.Drawing.Size(201, 25);
             this.btnSubGuidance.TabIndex = 3;
             this.btnSubGuidance.Text = "Guidance";
             this.btnSubGuidance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -810,10 +832,10 @@
             this.btnSubDimensions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubDimensions.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubDimensions.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubDimensions.Location = new System.Drawing.Point(0, 108);
+            this.btnSubDimensions.Location = new System.Drawing.Point(0, 50);
             this.btnSubDimensions.Name = "btnSubDimensions";
             this.btnSubDimensions.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubDimensions.Size = new System.Drawing.Size(184, 54);
+            this.btnSubDimensions.Size = new System.Drawing.Size(201, 25);
             this.btnSubDimensions.TabIndex = 1;
             this.btnSubDimensions.Text = "Dimensions";
             this.btnSubDimensions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -831,10 +853,10 @@
             this.btnSubAntenna.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubAntenna.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubAntenna.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubAntenna.Location = new System.Drawing.Point(0, 54);
+            this.btnSubAntenna.Location = new System.Drawing.Point(0, 25);
             this.btnSubAntenna.Name = "btnSubAntenna";
             this.btnSubAntenna.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubAntenna.Size = new System.Drawing.Size(184, 54);
+            this.btnSubAntenna.Size = new System.Drawing.Size(201, 25);
             this.btnSubAntenna.TabIndex = 2;
             this.btnSubAntenna.Text = "Antenna";
             this.btnSubAntenna.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -855,7 +877,7 @@
             this.btnSubVehicleConfig.Location = new System.Drawing.Point(0, 0);
             this.btnSubVehicleConfig.Name = "btnSubVehicleConfig";
             this.btnSubVehicleConfig.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubVehicleConfig.Size = new System.Drawing.Size(184, 54);
+            this.btnSubVehicleConfig.Size = new System.Drawing.Size(201, 25);
             this.btnSubVehicleConfig.TabIndex = 0;
             this.btnSubVehicleConfig.Text = "Configuration";
             this.btnSubVehicleConfig.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -876,7 +898,7 @@
             this.btnVehicle.Location = new System.Drawing.Point(0, 0);
             this.btnVehicle.Name = "btnVehicle";
             this.btnVehicle.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnVehicle.Size = new System.Drawing.Size(184, 60);
+            this.btnVehicle.Size = new System.Drawing.Size(201, 38);
             this.btnVehicle.TabIndex = 113;
             this.btnVehicle.Text = "Vehicle";
             this.btnVehicle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2883,6 +2905,8 @@
             // tabTSettings
             // 
             this.tabTSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
+            this.tabTSettings.Controls.Add(this.label69);
+            this.tabTSettings.Controls.Add(this.nudHydLiftLookAhead);
             this.tabTSettings.Controls.Add(this.btnNext3);
             this.tabTSettings.Controls.Add(this.label16);
             this.tabTSettings.Controls.Add(this.nudLookAheadOff);
@@ -2901,6 +2925,47 @@
             this.tabTSettings.Text = "TSettings";
             this.tabTSettings.Enter += new System.EventHandler(this.tabTSettings_Enter);
             this.tabTSettings.Leave += new System.EventHandler(this.tabTSettings_Leave);
+            // 
+            // label69
+            // 
+            this.label69.BackColor = System.Drawing.Color.Transparent;
+            this.label69.Font = new System.Drawing.Font("Tahoma", 14.25F);
+            this.label69.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label69.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label69.Location = new System.Drawing.Point(591, 426);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(151, 53);
+            this.label69.TabIndex = 128;
+            this.label69.Text = "Hydraulic Lift Look Ahead";
+            this.label69.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // nudHydLiftLookAhead
+            // 
+            this.nudHydLiftLookAhead.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudHydLiftLookAhead.DecimalPlaces = 1;
+            this.nudHydLiftLookAhead.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudHydLiftLookAhead.InterceptArrowKeys = false;
+            this.nudHydLiftLookAhead.Location = new System.Drawing.Point(595, 491);
+            this.nudHydLiftLookAhead.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.nudHydLiftLookAhead.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudHydLiftLookAhead.Name = "nudHydLiftLookAhead";
+            this.nudHydLiftLookAhead.Size = new System.Drawing.Size(148, 52);
+            this.nudHydLiftLookAhead.TabIndex = 117;
+            this.nudHydLiftLookAhead.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudHydLiftLookAhead.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nudHydLiftLookAhead.Enter += new System.EventHandler(this.nudHydLiftSecs_Enter);
             // 
             // btnNext3
             // 
@@ -4094,7 +4159,7 @@
             this.tabASteer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(22)))), ((int)(((byte)(40)))));
             this.tabASteer.Controls.Add(this.chkSteerInvertRelays);
             this.tabASteer.Controls.Add(this.label68);
-            this.tabASteer.Controls.Add(this.btnSendToSteerArduino);
+            this.tabASteer.Controls.Add(this.btnSendSteerConfigPGN);
             this.tabASteer.Controls.Add(this.cboxMotorDrive);
             this.tabASteer.Controls.Add(this.cboxSteerEnable);
             this.tabASteer.Controls.Add(this.label62);
@@ -4140,27 +4205,27 @@
             this.label68.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.label68.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label68.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label68.Location = new System.Drawing.Point(446, 498);
+            this.label68.Location = new System.Drawing.Point(463, 504);
             this.label68.Name = "label68";
             this.label68.Size = new System.Drawing.Size(172, 62);
             this.label68.TabIndex = 466;
-            this.label68.Text = "Send ";
+            this.label68.Text = "Send +  Save";
             this.label68.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btnSendToSteerArduino
+            // btnSendSteerConfigPGN
             // 
-            this.btnSendToSteerArduino.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSendToSteerArduino.BackColor = System.Drawing.Color.Transparent;
-            this.btnSendToSteerArduino.FlatAppearance.BorderSize = 0;
-            this.btnSendToSteerArduino.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSendToSteerArduino.Image = global::AgOpenGPS.Properties.Resources.ToolAcceptChange;
-            this.btnSendToSteerArduino.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSendToSteerArduino.Location = new System.Drawing.Point(602, 498);
-            this.btnSendToSteerArduino.Name = "btnSendToSteerArduino";
-            this.btnSendToSteerArduino.Size = new System.Drawing.Size(133, 62);
-            this.btnSendToSteerArduino.TabIndex = 465;
-            this.btnSendToSteerArduino.UseVisualStyleBackColor = false;
-            this.btnSendToSteerArduino.Click += new System.EventHandler(this.btnSendToSteerArduino_Click);
+            this.btnSendSteerConfigPGN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSendSteerConfigPGN.BackColor = System.Drawing.Color.Transparent;
+            this.btnSendSteerConfigPGN.FlatAppearance.BorderSize = 0;
+            this.btnSendSteerConfigPGN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSendSteerConfigPGN.Image = global::AgOpenGPS.Properties.Resources.ToolAcceptChange;
+            this.btnSendSteerConfigPGN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnSendSteerConfigPGN.Location = new System.Drawing.Point(619, 504);
+            this.btnSendSteerConfigPGN.Name = "btnSendSteerConfigPGN";
+            this.btnSendSteerConfigPGN.Size = new System.Drawing.Size(133, 62);
+            this.btnSendSteerConfigPGN.TabIndex = 465;
+            this.btnSendSteerConfigPGN.UseVisualStyleBackColor = false;
+            this.btnSendSteerConfigPGN.Click += new System.EventHandler(this.btnSendToSteerArduino_Click);
             // 
             // cboxMotorDrive
             // 
@@ -4399,9 +4464,8 @@
             // 
             this.tabAMachine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(22)))), ((int)(((byte)(40)))));
             this.tabAMachine.Controls.Add(this.label67);
-            this.tabAMachine.Controls.Add(this.btnChangeAttachment);
+            this.tabAMachine.Controls.Add(this.btnSendMachinePGN);
             this.tabAMachine.Controls.Add(this.cboxMachInvertRelays);
-            this.tabAMachine.Controls.Add(this.groupBox10);
             this.tabAMachine.Controls.Add(this.groupBox8);
             this.tabAMachine.Controls.Add(this.label56);
             this.tabAMachine.Location = new System.Drawing.Point(4, 44);
@@ -4409,6 +4473,8 @@
             this.tabAMachine.Size = new System.Drawing.Size(787, 618);
             this.tabAMachine.TabIndex = 20;
             this.tabAMachine.Text = "aMach";
+            this.tabAMachine.Enter += new System.EventHandler(this.tabAMachine_Enter);
+            this.tabAMachine.Leave += new System.EventHandler(this.tabAMachine_Leave);
             // 
             // label67
             // 
@@ -4421,22 +4487,23 @@
             this.label67.Name = "label67";
             this.label67.Size = new System.Drawing.Size(172, 37);
             this.label67.TabIndex = 455;
-            this.label67.Text = "Send ";
+            this.label67.Text = "Send + Save";
             this.label67.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btnChangeAttachment
+            // btnSendMachinePGN
             // 
-            this.btnChangeAttachment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnChangeAttachment.BackColor = System.Drawing.Color.Transparent;
-            this.btnChangeAttachment.FlatAppearance.BorderSize = 0;
-            this.btnChangeAttachment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChangeAttachment.Image = global::AgOpenGPS.Properties.Resources.ToolAcceptChange;
-            this.btnChangeAttachment.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnChangeAttachment.Location = new System.Drawing.Point(620, 491);
-            this.btnChangeAttachment.Name = "btnChangeAttachment";
-            this.btnChangeAttachment.Size = new System.Drawing.Size(133, 62);
-            this.btnChangeAttachment.TabIndex = 454;
-            this.btnChangeAttachment.UseVisualStyleBackColor = false;
+            this.btnSendMachinePGN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSendMachinePGN.BackColor = System.Drawing.Color.Transparent;
+            this.btnSendMachinePGN.FlatAppearance.BorderSize = 0;
+            this.btnSendMachinePGN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSendMachinePGN.Image = global::AgOpenGPS.Properties.Resources.ToolAcceptChange;
+            this.btnSendMachinePGN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnSendMachinePGN.Location = new System.Drawing.Point(620, 491);
+            this.btnSendMachinePGN.Name = "btnSendMachinePGN";
+            this.btnSendMachinePGN.Size = new System.Drawing.Size(133, 62);
+            this.btnSendMachinePGN.TabIndex = 454;
+            this.btnSendMachinePGN.UseVisualStyleBackColor = false;
+            this.btnSendMachinePGN.Click += new System.EventHandler(this.btnSendMachinePGN_Click);
             // 
             // cboxMachInvertRelays
             // 
@@ -4445,7 +4512,7 @@
             this.cboxMachInvertRelays.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboxMachInvertRelays.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboxMachInvertRelays.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.cboxMachInvertRelays.Location = new System.Drawing.Point(510, 299);
+            this.cboxMachInvertRelays.Location = new System.Drawing.Point(459, 100);
             this.cboxMachInvertRelays.Name = "cboxMachInvertRelays";
             this.cboxMachInvertRelays.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cboxMachInvertRelays.Size = new System.Drawing.Size(192, 70);
@@ -4453,36 +4520,6 @@
             this.cboxMachInvertRelays.Text = "Invert Relays";
             this.cboxMachInvertRelays.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cboxMachInvertRelays.UseVisualStyleBackColor = true;
-            // 
-            // groupBox10
-            // 
-            this.groupBox10.Controls.Add(this.cboxIsSendMachineControlToAutoSteer);
-            this.groupBox10.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox10.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox10.Location = new System.Drawing.Point(457, 84);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(279, 168);
-            this.groupBox10.TabIndex = 452;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "To AutoSteer Port";
-            // 
-            // cboxIsSendMachineControlToAutoSteer
-            // 
-            this.cboxIsSendMachineControlToAutoSteer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cboxIsSendMachineControlToAutoSteer.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cboxIsSendMachineControlToAutoSteer.BackColor = System.Drawing.Color.Transparent;
-            this.cboxIsSendMachineControlToAutoSteer.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cboxIsSendMachineControlToAutoSteer.FlatAppearance.CheckedBackColor = System.Drawing.Color.PaleGreen;
-            this.cboxIsSendMachineControlToAutoSteer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboxIsSendMachineControlToAutoSteer.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxIsSendMachineControlToAutoSteer.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.cboxIsSendMachineControlToAutoSteer.Location = new System.Drawing.Point(26, 66);
-            this.cboxIsSendMachineControlToAutoSteer.Name = "cboxIsSendMachineControlToAutoSteer";
-            this.cboxIsSendMachineControlToAutoSteer.Size = new System.Drawing.Size(230, 61);
-            this.cboxIsSendMachineControlToAutoSteer.TabIndex = 312;
-            this.cboxIsSendMachineControlToAutoSteer.Text = "Machine Control \r\nPGN";
-            this.cboxIsSendMachineControlToAutoSteer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cboxIsSendMachineControlToAutoSteer.UseVisualStyleBackColor = false;
             // 
             // groupBox8
             // 
@@ -4525,6 +4562,7 @@
             0,
             0,
             0});
+            this.nudLowerTime.Enter += new System.EventHandler(this.nudLowerTime_Enter);
             // 
             // nudRaiseTime
             // 
@@ -4551,6 +4589,7 @@
             0,
             0,
             0});
+            this.nudRaiseTime.Enter += new System.EventHandler(this.nudRaiseTime_Enter);
             // 
             // label65
             // 
@@ -4685,7 +4724,7 @@
             this.panelBottom.Controls.Add(this.btnOK);
             this.panelBottom.Controls.Add(this.lblSecTotalWidthMeters);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(203, 919);
+            this.panelBottom.Location = new System.Drawing.Point(203, 670);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(795, 68);
             this.panelBottom.TabIndex = 112;
@@ -4695,7 +4734,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1000, 989);
+            this.ClientSize = new System.Drawing.Size(1000, 740);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.panelChildForm);
             this.Controls.Add(this.panelLeftSideMenu);
@@ -4770,6 +4809,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabTSettings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudHydLiftLookAhead)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLookAheadOff)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTurnOffDelay)).EndInit();
@@ -4796,7 +4836,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudMaxCounts)).EndInit();
             this.tabAMachine.ResumeLayout(false);
             this.tabAMachine.PerformLayout();
-            this.groupBox10.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudLowerTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRaiseTime)).EndInit();
@@ -5009,6 +5048,7 @@
         private System.Windows.Forms.Button btnArduino;
         private System.Windows.Forms.Panel panelArduino;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn3;
         private System.Windows.Forms.Button btnMachineModule;
         private System.Windows.Forms.Button btnSteerModule;
         private System.Windows.Forms.TabPage tabUTurn;
@@ -5057,14 +5097,14 @@
         private System.Windows.Forms.Label label65;
         private System.Windows.Forms.CheckBox cboxIsHydOn;
         private System.Windows.Forms.Label label66;
-        private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.CheckBox cboxIsSendMachineControlToAutoSteer;
         private System.Windows.Forms.CheckBox cboxMachInvertRelays;
         private System.Windows.Forms.Label label68;
-        private System.Windows.Forms.Button btnSendToSteerArduino;
+        private System.Windows.Forms.Button btnSendSteerConfigPGN;
         private System.Windows.Forms.Label label67;
-        private System.Windows.Forms.Button btnChangeAttachment;
+        private System.Windows.Forms.Button btnSendMachinePGN;
         private System.Windows.Forms.CheckBox chkSteerInvertRelays;
         private System.Windows.Forms.CheckBox cboxDataInvertRoll;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.NumericUpDown nudHydLiftLookAhead;
     }
 }

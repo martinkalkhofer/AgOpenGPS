@@ -148,6 +148,14 @@ namespace AgOpenGPS
             }
 
             Properties.Vehicle.Default.Save();
+
+            mf.vehicle.isPivotBehindAntenna = Properties.Vehicle.Default.setVehicle_isPivotBehindAntenna;
+            mf.vehicle.isSteerAxleAhead = Properties.Vehicle.Default.setVehicle_isSteerAxleAhead;
+            mf.vehicle.vehicleType = Properties.Vehicle.Default.setVehicle_vehicleType;
+
+
+
+
         }
 
         #endregion
@@ -185,6 +193,11 @@ namespace AgOpenGPS
             Properties.Vehicle.Default.setVehicle_antennaOffset = (double)nudAntennaOffset.Value * mf.inchOrCm2m;
 
             Properties.Vehicle.Default.setVehicle_wheelbase = (double)nudWheelbase.Value * mf.inchOrCm2m;
+
+            mf.vehicle.antennaHeight = Properties.Vehicle.Default.setVehicle_antennaHeight;
+            mf.vehicle.antennaPivot = Properties.Vehicle.Default.setVehicle_antennaPivot;
+            mf.vehicle.antennaOffset = Properties.Vehicle.Default.setVehicle_antennaOffset;
+            mf.vehicle.wheelbase = Properties.Vehicle.Default.setVehicle_wheelbase;
 
             Properties.Vehicle.Default.Save();
         }
@@ -237,6 +250,8 @@ namespace AgOpenGPS
         private void tabVDimensions_Leave(object sender, EventArgs e)
         {
             Properties.Vehicle.Default.setVehicle_minTurningRadius = (double)nudMinTurnRadius.Value * mf.inchOrCm2m;
+
+            mf.vehicle.minTurningRadius = Properties.Vehicle.Default.setVehicle_minTurningRadius;
 
             Properties.Vehicle.Default.Save();
         }

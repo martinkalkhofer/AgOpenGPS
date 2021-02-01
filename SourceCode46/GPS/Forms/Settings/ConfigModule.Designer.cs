@@ -11,6 +11,8 @@ namespace AgOpenGPS
 {
     public partial class FormConfig
     {
+
+        #region Module Steer
         private void tabASteer_Enter(object sender, EventArgs e)
         {
             //tabAutoSteer.Text = gStr.gsAutoSteer;
@@ -72,7 +74,7 @@ namespace AgOpenGPS
             if (mf.KeypadToNUD((NumericUpDown)sender))
             {
             }
-            btnSendToSteerArduino.Focus();
+            btnSendSteerConfigPGN.Focus();
 
         }
         private void nudMaxCounts_Enter(object sender, EventArgs e)
@@ -80,7 +82,7 @@ namespace AgOpenGPS
             if (mf.KeypadToNUD((NumericUpDown)sender))
             {
             }
-            btnSendToSteerArduino.Focus();
+            btnSendSteerConfigPGN.Focus();
         }
 
         private void SaveSettings()
@@ -152,13 +154,93 @@ namespace AgOpenGPS
 
 
 
+        #endregion
+
+
+        #region Module MAchine
 
 
 
 
+        private void tabAMachine_Enter(object sender, EventArgs e)
+        {
+            label10.Text = gStr.gsRaiseTime;
+            label11.Text = gStr.gsLowerTime;
+            cboxIsHydOn.Text = gStr.gsEnableHydraulics;
+
+            int sett = Properties.Vehicle.Default.setArdMac_setting0;
+
+            if ((sett & 1) == 0) cboxMachInvertRelays.Checked = false;
+            else cboxMachInvertRelays.Checked = true;
+
+            if ((sett & 2) == 0) cboxIsHydOn.Checked = false;
+            else cboxIsHydOn.Checked = true;
+
+            nudRaiseTime.Value = (decimal)Properties.Vehicle.Default.setArdMac_hydRaiseTime;
+            nudLowerTime.Value = (decimal)Properties.Vehicle.Default.setArdMac_hydLowerTime;
+        }
+        private void tabAMachine_Leave(object sender, EventArgs e)
+        {
+            //nothing to do
+        }
+
+        private void nudRaiseTime_Enter(object sender, EventArgs e)
+        {
+            if (mf.KeypadToNUD((NumericUpDown)sender))
+            {
+            }
+            btnSendMachinePGN.Focus();
+        }
+
+        private void nudLowerTime_Enter(object sender, EventArgs e)
+        {
+            if (mf.KeypadToNUD((NumericUpDown)sender))
+            {
+            }
+            btnSendMachinePGN.Focus();
+        }
+
+        private void SaveSettingsMachine()
+        {
+            int set = 1;
+            int reset = 2046;
+            int sett = 0;
+
+            if (cboxMachInvertRelays.Checked) sett |= set;
+            else sett &= reset;
+
+            set <<= 1;
+            reset <<= 1;
+            reset += 1;
+            if (cboxIsHydOn.Checked) sett |= set;
+            else sett &= reset;
 
 
 
+            mf.p_FB.steerConfig[mf.p_FB.set0] = Properties.Vehicle.Default.setArdSteer_setting0;
+
+
+            Properties.Vehicle.Default.setArdMac_setting0 = (byte)sett;
+            Properties.Vehicle.Default.setArdMac_hydRaiseTime = (byte)nudRaiseTime.Value;
+            Properties.Vehicle.Default.setArdMac_hydLowerTime = (byte)nudLowerTime.Value;
+
+            mf.p_EE.machineConfig[mf.p_EE.set0] = (byte)sett;
+            mf.p_EE.machineConfig[mf.p_EE.raiseTime] = (byte)nudRaiseTime.Value;
+            mf.p_EE.machineConfig[mf.p_EE.lowerTime] = (byte)nudLowerTime.Value;
+
+            mf.SendPgnToLoop(mf.p_EE.machineConfig);
+
+        }
+
+        private void btnSendMachinePGN_Click(object sender, EventArgs e)
+        {
+            SaveSettingsMachine();
+
+            mf.TimedMessageBox(1000, gStr.gsMachinePort, gStr.gsModuleConfiguration);
+
+        }
+
+        #endregion
 
 
 

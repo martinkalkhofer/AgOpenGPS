@@ -214,6 +214,7 @@ namespace AgOpenGPS
             nudTurnOffDelay.Value = (decimal)Properties.Vehicle.Default.setVehicle_toolOffDelay;
             nudOffset.Value =       (decimal)(Properties.Vehicle.Default.setVehicle_toolOffset*mf.m2InchOrCm);
             nudOverlap.Value =      (decimal)(Properties.Vehicle.Default.setVehicle_toolOverlap*mf.m2InchOrCm);
+            nudHydLiftLookAhead.Value = (decimal)Properties.Vehicle.Default.setVehicle_hydraulicLiftLookAhead;
 
             btnNext3.Focus();
 
@@ -227,6 +228,7 @@ namespace AgOpenGPS
             Properties.Vehicle.Default.setVehicle_toolOffDelay = (double)nudTurnOffDelay.Value;
             Properties.Vehicle.Default.setVehicle_toolOffset = (double)nudOffset.Value*mf.inchOrCm2m;
             Properties.Vehicle.Default.setVehicle_toolOverlap = (double)nudOverlap.Value*mf.inchOrCm2m;
+            Properties.Vehicle.Default.setVehicle_hydraulicLiftLookAhead = (double)nudHydLiftLookAhead.Value;
 
             //line up manual buttons based on # of sections
             mf.LineUpManualBtns();
@@ -238,6 +240,10 @@ namespace AgOpenGPS
             mf.SectionCalcWidths();
 
             Properties.Vehicle.Default.Save();
+        }
+        private void nudHydLiftSecs_Enter(object sender, EventArgs e)
+        {
+
         }
 
         private void nudLookAhead_Enter(object sender, EventArgs e)
