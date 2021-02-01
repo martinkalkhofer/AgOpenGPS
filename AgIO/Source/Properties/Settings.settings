@@ -35,9 +35,6 @@
     <Setting Name="setNTRIP_casterIP" Type="System.String" Scope="User">
       <Value Profile="(Default)">69.75.31.235</Value>
     </Setting>
-    <Setting Name="setNTRIP_casterPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">2101</Value>
-    </Setting>
     <Setting Name="setNTRIP_mount" Type="System.String" Scope="User">
       <Value Profile="(Default)">AZU1</Value>
     </Setting>
@@ -118,6 +115,9 @@
     </Setting>
     <Setting Name="setPort_wasGPSConnected" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="setNTRIP_casterPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2101</Value>
     </Setting>
   </Settings>
 </SettingsFile>

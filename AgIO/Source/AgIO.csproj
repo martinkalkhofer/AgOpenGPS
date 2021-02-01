@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Drive\DriveV4\</OutputPath>
+    <OutputPath>..\..\ProgramV4\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -319,6 +319,7 @@
     <None Include="btnImages\gyro.png" />
     <None Include="btnImages\DrivePgm.png" />
     <Content Include="AgIO.ico" />
+    <None Include="btnImages\AppIcon64.png" />
     <Content Include="radar-icon.ico" />
   </ItemGroup>
   <ItemGroup />

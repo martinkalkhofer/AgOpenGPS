@@ -157,18 +157,6 @@ namespace AgIO.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2101")]
-        public int setNTRIP_casterPort {
-            get {
-                return ((int)(this["setNTRIP_casterPort"]));
-            }
-            set {
-                this["setNTRIP_casterPort"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("AZU1")]
         public string setNTRIP_mount {
             get {
@@ -488,6 +476,18 @@ namespace AgIO.Properties {
             }
             set {
                 this["setPort_wasGPSConnected"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2101")]
+        public int setNTRIP_casterPort {
+            get {
+                return ((int)(this["setNTRIP_casterPort"]));
+            }
+            set {
+                this["setNTRIP_casterPort"] = value;
             }
         }
     }

@@ -32,7 +32,6 @@
             this.panelLeftSideMenu = new System.Windows.Forms.Panel();
             this.panelArduino = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
-            this.btn3 = new System.Windows.Forms.Button();
             this.btnMachineModule = new System.Windows.Forms.Button();
             this.btnSteerModule = new System.Windows.Forms.Button();
             this.btnArduino = new System.Windows.Forms.Button();
@@ -389,20 +388,19 @@
             this.panelLeftSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeftSideMenu.Location = new System.Drawing.Point(2, 2);
             this.panelLeftSideMenu.Name = "panelLeftSideMenu";
-            this.panelLeftSideMenu.Size = new System.Drawing.Size(201, 736);
+            this.panelLeftSideMenu.Size = new System.Drawing.Size(201, 985);
             this.panelLeftSideMenu.TabIndex = 110;
             // 
             // panelArduino
             // 
             this.panelArduino.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
             this.panelArduino.Controls.Add(this.button2);
-            this.panelArduino.Controls.Add(this.btn3);
             this.panelArduino.Controls.Add(this.btnMachineModule);
             this.panelArduino.Controls.Add(this.btnSteerModule);
             this.panelArduino.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelArduino.Location = new System.Drawing.Point(0, 535);
+            this.panelArduino.Location = new System.Drawing.Point(0, 997);
             this.panelArduino.Name = "panelArduino";
-            this.panelArduino.Size = new System.Drawing.Size(201, 89);
+            this.panelArduino.Size = new System.Drawing.Size(184, 141);
             this.panelArduino.TabIndex = 116;
             // 
             // button2
@@ -426,26 +424,6 @@
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseVisualStyleBackColor = false;
             // 
-            // btn3
-            // 
-            this.btn3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(50)))));
-            this.btn3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn3.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btn3.FlatAppearance.BorderSize = 0;
-            this.btn3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(38)))), ((int)(((byte)(46)))));
-            this.btn3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(38)))), ((int)(((byte)(46)))));
-            this.btn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn3.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btn3.Location = new System.Drawing.Point(0, 50);
-            this.btn3.Name = "btn3";
-            this.btn3.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btn3.Size = new System.Drawing.Size(201, 25);
-            this.btn3.TabIndex = 0;
-            this.btn3.Text = "Btn3";
-            this.btn3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn3.UseVisualStyleBackColor = false;
-            // 
             // btnMachineModule
             // 
             this.btnMachineModule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(50)))));
@@ -457,10 +435,10 @@
             this.btnMachineModule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMachineModule.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMachineModule.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnMachineModule.Location = new System.Drawing.Point(0, 25);
+            this.btnMachineModule.Location = new System.Drawing.Point(0, 54);
             this.btnMachineModule.Name = "btnMachineModule";
             this.btnMachineModule.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnMachineModule.Size = new System.Drawing.Size(201, 25);
+            this.btnMachineModule.Size = new System.Drawing.Size(184, 54);
             this.btnMachineModule.TabIndex = 1;
             this.btnMachineModule.Text = "Machine";
             this.btnMachineModule.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -481,7 +459,7 @@
             this.btnSteerModule.Location = new System.Drawing.Point(0, 0);
             this.btnSteerModule.Name = "btnSteerModule";
             this.btnSteerModule.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSteerModule.Size = new System.Drawing.Size(201, 25);
+            this.btnSteerModule.Size = new System.Drawing.Size(184, 54);
             this.btnSteerModule.TabIndex = 2;
             this.btnSteerModule.Text = "Steer";
             this.btnSteerModule.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -499,10 +477,10 @@
             this.btnArduino.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnArduino.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnArduino.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnArduino.Location = new System.Drawing.Point(0, 497);
+            this.btnArduino.Location = new System.Drawing.Point(0, 937);
             this.btnArduino.Name = "btnArduino";
             this.btnArduino.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btnArduino.Size = new System.Drawing.Size(201, 38);
+            this.btnArduino.Size = new System.Drawing.Size(184, 60);
             this.btnArduino.TabIndex = 115;
             this.btnArduino.Text = "Module";
             this.btnArduino.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -521,10 +499,10 @@
             this.btnUTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUTurn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnUTurn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUTurn.Location = new System.Drawing.Point(0, 459);
+            this.btnUTurn.Location = new System.Drawing.Point(0, 877);
             this.btnUTurn.Name = "btnUTurn";
             this.btnUTurn.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btnUTurn.Size = new System.Drawing.Size(201, 38);
+            this.btnUTurn.Size = new System.Drawing.Size(184, 60);
             this.btnUTurn.TabIndex = 116;
             this.btnUTurn.Text = "UTurn";
             this.btnUTurn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -539,9 +517,9 @@
             this.panelDataSourcesSubMenu.Controls.Add(this.btnSubHeading);
             this.panelDataSourcesSubMenu.Controls.Add(this.btnSubFix);
             this.panelDataSourcesSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelDataSourcesSubMenu.Location = new System.Drawing.Point(0, 366);
+            this.panelDataSourcesSubMenu.Location = new System.Drawing.Point(0, 696);
             this.panelDataSourcesSubMenu.Name = "panelDataSourcesSubMenu";
-            this.panelDataSourcesSubMenu.Size = new System.Drawing.Size(201, 93);
+            this.panelDataSourcesSubMenu.Size = new System.Drawing.Size(184, 181);
             this.panelDataSourcesSubMenu.TabIndex = 7;
             // 
             // btnSubRoll
@@ -555,10 +533,10 @@
             this.btnSubRoll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubRoll.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubRoll.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubRoll.Location = new System.Drawing.Point(0, 50);
+            this.btnSubRoll.Location = new System.Drawing.Point(0, 108);
             this.btnSubRoll.Name = "btnSubRoll";
             this.btnSubRoll.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubRoll.Size = new System.Drawing.Size(201, 25);
+            this.btnSubRoll.Size = new System.Drawing.Size(184, 54);
             this.btnSubRoll.TabIndex = 0;
             this.btnSubRoll.Text = "Roll";
             this.btnSubRoll.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -576,10 +554,10 @@
             this.btnSubHeading.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubHeading.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubHeading.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubHeading.Location = new System.Drawing.Point(0, 25);
+            this.btnSubHeading.Location = new System.Drawing.Point(0, 54);
             this.btnSubHeading.Name = "btnSubHeading";
             this.btnSubHeading.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubHeading.Size = new System.Drawing.Size(201, 25);
+            this.btnSubHeading.Size = new System.Drawing.Size(184, 54);
             this.btnSubHeading.TabIndex = 1;
             this.btnSubHeading.Text = "Heading";
             this.btnSubHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -600,7 +578,7 @@
             this.btnSubFix.Location = new System.Drawing.Point(0, 0);
             this.btnSubFix.Name = "btnSubFix";
             this.btnSubFix.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubFix.Size = new System.Drawing.Size(201, 25);
+            this.btnSubFix.Size = new System.Drawing.Size(184, 54);
             this.btnSubFix.TabIndex = 2;
             this.btnSubFix.Text = "Fix Source";
             this.btnSubFix.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -618,10 +596,10 @@
             this.btnDataSources.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDataSources.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnDataSources.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDataSources.Location = new System.Drawing.Point(0, 328);
+            this.btnDataSources.Location = new System.Drawing.Point(0, 636);
             this.btnDataSources.Name = "btnDataSources";
             this.btnDataSources.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btnDataSources.Size = new System.Drawing.Size(201, 38);
+            this.btnDataSources.Size = new System.Drawing.Size(184, 60);
             this.btnDataSources.TabIndex = 114;
             this.btnDataSources.Text = "Sources";
             this.btnDataSources.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -638,9 +616,9 @@
             this.panelToolSubMenu.Controls.Add(this.btnSubHitch);
             this.panelToolSubMenu.Controls.Add(this.btnSubToolConfig);
             this.panelToolSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelToolSubMenu.Location = new System.Drawing.Point(0, 189);
+            this.panelToolSubMenu.Location = new System.Drawing.Point(0, 351);
             this.panelToolSubMenu.Name = "panelToolSubMenu";
-            this.panelToolSubMenu.Size = new System.Drawing.Size(201, 139);
+            this.panelToolSubMenu.Size = new System.Drawing.Size(184, 285);
             this.panelToolSubMenu.TabIndex = 4;
             // 
             // btnSubSwitches
@@ -654,10 +632,10 @@
             this.btnSubSwitches.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubSwitches.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubSwitches.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubSwitches.Location = new System.Drawing.Point(0, 100);
+            this.btnSubSwitches.Location = new System.Drawing.Point(0, 216);
             this.btnSubSwitches.Name = "btnSubSwitches";
             this.btnSubSwitches.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubSwitches.Size = new System.Drawing.Size(201, 25);
+            this.btnSubSwitches.Size = new System.Drawing.Size(184, 54);
             this.btnSubSwitches.TabIndex = 1;
             this.btnSubSwitches.Text = "Switches";
             this.btnSubSwitches.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -675,10 +653,10 @@
             this.btnSubToolSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubToolSettings.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubToolSettings.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubToolSettings.Location = new System.Drawing.Point(0, 75);
+            this.btnSubToolSettings.Location = new System.Drawing.Point(0, 162);
             this.btnSubToolSettings.Name = "btnSubToolSettings";
             this.btnSubToolSettings.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubToolSettings.Size = new System.Drawing.Size(201, 25);
+            this.btnSubToolSettings.Size = new System.Drawing.Size(184, 54);
             this.btnSubToolSettings.TabIndex = 4;
             this.btnSubToolSettings.Text = "Settings";
             this.btnSubToolSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -696,10 +674,10 @@
             this.btnSubSections.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubSections.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubSections.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubSections.Location = new System.Drawing.Point(0, 50);
+            this.btnSubSections.Location = new System.Drawing.Point(0, 108);
             this.btnSubSections.Name = "btnSubSections";
             this.btnSubSections.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubSections.Size = new System.Drawing.Size(201, 25);
+            this.btnSubSections.Size = new System.Drawing.Size(184, 54);
             this.btnSubSections.TabIndex = 0;
             this.btnSubSections.Text = "Sections";
             this.btnSubSections.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -717,10 +695,10 @@
             this.btnSubHitch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubHitch.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubHitch.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubHitch.Location = new System.Drawing.Point(0, 25);
+            this.btnSubHitch.Location = new System.Drawing.Point(0, 54);
             this.btnSubHitch.Name = "btnSubHitch";
             this.btnSubHitch.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubHitch.Size = new System.Drawing.Size(201, 25);
+            this.btnSubHitch.Size = new System.Drawing.Size(184, 54);
             this.btnSubHitch.TabIndex = 5;
             this.btnSubHitch.Text = "Hitch";
             this.btnSubHitch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -741,7 +719,7 @@
             this.btnSubToolConfig.Location = new System.Drawing.Point(0, 0);
             this.btnSubToolConfig.Name = "btnSubToolConfig";
             this.btnSubToolConfig.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubToolConfig.Size = new System.Drawing.Size(201, 25);
+            this.btnSubToolConfig.Size = new System.Drawing.Size(184, 54);
             this.btnSubToolConfig.TabIndex = 6;
             this.btnSubToolConfig.Text = "Configuration";
             this.btnSubToolConfig.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -759,10 +737,10 @@
             this.btnTool.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTool.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnTool.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTool.Location = new System.Drawing.Point(0, 151);
+            this.btnTool.Location = new System.Drawing.Point(0, 291);
             this.btnTool.Name = "btnTool";
             this.btnTool.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnTool.Size = new System.Drawing.Size(201, 38);
+            this.btnTool.Size = new System.Drawing.Size(184, 60);
             this.btnTool.TabIndex = 3;
             this.btnTool.Text = "Tool";
             this.btnTool.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -779,9 +757,9 @@
             this.panelVehicleSubMenu.Controls.Add(this.btnSubAntenna);
             this.panelVehicleSubMenu.Controls.Add(this.btnSubVehicleConfig);
             this.panelVehicleSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelVehicleSubMenu.Location = new System.Drawing.Point(0, 38);
+            this.panelVehicleSubMenu.Location = new System.Drawing.Point(0, 60);
             this.panelVehicleSubMenu.Name = "panelVehicleSubMenu";
-            this.panelVehicleSubMenu.Size = new System.Drawing.Size(201, 113);
+            this.panelVehicleSubMenu.Size = new System.Drawing.Size(184, 231);
             this.panelVehicleSubMenu.TabIndex = 2;
             // 
             // button1
@@ -811,10 +789,10 @@
             this.btnSubGuidance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubGuidance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubGuidance.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubGuidance.Location = new System.Drawing.Point(0, 75);
+            this.btnSubGuidance.Location = new System.Drawing.Point(0, 162);
             this.btnSubGuidance.Name = "btnSubGuidance";
             this.btnSubGuidance.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubGuidance.Size = new System.Drawing.Size(201, 25);
+            this.btnSubGuidance.Size = new System.Drawing.Size(184, 54);
             this.btnSubGuidance.TabIndex = 3;
             this.btnSubGuidance.Text = "Guidance";
             this.btnSubGuidance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -832,10 +810,10 @@
             this.btnSubDimensions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubDimensions.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubDimensions.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubDimensions.Location = new System.Drawing.Point(0, 50);
+            this.btnSubDimensions.Location = new System.Drawing.Point(0, 108);
             this.btnSubDimensions.Name = "btnSubDimensions";
             this.btnSubDimensions.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubDimensions.Size = new System.Drawing.Size(201, 25);
+            this.btnSubDimensions.Size = new System.Drawing.Size(184, 54);
             this.btnSubDimensions.TabIndex = 1;
             this.btnSubDimensions.Text = "Dimensions";
             this.btnSubDimensions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -853,10 +831,10 @@
             this.btnSubAntenna.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubAntenna.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubAntenna.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSubAntenna.Location = new System.Drawing.Point(0, 25);
+            this.btnSubAntenna.Location = new System.Drawing.Point(0, 54);
             this.btnSubAntenna.Name = "btnSubAntenna";
             this.btnSubAntenna.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubAntenna.Size = new System.Drawing.Size(201, 25);
+            this.btnSubAntenna.Size = new System.Drawing.Size(184, 54);
             this.btnSubAntenna.TabIndex = 2;
             this.btnSubAntenna.Text = "Antenna";
             this.btnSubAntenna.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -877,7 +855,7 @@
             this.btnSubVehicleConfig.Location = new System.Drawing.Point(0, 0);
             this.btnSubVehicleConfig.Name = "btnSubVehicleConfig";
             this.btnSubVehicleConfig.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnSubVehicleConfig.Size = new System.Drawing.Size(201, 25);
+            this.btnSubVehicleConfig.Size = new System.Drawing.Size(184, 54);
             this.btnSubVehicleConfig.TabIndex = 0;
             this.btnSubVehicleConfig.Text = "Configuration";
             this.btnSubVehicleConfig.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -898,7 +876,7 @@
             this.btnVehicle.Location = new System.Drawing.Point(0, 0);
             this.btnVehicle.Name = "btnVehicle";
             this.btnVehicle.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnVehicle.Size = new System.Drawing.Size(201, 38);
+            this.btnVehicle.Size = new System.Drawing.Size(184, 60);
             this.btnVehicle.TabIndex = 113;
             this.btnVehicle.Text = "Vehicle";
             this.btnVehicle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -994,7 +972,7 @@
             this.tabSummary.Location = new System.Drawing.Point(4, 44);
             this.tabSummary.Name = "tabSummary";
             this.tabSummary.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSummary.Size = new System.Drawing.Size(767, 618);
+            this.tabSummary.Size = new System.Drawing.Size(787, 618);
             this.tabSummary.TabIndex = 0;
             this.tabSummary.Text = "Summ";
             // 
@@ -1299,7 +1277,7 @@
             this.tabVConfig.Controls.Add(this.groupBox1);
             this.tabVConfig.Location = new System.Drawing.Point(4, 44);
             this.tabVConfig.Name = "tabVConfig";
-            this.tabVConfig.Size = new System.Drawing.Size(767, 618);
+            this.tabVConfig.Size = new System.Drawing.Size(787, 618);
             this.tabVConfig.TabIndex = 4;
             this.tabVConfig.Text = "vConfig";
             this.tabVConfig.Enter += new System.EventHandler(this.tabVConfig_Enter);
@@ -1384,7 +1362,7 @@
             this.tabVAntenna.Controls.Add(this.pboxAntenna);
             this.tabVAntenna.Location = new System.Drawing.Point(4, 44);
             this.tabVAntenna.Name = "tabVAntenna";
-            this.tabVAntenna.Size = new System.Drawing.Size(767, 618);
+            this.tabVAntenna.Size = new System.Drawing.Size(787, 618);
             this.tabVAntenna.TabIndex = 12;
             this.tabVAntenna.Text = "vAnt";
             this.tabVAntenna.Enter += new System.EventHandler(this.tabVAntenna_Enter);
@@ -1582,7 +1560,7 @@
             this.tabVDimensions.Controls.Add(this.pictureBox1);
             this.tabVDimensions.Location = new System.Drawing.Point(4, 44);
             this.tabVDimensions.Name = "tabVDimensions";
-            this.tabVDimensions.Size = new System.Drawing.Size(767, 618);
+            this.tabVDimensions.Size = new System.Drawing.Size(787, 618);
             this.tabVDimensions.TabIndex = 13;
             this.tabVDimensions.Text = "vDim";
             this.tabVDimensions.Enter += new System.EventHandler(this.tabVDimensions_Enter);
@@ -1660,7 +1638,7 @@
             this.tabVGuidance.Controls.Add(this.groupBox5);
             this.tabVGuidance.Location = new System.Drawing.Point(4, 44);
             this.tabVGuidance.Name = "tabVGuidance";
-            this.tabVGuidance.Size = new System.Drawing.Size(767, 618);
+            this.tabVGuidance.Size = new System.Drawing.Size(787, 618);
             this.tabVGuidance.TabIndex = 14;
             this.tabVGuidance.Text = "vGuid";
             this.tabVGuidance.Enter += new System.EventHandler(this.tabVGuidance_Enter);
@@ -1816,7 +1794,7 @@
             this.tabTConfig.Controls.Add(this.gboxAttachment);
             this.tabTConfig.Location = new System.Drawing.Point(4, 44);
             this.tabTConfig.Name = "tabTConfig";
-            this.tabTConfig.Size = new System.Drawing.Size(767, 618);
+            this.tabTConfig.Size = new System.Drawing.Size(787, 618);
             this.tabTConfig.TabIndex = 11;
             this.tabTConfig.Text = "tConfig";
             this.tabTConfig.Enter += new System.EventHandler(this.tabTConfig_Enter);
@@ -1910,7 +1888,7 @@
             this.tabTHitch.Controls.Add(this.picboxToolHitch);
             this.tabTHitch.Location = new System.Drawing.Point(4, 44);
             this.tabTHitch.Name = "tabTHitch";
-            this.tabTHitch.Size = new System.Drawing.Size(767, 618);
+            this.tabTHitch.Size = new System.Drawing.Size(787, 618);
             this.tabTHitch.TabIndex = 5;
             this.tabTHitch.Text = "tHitch";
             this.tabTHitch.Enter += new System.EventHandler(this.tabTHitch_Enter);
@@ -2063,7 +2041,7 @@
             this.tabTSections.Controls.Add(this.nudSection1);
             this.tabTSections.Location = new System.Drawing.Point(4, 44);
             this.tabTSections.Name = "tabTSections";
-            this.tabTSections.Size = new System.Drawing.Size(767, 618);
+            this.tabTSections.Size = new System.Drawing.Size(787, 618);
             this.tabTSections.TabIndex = 7;
             this.tabTSections.Text = "tSect";
             this.tabTSections.Enter += new System.EventHandler(this.tabTSections_Enter);
@@ -2834,7 +2812,7 @@
             this.tabTSwitches.Controls.Add(this.groupBox3);
             this.tabTSwitches.Location = new System.Drawing.Point(4, 44);
             this.tabTSwitches.Name = "tabTSwitches";
-            this.tabTSwitches.Size = new System.Drawing.Size(767, 618);
+            this.tabTSwitches.Size = new System.Drawing.Size(787, 618);
             this.tabTSwitches.TabIndex = 9;
             this.tabTSwitches.Text = "tSwit";
             this.tabTSwitches.Enter += new System.EventHandler(this.tabTSwitches_Enter);
@@ -3130,7 +3108,7 @@
             this.tabDFix.Controls.Add(this.groupBox4);
             this.tabDFix.Location = new System.Drawing.Point(4, 44);
             this.tabDFix.Name = "tabDFix";
-            this.tabDFix.Size = new System.Drawing.Size(767, 618);
+            this.tabDFix.Size = new System.Drawing.Size(787, 618);
             this.tabDFix.TabIndex = 17;
             this.tabDFix.Text = "dFix";
             this.tabDFix.Enter += new System.EventHandler(this.tabDFix_Enter);
@@ -3261,7 +3239,7 @@
             this.tabDHeading.Controls.Add(this.headingGroupBox);
             this.tabDHeading.Location = new System.Drawing.Point(4, 44);
             this.tabDHeading.Name = "tabDHeading";
-            this.tabDHeading.Size = new System.Drawing.Size(767, 618);
+            this.tabDHeading.Size = new System.Drawing.Size(787, 618);
             this.tabDHeading.TabIndex = 15;
             this.tabDHeading.Text = "dHead";
             this.tabDHeading.Enter += new System.EventHandler(this.tabDHeading_Enter);
@@ -3567,7 +3545,7 @@
             this.tabDRoll.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.tabDRoll.Location = new System.Drawing.Point(4, 44);
             this.tabDRoll.Name = "tabDRoll";
-            this.tabDRoll.Size = new System.Drawing.Size(767, 618);
+            this.tabDRoll.Size = new System.Drawing.Size(787, 618);
             this.tabDRoll.TabIndex = 16;
             this.tabDRoll.Text = "dRoll";
             this.tabDRoll.Enter += new System.EventHandler(this.tabDRoll_Enter);
@@ -3788,7 +3766,7 @@
             this.tabUTurn.Controls.Add(this.label54);
             this.tabUTurn.Location = new System.Drawing.Point(4, 44);
             this.tabUTurn.Name = "tabUTurn";
-            this.tabUTurn.Size = new System.Drawing.Size(767, 618);
+            this.tabUTurn.Size = new System.Drawing.Size(787, 618);
             this.tabUTurn.TabIndex = 18;
             this.tabUTurn.Text = "uTurn";
             this.tabUTurn.Enter += new System.EventHandler(this.tabUTurn_Enter);
@@ -4133,7 +4111,7 @@
             this.tabASteer.Controls.Add(this.label55);
             this.tabASteer.Location = new System.Drawing.Point(4, 44);
             this.tabASteer.Name = "tabASteer";
-            this.tabASteer.Size = new System.Drawing.Size(767, 618);
+            this.tabASteer.Size = new System.Drawing.Size(787, 618);
             this.tabASteer.TabIndex = 19;
             this.tabASteer.Text = "aSteer";
             this.tabASteer.Enter += new System.EventHandler(this.tabASteer_Enter);
@@ -4428,7 +4406,7 @@
             this.tabAMachine.Controls.Add(this.label56);
             this.tabAMachine.Location = new System.Drawing.Point(4, 44);
             this.tabAMachine.Name = "tabAMachine";
-            this.tabAMachine.Size = new System.Drawing.Size(767, 618);
+            this.tabAMachine.Size = new System.Drawing.Size(787, 618);
             this.tabAMachine.TabIndex = 20;
             this.tabAMachine.Text = "aMach";
             // 
@@ -4707,7 +4685,7 @@
             this.panelBottom.Controls.Add(this.btnOK);
             this.panelBottom.Controls.Add(this.lblSecTotalWidthMeters);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(203, 670);
+            this.panelBottom.Location = new System.Drawing.Point(203, 919);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(795, 68);
             this.panelBottom.TabIndex = 112;
@@ -4717,7 +4695,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1000, 740);
+            this.ClientSize = new System.Drawing.Size(1000, 989);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.panelChildForm);
             this.Controls.Add(this.panelLeftSideMenu);
@@ -5031,7 +5009,6 @@
         private System.Windows.Forms.Button btnArduino;
         private System.Windows.Forms.Panel panelArduino;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btn3;
         private System.Windows.Forms.Button btnMachineModule;
         private System.Windows.Forms.Button btnSteerModule;
         private System.Windows.Forms.TabPage tabUTurn;

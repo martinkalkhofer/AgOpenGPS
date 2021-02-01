@@ -158,14 +158,14 @@ namespace AgIO
             }
         }
 
-        private void StartDrive()
+        private void StartAOG()
         {
 
             DirectoryInfo di = new DirectoryInfo(Application.StartupPath);
             string strPath = di.ToString();
             try
             {
-                strPath += "\\Drive.exe";
+                strPath += "\\AgOpenGPS.exe";
                 Process.Start(strPath);
             }
             catch
@@ -215,7 +215,7 @@ namespace AgIO
 
         private void stripRunDrive_Click(object sender, EventArgs e)
         {
-            StartDrive();
+            StartAOG();
         }
 
         private void nTRIPToolStrip_Click(object sender, EventArgs e)
