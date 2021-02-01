@@ -119,6 +119,9 @@ namespace AgOpenGPS
         //the autoManual drive button. Assume in Auto
         public bool isInAutoDrive = true;
 
+        //isGPSData form up
+        public bool isGPSSentencesOn = false;
+
         /// <summary>
         /// create the scene camera
         /// </summary>
@@ -206,11 +209,6 @@ namespace AgOpenGPS
         public ResourceManager _rm;
 
         /// <summary>
-        /// AutoSteer class of properties
-        /// </summary>
-        public CAutoSteer ast;
-
-        /// <summary>
         /// Heading, Roll, Pitch, GPS, Properties
         /// </summary>
         public CAHRS ahrs;
@@ -259,7 +257,6 @@ namespace AgOpenGPS
             aboutToolStripMenuItem.Text = gStr.gsAbout;
             shortcutKeysToolStripMenuItem.Text = gStr.gsShortcutKeys;
             menustripLanguage.Text = gStr.gsLanguage;
-            gPSInfoToolStripMenuItem.Text = gStr.gsModuleInfo;
             showStartScreenToolStripMenuItem.Text = gStr.gsShowStartScreen;
             //Display Menu
 
@@ -279,17 +276,14 @@ namespace AgOpenGPS
             fileExplorerToolStripMenuItem.Text = gStr.gsWindowsFileExplorer;
 
             //Settings Menu
-            toolstripYouTurnConfig.Text = gStr.gsUTurn;
+            //toolstripYouTurnConfig.Text = gStr.gsUTurn;
             toolstripAutoSteerConfig.Text = gStr.gsAutoSteer;
             steerChartStripMenu.Text = gStr.gsSteerChart;
             //toolstripVehicleConfig.Text = gStr.gsVehicle;
             //toolstripDisplayConfig.Text = gStr.gsDataSources;
-            toolstripUSBPortsConfig.Text = gStr.gsSerialPorts;
-            toolstripUDPConfig.Text = gStr.gsUDP;
-            toolStripNTRIPConfig.Text = gStr.gsNTRIP;
+            //toolstripUSBPortsConfig.Text = gStr.gsSerialPorts;
 
             //Tools Menu
-            treePlantToolStrip.Text = gStr.gsTreePlanter;
             SmoothABtoolStripMenu.Text = gStr.gsSmoothABCurve;
             toolStripBtnMakeBndContour.Text = gStr.gsMakeBoundaryContours;
             boundariesToolStripMenuItem.Text = gStr.gsBoundary;
@@ -300,7 +294,7 @@ namespace AgOpenGPS
             webcamToolStrip.Text = gStr.gsWebCam;
             googleEarthFlagsToolStrip.Text = gStr.gsGoogleEarth;
             offsetFixToolStrip.Text = gStr.gsOffsetFix;
-            moduleConfigToolStripMenuItem.Text = gStr.gsModuleConfiguration;
+            //moduleConfigToolStripMenuItem.Text = gStr.gsModuleConfiguration;
 
             //Recorded Path
             deletePathMenu.Text = gStr.gsDeletePath;
@@ -309,10 +303,6 @@ namespace AgOpenGPS
             pausePathMenu.Text = gStr.gsPauseResume;
 
             stripSectionColor.Text = Application.ProductVersion.ToString(CultureInfo.InvariantCulture);
-
-            //NTRIP
-            this.lblWatch.Text = "Wait GPS";
-            NTRIPStartStopStrip.Text = gStr.gsNTRIPOff;
 
             //time keeper
             secondsSinceStart = (DateTime.Now - Process.GetCurrentProcess().StartTime).TotalSeconds;
@@ -350,7 +340,7 @@ namespace AgOpenGPS
             //yt = new CYouTurn(this);
 
             //module communication
-            mc = new CModuleComm(this);
+            mc = new CModuleComm();
 
             //boundary object
             bnd = new CBoundary(this);
@@ -364,11 +354,8 @@ namespace AgOpenGPS
             //nmea simulator built in.
             sim = new CSim(this);
 
-            //all the autosteer objects
-            ast = new CAutoSteer(this);
-
             ////all the attitude, heading, roll, pitch reference system
-            //ahrs = new CAHRS(this);
+            ahrs = new CAHRS();
 
             //fieldData all in one place
             fd = new CFieldData(this);
@@ -378,9 +365,6 @@ namespace AgOpenGPS
 
             //resource for gloabal language strings
             _rm = new ResourceManager("AgOpenGPS.gStr", Assembly.GetExecutingAssembly());
-
-            // Add Message Event handler for Form decoupling from client socket thread
-            updateRTCM_DataEvent = new UpdateRTCM_Data(OnAddMessage);
 
             // Access to workswitch functionality
             workSwitch = new CWorkSwitch(this);
@@ -418,6 +402,11 @@ namespace AgOpenGPS
         {
             this.MouseWheel += ZoomByMouseWheel;
 
+            //start udp server if required
+            StartLocalUDPServer();
+
+            vehicle = new CVehicle(this);
+
 
             // load all the gui elements in gui.designer.cs
             LoadSettings();
@@ -426,6 +415,26 @@ namespace AgOpenGPS
         //form is closing so tidy up and save settings
         private void FormGPS_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (sendToAppSocket != null)
+            {
+                try
+                {
+                    sendToAppSocket.Shutdown(SocketShutdown.Both);
+                }
+                catch { }
+                finally { sendToAppSocket.Close(); }
+            }
+
+            if (recvFromAppSocket != null)
+            {
+                try
+                {
+                    recvFromAppSocket.Shutdown(SocketShutdown.Both);
+                }
+                catch { }
+                finally { recvFromAppSocket.Close(); }
+            }
+
             //Save, return, cancel save
             if (isJobStarted)
             {
@@ -436,7 +445,6 @@ namespace AgOpenGPS
                 {
                     //OK
                     case 0:
-                        isUDPSendConnected = false;
                         Settings.Default.setF_CurrentDir = currentFieldDirectory;
                         Settings.Default.Save();
 
@@ -789,44 +797,6 @@ namespace AgOpenGPS
         }// Load Bitmaps And Convert To Textures
 
         //start the UDP server
-        private void StartUDPServer()
-        {            
-            try
-            {
-                // Initialise the delegate which updates the message received
-                updateRecvMessageDelegate = UpdateRecvMessage;
-
-                // Initialise the socket
-                sendSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                recvSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-
-                sendSocket.EnableBroadcast = true;
-                recvSocket.EnableBroadcast = true;
-
-                // Initialise the IPEndPoint for the server and listen on port 9999
-                IPEndPoint recv = new IPEndPoint(IPAddress.Any, Properties.Settings.Default.setIP_thisPort);
-
-                // Associate the socket with this IP address and port
-                recvSocket.Bind(recv);
-
-                // Initialise the IPEndPoint for the server to send on port 9998
-                IPEndPoint server = new IPEndPoint(IPAddress.Any, 9998);
-                sendSocket.Bind(server);
-
-                // Initialise the IPEndPoint for the client - async listner client only!
-                EndPoint client = new IPEndPoint(IPAddress.Any, 0);
-
-                // Start listening for incoming data
-                recvSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None,
-                                                ref client, new AsyncCallback(ReceiveData), recvSocket);
-                isUDPSendConnected = true;
-            }
-            catch (Exception e)
-            {
-                //WriteErrorLog("UDP Server" + e);
-                MessageBox.Show("Load Error: " + e.Message, "UDP Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
         public void StartLocalUDPServer()
         {
@@ -834,32 +804,45 @@ namespace AgOpenGPS
             try
             {
                 // Initialise the delegate which updates the status
-                updateStatusDelegate = new UpdateStatusDelegate(UpdateAppStatus);
+                updateStatusDelegate = new UpdateLoopDelegate(UpdateAppStatus);
 
                 // Initialise the socket
                 sendToAppSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
-                // Initialise the IPEndPoint for the server to send on port 15554
-                IPEndPoint server = new IPEndPoint(IPAddress.Loopback, 15554);
-                sendToAppSocket.Bind(server);
+                //sendToAppSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+                sendToAppSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, true);
+
+                //Our external app address & port number
+                epAppOne = new IPEndPoint(IPAddress.Parse("127.255.255.255"), 17777);
+
+
 
                 // Initialise the client socket
                 recvFromAppSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
                 // Initialise the IPEndPoint for and listen on port 15555
-                IPEndPoint client = new IPEndPoint(IPAddress.Loopback, 15555);
-                recvFromAppSocket.Bind(client);
-
-                //Our external app address & port number
-                epAppOne = new IPEndPoint(IPAddress.Loopback, 17777);
-                //epAppTwo = new IPEndPoint(zeroIP, 16666);
+                recvFromAppSocket.Bind(new IPEndPoint(IPAddress.Loopback, 15555));
 
                 // Initialise the IPEndPoint for the client
-                EndPoint clientEp = new IPEndPoint(IPAddress.Loopback, 0);
+                EndPoint clientEp = new IPEndPoint(IPAddress.Any, 0);
 
                 // Start listening for incoming data
-                recvFromAppSocket.BeginReceiveFrom(appBuffer, 0, appBuffer.Length, SocketFlags.None,
-                                                ref clientEp, new AsyncCallback(ReceiveAppData), recvFromAppSocket);
+                recvFromAppSocket.BeginReceiveFrom(loopBuffer, 0, loopBuffer.Length, SocketFlags.None, ref clientEp, new AsyncCallback(ReceiveAppData), recvFromAppSocket);
+
+                string strPath = Application.StartupPath;
+
+                try
+                {
+                    strPath += "\\AgIO.exe";
+                    //Process.Start(strPath);
+                }
+
+                catch
+                {
+                    TimedMessageBox(2000, "Program Miising", "Can't Find AgIO.exe");
+                }
+                //strPath += "\\Looper\\Looper.exe";
+                //Process.Start(strPath);
             }
             catch (Exception ex)
             {
@@ -891,6 +874,49 @@ namespace AgOpenGPS
                 if (yt.isYouTurnBtnOn) btnAutoYouTurn.PerformClick();
             }
         }
+
+        private void BuildMachineByte()
+        {
+            int set = 1;
+            int reset = 2046;
+            p_FE.steerData[p_FE.sc1to8] = (byte)0;
+            p_FE.steerData[p_FE.sc9to16] = (byte)0;
+
+            int machine = 0;
+
+            //check if super section is on
+            if (section[tool.numOfSections].isSectionOn)
+            {
+                for (int j = 0; j < tool.numOfSections; j++)
+                {
+                    //all the sections are on, so set them
+                    machine = machine | set;
+                    set = (set << 1);
+                }
+            }
+
+            else
+            {
+                for (int j = 0; j < MAXSECTIONS; j++)
+                {
+                    //set if on, reset bit if off
+                    if (section[j].isSectionOn) machine |= set;
+                    else machine = machine & reset;
+
+                    //move set and reset over 1 bit left
+                    set = (set << 1);
+                    reset = (reset << 1);
+                    reset = (reset + 1);
+                }
+            }
+
+            p_FE.steerData[p_FE.sc9to16] = unchecked((byte)(machine >> 8));
+            p_FE.steerData[p_FE.sc1to8] = unchecked((byte)machine);
+
+            //autosteer gets only the first 8 sections
+            //mc.autoSteerData[mc.sdMachineLo] = unchecked((byte)(mc.machineData[mc.rdSectionControlByteLo]));
+        }
+
 
         //dialog for requesting user to save or cancel
         public int SaveOrNot(bool closing)
@@ -1057,60 +1083,6 @@ namespace AgOpenGPS
                 }
             }
             tbox.BackColor = System.Drawing.Color.AliceBlue;
-        }
-
-
-        //show the communications window
-        private void SettingsCommunications()
-        {
-            using (var form = new FormCommSet(this))
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    fixUpdateTime = 1 / (double)fixUpdateHz;
-                }
-            }
-            //SendSteerSettingsOutAutoSteerPort();
-            //SendArduinoSettingsOutToAutoSteerPort();
-        }
-
-        //show the UDP ethernet settings page
-        private void SettingsUDP()
-        {
-            using (var form = new FormUDP(this))
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    //Clicked Save
-                    Application.Restart();
-                    Environment.Exit(0);
-                }
-                else
-                {
-                    //Clicked X - No Save
-                }
-            }
-        }
-
-        private void SettingsNTRIP()
-        {
-            using (var form = new FormNtrip(this))
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    if (isNTRIP_Connected)
-                    {
-                        SettingsShutDownNTRIP();
-                    }
-                }
-                else
-                {
-                    //Clicked X - No Save
-                }
-            }
         }
 
         //function to set section positions
@@ -1285,7 +1257,7 @@ namespace AgOpenGPS
             btnHeadlandOnOff.Image = Properties.Resources.HeadlandOff;
 
             //make sure hydraulic lift is off
-            mc.machineData[mc.mdHydLift] = 0;
+            p_EF.machineData[p_EF.hydLift] = 0;
             vehicle.isHydLiftOn = false;
             btnHydLift.Image = Properties.Resources.HydraulicLiftOff;
 

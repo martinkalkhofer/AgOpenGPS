@@ -121,46 +121,17 @@ namespace AgOpenGPS
 
                     if (isMetric)
                     {
-                        //lblTotalFieldArea.Text = fd.AreaBoundaryLessInnersHectares;
-                        //lblTotalAppliedArea.Text = fd.WorkedHectares;
-                        //lblWorkRemaining.Text = fd.WorkedAreaRemainHectares;
-                        //lblPercentRemaining.Text = fd.WorkedAreaRemainPercentage;
-                        //lblTimeRemaining.Text = fd.TimeTillFinished;
-
                         fieldStatusStripText.Text = fd.WorkedAreaRemainHectares + "\r\n"+
                                                        fd.WorkedAreaRemainPercentage +"\r\n" +
                                                        fd.TimeTillFinished + "\r\n" +
                                                        fd.WorkRateHectares;
-
-
-                        //lblAreaAppliedMinusOverlap.Text = ((fd.actualAreaCovered * glm.m2ha).ToString("N2"));
-                        //lblAreaMinusActualApplied.Text = (((fd.areaBoundaryOuterLessInner - fd.actualAreaCovered) * glm.m2ha).ToString("N2"));
-                        //lblOverlapPercent.Text = (fd.overlapPercent.ToString("N2")) + "%";
-                        //lblAreaOverlapped.Text = (((fd.workedAreaTotal - fd.actualAreaCovered) * glm.m2ha).ToString("N3"));
-
-                        //btnManualOffOn.Text = fd.AreaBoundaryLessInnersHectares;
-                        //lblEqSpec.Text = (Math.Round(tool.toolWidth, 2)).ToString() + " m  " + vehicleFileName + toolFileName;
                     }
                     else //imperial
                     {
-                        //lblTotalFieldArea.Text = fd.AreaBoundaryLessInnersAcres;
-                        //lblTotalAppliedArea.Text = fd.WorkedAcres;
-                        //lblWorkRemaining.Text = fd.WorkedAreaRemainAcres;
-                        //lblPercentRemaining.Text = fd.WorkedAreaRemainPercentage;
-                        //lblTimeRemaining.Text = fd.TimeTillFinished;
-
-                        //lblAreaAppliedMinusOverlap.Text = ((fd.actualAreaCovered * glm.m2ac).ToString("N2"));
-                        //lblAreaMinusActualApplied.Text = (((fd.areaBoundaryOuterLessInner - fd.actualAreaCovered) * glm.m2ac).ToString("N2"));
-                        //lblOverlapPercent.Text = (fd.overlapPercent.ToString("N2")) + "%";
-                        //lblAreaOverlapped.Text = (((fd.workedAreaTotal - fd.actualAreaCovered) * glm.m2ac).ToString("N3"));
-
                         fieldStatusStripText.Text = fd.WorkedAreaRemainAcres + "\r\n" +
                                fd.WorkedAreaRemainPercentage + "\r\n" +
                                fd.TimeTillFinished + "\r\n" +
                                fd.WorkRateAcres;
-
-                        //btnManualOffOn.Text = fd.AreaBoundaryLessInnersAcres;
-                        //lblEqSpec.Text =  (Math.Round(tool.toolWidth * glm.m2ft, 2)).ToString() + " ft  " + vehicleFileName + toolFileName;
                     }
 
                     //not Metric/Standard units sensitive
@@ -183,12 +154,11 @@ namespace AgOpenGPS
                     minuteCounter++;
                     tenMinuteCounter++;
 
-                    //if (isRTK)
-                    //{
-                    //    if (pn.fixQuality == 4) lblHz.BackColor = Color.Transparent;
-                    //    else lblHz.BackColor = Color.Salmon;
-                    //}
-                    //else lblHz.BackColor = Color.Transparent;
+
+                    //send lat and lon
+                    p_D0.LoadLatitudeLongitude(pn.latitude, pn.longitude);
+                    SendPgnToLoop(p_D0.latLong);
+
 
                     if (ABLine.isBtnABLineOn && !ct.isContourBtnOn)
                     {
@@ -198,19 +168,6 @@ namespace AgOpenGPS
                     {
                         btnEditHeadingB.Text = ((int)(curve.moveDistance * 100)).ToString();
                     }
-
-                    //pbarAutoSteerComm.Value = pbarSteer;
-                    //pbarUDPComm.Value = pbarUDP;
-                    //pbarMachineComm.Value = pbarMachine;
-
-                    //if (mc.steerSwitchValue == 0)
-                    //{
-                    //    this.btnAutoSteer.BackColor = System.Drawing.Color.SkyBlue;
-                    //}
-                    //else
-                    //{
-                    //    this.btnAutoSteer.BackColor = System.Drawing.Color.Transparent;
-                    //}
                     
                     //AutoSteerAuto button enable - Ray Bear inspired code - Thx Ray!
                     if (isJobStarted && ahrs.isAutoSteerAuto && 
@@ -231,7 +188,6 @@ namespace AgOpenGPS
                         ) btnAutoSteer.PerformClick();
 
                     //do all the NTRIP routines
-                    DoNTRIPSecondRoutine();
 
                     //the main formgps window
                     if (isMetric)  //metric or imperial
@@ -430,34 +386,6 @@ namespace AgOpenGPS
             dir = Path.GetDirectoryName(fieldsDirectory);
             if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
 
-            //set baud and port from last time run
-            baudRateGPS = Settings.Default.setPort_baudRate;
-            portNameGPS = Settings.Default.setPort_portNameGPS;
-
-            //try and open
-            SerialPortOpenGPS();
-
-            if (spGPS.IsOpen)
-            {
-                simulatorOnToolStripMenuItem.Checked = false;
-                panelSim.Visible = false;
-                timerSim.Enabled = false;
-
-                Settings.Default.setMenu_isSimulatorOn = simulatorOnToolStripMenuItem.Checked;
-                Settings.Default.Save();
-            }
-
-
-            //same for SectionMachine port
-            portNameMachine = Settings.Default.setPort_portNameMachine;
-            wasRateMachineConnectedLastRun = Settings.Default.setPort_wasMachineConnected;
-            if (wasRateMachineConnectedLastRun) SerialPortMachineOpen();
-
-            //same for AutoSteer port
-            portNameAutoSteer = Settings.Default.setPort_portNameAutoSteer;
-            wasAutoSteerConnectedLastRun = Settings.Default.setPort_wasAutoSteerConnected;
-            if (wasAutoSteerConnectedLastRun) SerialPortAutoSteerOpen();
-
             simulatorOnToolStripMenuItem.Checked = Settings.Default.setMenu_isSimulatorOn;
             if (simulatorOnToolStripMenuItem.Checked)
             {
@@ -529,8 +457,6 @@ namespace AgOpenGPS
             //boundaryToolStripBtn.Enabled = false;
             toolStripBtnDropDownBoundaryTools.Enabled = false;
 
-            LoadNTRIPSettings();
-
             if (hd.isOn) btnHeadlandOnOff.Image = Properties.Resources.HeadlandOn;
             else btnHeadlandOnOff.Image = Properties.Resources.HeadlandOff;
 
@@ -557,8 +483,6 @@ namespace AgOpenGPS
             //update the field data areas
             fd.UpdateFieldBoundaryGUIAreas();
 
-            vehicle = new CVehicle(this);
-
             tool = new CTool(this);
 
             //Set width of section and positions for each section
@@ -577,9 +501,6 @@ namespace AgOpenGPS
             yt.rowSkipsWidth = Properties.Vehicle.Default.set_youSkipWidth;
             cboxpRowWidth.SelectedIndex = yt.rowSkipsWidth - 1;
 
-            //all the attitude, heading, roll, pitch reference system
-            ahrs = new CAHRS(this);
-
             DisableYouTurnButtons();
             //set the correct zoom and grid
             camera.camSetDistance = camera.zoomValue * camera.zoomValue * -1;
@@ -587,12 +508,6 @@ namespace AgOpenGPS
 
             //which heading source is being used
             headingFromSource = Settings.Default.setGPS_headingFromWhichSource;
-
-            //start udp server if required
-            if (Properties.Settings.Default.setUDP_isOn
-                && !Properties.Settings.Default.setUDP_isInterAppOn) StartUDPServer();
-
-            if (Properties.Settings.Default.setUDP_isInterAppOn) StartLocalUDPServer();
 
             //clear the flags
             flagPts.Clear();
@@ -655,35 +570,6 @@ namespace AgOpenGPS
                 }
             }
 
-        }
-
-        public void LoadNTRIPSettings()
-        {
-            if (Properties.Settings.Default.setNTRIP_isOn)
-            {
-                isNTRIP_RequiredOn = true;
-            }
-            else
-            {
-                isNTRIP_RequiredOn = false;
-            }
-
-            if (isNTRIP_RequiredOn)
-            {
-                //btnStartStopNtrip.Visible = true;
-                NTRIPStartStopStrip.Visible = true;
-                lblWatch.Visible = true;
-                NTRIPBytesMenu.Visible = true;
-                pbarNtripMenu.Visible = true;
-            }
-            else
-            {
-                //btnStartStopNtrip.Visible = false;
-                NTRIPStartStopStrip.Visible = false;
-                lblWatch.Visible = false;
-                NTRIPBytesMenu.Visible = false;
-                pbarNtripMenu.Visible = false;
-            }
         }
 
         public void SwapDayNightMode()
@@ -1559,66 +1445,6 @@ namespace AgOpenGPS
             yt.ResetYouTurn();
         }
 
-        private void DoNTRIPSecondRoutine()
-        {
-            //count up the ntrip clock only if everything is alive
-            if (startCounter > 50 && recvCounter < 20 && isNTRIP_RequiredOn)
-            {
-                IncrementNTRIPWatchDog();
-            }
-
-            //Have we connection
-            if (isNTRIP_RequiredOn && !isNTRIP_Connected && !isNTRIP_Connecting)
-            {
-                if (!isNTRIP_Starting && ntripCounter > 20)
-                {
-                    StartNTRIP();
-                }
-            }
-
-            if (isNTRIP_Connecting)
-            {
-                if (ntripCounter > 28)
-                {
-                    TimedMessageBox(2000, gStr.gsSocketConnectionProblem, gStr.gsNotConnectingToCaster);
-                    ReconnectRequest();
-                }
-                if (clientSocket != null && clientSocket.Connected)
-                {
-                    //TimedMessageBox(2000, "NTRIP Not Connected", " At the StartNTRIP() ");
-                    //ReconnectRequest();
-                    //return;
-                    SendAuthorization();
-                }
-
-            }
-
-            if (isNTRIP_RequiredOn)
-            {
-                //update byte counter and up counter
-                if (ntripCounter > 59) NTRIPStartStopStrip.Text = (ntripCounter / 60) + " Mins";
-                else if (ntripCounter < 60 && ntripCounter > 22) NTRIPStartStopStrip.Text = ntripCounter + " Secs";
-                else NTRIPStartStopStrip.Text = "In " + (Math.Abs(ntripCounter - 22)) + " secs";
-
-                pbarNtripMenu.Value = unchecked((byte)(tripBytes * 0.02));
-                NTRIPBytesMenu.Text = ((tripBytes) * 0.001).ToString("###,###,###") + " kb";
-
-                //watchdog for Ntrip
-                if (isNTRIP_Connecting) lblWatch.Text = gStr.gsAuthourizing;
-                else
-                {
-                    if (NTRIP_Watchdog > 10) lblWatch.Text = gStr.gsWaiting;
-                    else lblWatch.Text = gStr.gsListening;
-                }
-
-                if (sendGGAInterval > 0 && isNTRIP_Sending)
-                {
-                    lblWatch.Text = "Send GGA";
-                    isNTRIP_Sending = false;
-                }
-            }
-        }
-
         private void ShowNoGPSWarning()
         {
             //update main window
@@ -1682,7 +1508,7 @@ namespace AgOpenGPS
             }
         }
         public string SetSteerAngle { get { return ((double)(guidanceLineSteerAngle) * 0.01).ToString("N1") + "\u00B0"; } }
-        public string ActualSteerAngle { get { return ((double)(actualSteerAngleDisp) * 0.01).ToString("N1") + "\u00B0"; } }
+        public string ActualSteerAngle { get { return ((mc.actualSteerAngleDisp) ).ToString("N1") + "\u00B0"; } }
 
         public string FixHeading { get { return Math.Round(fixHeading, 4).ToString(); } }
 

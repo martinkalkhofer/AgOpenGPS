@@ -30,10 +30,9 @@ namespace AgOpenGPS
             lblSatsTracked.Text = mf.SatsTracked;
             lblStatus.Text = mf.Status;
             lblHDOP.Text = mf.HDOP;
-            tboxNMEASerial.Text = mf.recvSentenceSettings;
             lblSpeed.Text = mf.pn.speed.ToString();
 
-            lblUturnByte.Text = Convert.ToString(mf.mc.machineData[mf.mc.mdUTurn], 2).PadLeft(6, '0');
+            //lblUturnByte.Text = Convert.ToString(mf.mc.machineData[mf.mc.mdUTurn], 2).PadLeft(6, '0');
 
             lblRoll.Text = mf.RollInDegrees;
             lblYawHeading.Text = mf.GyroInDegrees;
@@ -61,20 +60,11 @@ namespace AgOpenGPS
                 lblEqSpec.Text =  (Math.Round(mf.tool.toolWidth * glm.m2ft, 2)).ToString() + " ft  " + mf.vehicleFileName + mf.toolFileName;
             }
 
-            if (mf.isUDPSendConnected)
-            {
-                tboxUDPSteer.Text = mf.autoSteerUDPActivity.ToString();
-                tboxUDPMachine.Text = mf.machineUDPActivity.ToString();
-                tboxUDPSwitch.Text = mf.switchUDPActivity.ToString();
-            }
-            else
-            {
-                tboxUDPSteer.Text = "NC";
-                tboxUDPMachine.Text = "NC";
-                tboxUDPSwitch.Text = "NC";
-            }
-            txtBoxRecvAutoSteer.Text = mf.mc.serialRecvAutoSteerStr;
-                txtBoxRecvMachine.Text = mf.mc.serialRecvMachineStr;
+            tboxVTG.Text = mf.pn.vtgSentence;
+            tboxGGA.Text = mf.pn.ggaSentence;
+            tboxPAOGI.Text = mf.pn.paogiSentence;
+            tboxAVR.Text = mf.pn.avrSentence;
+            tboxHDT.Text = mf.pn.hdtSentence;
         }
 
         private void FormGPSData_Load(object sender, EventArgs e)
@@ -82,6 +72,16 @@ namespace AgOpenGPS
             lblSunrise.Text = mf.sunrise.ToString("HH:mm");
             lblSunset.Text = mf.sunset.ToString("HH:mm");
 
+            tboxGGA.Text = "";
+            tboxVTG.Text = "";
+            tboxHDT.Text = "";
+            tboxAVR.Text = "";
+            tboxPAOGI.Text = "";
+        }
+
+        private void FormGPSData_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            mf.isGPSSentencesOn = false;
         }
     }
 }

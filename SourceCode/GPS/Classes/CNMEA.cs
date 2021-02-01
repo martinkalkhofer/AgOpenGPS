@@ -168,6 +168,9 @@ Field	Meaning
         public char hemisphere = 'N';
 
         public StringBuilder logNMEASentence = new StringBuilder();
+
+        public string ggaSentence, vtgSentence, hdtSentence, avrSentence, paogiSentence;
+
         private readonly FormGPS mf;
         public CNMEA(FormGPS f)
         {
@@ -263,15 +266,50 @@ Field	Meaning
                 words = nextNMEASentence.Split(',');
                 if (words.Length < 3) return;
 
-                if (words[0] == "$GPGGA" || words[0] == "$GNGGA") ParseGGA();
-                if (words[0] == "$GPVTG" || words[0] == "$GNVTG") ParseVTG();
-                if (words[0] == "$GPRMC" || words[0] == "$GNRMC") ParseRMC();
-                if (words[0] == "$GPHDT" || words[0] == "$GNHDT") ParseHDT();
-                if (words[0] == "$PAOGI") ParseOGI();
-                if (words[0] == "$PTNL") ParseAVR();
-                if (words[0] == "$GNTRA") ParseTRA();
-                if (words[0] == "$PSTI" && words[1] == "032") ParseSTI032(); //there is also an $PSTI,030,... wich contains different data!
+                if (words[0] == "$GPGGA" || words[0] == "$GNGGA")
+                {
+                    ParseGGA();
+                    if (mf.isGPSSentencesOn) ggaSentence = nextNMEASentence;
+                }
 
+                if (words[0] == "$GPVTG" || words[0] == "$GNVTG")
+                {
+                    ParseVTG();
+                    if (mf.isGPSSentencesOn) vtgSentence = nextNMEASentence;
+                }
+
+                if (words[0] == "$GPRMC" || words[0] == "$GNRMC")
+                {
+                    ParseRMC();
+                }
+
+                if (words[0] == "$PAOGI")
+                {
+                    ParseOGI();
+                    if (mf.isGPSSentencesOn) paogiSentence = nextNMEASentence;
+                }
+
+                if (words[0] == "$GPHDT" || words[0] == "$GNHDT")
+                {
+                    ParseHDT();
+                    if (mf.isGPSSentencesOn) hdtSentence = nextNMEASentence;
+                }
+
+                if (words[0] == "$PTNL")
+                {
+                    ParseAVR();
+                    if (mf.isGPSSentencesOn) avrSentence = nextNMEASentence;
+                }
+
+                if (words[0] == "$GNTRA")
+                {
+                    ParseTRA();
+                }
+
+                if (words[0] == "$PSTI" && words[1] == "032")
+                {
+                    ParseSTI032(); //there is also an $PSTI,030,... wich contains different data!
+                }
             }// while still data
         }
 

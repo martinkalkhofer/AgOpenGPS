@@ -117,45 +117,7 @@ namespace AgOpenGPS
                 int edge = -oglMain.Width / 2 + 10;
                 int line = 20;
 
-                font.DrawText(edge, line, "NMEA: " + recvSentenceSettings, 1);
-                line += 30;
-                if (spGPS.IsOpen)
-                {
-                    font.DrawText(edge, line, "GPS Port: Connected", 1);
-                }
-                else
-                {
-                    font.DrawText(edge, line, "GPS Port: Not Connected", 1);
-                }
-
-                line += 30;
-
-                if (spAutoSteer.IsOpen)
-                {
-                    font.DrawText(edge, line, "AutoSteer Port: Connected", 1);
-                }
-                else
-                {
-                    font.DrawText(edge, line, "AutoSteer Port: Not Connected", 1);
-                }
-                line += 30;
-                if (spMachine.IsOpen)
-                {
-                    font.DrawText(edge, line, "Machine Port: Connected", 1);
-                }
-                else
-                {
-                    font.DrawText(edge, line, "Machine Port: Not Connected", 1);
-                }
-                line += 30;
-                if (Properties.Settings.Default.setUDP_isOn)
-                {
-                    font.DrawText(edge, line, "UDP: Counter is " + pbarUDP.ToString(), 1);
-                }
-                else
-                {
-                    font.DrawText(edge, line, "UDP: Off", 1);
-                }
+                font.DrawText(edge, line, "NMEA: " + pn.rawBuffer, 1);
                 line += 30;
 
                 GL.Flush();//finish openGL commands
@@ -489,7 +451,8 @@ namespace AgOpenGPS
                     if (leftMouseDownOnOpenGL) MakeFlagMark();
 
                     //draw the section control window off screen buffer
-                    oglBack.Refresh();
+                    if (isJobStarted)
+                        oglBack.Refresh();
 
                     //draw the zoom window
                     if (isJobStarted && oglZoom.Width != 400)
@@ -1244,12 +1207,12 @@ namespace AgOpenGPS
             //send the byte out to section machines
             BuildMachineByte();
 
-            //send the machine out to port
-            SendOutUSBMachinePort(mc.machineData, CModuleComm.pgnSentenceLength);
+            ////send the machine out to port
+            //SendOutUSBMachinePort(mc.machineData, CModuleComm.pgnSentenceLength);
 
-            ////send machine data to autosteer if checked
-            if (mc.isMachineDataSentToAutoSteer)
-                SendOutUSBAutoSteerPort(mc.machineData, CModuleComm.pgnSentenceLength);
+            //////send machine data to autosteer if checked
+            //if (mc.isMachineDataSentToAutoSteer)
+            //    SendOutUSBAutoSteerPort(mc.machineData, CModuleComm.pgnSentenceLength);
 
 
             //if a minute has elapsed save the field in case of crash and to be able to resume            
@@ -2204,7 +2167,7 @@ namespace AgOpenGPS
 
             GL.Translate(oglMain.Width / 2 - 35, oglMain.Height/2, 0);
 
-            if (mc.machineData[mc.mdHydLift] == 2)
+            if (p_EF.machineData[p_EF.hydLift] == 2)
             {
                 GL.Color3(0.0f, 0.950f, 0.0f);
             }
@@ -2213,7 +2176,7 @@ namespace AgOpenGPS
                 GL.Rotate(180, 0, 0, 1);
                 GL.Color3(0.952f, 0.40f, 0.0f);
             }
-            
+
             GL.Begin(PrimitiveType.Quads);              // Build Quad From A Triangle Strip
             {
                 GL.TexCoord2(0, 0); GL.Vertex2(-48, -64); // 

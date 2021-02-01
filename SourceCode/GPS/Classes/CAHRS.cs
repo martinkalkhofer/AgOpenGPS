@@ -4,7 +4,7 @@ namespace AgOpenGPS
 {
     public class CAHRS
     {
-        private readonly FormGPS mf;
+        //private readonly FormGPS mf;
 
         //Roll and heading from the IMU
         public double imuHeading = 99999, prevIMUHeading = 0, imuRoll = 88888;
@@ -22,9 +22,9 @@ namespace AgOpenGPS
         public double fusionWeight;
 
         //constructor
-        public CAHRS(FormGPS _f)
+        public CAHRS()
         {
-            mf = _f;
+            //mf = _f;
 
             rollZero = Properties.Settings.Default.setIMU_rollZero;
             //pitchZeroX16 = Properties.Settings.Default.setIMU_pitchZeroX16;
@@ -35,6 +35,7 @@ namespace AgOpenGPS
 
             fusionWeight = Properties.Settings.Default.setIMU_fusionWeight;
             isRollInvert = Properties.Settings.Default.setIMU_invertRoll;
+
         }
     }
 }

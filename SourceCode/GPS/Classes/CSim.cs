@@ -86,7 +86,6 @@ namespace AgOpenGPS
 
             //sbSendText.Append(sbOGI.ToString());
             mf.pn.rawBuffer += sbSendText.ToString();
-            mf.recvSentenceSettings = sbSendText.ToString();
 
             if (mf.isLogNMEA)
             {

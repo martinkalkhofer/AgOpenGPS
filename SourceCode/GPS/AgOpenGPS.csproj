@@ -149,12 +149,6 @@
     <Compile Include="Forms\Pickers\FormColorPicker.Designer.cs">
       <DependentUpon>FormColorPicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Pickers\FormSource.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Pickers\FormSource.Designer.cs">
-      <DependentUpon>FormSource.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormSaveAs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,12 +190,6 @@
     </Compile>
     <Compile Include="Forms\Pickers\FormSettingsPicker.Designer.cs">
       <DependentUpon>FormSettingsPicker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormModules.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormModules.Designer.cs">
-      <DependentUpon>FormModules.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormHeadland.cs">
       <SubType>Form</SubType>
@@ -267,7 +255,7 @@
       <SubType>Form</SubType>
       <DependentUpon>FormConfig.cs</DependentUpon>
     </Compile>
-   <Compile Include="Forms\Settings\ConfigModule.Designer.cs">
+    <Compile Include="Forms\Settings\ConfigModule.Designer.cs">
       <SubType>Form</SubType>
       <DependentUpon>FormConfig.cs</DependentUpon>
     </Compile>
@@ -277,23 +265,11 @@
     <Compile Include="Forms\Settings\FormDisplayOptions.Designer.cs">
       <DependentUpon>FormDisplayOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Settings\FormNtrip.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Settings\FormNtrip.Designer.cs">
-      <DependentUpon>FormNtrip.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Guidance\FormABDraw.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Guidance\FormABDraw.Designer.cs">
       <DependentUpon>FormABDraw.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Settings\FormArduinoSettings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Settings\FormArduinoSettings.Designer.cs">
-      <DependentUpon>FormArduinoSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormFlags.cs">
       <SubType>Form</SubType>
@@ -348,12 +324,6 @@
     </Compile>
     <Compile Include="Forms\FormFieldDir.Designer.cs">
       <DependentUpon>FormFieldDir.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Settings\FormCommSet.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Settings\FormCommSet.Designer.cs">
-      <DependentUpon>FormCommSet.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormJob.cs">
       <SubType>Form</SubType>
@@ -417,23 +387,11 @@
     <Compile Include="Forms\Guidance\FormYouTurn.Designer.cs">
       <DependentUpon>FormYouTurn.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Settings\FormUDP.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Settings\FormUDP.Designer.cs">
-      <DependentUpon>FormUDP.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Form_About.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Form_About.Designer.cs">
       <DependentUpon>Form_About.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Settings\FormTreePlant.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Settings\FormTreePlant.Designer.cs">
-      <DependentUpon>FormTreePlant.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Guidance\FormTram.cs">
       <SubType>Form</SubType>
@@ -498,11 +456,7 @@
       <SubType>Form</SubType>
       <DependentUpon>FormGPS.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SerialComm.Designer.cs">
-      <SubType>Form</SubType>
-      <DependentUpon>FormGPS.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\NTRIPComm.Designer.cs">
+    <Compile Include="Forms\PGN.Designer.cs">
       <SubType>Form</SubType>
       <DependentUpon>FormGPS.cs</DependentUpon>
     </Compile>
@@ -552,9 +506,6 @@
     <EmbeddedResource Include="Forms\Pickers\FormColorPicker.resx">
       <DependentUpon>FormColorPicker.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Pickers\FormSource.resx">
-      <DependentUpon>FormSource.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSaveAs.resx">
       <DependentUpon>FormSaveAs.cs</DependentUpon>
     </EmbeddedResource>
@@ -575,10 +526,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pickers\FormSettingsPicker.resx">
       <DependentUpon>FormSettingsPicker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormModules.resx">
-      <DependentUpon>FormModules.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormHeadland.resx">
       <DependentUpon>FormHeadland.cs</DependentUpon>
@@ -609,15 +556,8 @@
       <DependentUpon>FormDisplayOptions.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormNtrip.resx">
-      <DependentUpon>FormNtrip.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Guidance\FormABDraw.resx">
       <DependentUpon>FormABDraw.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormArduinoSettings.resx">
-      <DependentUpon>FormArduinoSettings.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormShortcutKeys.uk.resx">
       <DependentUpon>FormShortcutKeys.cs</DependentUpon>
@@ -645,10 +585,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Guidance\FormABLine.resx">
       <DependentUpon>FormABLine.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormCommSet.resx">
-      <DependentUpon>FormCommSet.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormGPSData.resx">
@@ -693,14 +629,8 @@
     <EmbeddedResource Include="Forms\Guidance\FormYouTurn.resx">
       <DependentUpon>FormYouTurn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormUDP.resx">
-      <DependentUpon>FormUDP.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form_About.resx">
       <DependentUpon>Form_About.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\FormTreePlant.resx">
-      <DependentUpon>FormTreePlant.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Guidance\FormTram.resx">
       <DependentUpon>FormTram.cs</DependentUpon>

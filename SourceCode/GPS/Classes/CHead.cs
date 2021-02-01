@@ -44,12 +44,12 @@ namespace AgOpenGPS
             {
                 if (isToolInHeadland)
                 {
-                    mf.mc.machineData[mf.mc.mdHydLift] = 2;
+                    mf.p_EF.machineData[mf.p_EF.hydLift] = 2;
                     isToolUp = true;
                 }
                 else
                 {
-                    mf.mc.machineData[mf.mc.mdHydLift] = 1;
+                    mf.p_EF.machineData[mf.p_EF.hydLift] = 1;
                     isToolUp = false;
                 }
             }

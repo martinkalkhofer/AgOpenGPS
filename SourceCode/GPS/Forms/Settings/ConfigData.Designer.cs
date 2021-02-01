@@ -119,9 +119,14 @@ namespace AgOpenGPS
             Properties.Settings.Default.setIMU_rollFilter = (double)hsbarRollFilter.Value * 0.01;
             Properties.Settings.Default.setIMU_rollZero = mf.ahrs.rollZero;
             Properties.Settings.Default.setIMU_invertRoll = cboxDataInvertRoll.Checked;
-            Properties.Settings.Default.Save();
 
+            mf.ahrs.rollFilter = Properties.Settings.Default.setIMU_rollFilter;
+            mf.ahrs.fusionWeight = Properties.Settings.Default.setIMU_fusionWeight;
+            mf.ahrs.isRollInvert = Properties.Settings.Default.setIMU_invertRoll;
+
+            Properties.Settings.Default.Save();
         }
+
         private void hsbarRollFilter_ValueChanged(object sender, EventArgs e)
         {
             lblRollFilterPercent.Text = hsbarRollFilter.Value.ToString();

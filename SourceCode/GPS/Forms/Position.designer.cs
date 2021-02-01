@@ -41,8 +41,6 @@ namespace AgOpenGPS
 
         //a distance between previous and current fix
         private double distance = 0.0;
-        public double treeSpacingCounter = 0.0;
-        public int treeTrigger = 0;
 
         //how far travelled since last section was added, section points
         double sectionTriggerDistance = 0, sectionTriggerStepDistance = 0;
@@ -92,9 +90,6 @@ namespace AgOpenGPS
 
         private bool ScanForNMEA()
         {
-            //update the recv string so it can display at least something
-            recvSentenceSettings = pn.rawBuffer;
-
             //parse any data from pn.rawBuffer
             pn.ParseNMEA();
 
@@ -542,50 +537,43 @@ namespace AgOpenGPS
             if (!isAutoSteerBtnOn) //32020 means auto steer is off
             {
                 guidanceLineDistanceOff = 32020;
+                p_FE.steerData[p_FE.status] = 0;
             }
 
             // If Drive button enabled be normal, or just fool the autosteer and fill values
-            if (!ast.isInFreeDriveMode)
+            if (!vehicle.ast.isInFreeDriveMode)
             {
                 //fill up0 the appropriate arrays with new values
-                mc.autoSteerData[mc.sdSpeed] = unchecked((byte)(Math.Abs(pn.speed) * 4.0));
+                p_FE.steerData[p_FE.speedHi] = unchecked((byte)((int)(Math.Abs(pn.speed) * 10.0) >> 8));
+                p_FE.steerData[p_FE.speedLo] = unchecked((byte)((int)(Math.Abs(pn.speed) * 10.0)));
                 //mc.machineControlData[mc.cnSpeed] = mc.autoSteerData[mc.sdSpeed];
 
-                mc.autoSteerData[mc.sdDistanceHi] = unchecked((byte)(guidanceLineDistanceOff >> 8));
-                mc.autoSteerData[mc.sdDistanceLo] = unchecked((byte)(guidanceLineDistanceOff));
+                //mc.autoSteerData[7] = unchecked((byte)(guidanceLineDistanceOff >> 8));
+                //mc.autoSteerData[8] = unchecked((byte)(guidanceLineDistanceOff));
 
-                mc.autoSteerData[mc.sdSteerAngleHi] = unchecked((byte)(guidanceLineSteerAngle >> 8));
-                mc.autoSteerData[mc.sdSteerAngleLo] = unchecked((byte)(guidanceLineSteerAngle));
+                p_FE.steerData[p_FE.steerAngleHi] = unchecked((byte)(guidanceLineSteerAngle >> 8));
+                p_FE.steerData[p_FE.steerAngleLo] = unchecked((byte)(guidanceLineSteerAngle));
+                p_FE.steerData[p_FE.status] = 1;
             }
 
             else
             {
                 //fill up the auto steer array with free drive values
-                mc.autoSteerData[mc.sdSpeed] = unchecked((byte)(pn.speed * 4.0 + 16));
-                //mc.machineControlData[mc.cnSpeed] = mc.autoSteerData[mc.sdSpeed];
+                p_FE.steerData[p_FE.speedHi] = unchecked((byte)((int)(80) >> 8));
+                p_FE.steerData[p_FE.speedLo] = unchecked((byte)((int)(80)));
 
                 //make steer module think everything is normal
-                guidanceLineDistanceOff = 0;
-                mc.autoSteerData[mc.sdDistanceHi] = unchecked((byte)(0));
-                mc.autoSteerData[mc.sdDistanceLo] = unchecked((byte)0);
+                //guidanceLineDistanceOff = 0;
+                //mc.autoSteerData[7] = unchecked((byte)(0));
+                //mc.autoSteerData[8] = unchecked((byte)0);
 
-                guidanceLineSteerAngle = (Int16)(ast.driveFreeSteerAngle * 100);
-                mc.autoSteerData[mc.sdSteerAngleHi] = unchecked((byte)(guidanceLineSteerAngle >> 8));
-                mc.autoSteerData[mc.sdSteerAngleLo] = unchecked((byte)(guidanceLineSteerAngle));
+                guidanceLineSteerAngle = (Int16)(vehicle.ast.driveFreeSteerAngle * 100);
+                p_FE.steerData[p_FE.steerAngleHi] = unchecked((byte)(guidanceLineSteerAngle >> 8));
+                p_FE.steerData[p_FE.steerAngleLo] = unchecked((byte)(guidanceLineSteerAngle));
             }
 
             //out serial to autosteer module  //indivdual classes load the distance and heading deltas 
-            SendOutUSBAutoSteerPort(mc.autoSteerData, CModuleComm.pgnSentenceLength);
-
-            //send out to network
-            if (Properties.Settings.Default.setUDP_isOn)
-            {
-                //send autosteer since it never is logic controlled
-                SendUDPMessage(mc.autoSteerData);
-
-                //machine control
-                SendUDPMessage(mc.machineData);
-            }
+            SendPgnToLoop(p_FE.steerData);
 
             //for average cross track error
             if (guidanceLineDistanceOff < 29000)
@@ -699,7 +687,7 @@ namespace AgOpenGPS
             #region Remote Switches
 
             // by MTZ8302 ------------------------------------------------------------------------------------
-            if (mc.ss[mc.swHeaderLo] == 249) DoRemoteSwitches();
+            //if (mc.ss[mc.swHeaderLo] == 249) DoRemoteSwitches();
 
             #endregion
 
@@ -1238,304 +1226,305 @@ namespace AgOpenGPS
             }
         }
 
-        private void DoRemoteSwitches()
-        {
-            //MTZ8302 Feb 2020 
-            if (isJobStarted)
-            {
-                //MainSW was used
-                if (mc.ss[mc.swMain] != mc.ssP[mc.swMain])
-                {
-                    //Main SW pressed
-                    if ((mc.ss[mc.swMain] & 1) == 1)
-                    {
-                        //set butto off and then press it = ON
-                        autoBtnState = btnStates.Off;
-                        btnSectionOffAutoOn.PerformClick();
-                    } // if Main SW ON
+        // MTZ8302
+        //private void DoRemoteSwitches()
+        //{
+        //    //MTZ8302 Feb 2020 
+        //    if (isJobStarted)
+        //    {
+        //        //MainSW was used
+        //        if (mc.ss[mc.swMain] != mc.ssP[mc.swMain])
+        //        {
+        //            //Main SW pressed
+        //            if ((mc.ss[mc.swMain] & 1) == 1)
+        //            {
+        //                //set butto off and then press it = ON
+        //                autoBtnState = btnStates.Off;
+        //                btnSectionOffAutoOn.PerformClick();
+        //            } // if Main SW ON
 
-                    //if Main SW in Arduino is pressed OFF
-                    if ((mc.ss[mc.swMain] & 2) == 2)
-                    {
-                        //set button on and then press it = OFF
-                        autoBtnState = btnStates.Auto;
-                        btnSectionOffAutoOn.PerformClick();
-                    } // if Main SW OFF
+        //            //if Main SW in Arduino is pressed OFF
+        //            if ((mc.ss[mc.swMain] & 2) == 2)
+        //            {
+        //                //set button on and then press it = OFF
+        //                autoBtnState = btnStates.Auto;
+        //                btnSectionOffAutoOn.PerformClick();
+        //            } // if Main SW OFF
 
-                    mc.ssP[mc.swMain] = mc.ss[mc.swMain];
-                }  //Main or Rate SW
-
-
-                if (mc.ss[mc.swONLo] != 0)
-                {
-                    // ON Signal from Arduino 
-                    if ((mc.ss[mc.swONLo] & 128) == 128 & tool.numOfSections > 7)
-                    {
-                        if (section[7].manBtnState != manBtn.Auto) section[7].manBtnState = manBtn.Auto;
-                        btnSection8Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swONLo] & 64) == 64 & tool.numOfSections > 6)
-                    {
-                        if (section[6].manBtnState != manBtn.Auto) section[6].manBtnState = manBtn.Auto;
-                        btnSection7Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swONLo] & 32) == 32 & tool.numOfSections > 5)
-                    {
-                        if (section[5].manBtnState != manBtn.Auto) section[5].manBtnState = manBtn.Auto;
-                        btnSection6Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swONLo] & 16) == 16 & tool.numOfSections > 4)
-                    {
-                        if (section[4].manBtnState != manBtn.Auto) section[4].manBtnState = manBtn.Auto;
-                        btnSection5Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swONLo] & 8) == 8 & tool.numOfSections > 3)
-                    {
-                        if (section[3].manBtnState != manBtn.Auto) section[3].manBtnState = manBtn.Auto;
-                        btnSection4Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swONLo] & 4) == 4 & tool.numOfSections > 2)
-                    {
-                        if (section[2].manBtnState != manBtn.Auto) section[2].manBtnState = manBtn.Auto;
-                        btnSection3Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swONLo] & 2) == 2 & tool.numOfSections > 1)
-                    {
-                        if (section[1].manBtnState != manBtn.Auto) section[1].manBtnState = manBtn.Auto;
-                        btnSection2Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swONLo] & 1) == 1)
-                    {
-                        if (section[0].manBtnState != manBtn.Auto) section[0].manBtnState = manBtn.Auto;
-                        btnSection1Man.PerformClick();
-                    }
-                    mc.ssP[mc.swONLo] = mc.ss[mc.swONLo];
-                } //if swONLo != 0 
-                else { if (mc.ssP[mc.swONLo] != 0) { mc.ssP[mc.swONLo] = 0; } }
-
-                if (mc.ss[mc.swONHi] != 0)
-                {
-                    // sections ON signal from Arduino  
-                    if ((mc.ss[mc.swONHi] & 128) == 128 & tool.numOfSections > 15)
-                    {
-                        if (section[15].manBtnState != manBtn.Auto) section[15].manBtnState = manBtn.Auto;
-                        btnSection16Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swONHi] & 64) == 64 & tool.numOfSections > 14)
-                    {
-                        if (section[14].manBtnState != manBtn.Auto) section[14].manBtnState = manBtn.Auto;
-                        btnSection15Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swONHi] & 32) == 32 & tool.numOfSections > 13)
-                    {
-                        if (section[13].manBtnState != manBtn.Auto) section[13].manBtnState = manBtn.Auto;
-                        btnSection14Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swONHi] & 16) == 16 & tool.numOfSections > 12)
-                    {
-                        if (section[12].manBtnState != manBtn.Auto) section[12].manBtnState = manBtn.Auto;
-                        btnSection13Man.PerformClick();
-                    }
-
-                    if ((mc.ss[mc.swONHi] & 8) == 8 & tool.numOfSections > 11)
-                    {
-                        if (section[11].manBtnState != manBtn.Auto) section[11].manBtnState = manBtn.Auto;
-                        btnSection12Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swONHi] & 4) == 4 & tool.numOfSections > 10)
-                    {
-                        if (section[10].manBtnState != manBtn.Auto) section[10].manBtnState = manBtn.Auto;
-                        btnSection11Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swONHi] & 2) == 2 & tool.numOfSections > 9)
-                    {
-                        if (section[9].manBtnState != manBtn.Auto) section[9].manBtnState = manBtn.Auto;
-                        btnSection10Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swONHi] & 1) == 1 & tool.numOfSections > 8)
-                    {
-                        if (section[8].manBtnState != manBtn.Auto) section[8].manBtnState = manBtn.Auto;
-                        btnSection9Man.PerformClick();
-                    }
-                    mc.ssP[mc.swONHi] = mc.ss[mc.swONHi];
-                } //if swONHi != 0   
-                else { if (mc.ssP[mc.swONHi] != 0) { mc.ssP[mc.swONHi] = 0; } }
-
-                // Switches have changed
-                if (mc.ss[mc.swOFFLo] != mc.ssP[mc.swOFFLo])
-                {
-                    //if Main = Auto then change section to Auto if Off signal from Arduino stopped
-                    if (autoBtnState == btnStates.Auto)
-                    {
-                        if (((mc.ssP[mc.swOFFLo] & 128) == 128) & ((mc.ss[mc.swOFFLo] & 128) != 128) & (section[7].manBtnState == manBtn.Off))
-                        {
-                            btnSection8Man.PerformClick();
-                        }
-                        if (((mc.ssP[mc.swOFFLo] & 64) == 64) & ((mc.ss[mc.swOFFLo] & 64) != 64) & (section[6].manBtnState == manBtn.Off))
-                        {
-                            btnSection7Man.PerformClick();
-                        }
-                        if (((mc.ssP[mc.swOFFLo] & 32) == 32) & ((mc.ss[mc.swOFFLo] & 32) != 32) & (section[5].manBtnState == manBtn.Off))
-                        {
-                            btnSection6Man.PerformClick();
-                        }
-                        if (((mc.ssP[mc.swOFFLo] & 16) == 16) & ((mc.ss[mc.swOFFLo] & 16) != 16) & (section[4].manBtnState == manBtn.Off))
-                        {
-                            btnSection5Man.PerformClick();
-                        }
-                        if (((mc.ssP[mc.swOFFLo] & 8) == 8) & ((mc.ss[mc.swOFFLo] & 8) != 8) & (section[3].manBtnState == manBtn.Off))
-                        {
-                            btnSection4Man.PerformClick();
-                        }
-                        if (((mc.ssP[mc.swOFFLo] & 4) == 4) & ((mc.ss[mc.swOFFLo] & 4) != 4) & (section[2].manBtnState == manBtn.Off))
-                        {
-                            btnSection3Man.PerformClick();
-                        }
-                        if (((mc.ssP[mc.swOFFLo] & 2) == 2) & ((mc.ss[mc.swOFFLo] & 2) != 2) & (section[1].manBtnState == manBtn.Off))
-                        {
-                            btnSection2Man.PerformClick();
-                        }
-                        if (((mc.ssP[mc.swOFFLo] & 1) == 1) & ((mc.ss[mc.swOFFLo] & 1) != 1) & (section[0].manBtnState == manBtn.Off))
-                        {
-                            btnSection1Man.PerformClick();
-                        }
-                    }
-                    mc.ssP[mc.swOFFLo] = mc.ss[mc.swOFFLo];
-                }
-
-                if (mc.ss[mc.swOFFHi] != mc.ssP[mc.swOFFHi])
-                {
-                    //if Main = Auto then change section to Auto if Off signal from Arduino stopped
-                    if (autoBtnState == btnStates.Auto)
-                    {
-                        if (((mc.ssP[mc.swOFFHi] & 128) == 128) & ((mc.ss[mc.swOFFHi] & 128) != 128) & (section[15].manBtnState == manBtn.Off))
-                        { btnSection16Man.PerformClick(); }
-
-                        if (((mc.ssP[mc.swOFFHi] & 64) == 64) & ((mc.ss[mc.swOFFHi] & 64) != 64) & (section[14].manBtnState == manBtn.Off))
-                        { btnSection15Man.PerformClick(); }
-
-                        if (((mc.ssP[mc.swOFFHi] & 32) == 32) & ((mc.ss[mc.swOFFHi] & 32) != 32) & (section[13].manBtnState == manBtn.Off))
-                        { btnSection14Man.PerformClick(); }
-
-                        if (((mc.ssP[mc.swOFFHi] & 16) == 16) & ((mc.ss[mc.swOFFHi] & 16) != 16) & (section[12].manBtnState == manBtn.Off))
-                        { btnSection13Man.PerformClick(); }
+        //            mc.ssP[mc.swMain] = mc.ss[mc.swMain];
+        //        }  //Main or Rate SW
 
 
-                        if (((mc.ssP[mc.swOFFHi] & 8) == 8) & ((mc.ss[mc.swOFFHi] & 8) != 8) & (section[11].manBtnState == manBtn.Off))
-                        {
-                            btnSection12Man.PerformClick();
-                        }
-                        if (((mc.ssP[mc.swOFFHi] & 4) == 4) & ((mc.ss[mc.swOFFHi] & 4) != 4) & (section[10].manBtnState == manBtn.Off))
-                        {
-                            btnSection11Man.PerformClick();
-                        }
-                        if (((mc.ssP[mc.swOFFHi] & 2) == 2) & ((mc.ss[mc.swOFFHi] & 2) != 2) & (section[9].manBtnState == manBtn.Off))
-                        {
-                            btnSection10Man.PerformClick();
-                        }
-                        if (((mc.ssP[mc.swOFFHi] & 1) == 1) & ((mc.ss[mc.swOFFHi] & 1) != 1) & (section[8].manBtnState == manBtn.Off))
-                        {
-                            btnSection9Man.PerformClick();
-                        }
-                    }
-                    mc.ssP[mc.swOFFHi] = mc.ss[mc.swOFFHi];
-                }
+        //        if (mc.ss[mc.swONLo] != 0)
+        //        {
+        //            // ON Signal from Arduino 
+        //            if ((mc.ss[mc.swONLo] & 128) == 128 & tool.numOfSections > 7)
+        //            {
+        //                if (section[7].manBtnState != manBtn.Auto) section[7].manBtnState = manBtn.Auto;
+        //                btnSection8Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swONLo] & 64) == 64 & tool.numOfSections > 6)
+        //            {
+        //                if (section[6].manBtnState != manBtn.Auto) section[6].manBtnState = manBtn.Auto;
+        //                btnSection7Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swONLo] & 32) == 32 & tool.numOfSections > 5)
+        //            {
+        //                if (section[5].manBtnState != manBtn.Auto) section[5].manBtnState = manBtn.Auto;
+        //                btnSection6Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swONLo] & 16) == 16 & tool.numOfSections > 4)
+        //            {
+        //                if (section[4].manBtnState != manBtn.Auto) section[4].manBtnState = manBtn.Auto;
+        //                btnSection5Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swONLo] & 8) == 8 & tool.numOfSections > 3)
+        //            {
+        //                if (section[3].manBtnState != manBtn.Auto) section[3].manBtnState = manBtn.Auto;
+        //                btnSection4Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swONLo] & 4) == 4 & tool.numOfSections > 2)
+        //            {
+        //                if (section[2].manBtnState != manBtn.Auto) section[2].manBtnState = manBtn.Auto;
+        //                btnSection3Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swONLo] & 2) == 2 & tool.numOfSections > 1)
+        //            {
+        //                if (section[1].manBtnState != manBtn.Auto) section[1].manBtnState = manBtn.Auto;
+        //                btnSection2Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swONLo] & 1) == 1)
+        //            {
+        //                if (section[0].manBtnState != manBtn.Auto) section[0].manBtnState = manBtn.Auto;
+        //                btnSection1Man.PerformClick();
+        //            }
+        //            mc.ssP[mc.swONLo] = mc.ss[mc.swONLo];
+        //        } //if swONLo != 0 
+        //        else { if (mc.ssP[mc.swONLo] != 0) { mc.ssP[mc.swONLo] = 0; } }
 
-                // OFF Signal from Arduino
-                if (mc.ss[mc.swOFFLo] != 0)
-                {
-                    //if section SW in Arduino is switched to OFF; check always, if switch is locked to off GUI should not change
-                    if ((mc.ss[mc.swOFFLo] & 128) == 128 & section[7].manBtnState != manBtn.Off)
-                    {
-                        section[7].manBtnState = manBtn.On;
-                        btnSection8Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swOFFLo] & 64) == 64 & section[6].manBtnState != manBtn.Off)
-                    {
-                        section[6].manBtnState = manBtn.On;
-                        btnSection7Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swOFFLo] & 32) == 32 & section[5].manBtnState != manBtn.Off)
-                    {
-                        section[5].manBtnState = manBtn.On;
-                        btnSection6Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swOFFLo] & 16) == 16 & section[4].manBtnState != manBtn.Off)
-                    {
-                        section[4].manBtnState = manBtn.On;
-                        btnSection5Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swOFFLo] & 8) == 8 & section[3].manBtnState != manBtn.Off)
-                    {
-                        section[3].manBtnState = manBtn.On;
-                        btnSection4Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swOFFLo] & 4) == 4 & section[2].manBtnState != manBtn.Off)
-                    {
-                        section[2].manBtnState = manBtn.On;
-                        btnSection3Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swOFFLo] & 2) == 2 & section[1].manBtnState != manBtn.Off)
-                    {
-                        section[1].manBtnState = manBtn.On;
-                        btnSection2Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swOFFLo] & 1) == 1 & section[0].manBtnState != manBtn.Off)
-                    {
-                        section[0].manBtnState = manBtn.On;
-                        btnSection1Man.PerformClick();
-                    }
-                } // if swOFFLo !=0
-                if (mc.ss[mc.swOFFHi] != 0)
-                {
-                    //if section SW in Arduino is switched to OFF; check always, if switch is locked to off GUI should not change
-                    if ((mc.ss[mc.swOFFHi] & 128) == 128 & section[15].manBtnState != manBtn.Off)
-                    {
-                        section[15].manBtnState = manBtn.On;
-                        btnSection16Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swOFFHi] & 64) == 64 & section[14].manBtnState != manBtn.Off)
-                    {
-                        section[14].manBtnState = manBtn.On;
-                        btnSection15Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swOFFHi] & 32) == 32 & section[13].manBtnState != manBtn.Off)
-                    {
-                        section[13].manBtnState = manBtn.On;
-                        btnSection14Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swOFFHi] & 16) == 16 & section[12].manBtnState != manBtn.Off)
-                    {
-                        section[12].manBtnState = manBtn.On;
-                        btnSection13Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swOFFHi] & 8) == 8 & section[11].manBtnState != manBtn.Off)
-                    {
-                        section[11].manBtnState = manBtn.On;
-                        btnSection12Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swOFFHi] & 4) == 4 & section[10].manBtnState != manBtn.Off)
-                    {
-                        section[10].manBtnState = manBtn.On;
-                        btnSection11Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swOFFHi] & 2) == 2 & section[9].manBtnState != manBtn.Off)
-                    {
-                        section[9].manBtnState = manBtn.On;
-                        btnSection10Man.PerformClick();
-                    }
-                    if ((mc.ss[mc.swOFFHi] & 1) == 1 & section[8].manBtnState != manBtn.Off)
-                    {
-                        section[8].manBtnState = manBtn.On;
-                        btnSection9Man.PerformClick();
-                    }
-                } // if swOFFHi !=0
+        //        if (mc.ss[mc.swONHi] != 0)
+        //        {
+        //            // sections ON signal from Arduino  
+        //            if ((mc.ss[mc.swONHi] & 128) == 128 & tool.numOfSections > 15)
+        //            {
+        //                if (section[15].manBtnState != manBtn.Auto) section[15].manBtnState = manBtn.Auto;
+        //                btnSection16Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swONHi] & 64) == 64 & tool.numOfSections > 14)
+        //            {
+        //                if (section[14].manBtnState != manBtn.Auto) section[14].manBtnState = manBtn.Auto;
+        //                btnSection15Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swONHi] & 32) == 32 & tool.numOfSections > 13)
+        //            {
+        //                if (section[13].manBtnState != manBtn.Auto) section[13].manBtnState = manBtn.Auto;
+        //                btnSection14Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swONHi] & 16) == 16 & tool.numOfSections > 12)
+        //            {
+        //                if (section[12].manBtnState != manBtn.Auto) section[12].manBtnState = manBtn.Auto;
+        //                btnSection13Man.PerformClick();
+        //            }
 
-            //set to make sure new data arrives
-            mc.ss[mc.swHeaderLo] = 0;
+        //            if ((mc.ss[mc.swONHi] & 8) == 8 & tool.numOfSections > 11)
+        //            {
+        //                if (section[11].manBtnState != manBtn.Auto) section[11].manBtnState = manBtn.Auto;
+        //                btnSection12Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swONHi] & 4) == 4 & tool.numOfSections > 10)
+        //            {
+        //                if (section[10].manBtnState != manBtn.Auto) section[10].manBtnState = manBtn.Auto;
+        //                btnSection11Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swONHi] & 2) == 2 & tool.numOfSections > 9)
+        //            {
+        //                if (section[9].manBtnState != manBtn.Auto) section[9].manBtnState = manBtn.Auto;
+        //                btnSection10Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swONHi] & 1) == 1 & tool.numOfSections > 8)
+        //            {
+        //                if (section[8].manBtnState != manBtn.Auto) section[8].manBtnState = manBtn.Auto;
+        //                btnSection9Man.PerformClick();
+        //            }
+        //            mc.ssP[mc.swONHi] = mc.ss[mc.swONHi];
+        //        } //if swONHi != 0   
+        //        else { if (mc.ssP[mc.swONHi] != 0) { mc.ssP[mc.swONHi] = 0; } }
 
-            }//if serial or udp port open
-        }
+        //        // Switches have changed
+        //        if (mc.ss[mc.swOFFLo] != mc.ssP[mc.swOFFLo])
+        //        {
+        //            //if Main = Auto then change section to Auto if Off signal from Arduino stopped
+        //            if (autoBtnState == btnStates.Auto)
+        //            {
+        //                if (((mc.ssP[mc.swOFFLo] & 128) == 128) & ((mc.ss[mc.swOFFLo] & 128) != 128) & (section[7].manBtnState == manBtn.Off))
+        //                {
+        //                    btnSection8Man.PerformClick();
+        //                }
+        //                if (((mc.ssP[mc.swOFFLo] & 64) == 64) & ((mc.ss[mc.swOFFLo] & 64) != 64) & (section[6].manBtnState == manBtn.Off))
+        //                {
+        //                    btnSection7Man.PerformClick();
+        //                }
+        //                if (((mc.ssP[mc.swOFFLo] & 32) == 32) & ((mc.ss[mc.swOFFLo] & 32) != 32) & (section[5].manBtnState == manBtn.Off))
+        //                {
+        //                    btnSection6Man.PerformClick();
+        //                }
+        //                if (((mc.ssP[mc.swOFFLo] & 16) == 16) & ((mc.ss[mc.swOFFLo] & 16) != 16) & (section[4].manBtnState == manBtn.Off))
+        //                {
+        //                    btnSection5Man.PerformClick();
+        //                }
+        //                if (((mc.ssP[mc.swOFFLo] & 8) == 8) & ((mc.ss[mc.swOFFLo] & 8) != 8) & (section[3].manBtnState == manBtn.Off))
+        //                {
+        //                    btnSection4Man.PerformClick();
+        //                }
+        //                if (((mc.ssP[mc.swOFFLo] & 4) == 4) & ((mc.ss[mc.swOFFLo] & 4) != 4) & (section[2].manBtnState == manBtn.Off))
+        //                {
+        //                    btnSection3Man.PerformClick();
+        //                }
+        //                if (((mc.ssP[mc.swOFFLo] & 2) == 2) & ((mc.ss[mc.swOFFLo] & 2) != 2) & (section[1].manBtnState == manBtn.Off))
+        //                {
+        //                    btnSection2Man.PerformClick();
+        //                }
+        //                if (((mc.ssP[mc.swOFFLo] & 1) == 1) & ((mc.ss[mc.swOFFLo] & 1) != 1) & (section[0].manBtnState == manBtn.Off))
+        //                {
+        //                    btnSection1Man.PerformClick();
+        //                }
+        //            }
+        //            mc.ssP[mc.swOFFLo] = mc.ss[mc.swOFFLo];
+        //        }
+
+        //        if (mc.ss[mc.swOFFHi] != mc.ssP[mc.swOFFHi])
+        //        {
+        //            //if Main = Auto then change section to Auto if Off signal from Arduino stopped
+        //            if (autoBtnState == btnStates.Auto)
+        //            {
+        //                if (((mc.ssP[mc.swOFFHi] & 128) == 128) & ((mc.ss[mc.swOFFHi] & 128) != 128) & (section[15].manBtnState == manBtn.Off))
+        //                { btnSection16Man.PerformClick(); }
+
+        //                if (((mc.ssP[mc.swOFFHi] & 64) == 64) & ((mc.ss[mc.swOFFHi] & 64) != 64) & (section[14].manBtnState == manBtn.Off))
+        //                { btnSection15Man.PerformClick(); }
+
+        //                if (((mc.ssP[mc.swOFFHi] & 32) == 32) & ((mc.ss[mc.swOFFHi] & 32) != 32) & (section[13].manBtnState == manBtn.Off))
+        //                { btnSection14Man.PerformClick(); }
+
+        //                if (((mc.ssP[mc.swOFFHi] & 16) == 16) & ((mc.ss[mc.swOFFHi] & 16) != 16) & (section[12].manBtnState == manBtn.Off))
+        //                { btnSection13Man.PerformClick(); }
+
+
+        //                if (((mc.ssP[mc.swOFFHi] & 8) == 8) & ((mc.ss[mc.swOFFHi] & 8) != 8) & (section[11].manBtnState == manBtn.Off))
+        //                {
+        //                    btnSection12Man.PerformClick();
+        //                }
+        //                if (((mc.ssP[mc.swOFFHi] & 4) == 4) & ((mc.ss[mc.swOFFHi] & 4) != 4) & (section[10].manBtnState == manBtn.Off))
+        //                {
+        //                    btnSection11Man.PerformClick();
+        //                }
+        //                if (((mc.ssP[mc.swOFFHi] & 2) == 2) & ((mc.ss[mc.swOFFHi] & 2) != 2) & (section[9].manBtnState == manBtn.Off))
+        //                {
+        //                    btnSection10Man.PerformClick();
+        //                }
+        //                if (((mc.ssP[mc.swOFFHi] & 1) == 1) & ((mc.ss[mc.swOFFHi] & 1) != 1) & (section[8].manBtnState == manBtn.Off))
+        //                {
+        //                    btnSection9Man.PerformClick();
+        //                }
+        //            }
+        //            mc.ssP[mc.swOFFHi] = mc.ss[mc.swOFFHi];
+        //        }
+
+        //        // OFF Signal from Arduino
+        //        if (mc.ss[mc.swOFFLo] != 0)
+        //        {
+        //            //if section SW in Arduino is switched to OFF; check always, if switch is locked to off GUI should not change
+        //            if ((mc.ss[mc.swOFFLo] & 128) == 128 & section[7].manBtnState != manBtn.Off)
+        //            {
+        //                section[7].manBtnState = manBtn.On;
+        //                btnSection8Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swOFFLo] & 64) == 64 & section[6].manBtnState != manBtn.Off)
+        //            {
+        //                section[6].manBtnState = manBtn.On;
+        //                btnSection7Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swOFFLo] & 32) == 32 & section[5].manBtnState != manBtn.Off)
+        //            {
+        //                section[5].manBtnState = manBtn.On;
+        //                btnSection6Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swOFFLo] & 16) == 16 & section[4].manBtnState != manBtn.Off)
+        //            {
+        //                section[4].manBtnState = manBtn.On;
+        //                btnSection5Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swOFFLo] & 8) == 8 & section[3].manBtnState != manBtn.Off)
+        //            {
+        //                section[3].manBtnState = manBtn.On;
+        //                btnSection4Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swOFFLo] & 4) == 4 & section[2].manBtnState != manBtn.Off)
+        //            {
+        //                section[2].manBtnState = manBtn.On;
+        //                btnSection3Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swOFFLo] & 2) == 2 & section[1].manBtnState != manBtn.Off)
+        //            {
+        //                section[1].manBtnState = manBtn.On;
+        //                btnSection2Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swOFFLo] & 1) == 1 & section[0].manBtnState != manBtn.Off)
+        //            {
+        //                section[0].manBtnState = manBtn.On;
+        //                btnSection1Man.PerformClick();
+        //            }
+        //        } // if swOFFLo !=0
+        //        if (mc.ss[mc.swOFFHi] != 0)
+        //        {
+        //            //if section SW in Arduino is switched to OFF; check always, if switch is locked to off GUI should not change
+        //            if ((mc.ss[mc.swOFFHi] & 128) == 128 & section[15].manBtnState != manBtn.Off)
+        //            {
+        //                section[15].manBtnState = manBtn.On;
+        //                btnSection16Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swOFFHi] & 64) == 64 & section[14].manBtnState != manBtn.Off)
+        //            {
+        //                section[14].manBtnState = manBtn.On;
+        //                btnSection15Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swOFFHi] & 32) == 32 & section[13].manBtnState != manBtn.Off)
+        //            {
+        //                section[13].manBtnState = manBtn.On;
+        //                btnSection14Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swOFFHi] & 16) == 16 & section[12].manBtnState != manBtn.Off)
+        //            {
+        //                section[12].manBtnState = manBtn.On;
+        //                btnSection13Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swOFFHi] & 8) == 8 & section[11].manBtnState != manBtn.Off)
+        //            {
+        //                section[11].manBtnState = manBtn.On;
+        //                btnSection12Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swOFFHi] & 4) == 4 & section[10].manBtnState != manBtn.Off)
+        //            {
+        //                section[10].manBtnState = manBtn.On;
+        //                btnSection11Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swOFFHi] & 2) == 2 & section[9].manBtnState != manBtn.Off)
+        //            {
+        //                section[9].manBtnState = manBtn.On;
+        //                btnSection10Man.PerformClick();
+        //            }
+        //            if ((mc.ss[mc.swOFFHi] & 1) == 1 & section[8].manBtnState != manBtn.Off)
+        //            {
+        //                section[8].manBtnState = manBtn.On;
+        //                btnSection9Man.PerformClick();
+        //            }
+        //        } // if swOFFHi !=0
+
+        //    //set to make sure new data arrives
+        //    mc.ss[mc.swHeaderLo] = 0;
+
+        //    }//if serial or udp port open
+        //}
 
         public bool IsInsideGeoFenceAKABoundary()
         {

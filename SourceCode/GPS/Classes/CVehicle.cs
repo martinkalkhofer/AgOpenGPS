@@ -29,7 +29,6 @@ namespace AgOpenGPS
         public double minLookAheadDistance = 2.0;
         public double maxSteerAngle;
         public double maxAngularVelocity;
-        public double treeSpacing;
         public double hydLiftLookAheadTime;
         
         public double hydLiftLookAheadDistanceLeft, hydLiftLookAheadDistanceRight;
@@ -37,11 +36,13 @@ namespace AgOpenGPS
         public bool isHydLiftOn;
         public double stanleyIntegralDistanceAwayTriggerAB, stanleyIntegralGainAB;
 
+        public CAutoSteer ast;
 
         public CVehicle(FormGPS _f)
         {
             //constructor
             mf = _f;
+            ast = new CAutoSteer();
 
             isPivotBehindAntenna = Properties.Vehicle.Default.setVehicle_isPivotBehindAntenna;
             antennaHeight = Properties.Vehicle.Default.setVehicle_antennaHeight;
@@ -69,9 +70,6 @@ namespace AgOpenGPS
 
             stanleyIntegralGainAB = Properties.Vehicle.Default.stanleyIntegralGainAB;
             stanleyIntegralDistanceAwayTriggerAB = Properties.Vehicle.Default.stanleyIntegralDistanceAwayTriggerAB;
-
-            //treeSpacing = Properties.Settings.Default.setDistance_TreeSpacing;
-            treeSpacing = 0;
 
             vehicleType = Properties.Vehicle.Default.setVehicle_vehicleType;
 

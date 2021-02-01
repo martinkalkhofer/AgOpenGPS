@@ -66,7 +66,6 @@ namespace AgOpenGPS
             SaveSettings();
 
             mf.TimedMessageBox(1000, gStr.gsAutoSteerPort, gStr.gsModuleConfiguration);
-            mf.SendArduinoSettingsOutToAutoSteerPort();
         }
         private void nudAckerman_Enter(object sender, EventArgs e)
         {
@@ -141,9 +140,14 @@ namespace AgOpenGPS
             Properties.Vehicle.Default.setArdSteer_maxPulseCounts = (byte)nudMaxCounts.Value;
             Properties.Vehicle.Default.setArdSteer_ackermanFix = (byte)nudAckerman.Value;
 
-            mf.mc.ardSteerConfig[mf.mc.arIncMaxPulse] = (byte)(Properties.Vehicle.Default.setArdSteer_maxPulseCounts);
-            mf.mc.ardSteerConfig[mf.mc.arSet0] = Properties.Vehicle.Default.setArdSteer_setting0;
-            mf.mc.ardSteerConfig[mf.mc.arAckermanFix] = Properties.Vehicle.Default.setArdSteer_ackermanFix;
+            Properties.Vehicle.Default.Save();
+
+            mf.p_FB.steerConfig[mf.p_FB.set0] = Properties.Vehicle.Default.setArdSteer_setting0;
+            mf.p_FB.steerConfig[mf.p_FB.maxPulse] = Properties.Vehicle.Default.setArdSteer_maxPulseCounts;
+            mf.p_FB.steerConfig[mf.p_FB.minSpeed] = 5; //0.5 kmh
+            mf.p_FB.steerConfig[mf.p_FB.ackermanFix] = Properties.Vehicle.Default.setArdSteer_ackermanFix;
+
+            mf.SendPgnToLoop(mf.p_FB.steerConfig);
         }
 
 
