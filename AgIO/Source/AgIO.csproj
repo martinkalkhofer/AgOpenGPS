@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C88A8244-47F5-4275-AA35-54CC884E9EDE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>AgIO</RootNamespace>
+    <AssemblyName>AgIO</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Drive\DriveV4\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AgIO.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Keypad">
+      <HintPath>References\Keypad.dll</HintPath>
+    </Reference>
+    <Reference Include="RepeatButtonControl">
+      <HintPath>References\RepeatButtonControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CGLM.cs" />
+    <Compile Include="Forms\FormCommPicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCommPicker.designer.cs">
+      <DependentUpon>FormCommPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCommSaver.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCommSaver.designer.cs">
+      <DependentUpon>FormCommSaver.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCommSetIMU.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCommSetIMU.Designer.cs">
+      <DependentUpon>FormCommSetIMU.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCommSetGPS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCommSetGPS.Designer.cs">
+      <DependentUpon>FormCommSetGPS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCommSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCommSet.Designer.cs">
+      <DependentUpon>FormCommSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormKeyboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormKeyboard.designer.cs">
+      <DependentUpon>FormKeyboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormLoop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormLoop.Designer.cs">
+      <DependentUpon>FormLoop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormNtrip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormNtrip.Designer.cs">
+      <DependentUpon>FormNtrip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormNumeric.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormNumeric.designer.cs">
+      <DependentUpon>FormNumeric.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSource.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSource.designer.cs">
+      <DependentUpon>FormSource.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormTimedMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTimedMessage.designer.cs">
+      <DependentUpon>FormTimedMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormUDP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormUDP.designer.cs">
+      <DependentUpon>FormUDP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\FormCommPicker.resx">
+      <DependentUpon>FormCommPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCommSaver.resx">
+      <DependentUpon>FormCommSaver.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCommSetIMU.resx">
+      <DependentUpon>FormCommSetIMU.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCommSetGPS.resx">
+      <DependentUpon>FormCommSetGPS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCommSet.resx">
+      <DependentUpon>FormCommSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormKeyboard.resx">
+      <DependentUpon>FormKeyboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormLoop.resx">
+      <DependentUpon>FormLoop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormNtrip.resx">
+      <DependentUpon>FormNtrip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormNumeric.resx">
+      <DependentUpon>FormNumeric.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSource.resx">
+      <DependentUpon>FormSource.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUDP.resx">
+      <DependentUpon>FormUDP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="gStr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>gStr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="gStr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gStr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SerialComm.Designer.cs">
+      <SubType>Form</SubType>
+      <DependentUpon>FormLoop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NTRIPComm.Designer.cs">
+      <SubType>Form</SubType>
+      <DependentUpon>FormLoop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Controls.Designer.cs">
+      <SubType>Form</SubType>
+      <DependentUpon>FormLoop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UDP.Designer.cs">
+      <SubType>Form</SubType>
+      <DependentUpon>FormLoop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\Arduino.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\ArrowLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\ArrowRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\back-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\Batman48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\boundaryPause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\boundaryPlay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\BoundaryRecord.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\boundaryStop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\Cancel64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\ComPorts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\DataSources.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\DisplayDrag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\displayMenu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\DnArrow64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\fileMenu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\FileNew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\FileOpen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\FileSave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\FileUse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\NtripSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\OK64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\radar-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\Settings48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\SettingsGear64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\SnapLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\SnapRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\SpecialFunctions.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\SwitchOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\SwitchOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\UDPConfig.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\UpArrow64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\WindowDayMode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\WindowNightMode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="btnImages\GPSSignalGood.png" />
+    <None Include="btnImages\gyro.png" />
+    <None Include="btnImages\DrivePgm.png" />
+    <Content Include="AgIO.ico" />
+    <Content Include="radar-icon.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
