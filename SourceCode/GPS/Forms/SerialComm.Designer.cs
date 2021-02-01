@@ -267,11 +267,7 @@ namespace AgOpenGPS
                 spAutoSteer.RtsEnable = true;
             }
 
-            try 
-            { 
-                spAutoSteer.Open();
-                System.Threading.Thread.Sleep(1000); // waiting for Arduino reset
-            }
+            try { spAutoSteer.Open(); }
             catch (Exception e)
             {
                 WriteErrorLog("Opening Steer Port" + e.ToString());
@@ -496,11 +492,7 @@ namespace AgOpenGPS
                 spMachine.RtsEnable = true;
             }
 
-            try 
-            {
-                spMachine.Open();
-                System.Threading.Thread.Sleep(1000); // waiting for Arduino reset
-            }
+            try { spMachine.Open(); }
             catch (Exception e)
             {
                 WriteErrorLog("Opening Machine Port" + e.ToString());
