@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CGuidance.cs" />
+    <Compile Include="Classes\CRecordedPath.cs" />
     <Compile Include="Classes\CSettings.cs" />
     <Compile Include="Classes\CSunTimes.cs" />
     <Compile Include="Classes\CFieldData.cs" />

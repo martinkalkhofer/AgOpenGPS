@@ -46,7 +46,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label6
@@ -258,17 +257,6 @@
             this.label8.TabIndex = 124;
             this.label8.Text = "Most Settings";
             // 
-            // label9
-            // 
-            this.label9.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.DarkRed;
-            this.label9.Location = new System.Drawing.Point(28, 87);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(920, 104);
-            this.label9.TabIndex = 126;
-            this.label9.Text = "*** This version will delete Section.txt and remove previously applied area when " +
-    "opening a field";
-            // 
             // Form_First
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -276,7 +264,6 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(974, 661);
             this.ControlBox = false;
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.button3);
@@ -325,6 +312,5 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
     }
 }

@@ -214,6 +214,11 @@ namespace AgOpenGPS
         public CAHRS ahrs;
 
         /// <summary>
+        /// Recorded Path
+        /// </summary>
+        public CRecordedPath recPath;
+
+        /// <summary>
         /// Most of the displayed field data for GUI
         /// </summary>
         public CFieldData fd;
@@ -277,7 +282,7 @@ namespace AgOpenGPS
 
             //Settings Menu
             //toolstripYouTurnConfig.Text = gStr.gsUTurn;
-            toolstripAutoSteerConfig.Text = gStr.gsAutoSteer;
+            //toolstripAutoSteerConfig.Text = gStr.gsAutoSteer;
             steerChartStripMenu.Text = gStr.gsSteerChart;
             //toolstripVehicleConfig.Text = gStr.gsVehicle;
             //toolstripDisplayConfig.Text = gStr.gsDataSources;
@@ -357,6 +362,9 @@ namespace AgOpenGPS
             ////all the attitude, heading, roll, pitch reference system
             ahrs = new CAHRS();
 
+            //A recorded path
+            recPath = new CRecordedPath(this);
+
             //fieldData all in one place
             fd = new CFieldData(this);
 
@@ -407,6 +415,15 @@ namespace AgOpenGPS
 
             vehicle = new CVehicle(this);
 
+            //boundaryToolStripBtn.Enabled = false;
+            FieldMenuButtonStatus(false);
+            
+            layoutPanelRight.Enabled = false;
+
+            FixPanelsAndMenus();
+
+            //default to come up in mini panel, exit remembers 
+            SwapBatmanPanels();
 
             // load all the gui elements in gui.designer.cs
             LoadSettings();
@@ -973,6 +990,19 @@ namespace AgOpenGPS
 
         }
 
+        private void bottomStripConfig_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormConfig(this, 0))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    if (Properties.Settings.Default.setAS_isAutoSteerAutoOn) btnAutoSteer.Text = "A";
+                    else btnAutoSteer.Text = "M";
+                }
+            }
+        }
+
         private void colorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var form = new FormColor(this))
@@ -1242,7 +1272,21 @@ namespace AgOpenGPS
             this.menustripLanguage.Enabled = false;
             layoutPanelRight.Enabled = true;
             //boundaryToolStripBtn.Enabled = true;
-            toolStripBtnDropDownBoundaryTools.Enabled = true;
+
+            FieldMenuButtonStatus(true);
+        }
+
+        public void FieldMenuButtonStatus(bool isOn)
+        {
+            SmoothABtoolStripMenu.Enabled = isOn;
+            toolStripBtnMakeBndContour.Enabled = isOn;
+            boundariesToolStripMenuItem.Enabled = isOn;
+            headlandToolStripMenuItem.Enabled = isOn;
+            deleteContourPathsToolStripMenuItem.Enabled = isOn;
+            stripSectionColor.Enabled = isOn;
+            snapToCurrent.Enabled = isOn;
+            snapLeftBigStrip.Enabled = isOn;
+            snapRightBigStrip.Enabled = isOn;
         }
 
         //close the current job
@@ -1270,7 +1314,7 @@ namespace AgOpenGPS
             hd.headArr[0].hdLine?.Clear();
 
             layoutPanelRight.Enabled = false;
-            toolStripBtnDropDownBoundaryTools.Enabled = false;
+            FieldMenuButtonStatus(false);
 
             menustripLanguage.Enabled = true;
             isJobStarted = false;
@@ -1440,13 +1484,13 @@ namespace AgOpenGPS
                 {
                     layoutPanelRight.Enabled = true;
                     //boundaryToolStripBtn.Enabled = true;
-                    toolStripBtnDropDownBoundaryTools.Enabled = true;
+                    FieldMenuButtonStatus(true);
                 }
                 else
                 {
                     layoutPanelRight.Enabled = false;
                     //boundaryToolStripBtn.Enabled = false;
-                    toolStripBtnDropDownBoundaryTools.Enabled = false;
+                    FieldMenuButtonStatus(false);
                 }
             }
 
@@ -1464,7 +1508,7 @@ namespace AgOpenGPS
                         FileSaveEverythingBeforeClosingField();
                         layoutPanelRight.Enabled = false;
                         //boundaryToolStripBtn.Enabled = false;
-                        toolStripBtnDropDownBoundaryTools.Enabled = false;
+                        FieldMenuButtonStatus(false);
                         break;
 
                     //Ignore and return
@@ -1479,7 +1523,7 @@ namespace AgOpenGPS
                         FileSaveEverythingBeforeClosingField();
                         layoutPanelRight.Enabled = false;
                         //boundaryToolStripBtn.Enabled = false;
-                        toolStripBtnDropDownBoundaryTools.Enabled = false;
+                        FieldMenuButtonStatus(false);
 
                         //ask for a directory name
                         using (var form2 = new FormSaveAs(this))

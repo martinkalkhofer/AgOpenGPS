@@ -106,6 +106,7 @@ namespace AgOpenGPS
         public class CPGN_FB
         {
             /// <summary>
+            /// 
             /// PGN - 251 - FB 
             /// set0=5 maxPulse = 6 minSpeed = 7 ackermanFix = 8
             /// </summary>

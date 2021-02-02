@@ -389,7 +389,7 @@
             this.panelLeftSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeftSideMenu.Location = new System.Drawing.Point(2, 2);
             this.panelLeftSideMenu.Name = "panelLeftSideMenu";
-            this.panelLeftSideMenu.Size = new System.Drawing.Size(201, 736);
+            this.panelLeftSideMenu.Size = new System.Drawing.Size(201, 709);
             this.panelLeftSideMenu.TabIndex = 110;
             // 
             // panelArduino
@@ -936,7 +936,7 @@
             this.panelChildForm.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelChildForm.Location = new System.Drawing.Point(203, 2);
             this.panelChildForm.Name = "panelChildForm";
-            this.panelChildForm.Size = new System.Drawing.Size(795, 666);
+            this.panelChildForm.Size = new System.Drawing.Size(795, 641);
             this.panelChildForm.TabIndex = 111;
             // 
             // tab1
@@ -964,7 +964,7 @@
             this.tab1.Name = "tab1";
             this.tab1.Padding = new System.Drawing.Point(0, 0);
             this.tab1.SelectedIndex = 0;
-            this.tab1.Size = new System.Drawing.Size(795, 666);
+            this.tab1.Size = new System.Drawing.Size(795, 641);
             this.tab1.TabIndex = 0;
             // 
             // tabSummary
@@ -1372,7 +1372,7 @@
             // 
             this.tabVAntenna.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
             this.tabVAntenna.Controls.Add(this.label53);
-            this.tabVAntenna.Controls.Add(this.nudMinTurnRadius);
+            this.tabVAntenna.Controls.Add(this.nudWheelbase);
             this.tabVAntenna.Controls.Add(this.btnNext);
             this.tabVAntenna.Controls.Add(this.label17);
             this.tabVAntenna.Controls.Add(this.nudAntennaHeight);
@@ -1384,7 +1384,7 @@
             this.tabVAntenna.Controls.Add(this.pboxAntenna);
             this.tabVAntenna.Location = new System.Drawing.Point(4, 44);
             this.tabVAntenna.Name = "tabVAntenna";
-            this.tabVAntenna.Size = new System.Drawing.Size(787, 618);
+            this.tabVAntenna.Size = new System.Drawing.Size(787, 593);
             this.tabVAntenna.TabIndex = 12;
             this.tabVAntenna.Text = "vAnt";
             this.tabVAntenna.Enter += new System.EventHandler(this.tabVAntenna_Enter);
@@ -1408,7 +1408,7 @@
             this.nudMinTurnRadius.BackColor = System.Drawing.Color.AliceBlue;
             this.nudMinTurnRadius.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudMinTurnRadius.InterceptArrowKeys = false;
-            this.nudMinTurnRadius.Location = new System.Drawing.Point(183, 513);
+            this.nudMinTurnRadius.Location = new System.Drawing.Point(213, 300);
             this.nudMinTurnRadius.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -1485,12 +1485,12 @@
             this.label20.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.label20.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label20.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label20.Location = new System.Drawing.Point(521, 300);
+            this.label20.Location = new System.Drawing.Point(538, 260);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(196, 23);
+            this.label20.Size = new System.Drawing.Size(160, 60);
             this.label20.TabIndex = 43;
             this.label20.Text = "Height";
-            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label20.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // label21
             // 
@@ -1498,12 +1498,12 @@
             this.label21.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.label21.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label21.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label21.Location = new System.Drawing.Point(518, 88);
+            this.label21.Location = new System.Drawing.Point(534, 58);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(216, 23);
+            this.label21.Size = new System.Drawing.Size(163, 55);
             this.label21.TabIndex = 45;
             this.label21.Text = "Offset";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label21.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // nudAntennaPivot
             // 
@@ -1577,8 +1577,8 @@
             // 
             this.tabVDimensions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
             this.tabVDimensions.Controls.Add(this.label23);
-            this.tabVDimensions.Controls.Add(this.nudWheelbase);
             this.tabVDimensions.Controls.Add(this.btnNextDim);
+            this.tabVDimensions.Controls.Add(this.nudMinTurnRadius);
             this.tabVDimensions.Controls.Add(this.pictureBox1);
             this.tabVDimensions.Location = new System.Drawing.Point(4, 44);
             this.tabVDimensions.Name = "tabVDimensions";
@@ -1606,7 +1606,7 @@
             this.nudWheelbase.BackColor = System.Drawing.Color.AliceBlue;
             this.nudWheelbase.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudWheelbase.InterceptArrowKeys = false;
-            this.nudWheelbase.Location = new System.Drawing.Point(213, 302);
+            this.nudWheelbase.Location = new System.Drawing.Point(183, 520);
             this.nudWheelbase.Maximum = new decimal(new int[] {
             1999,
             0,
@@ -1623,7 +1623,7 @@
             this.nudWheelbase.TabIndex = 52;
             this.nudWheelbase.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudWheelbase.Value = new decimal(new int[] {
-            501,
+            499,
             0,
             0,
             0});
@@ -4724,7 +4724,7 @@
             this.panelBottom.Controls.Add(this.btnOK);
             this.panelBottom.Controls.Add(this.lblSecTotalWidthMeters);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(203, 670);
+            this.panelBottom.Location = new System.Drawing.Point(203, 643);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(795, 68);
             this.panelBottom.TabIndex = 112;
@@ -4733,8 +4733,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1000, 740);
+            this.BackColor = System.Drawing.Color.Cyan;
+            this.ClientSize = new System.Drawing.Size(1000, 713);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.panelChildForm);
             this.Controls.Add(this.panelLeftSideMenu);

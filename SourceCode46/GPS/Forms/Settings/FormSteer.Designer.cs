@@ -98,6 +98,7 @@
             this.tabSteer = new System.Windows.Forms.TabPage();
             this.tabStan = new System.Windows.Forms.TabPage();
             this.tabInt = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.nudIntDistance)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -878,9 +879,10 @@
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label12);
-            this.panel1.Location = new System.Drawing.Point(0, 357);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(2, 355);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(369, 107);
+            this.panel1.Size = new System.Drawing.Size(368, 107);
             this.panel1.TabIndex = 323;
             // 
             // label22
@@ -903,12 +905,12 @@
             this.tabControl1.Controls.Add(this.tabInt);
             this.tabControl1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.ItemSize = new System.Drawing.Size(89, 48);
-            this.tabControl1.Location = new System.Drawing.Point(0, 3);
+            this.tabControl1.Location = new System.Drawing.Point(2, 1);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(369, 351);
+            this.tabControl1.Size = new System.Drawing.Size(368, 351);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 347;
             // 
@@ -930,7 +932,7 @@
             this.tabGain.Controls.Add(this.hsbarHighSteerPWM);
             this.tabGain.Location = new System.Drawing.Point(4, 52);
             this.tabGain.Name = "tabGain";
-            this.tabGain.Size = new System.Drawing.Size(361, 295);
+            this.tabGain.Size = new System.Drawing.Size(360, 295);
             this.tabGain.TabIndex = 13;
             this.tabGain.Text = "Gain";
             // 
@@ -949,7 +951,7 @@
             this.tabSteer.Controls.Add(this.lblMaxSteerAngle);
             this.tabSteer.Location = new System.Drawing.Point(4, 52);
             this.tabSteer.Name = "tabSteer";
-            this.tabSteer.Size = new System.Drawing.Size(361, 295);
+            this.tabSteer.Size = new System.Drawing.Size(361, 300);
             this.tabSteer.TabIndex = 5;
             this.tabSteer.Text = "Steer";
             // 
@@ -971,7 +973,7 @@
             this.tabStan.Controls.Add(this.label16);
             this.tabStan.Location = new System.Drawing.Point(4, 52);
             this.tabStan.Name = "tabStan";
-            this.tabStan.Size = new System.Drawing.Size(361, 295);
+            this.tabStan.Size = new System.Drawing.Size(361, 300);
             this.tabStan.TabIndex = 15;
             this.tabStan.Text = "Stanley";
             // 
@@ -992,23 +994,35 @@
             this.tabInt.Controls.Add(this.label2);
             this.tabInt.Location = new System.Drawing.Point(4, 52);
             this.tabInt.Name = "tabInt";
-            this.tabInt.Size = new System.Drawing.Size(361, 295);
+            this.tabInt.Size = new System.Drawing.Size(361, 300);
             this.tabInt.TabIndex = 16;
             this.tabInt.Text = "PureP";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(70)))));
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(2, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(368, 462);
+            this.panel2.TabIndex = 348;
             // 
             // FormSteer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(370, 466);
+            this.BackColor = System.Drawing.Color.Cyan;
+            this.ClientSize = new System.Drawing.Size(372, 464);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(380, 200);
             this.Name = "FormSteer";
+            this.Padding = new System.Windows.Forms.Padding(2, 0, 2, 2);
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -1098,5 +1112,6 @@
         private System.Windows.Forms.TabPage tabSteer;
         private System.Windows.Forms.TabPage tabStan;
         private System.Windows.Forms.TabPage tabInt;
+        private System.Windows.Forms.Panel panel2;
     }
 }

@@ -294,6 +294,113 @@ namespace AgOpenGPS
             }
         }
 
+
+        //rec path
+        private void goPathMenu_Click(object sender, EventArgs e)
+        {
+            //if contour is on, turn it off
+            if (ct.isContourBtnOn) { if (ct.isContourBtnOn) btnContour.PerformClick(); }
+            //btnContourPriority.Enabled = true;
+
+            if (yt.isYouTurnBtnOn) btnAutoYouTurn.PerformClick();
+            if (isAutoSteerBtnOn) btnAutoSteer.PerformClick();
+
+            DisableYouTurnButtons();
+
+            //if ABLine isn't set, turn off the YouTurn
+            if (ABLine.isABLineSet)
+            {
+                //ABLine.DeleteAB();
+                ABLine.isABLineBeingSet = false;
+                ABLine.isABLineSet = false;
+                //lblDistanceOffLine.Visible = false;
+
+                //change image to reflect on off
+                btnABLine.Image = Properties.Resources.ABLineOff;
+                ABLine.isBtnABLineOn = false;
+            }
+
+            if (curve.isCurveSet)
+            {
+
+                //make sure the other stuff is off
+                curve.isOkToAddPoints = false;
+                curve.isCurveSet = false;
+                //btnContourPriority.Enabled = false;
+                curve.isBtnCurveOn = false;
+                btnCurve.Image = Properties.Resources.CurveOff;
+            }
+
+            if (!recPath.isPausedDrivingRecordedPath)
+            {
+                //already running?
+                if (recPath.isDrivingRecordedPath)
+                {
+                    recPath.StopDrivingRecordedPath();
+                    return;
+                }
+
+                //start the recorded path driving process
+
+
+
+                if (!recPath.StartDrivingRecordedPath())
+                {
+                    //Cancel the recPath - something went seriously wrong
+                    recPath.StopDrivingRecordedPath();
+                    TimedMessageBox(1500, gStr.gsProblemMakingPath, gStr.gsCouldntGenerateValidPath);
+                }
+                else
+                {
+                    goPathMenu.Image = Properties.Resources.AutoStop;
+                }
+            }
+            else
+            {
+                recPath.isPausedDrivingRecordedPath = false;
+                pausePathMenu.BackColor = Color.Lime;
+            }
+        }
+        private void PausePathMenu_Click(object sender, EventArgs e)
+        {
+            if (recPath.isPausedDrivingRecordedPath)
+            {
+                //btnPauseDrivingPath.BackColor = Color.Lime;
+                pausePathMenu.BackColor = Color.Lime;
+            }
+            else
+            {
+                //btnPauseDrivingPath.BackColor = Color.OrangeRed;
+                pausePathMenu.BackColor = Color.OrangeRed;
+            }
+
+            recPath.isPausedDrivingRecordedPath = !recPath.isPausedDrivingRecordedPath;
+
+        }
+        private void RecordPathMenu_Click(object sender, EventArgs e)
+        {
+            if (recPath.isRecordOn)
+            {
+                FileSaveRecPath();
+                recPath.isRecordOn = false;
+                recordPathMenu.Image = Properties.Resources.BoundaryRecord;
+            }
+            else if (isJobStarted)
+            {
+                recPath.recList.Clear();
+                recPath.isRecordOn = true;
+                recordPathMenu.Image = Properties.Resources.boundaryStop;
+            }
+        }
+        private void DeletePathMenu_Click(object sender, EventArgs e)
+        {
+            recPath.recList.Clear();
+            recPath.StopDrivingRecordedPath();
+            FileSaveRecPath();
+
+        }
+
+
         //Snaps
         private void SnapRight()
         {
@@ -1032,6 +1139,16 @@ namespace AgOpenGPS
             }
             else { TimedMessageBox(3000, gStr.gsFieldNotOpen, gStr.gsStartNewField); }
         }
+        private void headlandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (bnd.bndArr.Count == 0)
+            {
+                TimedMessageBox(2000, gStr.gsNoBoundary, gStr.gsCreateABoundaryFirst);
+                return;
+            }
+
+            GetHeadland();
+        }
         private void toolStripBtnMakeBndContour_Click_1(object sender, EventArgs e)
         {
             //build all the contour guidance lines from boundaries, all of them.
@@ -1039,6 +1156,22 @@ namespace AgOpenGPS
             {
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK) { }
+            }
+        }
+        private void SmoothABtoolStripMenu_Click(object sender, EventArgs e)
+        {
+            if (isJobStarted && curve.isBtnCurveOn)
+            {
+                using (var form = new FormSmoothAB(this))
+                {
+                    var result = form.ShowDialog();
+                    if (result == DialogResult.OK) { }
+                }
+            }
+            else
+            {
+                if (!isJobStarted) TimedMessageBox(2000, gStr.gsFieldNotOpen, gStr.gsStartNewField);
+                else TimedMessageBox(2000, gStr.gsCurveNotOn, gStr.gsTurnABCurveOn);
             }
         }
         private void deleteContourPathsToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -1049,6 +1182,11 @@ namespace AgOpenGPS
             ct.ctList?.Clear();
             contourSaveList?.Clear();
         }
+        private void toolStripBtnField_Click(object sender, EventArgs e)
+        {
+            JobNewOpenResume();
+        }
+
         private void fileExplorerToolStripItem_Click(object sender, EventArgs e)
         {
             if (isJobStarted)
@@ -1133,26 +1271,6 @@ namespace AgOpenGPS
                 {
                    TimedMessageBox(1500, "Sections are on", "Turn Auto or Manual Off First");
                 }
-            }
-        }
-        private void toolStripBtnField_Click(object sender, EventArgs e)
-        {
-            JobNewOpenResume();
-        }
-        private void SmoothABtoolStripMenu_Click(object sender, EventArgs e)
-        {
-            if (isJobStarted && curve.isBtnCurveOn)
-            {
-                using (var form = new FormSmoothAB(this))
-                {
-                    var result = form.ShowDialog();
-                    if (result == DialogResult.OK) { }
-                }
-            }
-            else
-            {
-                if (!isJobStarted) TimedMessageBox(2000, gStr.gsFieldNotOpen, gStr.gsStartNewField);
-                else TimedMessageBox(2000, gStr.gsCurveNotOn, gStr.gsTurnABCurveOn);
             }
         }
         //private void toolstripDisplayConfig_Click_1(object sender, EventArgs e)
@@ -1345,16 +1463,6 @@ namespace AgOpenGPS
                 oglZoom.Top = 80;
                 if (isJobStarted) oglZoom.BringToFront();
             }
-        }
-        private void headlandToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (bnd.bndArr.Count == 0)
-            {
-                TimedMessageBox(2000, gStr.gsNoBoundary, gStr.gsCreateABoundaryFirst);
-                return;
-            }
-
-            GetHeadland();
         }
         private void simplifyToolStrip_Click(object sender, EventArgs e)
         {
@@ -1644,7 +1752,7 @@ namespace AgOpenGPS
             //if (!spGPS.IsOpen)
             {
                 if (isAutoSteerBtnOn && (guidanceLineDistanceOff != 32000)) sim.DoSimTick(guidanceLineSteerAngle * 0.01);
-                //else if (recPath.isDrivingRecordedPath) sim.DoSimTick(guidanceLineSteerAngle * 0.01);
+                else if (recPath.isDrivingRecordedPath) sim.DoSimTick(guidanceLineSteerAngle * 0.01);
                 //else if (self.isSelfDriving) sim.DoSimTick(guidanceLineSteerAngle * 0.01);
                 else sim.DoSimTick(sim.steerAngleScrollBar);
             }

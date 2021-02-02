@@ -256,7 +256,7 @@ namespace AgOpenGPS
                     //reset the counter
                     displayUpdateOneFifthCounter = oneFifthSecond;
 
-                    AutoSteerToolBtn.Text = SetSteerAngle + "\r\n" + ActualSteerAngle;
+                    bottomStripAutoSteerConfig.Text = SetSteerAngle + "\r\n" + ActualSteerAngle;
 
                     integralStatusLeftSide.Text = "I: " + gyd.inty.ToString("N3");
                 }
@@ -443,19 +443,11 @@ namespace AgOpenGPS
                 oglZoom.SendToBack();
 
 
-            //default to come up in mini panel, exit remembers 
-            SwapBatmanPanels();
 
             if (Properties.Settings.Default.setAS_isAutoSteerAutoOn) btnAutoSteer.Text = "R";
             else btnAutoSteer.Text = "M";
 
-            FixPanelsAndMenus();
 
-            if (!isJobStarted)
-            layoutPanelRight.Enabled = false;
-
-            //boundaryToolStripBtn.Enabled = false;
-            toolStripBtnDropDownBoundaryTools.Enabled = false;
 
             if (hd.isOn) btnHeadlandOnOff.Image = Properties.Resources.HeadlandOn;
             else btnHeadlandOnOff.Image = Properties.Resources.HeadlandOff;
@@ -619,7 +611,7 @@ namespace AgOpenGPS
 
             if (!isSimple)
             {
-                AutoSteerToolBtn.Visible = true;
+                bottomStripAutoSteerConfig.Visible = true;
 
                 //lblDateTime.Visible = false;
                 //snapLeftBigStrip.Visible = false;
@@ -642,7 +634,7 @@ namespace AgOpenGPS
 
             if (isSimple)
             {
-                AutoSteerToolBtn.Visible = false;
+                bottomStripAutoSteerConfig.Visible = false;
 
                 //lblDateTime.Visible = true;
                 snapLeftBigStrip.Visible = true;

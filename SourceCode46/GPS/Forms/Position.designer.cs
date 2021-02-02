@@ -540,6 +540,9 @@ namespace AgOpenGPS
                 p_FE.steerData[p_FE.status] = 0;
             }
 
+            //if the whole path driving driving process is green
+            if (recPath.isDrivingRecordedPath) recPath.UpdatePosition();
+
             // If Drive button enabled be normal, or just fool the autosteer and fill values
             if (!vehicle.ast.isInFreeDriveMode)
             {
@@ -918,6 +921,17 @@ namespace AgOpenGPS
         //add the points for section, contour line points, Area Calc feature
         private void AddSectionOrContourPathPoints()
         {
+            if (recPath.isRecordOn)
+            {
+                //keep minimum speed of 1.0
+                double speed = pn.speed;
+                if (pn.speed < 1.0) speed = 1.0;
+                bool autoBtn = (autoBtnState == btnStates.Auto);
+
+                CRecPathPt pt = new CRecPathPt(pivotAxlePos.easting, pivotAxlePos.northing, pivotAxlePos.heading, pn.speed, autoBtn);
+                recPath.recList.Add(pt);
+            }
+
             if (curve.isOkToAddPoints)
             {
                 vec3 pt = new vec3(pivotAxlePos.easting, pivotAxlePos.northing, pivotAxlePos.heading);

@@ -331,6 +331,9 @@ namespace AgOpenGPS
                         if (curve.isBtnCurveOn) curve.DrawCurve();
                     }
 
+                    recPath.DrawRecordedLine();
+                    recPath.DrawDubins();
+
                     //draw Boundaries
                     bnd.DrawBoundaryLines();
 
