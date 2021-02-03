@@ -91,6 +91,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // timer1
@@ -826,11 +827,19 @@
             this.label29.TabIndex = 496;
             this.label29.Text = "AVR";
             // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(544, 289);
+            this.panel1.TabIndex = 506;
+            // 
             // FormGPSData
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(490, 289);
+            this.ClientSize = new System.Drawing.Size(544, 289);
             this.Controls.Add(this.tboxPAOGI);
             this.Controls.Add(this.tboxAVR);
             this.Controls.Add(this.tboxHDT);
@@ -892,6 +901,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblFixQuality);
             this.Controls.Add(this.lblStatus);
+            this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.MaximizeBox = false;
@@ -972,5 +982,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Panel panel1;
     }
 }

@@ -35,16 +35,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnInField = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // btnJobOpen
             // 
+            this.btnJobOpen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(90)))));
             this.btnJobOpen.FlatAppearance.BorderSize = 0;
             this.btnJobOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnJobOpen.Font = new System.Drawing.Font("Tahoma", 20.25F);
+            this.btnJobOpen.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnJobOpen.Image = global::AgOpenGPS.Properties.Resources.FileOpen;
             this.btnJobOpen.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnJobOpen.Location = new System.Drawing.Point(39, 334);
+            this.btnJobOpen.Location = new System.Drawing.Point(60, 334);
             this.btnJobOpen.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnJobOpen.Name = "btnJobOpen";
             this.btnJobOpen.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -52,17 +55,19 @@
             this.btnJobOpen.TabIndex = 3;
             this.btnJobOpen.Text = "Open";
             this.btnJobOpen.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnJobOpen.UseVisualStyleBackColor = true;
+            this.btnJobOpen.UseVisualStyleBackColor = false;
             this.btnJobOpen.Click += new System.EventHandler(this.btnJobOpen_Click);
             // 
             // btnJobNew
             // 
+            this.btnJobNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(90)))));
             this.btnJobNew.FlatAppearance.BorderSize = 0;
             this.btnJobNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnJobNew.Font = new System.Drawing.Font("Tahoma", 20.25F);
+            this.btnJobNew.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnJobNew.Image = global::AgOpenGPS.Properties.Resources.FileNew;
             this.btnJobNew.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnJobNew.Location = new System.Drawing.Point(39, 221);
+            this.btnJobNew.Location = new System.Drawing.Point(60, 227);
             this.btnJobNew.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnJobNew.Name = "btnJobNew";
             this.btnJobNew.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -70,31 +75,35 @@
             this.btnJobNew.TabIndex = 2;
             this.btnJobNew.Text = "New";
             this.btnJobNew.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnJobNew.UseVisualStyleBackColor = true;
+            this.btnJobNew.UseVisualStyleBackColor = false;
             this.btnJobNew.Click += new System.EventHandler(this.btnJobNew_Click);
             // 
             // btnDeleteAB
             // 
+            this.btnDeleteAB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(70)))));
             this.btnDeleteAB.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnDeleteAB.FlatAppearance.BorderSize = 0;
             this.btnDeleteAB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteAB.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.btnDeleteAB.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnDeleteAB.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnDeleteAB.Image = global::AgOpenGPS.Properties.Resources.Cancel64;
             this.btnDeleteAB.Location = new System.Drawing.Point(279, 555);
             this.btnDeleteAB.Name = "btnDeleteAB";
             this.btnDeleteAB.Size = new System.Drawing.Size(90, 64);
             this.btnDeleteAB.TabIndex = 4;
             this.btnDeleteAB.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnDeleteAB.UseVisualStyleBackColor = false;
             // 
             // btnJobResume
             // 
+            this.btnJobResume.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(90)))));
             this.btnJobResume.FlatAppearance.BorderSize = 0;
             this.btnJobResume.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnJobResume.Font = new System.Drawing.Font("Tahoma", 20.25F);
+            this.btnJobResume.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnJobResume.Image = global::AgOpenGPS.Properties.Resources.FilePrevious;
             this.btnJobResume.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnJobResume.Location = new System.Drawing.Point(39, 120);
+            this.btnJobResume.Location = new System.Drawing.Point(60, 120);
             this.btnJobResume.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnJobResume.Name = "btnJobResume";
             this.btnJobResume.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -102,13 +111,15 @@
             this.btnJobResume.TabIndex = 1;
             this.btnJobResume.Text = "Resume";
             this.btnJobResume.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnJobResume.UseVisualStyleBackColor = true;
+            this.btnJobResume.UseVisualStyleBackColor = false;
             this.btnJobResume.Click += new System.EventHandler(this.btnJobResume_Click);
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Underline);
-            this.label1.Location = new System.Drawing.Point(23, 11);
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(70)))));
+            this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F);
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.Location = new System.Drawing.Point(23, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(332, 23);
             this.label1.TabIndex = 6;
@@ -117,20 +128,25 @@
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(110)))));
+            this.textBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.textBox1.Location = new System.Drawing.Point(12, 46);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(357, 56);
             this.textBox1.TabIndex = 88;
+            this.textBox1.Text = "File name goes here";
             // 
             // btnInField
             // 
+            this.btnInField.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(90)))));
             this.btnInField.FlatAppearance.BorderSize = 0;
             this.btnInField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInField.Font = new System.Drawing.Font("Tahoma", 20.25F);
+            this.btnInField.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnInField.Image = global::AgOpenGPS.Properties.Resources.AutoManualIsAuto;
             this.btnInField.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnInField.Location = new System.Drawing.Point(39, 442);
+            this.btnInField.Location = new System.Drawing.Point(60, 441);
             this.btnInField.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnInField.Name = "btnInField";
             this.btnInField.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -138,14 +154,24 @@
             this.btnInField.TabIndex = 89;
             this.btnInField.Text = "Drive In";
             this.btnInField.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInField.UseVisualStyleBackColor = true;
+            this.btnInField.UseVisualStyleBackColor = false;
             this.btnInField.Click += new System.EventHandler(this.btnInField_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(70)))));
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(2, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(378, 627);
+            this.panel1.TabIndex = 90;
             // 
             // FormJob
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(381, 631);
+            this.BackColor = System.Drawing.Color.Cyan;
+            this.ClientSize = new System.Drawing.Size(382, 631);
             this.ControlBox = false;
             this.Controls.Add(this.btnInField);
             this.Controls.Add(this.textBox1);
@@ -154,11 +180,13 @@
             this.Controls.Add(this.btnJobResume);
             this.Controls.Add(this.btnJobNew);
             this.Controls.Add(this.btnJobOpen);
+            this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormJob";
+            this.Padding = new System.Windows.Forms.Padding(2);
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -178,5 +206,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnInField;
+        private System.Windows.Forms.Panel panel1;
     }
 }

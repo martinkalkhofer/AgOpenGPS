@@ -17,7 +17,7 @@ namespace AgOpenGPS
             InitializeComponent();
 
             //btnStop.Text = gStr.gsDone;
-            btnPausePlay.Text = gStr.gsRecord;
+            //btnPausePlay.Text = gStr.gsRecord;
             label1.Text = gStr.gsArea + ":";
             this.Text = gStr.gsStopRecordPauseBoundary;
         }
@@ -33,14 +33,6 @@ namespace AgOpenGPS
                 {
                     mf.bnd.bndArr[mf.bnd.boundarySelected].bndLine.Add(mf.bnd.bndBeingMadePts[i]);
                 }
-
-                //mf.bnd.bndArr[mf.bnd.boundarySelected].PreCalcBoundaryLines();
-                //mf.bnd.bndArr[mf.bnd.boundarySelected].FixBoundaryLine(mf.bnd.boundarySelected, mf.tool.toolWidth);
-                //mf.bnd.bndArr[mf.bnd.boundarySelected].PreCalcBoundaryEarLines();
-                //mf.bnd.bndArr[mf.bnd.boundarySelected].PreCalcBoundaryLines();
-                //mf.bnd.bndArr[mf.bnd.boundarySelected].isSet = true;
-                //mf.bnd.bndArr[mf.bnd.boundarySelected].CalculateBoundaryArea();
-                //mf.fd.UpdateFieldBoundaryGUIAreas();
 
                 //build the boundary, make sure is clockwise for outer counter clockwise for inner
                 bool isCW = mf.bnd.bndArr[mf.bnd.boundarySelected].CalculateBoundaryArea();

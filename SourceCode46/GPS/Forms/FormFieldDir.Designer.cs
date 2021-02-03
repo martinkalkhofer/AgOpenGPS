@@ -38,13 +38,16 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tboxVehicle = new System.Windows.Forms.TextBox();
             this.lblFilename = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(70)))));
             this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(18, 31);
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.Location = new System.Drawing.Point(20, 33);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(155, 23);
@@ -66,8 +69,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(70)))));
             this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.label2.Location = new System.Drawing.Point(290, 29);
+            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label2.Location = new System.Drawing.Point(387, 31);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(193, 23);
@@ -77,32 +82,36 @@
             // btnSerialCancel
             // 
             this.btnSerialCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSerialCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(70)))));
             this.btnSerialCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSerialCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnSerialCancel.FlatAppearance.BorderSize = 0;
             this.btnSerialCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSerialCancel.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.btnSerialCancel.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSerialCancel.Image = global::AgOpenGPS.Properties.Resources.Cancel64;
-            this.btnSerialCancel.Location = new System.Drawing.Point(412, 194);
+            this.btnSerialCancel.Location = new System.Drawing.Point(408, 190);
             this.btnSerialCancel.Name = "btnSerialCancel";
-            this.btnSerialCancel.Size = new System.Drawing.Size(88, 77);
+            this.btnSerialCancel.Size = new System.Drawing.Size(77, 79);
             this.btnSerialCancel.TabIndex = 4;
             this.btnSerialCancel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSerialCancel.UseVisualStyleBackColor = true;
+            this.btnSerialCancel.UseVisualStyleBackColor = false;
             this.btnSerialCancel.Click += new System.EventHandler(this.btnSerialCancel_Click);
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(70)))));
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSave.Image = global::AgOpenGPS.Properties.Resources.OK64;
-            this.btnSave.Location = new System.Drawing.Point(511, 192);
+            this.btnSave.Location = new System.Drawing.Point(507, 190);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(140, 79);
             this.btnSave.TabIndex = 3;
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // tboxTask
@@ -120,9 +129,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(70)))));
             this.label4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label4.Location = new System.Drawing.Point(18, 144);
+            this.label4.Location = new System.Drawing.Point(20, 146);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(99, 23);
@@ -132,9 +143,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(70)))));
             this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label5.Location = new System.Drawing.Point(18, 213);
+            this.label5.Location = new System.Drawing.Point(20, 215);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(167, 23);
@@ -156,20 +169,32 @@
             // lblFilename
             // 
             this.lblFilename.AutoSize = true;
+            this.lblFilename.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(70)))));
             this.lblFilename.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFilename.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lblFilename.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblFilename.Location = new System.Drawing.Point(18, 101);
+            this.lblFilename.Location = new System.Drawing.Point(20, 97);
             this.lblFilename.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFilename.Name = "lblFilename";
             this.lblFilename.Size = new System.Drawing.Size(83, 19);
             this.lblFilename.TabIndex = 147;
             this.lblFilename.Text = "Filename";
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(70)))));
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(2, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(657, 279);
+            this.panel1.TabIndex = 148;
+            // 
             // FormFieldDir
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(663, 283);
+            this.BackColor = System.Drawing.Color.Cyan;
+            this.ClientSize = new System.Drawing.Size(661, 283);
             this.ControlBox = false;
             this.Controls.Add(this.lblFilename);
             this.Controls.Add(this.label5);
@@ -181,9 +206,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tboxFieldName);
+            this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Tahoma", 14.25F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormFieldDir";
+            this.Padding = new System.Windows.Forms.Padding(2);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Create New Field ";
@@ -204,5 +232,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tboxVehicle;
         private System.Windows.Forms.Label lblFilename;
+        private System.Windows.Forms.Panel panel1;
     }
 }

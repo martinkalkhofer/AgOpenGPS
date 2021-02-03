@@ -49,14 +49,20 @@ namespace AgOpenGPS
             UpdateChart();
             nudBndOffset.Value = (decimal)(mf.tool.toolWidth * 0.5);
 
-            panelMain.Top = 10;
-            panelMain.Left = 10;
-            panelChoose.Top = 10;
-            panelChoose.Left = 10;
-            panelDrv.Top = 10;
-            panelDrv.Left = 10;
-            panelKML.Top = 10;
-            panelKML.Left = 10;
+            panelMain.Top = 0;
+            panelMain.Left = 0;
+            panelChoose.Top = 2;
+            panelChoose.Left = 2;
+            panelDrv.Top = 2;
+            panelDrv.Left = 2;
+            panelKML.Top = 2;
+            panelKML.Left = 2;
+
+
+            panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            panelChoose.Dock = System.Windows.Forms.DockStyle.Fill;
+            panelDrv.Dock = System.Windows.Forms.DockStyle.Fill;
+            panelKML.Dock = System.Windows.Forms.DockStyle.Fill;
 
             panelMain.Visible = true;
             panelChoose.Visible = false;
@@ -303,11 +309,6 @@ namespace AgOpenGPS
             mf.bnd.isBndBeingMade = true;
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnDeleteAll_Click(object sender, EventArgs e)
         {
             DialogResult result3 = MessageBox.Show(gStr.gsCompletelyDeleteBoundary,
@@ -356,10 +357,11 @@ namespace AgOpenGPS
 
             panelMain.Visible = false;
             panelChoose.Visible = true;
+            panelChoose.Dock = System.Windows.Forms.DockStyle.Fill;
             panelDrv.Visible = false;
             panelKML.Visible = false;
 
-            this.Size = new System.Drawing.Size(270, 426);
+            this.Size = new System.Drawing.Size(260, 426);
         }
 
         private void btnLoadBoundaryFromGE_Click(object sender, EventArgs e)

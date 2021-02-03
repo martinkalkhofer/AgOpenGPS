@@ -286,9 +286,10 @@
             this.panelMain.Controls.Add(this.btnOpenGoogleEarth);
             this.panelMain.Controls.Add(this.btnDeleteAll);
             this.panelMain.Controls.Add(this.btnDelete);
-            this.panelMain.Location = new System.Drawing.Point(12, 12);
+            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMain.Location = new System.Drawing.Point(2, 2);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(594, 368);
+            this.panelMain.Size = new System.Drawing.Size(1357, 372);
             this.panelMain.TabIndex = 417;
             // 
             // tableLayoutPanel1
@@ -335,7 +336,7 @@
             this.panelDrv.Controls.Add(this.lblOffset);
             this.panelDrv.Controls.Add(this.btnLeftRight);
             this.panelDrv.Controls.Add(this.btnGo);
-            this.panelDrv.Location = new System.Drawing.Point(871, 12);
+            this.panelDrv.Location = new System.Drawing.Point(871, 4);
             this.panelDrv.Name = "panelDrv";
             this.panelDrv.Size = new System.Drawing.Size(229, 368);
             this.panelDrv.TabIndex = 418;
@@ -405,7 +406,7 @@
             this.panelKML.Controls.Add(this.btnCancelKML);
             this.panelKML.Controls.Add(this.btnLoadBoundaryFromGE);
             this.panelKML.Controls.Add(this.btnLoadMultiBoundaryFromGE);
-            this.panelKML.Location = new System.Drawing.Point(1115, 12);
+            this.panelKML.Location = new System.Drawing.Point(1115, 4);
             this.panelKML.Name = "panelKML";
             this.panelKML.Size = new System.Drawing.Size(229, 368);
             this.panelKML.TabIndex = 419;
@@ -459,7 +460,7 @@
             this.panelChoose.Controls.Add(this.label4);
             this.panelChoose.Controls.Add(this.btnGetKML);
             this.panelChoose.Controls.Add(this.btnDriveOrExt);
-            this.panelChoose.Location = new System.Drawing.Point(612, 12);
+            this.panelChoose.Location = new System.Drawing.Point(612, 4);
             this.panelChoose.Name = "panelChoose";
             this.panelChoose.Size = new System.Drawing.Size(229, 368);
             this.panelChoose.TabIndex = 419;
@@ -512,8 +513,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1361, 387);
+            this.BackColor = System.Drawing.Color.Cyan;
+            this.ClientSize = new System.Drawing.Size(1361, 376);
             this.ControlBox = false;
             this.Controls.Add(this.panelChoose);
             this.Controls.Add(this.panelKML);
@@ -523,6 +524,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "FormBoundary";
+            this.Padding = new System.Windows.Forms.Padding(2);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Start or Delete A Boundary";
