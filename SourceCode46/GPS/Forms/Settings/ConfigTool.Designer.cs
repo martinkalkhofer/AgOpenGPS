@@ -112,10 +112,10 @@ namespace AgOpenGPS
                 nudTankHitch.Visible = false;
 
                 nudTrailingHitchLength.Left = 0;
-                nudDrawbarLength.Left = 206;
+                nudDrawbarLength.Left = 330;
                 nudTankHitch.Left = 0;
 
-                picboxToolHitch.Image = Properties.Resources.ToolHitchPageFront1;
+                picboxToolHitch.BackgroundImage = Properties.Resources.ToolHitchPageFront1;
             }
             else if (Properties.Vehicle.Default.setTool_isToolTBT)
             {
@@ -123,11 +123,11 @@ namespace AgOpenGPS
                 nudDrawbarLength.Visible = true;
                 nudTankHitch.Visible = true;
 
-                nudTrailingHitchLength.Left = 451;
-                nudDrawbarLength.Left = 61;
-                nudTankHitch.Left = 256;
+                nudTrailingHitchLength.Left = 139;
+                nudDrawbarLength.Left = 577;
+                nudTankHitch.Left = 391;
 
-                picboxToolHitch.Image = Properties.Resources.ToolHitchPageTBT1;
+                picboxToolHitch.BackgroundImage = Properties.Resources.ToolHitchPageTBT1;
             }
             else if (Properties.Vehicle.Default.setTool_isToolRearFixed)
             {
@@ -136,10 +136,10 @@ namespace AgOpenGPS
                 nudTankHitch.Visible = false;
 
                 nudTrailingHitchLength.Left = 0;
-                nudDrawbarLength.Left = 440;
+                nudDrawbarLength.Left = 267;
                 nudTankHitch.Left = 0;
 
-                picboxToolHitch.Image = Properties.Resources.ToolHitchPageRear1;
+                picboxToolHitch.BackgroundImage = Properties.Resources.ToolHitchPageRear1;
             }
             else if (Properties.Vehicle.Default.setTool_isToolTrailing)
             {
@@ -147,11 +147,11 @@ namespace AgOpenGPS
                 nudDrawbarLength.Visible = true;
                 nudTankHitch.Visible = false;
 
-                nudTrailingHitchLength.Left = 465;
-                nudDrawbarLength.Left = 292;
+                nudTrailingHitchLength.Left = 177;
+                nudDrawbarLength.Left = 370;
                 nudTankHitch.Left = 0;
 
-                picboxToolHitch.Image = Properties.Resources.ToolHitchPageTrailing1;
+                picboxToolHitch.BackgroundImage = Properties.Resources.ToolHitchPageTrailing1;
             }
 
             nudDrawbarLength.Value = (decimal)(Math.Abs(Properties.Vehicle.Default.setVehicle_hitchLength)*mf.m2InchOrCm);

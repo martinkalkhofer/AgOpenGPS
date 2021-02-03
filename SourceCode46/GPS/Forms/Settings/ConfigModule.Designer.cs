@@ -243,15 +243,6 @@ namespace AgOpenGPS
         #endregion
 
 
-
-
-
-
-
-
-
-
-
         #region Uturn Enter-Leave
 
         private void tabUTurn_Enter(object sender, EventArgs e)
@@ -351,6 +342,7 @@ namespace AgOpenGPS
         }
 
         #endregion
+
 
         #region Uturn controls
         private void btnYouTurnKeyHole_Click(object sender, EventArgs e)

@@ -263,5 +263,8 @@
     <Setting Name="setVehicle_startSpeed" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.5</Value>
     </Setting>
+    <Setting Name="setVehicle_trackWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1.9</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
