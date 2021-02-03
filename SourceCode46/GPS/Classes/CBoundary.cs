@@ -29,8 +29,8 @@ namespace AgOpenGPS
             boundarySelected = 0;
             scanWidth = 1.0;
             boxLength = 2000;
-             //boundaries array
-    }
+            //boundaries array
+        }
 
         // the list of possible bounds points
         public List<vec4> bndClosestList = new List<vec4>();
@@ -150,11 +150,11 @@ namespace AgOpenGPS
         public void DrawBoundaryLines()
         {
             //draw the boundaries
-            GL.Color3(0.95f, 0.5f, 0.250f);
+            GL.Color3(0.5f, 0.25f, 0.250f);
 
             for (int i = 0; i < bndArr.Count; i++)
             {
-                bndArr[i].DrawBoundaryLine();
+                bndArr[i].DrawBoundaryLine(mf.ABLine.lineWidth);
             }
 
             if (bndBeingMadePts.Count > 0)

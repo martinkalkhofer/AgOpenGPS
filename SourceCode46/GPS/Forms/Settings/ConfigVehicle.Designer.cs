@@ -172,13 +172,13 @@ namespace AgOpenGPS
             nudWheelbase.Value = (decimal)(Math.Abs(Properties.Vehicle.Default.setVehicle_wheelbase) * mf.m2InchOrCm);
 
             if (Properties.Vehicle.Default.setVehicle_vehicleType == 0)
-                pboxAntenna.Image = Properties.Resources.VehicleAntennaTractor;
+                pboxAntenna.BackgroundImage = Properties.Resources.AntennaTractor;
 
             else if (Properties.Vehicle.Default.setVehicle_vehicleType == 1)
-                pboxAntenna.Image = Properties.Resources.VehicleAntennaHarvestor;
+                pboxAntenna.BackgroundImage = Properties.Resources.AntennaHarvester;
 
             else if (Properties.Vehicle.Default.setVehicle_vehicleType == 2)
-                pboxAntenna.Image = Properties.Resources.VehicleAntenna4WD;
+                pboxAntenna.BackgroundImage = Properties.Resources.Antenna4WD;
 
             btnNext.Focus();
         }

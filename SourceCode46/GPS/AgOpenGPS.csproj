@@ -811,6 +811,10 @@
     <None Include="btnImages\VehicleAntennaTractor.png" />
     <None Include="btnImages\VehicleAntenna4WD.png" />
     <None Include="btnImages\VehicleAntennaHarvestor.png" />
+    <None Include="btnImages\Antenna4WD.png" />
+    <None Include="btnImages\AntennaHarvester.png" />
+    <None Include="btnImages\AntennaTractor.png" />
+    <None Include="btnImages\RadiusWheelBase.png" />
     <Content Include="Dependencies\Audio\Boundary.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

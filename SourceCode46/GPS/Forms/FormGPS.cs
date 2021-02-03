@@ -91,9 +91,6 @@ namespace AgOpenGPS
         private int minuteCounter = 1;
         private int tenMinuteCounter = 1;
 
-        //for the NTRIP CLient counting
-        private int ntripCounter = 10;
-
         //whether or not to use Stanley control
         public bool isStanleyUsed = true;
 
@@ -1318,7 +1315,6 @@ namespace AgOpenGPS
 
             menustripLanguage.Enabled = true;
             isJobStarted = false;
-
 
             //turn section buttons all OFF
             for (int j = 0; j < MAXSECTIONS; j++)

@@ -742,7 +742,6 @@ namespace AgOpenGPS
                                 }
 
                                 bnd.bndArr[k].PreCalcBoundaryEarLines();
-
                             }
                             else
                             {
@@ -763,8 +762,6 @@ namespace AgOpenGPS
                         form.Show();
                         WriteErrorLog("Load Boundary Line" + e.ToString());
                     }
-
-
                 }
             }
 

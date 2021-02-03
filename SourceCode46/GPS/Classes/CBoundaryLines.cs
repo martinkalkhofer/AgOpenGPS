@@ -81,86 +81,69 @@ namespace AgOpenGPS
             bndLine.Add(pt3);
         }
 
-        public void FixBoundaryLine(int bndNum, double spacing)
+        public void FixBoundaryLine(int bndNum )
         {
             //count the points from the boundary
             int ptCount = bndLine.Count;
-
+            double spacing = 2;
             //boundary point spacing based on eq width
-            spacing *= 0.25;
+            //close if less then 30 ha, 60ha, more then 60
+            if (area < 200000) spacing = 1.1;
+            else if (area < 400000) spacing = 2.2;
+            else spacing = 3.3;
 
-            if (spacing < 1) spacing = 1;
-            if (spacing > 3) spacing = 3;
+            if (bndNum > 0) spacing *= 0.5;
 
-            //first find out which side is inside the boundary
-            double oneSide = glm.PIBy2;
-            vec3 point = new vec3(bndLine[2].easting - (Math.Sin(oneSide + bndLine[2].heading) * 2.0),
-            bndLine[2].northing - (Math.Cos(oneSide + bndLine[2].heading) * 2.0), 0.0);
+            int bndCount = bndLine.Count;
+            double distance;
 
-            //make sure boundaries are wound correctly
-            if (bndNum == 0)
+            //make sure distance isn't too big between points on boundary
+            for (int i = 0; i < bndCount; i++)
             {
-                //outside an outer boundary means its wound clockwise
-                if (!IsPointInsideBoundary(point)) ReverseWinding();
+                int j = i + 1;
+
+                if (j == bndCount) j = 0;
+                 distance = glm.Distance(bndLine[i], bndLine[j]);
+                if (distance > spacing*1.5)
+                {
+                    vec3 pointB = new vec3((bndLine[i].easting + bndLine[j].easting) / 2.0,
+                        (bndLine[i].northing + bndLine[j].northing) / 2.0, bndLine[i].heading);
+
+                    bndLine.Insert(j, pointB);
+                    bndCount = bndLine.Count;
+                    i--;
+                }
             }
-            else
+
+            //make sure distance isn't too big between points on boundary
+            bndCount = bndLine.Count;
+
+            for (int i = 0; i < bndCount; i++)
             {
-                //inside an inner boundary means its wound clockwise
-                if (IsPointInsideBoundary(point)) ReverseWinding();
-                spacing *= 0.66;
+                int j = i + 1;
+
+                if (j == bndCount) j = 0;
+                distance = glm.Distance(bndLine[i], bndLine[j]);
+                if (distance > spacing*1.6)
+                {
+                    vec3 pointB = new vec3((bndLine[i].easting + bndLine[j].easting) / 2.0,
+                        (bndLine[i].northing + bndLine[j].northing) / 2.0, bndLine[i].heading);
+
+                    bndLine.Insert(j, pointB);
+                    bndCount = bndLine.Count;
+                    i--;
+                }
             }
 
             //make sure distance isn't too small between points on headland
-            int bndCount = bndLine.Count;
-            double distance;
+            spacing *= 1.2;
+            bndCount = bndLine.Count;
             for (int i = 0; i < bndCount - 1; i++)
             {
                 distance = glm.Distance(bndLine[i], bndLine[i + 1]);
                 if (distance < spacing)
                 {
                     bndLine.RemoveAt(i + 1);
-                    bndCount = bndLine.Count;
-                    i--;
-                }
-            }
-
-            //make sure distance isn't too big between points on boundary
-            bndCount = bndLine.Count;
-            spacing *= 1.33;
-
-            for (int i = 0; i < bndCount; i++)
-            {
-                int j = i + 1;
-
-                if (j == bndCount) j = 0;
-                distance = glm.Distance(bndLine[i], bndLine[j]);
-                if (distance > spacing)
-                {
-                    vec3 pointB = new vec3((bndLine[i].easting + bndLine[j].easting) / 2.0,
-                        (bndLine[i].northing + bndLine[j].northing) / 2.0, bndLine[i].heading);
-
-                    bndLine.Insert(j, pointB);
-                    bndCount = bndLine.Count;
-                    i--;
-                }
-            }
-
-            //make sure distance isn't too big between points on boundary
-            bndCount = bndLine.Count;
-            spacing *= 1.33;
-
-            for (int i = 0; i < bndCount; i++)
-            {
-                int j = i + 1;
-
-                if (j == bndCount) j = 0;
-                distance = glm.Distance(bndLine[i], bndLine[j]);
-                if (distance > spacing)
-                {
-                    vec3 pointB = new vec3((bndLine[i].easting + bndLine[j].easting) / 2.0,
-                        (bndLine[i].northing + bndLine[j].northing) / 2.0, bndLine[i].heading);
-
-                    bndLine.Insert(j, pointB);
                     bndCount = bndLine.Count;
                     i--;
                 }
@@ -188,7 +171,7 @@ namespace AgOpenGPS
             }
         }
 
-        private void ReverseWinding()
+        public void ReverseWinding()
         {
             //reverse the boundary
             int cnt = bndLine.Count;
@@ -332,7 +315,7 @@ namespace AgOpenGPS
             return oddNodes; //true means inside.
         }
 
-        public void DrawBoundaryLine()
+        public void DrawBoundaryLine(int lw)
         {
             ////draw the perimeter line so far
             if (bndLineEar.Count < 1) return;
@@ -348,9 +331,9 @@ namespace AgOpenGPS
 
             //ptCount = bdList.Count;
             //if (ptCount < 1) return;
-            //GL.PointSize(8);
+            GL.PointSize(8);
             //GL.Color3(0.19f, 0.932f, 0.70f);
-            GL.LineWidth(2);
+            GL.LineWidth(lw);
             GL.Begin(PrimitiveType.LineLoop);
             for (int i = 0; i < bndLineEar.Count; i++)
             {
@@ -360,10 +343,11 @@ namespace AgOpenGPS
         }
 
         //obvious
-        public void CalculateBoundaryArea()
+        public bool CalculateBoundaryArea()
         {
             int ptCount = bndLine.Count;
-            if (ptCount < 1) return;
+            if (ptCount < 1) return false;
+            bool isClockwise = true;
 
             area = 0;         // Accumulates area in the loop
             int j = ptCount - 1;  // The last vertex is the 'previous' one to the first
@@ -372,7 +356,11 @@ namespace AgOpenGPS
             {
                 area += (bndLine[j].easting + bndLine[i].easting) * (bndLine[j].northing - bndLine[i].northing);
             }
+            if (area < 0) isClockwise = false;
+
             area = Math.Abs(area / 2);
+
+            return isClockwise;
         }
     }
 }

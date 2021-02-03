@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConfig));
             this.panelLeftSideMenu = new System.Windows.Forms.Panel();
             this.panelArduino = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
@@ -56,7 +55,6 @@
             this.btnSubAntenna = new System.Windows.Forms.Button();
             this.btnSubVehicleConfig = new System.Windows.Forms.Button();
             this.btnVehicle = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
             this.panelChildForm = new System.Windows.Forms.Panel();
             this.tab1 = new System.Windows.Forms.TabControl();
             this.tabSummary = new System.Windows.Forms.TabPage();
@@ -86,21 +84,17 @@
             this.rbtn4WD = new System.Windows.Forms.RadioButton();
             this.rbtnTractor = new System.Windows.Forms.RadioButton();
             this.tabVAntenna = new System.Windows.Forms.TabPage();
-            this.label53 = new System.Windows.Forms.Label();
-            this.nudMinTurnRadius = new System.Windows.Forms.NumericUpDown();
             this.btnNext = new System.Windows.Forms.Button();
-            this.label17 = new System.Windows.Forms.Label();
             this.nudAntennaHeight = new System.Windows.Forms.NumericUpDown();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
             this.nudAntennaPivot = new System.Windows.Forms.NumericUpDown();
-            this.label22 = new System.Windows.Forms.Label();
             this.nudAntennaOffset = new System.Windows.Forms.NumericUpDown();
             this.pboxAntenna = new System.Windows.Forms.PictureBox();
             this.tabVDimensions = new System.Windows.Forms.TabPage();
+            this.label53 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.nudWheelbase = new System.Windows.Forms.NumericUpDown();
             this.btnNextDim = new System.Windows.Forms.Button();
+            this.nudWheelbase = new System.Windows.Forms.NumericUpDown();
+            this.nudMinTurnRadius = new System.Windows.Forms.NumericUpDown();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabVGuidance = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -237,11 +231,8 @@
             this.btnTurnSmoothingDown = new ProXoft.WinForms.RepeatButton();
             this.label59 = new System.Windows.Forms.Label();
             this.lblSmoothing = new System.Windows.Forms.Label();
-            this.btnTriggerDistanceDn = new ProXoft.WinForms.RepeatButton();
-            this.btnTriggerDistanceUp = new ProXoft.WinForms.RepeatButton();
             this.label57 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
-            this.btnDistanceUp = new ProXoft.WinForms.RepeatButton();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.btnYouTurnWideReturn = new System.Windows.Forms.Button();
             this.btnYouTurnKeyHole = new System.Windows.Forms.Button();
@@ -249,15 +240,17 @@
             this.btnYouTurnRecord = new System.Windows.Forms.Button();
             this.btnYouTurnCustom = new System.Windows.Forms.Button();
             this.lblTriggerDistance = new System.Windows.Forms.Label();
-            this.btnDistanceDn = new ProXoft.WinForms.RepeatButton();
             this.lblWhenTrig = new System.Windows.Forms.Label();
             this.btnIsUsingDubins = new System.Windows.Forms.Button();
             this.lblDistance = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
+            this.btnTriggerDistanceDn = new ProXoft.WinForms.RepeatButton();
+            this.btnTriggerDistanceUp = new ProXoft.WinForms.RepeatButton();
+            this.btnDistanceUp = new ProXoft.WinForms.RepeatButton();
+            this.btnDistanceDn = new ProXoft.WinForms.RepeatButton();
             this.tabASteer = new System.Windows.Forms.TabPage();
             this.chkSteerInvertRelays = new System.Windows.Forms.CheckBox();
             this.label68 = new System.Windows.Forms.Label();
-            this.btnSendSteerConfigPGN = new System.Windows.Forms.Button();
             this.cboxMotorDrive = new System.Windows.Forms.ComboBox();
             this.cboxSteerEnable = new System.Windows.Forms.ComboBox();
             this.label62 = new System.Windows.Forms.Label();
@@ -272,9 +265,9 @@
             this.cboxEncoder = new System.Windows.Forms.CheckBox();
             this.chkInvertWAS = new System.Windows.Forms.CheckBox();
             this.label55 = new System.Windows.Forms.Label();
+            this.btnSendSteerConfigPGN = new System.Windows.Forms.Button();
             this.tabAMachine = new System.Windows.Forms.TabPage();
             this.label67 = new System.Windows.Forms.Label();
-            this.btnSendMachinePGN = new System.Windows.Forms.Button();
             this.cboxMachInvertRelays = new System.Windows.Forms.CheckBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.nudLowerTime = new System.Windows.Forms.NumericUpDown();
@@ -283,12 +276,13 @@
             this.cboxIsHydOn = new System.Windows.Forms.CheckBox();
             this.label66 = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
-            this.btnOK = new System.Windows.Forms.Button();
+            this.btnSendMachinePGN = new System.Windows.Forms.Button();
             this.lblSecTotalWidthMeters = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
             this.lblSecTotalWidthFeet = new System.Windows.Forms.Label();
             this.lblSecTotalWidthInches = new System.Windows.Forms.Label();
             this.panelBottom = new System.Windows.Forms.Panel();
+            this.btnOK = new System.Windows.Forms.Button();
             this.panelLeftSideMenu.SuspendLayout();
             this.panelArduino.SuspendLayout();
             this.panelDataSourcesSubMenu.SuspendLayout();
@@ -300,13 +294,13 @@
             this.tabVConfig.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabVAntenna.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMinTurnRadius)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaPivot)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxAntenna)).BeginInit();
             this.tabVDimensions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudWheelbase)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMinTurnRadius)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabVGuidance.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -389,7 +383,7 @@
             this.panelLeftSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeftSideMenu.Location = new System.Drawing.Point(2, 2);
             this.panelLeftSideMenu.Name = "panelLeftSideMenu";
-            this.panelLeftSideMenu.Size = new System.Drawing.Size(201, 709);
+            this.panelLeftSideMenu.Size = new System.Drawing.Size(201, 708);
             this.panelLeftSideMenu.TabIndex = 110;
             // 
             // panelArduino
@@ -906,28 +900,6 @@
             this.btnVehicle.UseVisualStyleBackColor = false;
             this.btnVehicle.Click += new System.EventHandler(this.btnVehicle_Click);
             // 
-            // btnExit
-            // 
-            this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(50)))));
-            this.btnExit.FlatAppearance.BorderSize = 0;
-            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
-            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
-            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
-            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(438, 173);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnExit.Size = new System.Drawing.Size(184, 74);
-            this.btnExit.TabIndex = 9;
-            this.btnExit.Text = "  Exit";
-            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
             // panelChildForm
             // 
             this.panelChildForm.AutoScroll = true;
@@ -970,7 +942,6 @@
             // tabSummary
             // 
             this.tabSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(22)))), ((int)(((byte)(40)))));
-            this.tabSummary.Controls.Add(this.btnExit);
             this.tabSummary.Controls.Add(this.btnVehicleSave);
             this.tabSummary.Controls.Add(this.btnVehicleLoad);
             this.tabSummary.Controls.Add(this.btnVehicleDelete);
@@ -994,7 +965,7 @@
             this.tabSummary.Location = new System.Drawing.Point(4, 44);
             this.tabSummary.Name = "tabSummary";
             this.tabSummary.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSummary.Size = new System.Drawing.Size(787, 618);
+            this.tabSummary.Size = new System.Drawing.Size(787, 593);
             this.tabSummary.TabIndex = 0;
             this.tabSummary.Text = "Summ";
             // 
@@ -1006,7 +977,7 @@
             this.btnVehicleSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVehicleSave.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btnVehicleSave.Image = global::AgOpenGPS.Properties.Resources.VehFileSave;
-            this.btnVehicleSave.Location = new System.Drawing.Point(540, 540);
+            this.btnVehicleSave.Location = new System.Drawing.Point(540, 517);
             this.btnVehicleSave.Name = "btnVehicleSave";
             this.btnVehicleSave.Size = new System.Drawing.Size(127, 71);
             this.btnVehicleSave.TabIndex = 457;
@@ -1022,7 +993,7 @@
             this.btnVehicleLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVehicleLoad.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btnVehicleLoad.Image = global::AgOpenGPS.Properties.Resources.VehFileLoad;
-            this.btnVehicleLoad.Location = new System.Drawing.Point(178, 540);
+            this.btnVehicleLoad.Location = new System.Drawing.Point(178, 517);
             this.btnVehicleLoad.Name = "btnVehicleLoad";
             this.btnVehicleLoad.Size = new System.Drawing.Size(81, 71);
             this.btnVehicleLoad.TabIndex = 456;
@@ -1038,7 +1009,7 @@
             this.btnVehicleDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVehicleDelete.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btnVehicleDelete.Image = global::AgOpenGPS.Properties.Resources.VehFileDelete;
-            this.btnVehicleDelete.Location = new System.Drawing.Point(19, 540);
+            this.btnVehicleDelete.Location = new System.Drawing.Point(19, 517);
             this.btnVehicleDelete.Name = "btnVehicleDelete";
             this.btnVehicleDelete.Size = new System.Drawing.Size(81, 71);
             this.btnVehicleDelete.TabIndex = 455;
@@ -1058,7 +1029,7 @@
             this.lvVehicles.HideSelection = false;
             this.lvVehicles.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.lvVehicles.LabelWrap = false;
-            this.lvVehicles.Location = new System.Drawing.Point(19, 387);
+            this.lvVehicles.Location = new System.Drawing.Point(19, 364);
             this.lvVehicles.Margin = new System.Windows.Forms.Padding(0);
             this.lvVehicles.MultiSelect = false;
             this.lvVehicles.Name = "lvVehicles";
@@ -1079,7 +1050,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(467, 460);
+            this.label3.Location = new System.Drawing.Point(467, 437);
             this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(186, 23);
@@ -1092,7 +1063,7 @@
             this.tboxVehicleNameSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tboxVehicleNameSave.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.tboxVehicleNameSave.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxVehicleNameSave.Location = new System.Drawing.Point(438, 491);
+            this.tboxVehicleNameSave.Location = new System.Drawing.Point(438, 468);
             this.tboxVehicleNameSave.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.tboxVehicleNameSave.Name = "tboxVehicleNameSave";
             this.tboxVehicleNameSave.Size = new System.Drawing.Size(328, 36);
@@ -1106,7 +1077,7 @@
             this.lblCurrentVehicle.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.lblCurrentVehicle.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lblCurrentVehicle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblCurrentVehicle.Location = new System.Drawing.Point(467, 399);
+            this.lblCurrentVehicle.Location = new System.Drawing.Point(467, 376);
             this.lblCurrentVehicle.Name = "lblCurrentVehicle";
             this.lblCurrentVehicle.Size = new System.Drawing.Size(138, 23);
             this.lblCurrentVehicle.TabIndex = 450;
@@ -1121,7 +1092,7 @@
             this.btnVehicleSaveAs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVehicleSaveAs.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btnVehicleSaveAs.Image = global::AgOpenGPS.Properties.Resources.VehFileSaveAs;
-            this.btnVehicleSaveAs.Location = new System.Drawing.Point(316, 540);
+            this.btnVehicleSaveAs.Location = new System.Drawing.Point(316, 517);
             this.btnVehicleSaveAs.Name = "btnVehicleSaveAs";
             this.btnVehicleSaveAs.Size = new System.Drawing.Size(127, 71);
             this.btnVehicleSaveAs.TabIndex = 453;
@@ -1299,7 +1270,7 @@
             this.tabVConfig.Controls.Add(this.groupBox1);
             this.tabVConfig.Location = new System.Drawing.Point(4, 44);
             this.tabVConfig.Name = "tabVConfig";
-            this.tabVConfig.Size = new System.Drawing.Size(787, 618);
+            this.tabVConfig.Size = new System.Drawing.Size(787, 593);
             this.tabVConfig.TabIndex = 4;
             this.tabVConfig.Text = "vConfig";
             this.tabVConfig.Enter += new System.EventHandler(this.tabVConfig_Enter);
@@ -1371,15 +1342,9 @@
             // tabVAntenna
             // 
             this.tabVAntenna.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
-            this.tabVAntenna.Controls.Add(this.label53);
-            this.tabVAntenna.Controls.Add(this.nudWheelbase);
             this.tabVAntenna.Controls.Add(this.btnNext);
-            this.tabVAntenna.Controls.Add(this.label17);
             this.tabVAntenna.Controls.Add(this.nudAntennaHeight);
-            this.tabVAntenna.Controls.Add(this.label20);
-            this.tabVAntenna.Controls.Add(this.label21);
             this.tabVAntenna.Controls.Add(this.nudAntennaPivot);
-            this.tabVAntenna.Controls.Add(this.label22);
             this.tabVAntenna.Controls.Add(this.nudAntennaOffset);
             this.tabVAntenna.Controls.Add(this.pboxAntenna);
             this.tabVAntenna.Location = new System.Drawing.Point(4, 44);
@@ -1389,47 +1354,6 @@
             this.tabVAntenna.Text = "vAnt";
             this.tabVAntenna.Enter += new System.EventHandler(this.tabVAntenna_Enter);
             this.tabVAntenna.Leave += new System.EventHandler(this.tabVAntenna_Leave);
-            // 
-            // label53
-            // 
-            this.label53.BackColor = System.Drawing.Color.Transparent;
-            this.label53.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.label53.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label53.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label53.Location = new System.Drawing.Point(22, 511);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(155, 67);
-            this.label53.TabIndex = 52;
-            this.label53.Text = "Wheelbase";
-            this.label53.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // nudMinTurnRadius
-            // 
-            this.nudMinTurnRadius.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudMinTurnRadius.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudMinTurnRadius.InterceptArrowKeys = false;
-            this.nudMinTurnRadius.Location = new System.Drawing.Point(213, 300);
-            this.nudMinTurnRadius.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.nudMinTurnRadius.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.nudMinTurnRadius.Name = "nudMinTurnRadius";
-            this.nudMinTurnRadius.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.nudMinTurnRadius.Size = new System.Drawing.Size(152, 52);
-            this.nudMinTurnRadius.TabIndex = 49;
-            this.nudMinTurnRadius.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudMinTurnRadius.Value = new decimal(new int[] {
-            301,
-            0,
-            0,
-            0});
-            this.nudMinTurnRadius.Enter += new System.EventHandler(this.nudWheelbase_Enter);
             // 
             // btnNext
             // 
@@ -1442,26 +1366,12 @@
             this.btnNext.TabIndex = 0;
             this.btnNext.UseVisualStyleBackColor = false;
             // 
-            // label17
-            // 
-            this.label17.BackColor = System.Drawing.Color.Transparent;
-            this.label17.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.label17.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label17.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label17.Location = new System.Drawing.Point(535, 168);
-            this.label17.Name = "label17";
-            this.label17.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label17.Size = new System.Drawing.Size(199, 23);
-            this.label17.TabIndex = 46;
-            this.label17.Text = "*Left is negative";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // nudAntennaHeight
             // 
             this.nudAntennaHeight.BackColor = System.Drawing.Color.AliceBlue;
             this.nudAntennaHeight.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudAntennaHeight.InterceptArrowKeys = false;
-            this.nudAntennaHeight.Location = new System.Drawing.Point(554, 326);
+            this.nudAntennaHeight.Location = new System.Drawing.Point(388, 209);
             this.nudAntennaHeight.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1479,38 +1389,12 @@
             0});
             this.nudAntennaHeight.Enter += new System.EventHandler(this.nudAntennaHeight_Enter);
             // 
-            // label20
-            // 
-            this.label20.BackColor = System.Drawing.Color.Transparent;
-            this.label20.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.label20.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label20.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label20.Location = new System.Drawing.Point(538, 260);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(160, 60);
-            this.label20.TabIndex = 43;
-            this.label20.Text = "Height";
-            this.label20.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // label21
-            // 
-            this.label21.BackColor = System.Drawing.Color.Transparent;
-            this.label21.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.label21.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label21.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label21.Location = new System.Drawing.Point(534, 58);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(163, 55);
-            this.label21.TabIndex = 45;
-            this.label21.Text = "Offset";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
             // nudAntennaPivot
             // 
             this.nudAntennaPivot.BackColor = System.Drawing.Color.AliceBlue;
             this.nudAntennaPivot.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudAntennaPivot.InterceptArrowKeys = false;
-            this.nudAntennaPivot.Location = new System.Drawing.Point(257, 78);
+            this.nudAntennaPivot.Location = new System.Drawing.Point(122, 44);
             this.nudAntennaPivot.Maximum = new decimal(new int[] {
             999,
             0,
@@ -1528,25 +1412,12 @@
             0});
             this.nudAntennaPivot.Enter += new System.EventHandler(this.nudAntennaPivot_Enter);
             // 
-            // label22
-            // 
-            this.label22.BackColor = System.Drawing.Color.Transparent;
-            this.label22.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.label22.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label22.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label22.Location = new System.Drawing.Point(91, 71);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(160, 56);
-            this.label22.TabIndex = 41;
-            this.label22.Text = "Distance";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // nudAntennaOffset
             // 
             this.nudAntennaOffset.BackColor = System.Drawing.Color.AliceBlue;
             this.nudAntennaOffset.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudAntennaOffset.InterceptArrowKeys = false;
-            this.nudAntennaOffset.Location = new System.Drawing.Point(554, 119);
+            this.nudAntennaOffset.Location = new System.Drawing.Point(462, 415);
             this.nudAntennaOffset.Maximum = new decimal(new int[] {
             500,
             0,
@@ -1565,28 +1436,43 @@
             // 
             // pboxAntenna
             // 
+            this.pboxAntenna.BackgroundImage = global::AgOpenGPS.Properties.Resources.AntennaTractor;
             this.pboxAntenna.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pboxAntenna.Image = global::AgOpenGPS.Properties.Resources.VehicleAntennaTractor;
-            this.pboxAntenna.Location = new System.Drawing.Point(18, 146);
+            this.pboxAntenna.Location = new System.Drawing.Point(18, 107);
             this.pboxAntenna.Name = "pboxAntenna";
-            this.pboxAntenna.Size = new System.Drawing.Size(500, 350);
+            this.pboxAntenna.Size = new System.Drawing.Size(514, 446);
             this.pboxAntenna.TabIndex = 48;
             this.pboxAntenna.TabStop = false;
             // 
             // tabVDimensions
             // 
             this.tabVDimensions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
+            this.tabVDimensions.Controls.Add(this.label53);
             this.tabVDimensions.Controls.Add(this.label23);
             this.tabVDimensions.Controls.Add(this.btnNextDim);
+            this.tabVDimensions.Controls.Add(this.nudWheelbase);
             this.tabVDimensions.Controls.Add(this.nudMinTurnRadius);
             this.tabVDimensions.Controls.Add(this.pictureBox1);
             this.tabVDimensions.Location = new System.Drawing.Point(4, 44);
             this.tabVDimensions.Name = "tabVDimensions";
-            this.tabVDimensions.Size = new System.Drawing.Size(787, 618);
+            this.tabVDimensions.Size = new System.Drawing.Size(787, 593);
             this.tabVDimensions.TabIndex = 13;
             this.tabVDimensions.Text = "vDim";
             this.tabVDimensions.Enter += new System.EventHandler(this.tabVDimensions_Enter);
             this.tabVDimensions.Leave += new System.EventHandler(this.tabVDimensions_Leave);
+            // 
+            // label53
+            // 
+            this.label53.BackColor = System.Drawing.Color.Transparent;
+            this.label53.Font = new System.Drawing.Font("Tahoma", 14.25F);
+            this.label53.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label53.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label53.Location = new System.Drawing.Point(28, 381);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(155, 67);
+            this.label53.TabIndex = 52;
+            this.label53.Text = "Wheelbase";
+            this.label53.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label23
             // 
@@ -1594,19 +1480,30 @@
             this.label23.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.label23.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label23.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label23.Location = new System.Drawing.Point(52, 300);
+            this.label23.Location = new System.Drawing.Point(506, 427);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(155, 67);
             this.label23.TabIndex = 53;
             this.label23.Text = "Min Turn Radius";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnNextDim
+            // 
+            this.btnNextDim.BackColor = System.Drawing.Color.Transparent;
+            this.btnNextDim.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnNextDim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNextDim.Location = new System.Drawing.Point(746, 6);
+            this.btnNextDim.Name = "btnNextDim";
+            this.btnNextDim.Size = new System.Drawing.Size(31, 28);
+            this.btnNextDim.TabIndex = 0;
+            this.btnNextDim.UseVisualStyleBackColor = false;
+            // 
             // nudWheelbase
             // 
             this.nudWheelbase.BackColor = System.Drawing.Color.AliceBlue;
             this.nudWheelbase.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudWheelbase.InterceptArrowKeys = false;
-            this.nudWheelbase.Location = new System.Drawing.Point(183, 520);
+            this.nudWheelbase.Location = new System.Drawing.Point(32, 326);
             this.nudWheelbase.Maximum = new decimal(new int[] {
             1999,
             0,
@@ -1629,24 +1526,41 @@
             0});
             this.nudWheelbase.Enter += new System.EventHandler(this.nudMinTurnRadius_Enter);
             // 
-            // btnNextDim
+            // nudMinTurnRadius
             // 
-            this.btnNextDim.BackColor = System.Drawing.Color.Transparent;
-            this.btnNextDim.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnNextDim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNextDim.Location = new System.Drawing.Point(746, 6);
-            this.btnNextDim.Name = "btnNextDim";
-            this.btnNextDim.Size = new System.Drawing.Size(31, 28);
-            this.btnNextDim.TabIndex = 0;
-            this.btnNextDim.UseVisualStyleBackColor = false;
+            this.nudMinTurnRadius.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudMinTurnRadius.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudMinTurnRadius.InterceptArrowKeys = false;
+            this.nudMinTurnRadius.Location = new System.Drawing.Point(509, 372);
+            this.nudMinTurnRadius.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nudMinTurnRadius.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudMinTurnRadius.Name = "nudMinTurnRadius";
+            this.nudMinTurnRadius.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.nudMinTurnRadius.Size = new System.Drawing.Size(152, 52);
+            this.nudMinTurnRadius.TabIndex = 49;
+            this.nudMinTurnRadius.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudMinTurnRadius.Value = new decimal(new int[] {
+            301,
+            0,
+            0,
+            0});
+            this.nudMinTurnRadius.Enter += new System.EventHandler(this.nudWheelbase_Enter);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::AgOpenGPS.Properties.Resources.tire;
+            this.pictureBox1.Image = global::AgOpenGPS.Properties.Resources.RadiusWheelBase;
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(138, 34);
+            this.pictureBox1.Location = new System.Drawing.Point(220, 54);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(200, 246);
+            this.pictureBox1.Size = new System.Drawing.Size(441, 415);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 32;
             this.pictureBox1.TabStop = false;
@@ -1660,7 +1574,7 @@
             this.tabVGuidance.Controls.Add(this.groupBox5);
             this.tabVGuidance.Location = new System.Drawing.Point(4, 44);
             this.tabVGuidance.Name = "tabVGuidance";
-            this.tabVGuidance.Size = new System.Drawing.Size(787, 618);
+            this.tabVGuidance.Size = new System.Drawing.Size(787, 593);
             this.tabVGuidance.TabIndex = 14;
             this.tabVGuidance.Text = "vGuid";
             this.tabVGuidance.Enter += new System.EventHandler(this.tabVGuidance_Enter);
@@ -1816,7 +1730,7 @@
             this.tabTConfig.Controls.Add(this.gboxAttachment);
             this.tabTConfig.Location = new System.Drawing.Point(4, 44);
             this.tabTConfig.Name = "tabTConfig";
-            this.tabTConfig.Size = new System.Drawing.Size(787, 618);
+            this.tabTConfig.Size = new System.Drawing.Size(787, 593);
             this.tabTConfig.TabIndex = 11;
             this.tabTConfig.Text = "tConfig";
             this.tabTConfig.Enter += new System.EventHandler(this.tabTConfig_Enter);
@@ -1910,7 +1824,7 @@
             this.tabTHitch.Controls.Add(this.picboxToolHitch);
             this.tabTHitch.Location = new System.Drawing.Point(4, 44);
             this.tabTHitch.Name = "tabTHitch";
-            this.tabTHitch.Size = new System.Drawing.Size(787, 618);
+            this.tabTHitch.Size = new System.Drawing.Size(787, 593);
             this.tabTHitch.TabIndex = 5;
             this.tabTHitch.Text = "tHitch";
             this.tabTHitch.Enter += new System.EventHandler(this.tabTHitch_Enter);
@@ -2063,7 +1977,7 @@
             this.tabTSections.Controls.Add(this.nudSection1);
             this.tabTSections.Location = new System.Drawing.Point(4, 44);
             this.tabTSections.Name = "tabTSections";
-            this.tabTSections.Size = new System.Drawing.Size(787, 618);
+            this.tabTSections.Size = new System.Drawing.Size(787, 593);
             this.tabTSections.TabIndex = 7;
             this.tabTSections.Text = "tSect";
             this.tabTSections.Enter += new System.EventHandler(this.tabTSections_Enter);
@@ -2834,7 +2748,7 @@
             this.tabTSwitches.Controls.Add(this.groupBox3);
             this.tabTSwitches.Location = new System.Drawing.Point(4, 44);
             this.tabTSwitches.Name = "tabTSwitches";
-            this.tabTSwitches.Size = new System.Drawing.Size(787, 618);
+            this.tabTSwitches.Size = new System.Drawing.Size(787, 593);
             this.tabTSwitches.TabIndex = 9;
             this.tabTSwitches.Text = "tSwit";
             this.tabTSwitches.Enter += new System.EventHandler(this.tabTSwitches_Enter);
@@ -2920,7 +2834,7 @@
             this.tabTSettings.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.tabTSettings.Location = new System.Drawing.Point(4, 44);
             this.tabTSettings.Name = "tabTSettings";
-            this.tabTSettings.Size = new System.Drawing.Size(787, 618);
+            this.tabTSettings.Size = new System.Drawing.Size(787, 593);
             this.tabTSettings.TabIndex = 10;
             this.tabTSettings.Text = "TSettings";
             this.tabTSettings.Enter += new System.EventHandler(this.tabTSettings_Enter);
@@ -3173,7 +3087,7 @@
             this.tabDFix.Controls.Add(this.groupBox4);
             this.tabDFix.Location = new System.Drawing.Point(4, 44);
             this.tabDFix.Name = "tabDFix";
-            this.tabDFix.Size = new System.Drawing.Size(787, 618);
+            this.tabDFix.Size = new System.Drawing.Size(787, 593);
             this.tabDFix.TabIndex = 17;
             this.tabDFix.Text = "dFix";
             this.tabDFix.Enter += new System.EventHandler(this.tabDFix_Enter);
@@ -3304,7 +3218,7 @@
             this.tabDHeading.Controls.Add(this.headingGroupBox);
             this.tabDHeading.Location = new System.Drawing.Point(4, 44);
             this.tabDHeading.Name = "tabDHeading";
-            this.tabDHeading.Size = new System.Drawing.Size(787, 618);
+            this.tabDHeading.Size = new System.Drawing.Size(787, 593);
             this.tabDHeading.TabIndex = 15;
             this.tabDHeading.Text = "dHead";
             this.tabDHeading.Enter += new System.EventHandler(this.tabDHeading_Enter);
@@ -3610,7 +3524,7 @@
             this.tabDRoll.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.tabDRoll.Location = new System.Drawing.Point(4, 44);
             this.tabDRoll.Name = "tabDRoll";
-            this.tabDRoll.Size = new System.Drawing.Size(787, 618);
+            this.tabDRoll.Size = new System.Drawing.Size(787, 593);
             this.tabDRoll.TabIndex = 16;
             this.tabDRoll.Text = "dRoll";
             this.tabDRoll.Enter += new System.EventHandler(this.tabDRoll_Enter);
@@ -3817,21 +3731,21 @@
             this.tabUTurn.Controls.Add(this.btnTurnSmoothingDown);
             this.tabUTurn.Controls.Add(this.label59);
             this.tabUTurn.Controls.Add(this.lblSmoothing);
-            this.tabUTurn.Controls.Add(this.btnTriggerDistanceDn);
-            this.tabUTurn.Controls.Add(this.btnTriggerDistanceUp);
             this.tabUTurn.Controls.Add(this.label57);
             this.tabUTurn.Controls.Add(this.label58);
-            this.tabUTurn.Controls.Add(this.btnDistanceUp);
             this.tabUTurn.Controls.Add(this.groupBox7);
             this.tabUTurn.Controls.Add(this.lblTriggerDistance);
-            this.tabUTurn.Controls.Add(this.btnDistanceDn);
             this.tabUTurn.Controls.Add(this.lblWhenTrig);
             this.tabUTurn.Controls.Add(this.btnIsUsingDubins);
             this.tabUTurn.Controls.Add(this.lblDistance);
             this.tabUTurn.Controls.Add(this.label54);
+            this.tabUTurn.Controls.Add(this.btnTriggerDistanceDn);
+            this.tabUTurn.Controls.Add(this.btnTriggerDistanceUp);
+            this.tabUTurn.Controls.Add(this.btnDistanceUp);
+            this.tabUTurn.Controls.Add(this.btnDistanceDn);
             this.tabUTurn.Location = new System.Drawing.Point(4, 44);
             this.tabUTurn.Name = "tabUTurn";
-            this.tabUTurn.Size = new System.Drawing.Size(787, 618);
+            this.tabUTurn.Size = new System.Drawing.Size(787, 593);
             this.tabUTurn.TabIndex = 18;
             this.tabUTurn.Text = "uTurn";
             this.tabUTurn.Enter += new System.EventHandler(this.tabUTurn_Enter);
@@ -3894,38 +3808,6 @@
             this.lblSmoothing.TabIndex = 464;
             this.lblSmoothing.Text = "XXX";
             // 
-            // btnTriggerDistanceDn
-            // 
-            this.btnTriggerDistanceDn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnTriggerDistanceDn.FlatAppearance.BorderSize = 0;
-            this.btnTriggerDistanceDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTriggerDistanceDn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTriggerDistanceDn.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnTriggerDistanceDn.Image = global::AgOpenGPS.Properties.Resources.DnArrow64;
-            this.btnTriggerDistanceDn.Location = new System.Drawing.Point(96, 474);
-            this.btnTriggerDistanceDn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnTriggerDistanceDn.Name = "btnTriggerDistanceDn";
-            this.btnTriggerDistanceDn.Size = new System.Drawing.Size(59, 69);
-            this.btnTriggerDistanceDn.TabIndex = 460;
-            this.btnTriggerDistanceDn.UseVisualStyleBackColor = true;
-            this.btnTriggerDistanceDn.Click += new System.EventHandler(this.btnTriggerDistanceDn_Click);
-            // 
-            // btnTriggerDistanceUp
-            // 
-            this.btnTriggerDistanceUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnTriggerDistanceUp.FlatAppearance.BorderSize = 0;
-            this.btnTriggerDistanceUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTriggerDistanceUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTriggerDistanceUp.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnTriggerDistanceUp.Image = global::AgOpenGPS.Properties.Resources.UpArrow64;
-            this.btnTriggerDistanceUp.Location = new System.Drawing.Point(186, 474);
-            this.btnTriggerDistanceUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnTriggerDistanceUp.Name = "btnTriggerDistanceUp";
-            this.btnTriggerDistanceUp.Size = new System.Drawing.Size(59, 69);
-            this.btnTriggerDistanceUp.TabIndex = 461;
-            this.btnTriggerDistanceUp.UseVisualStyleBackColor = true;
-            this.btnTriggerDistanceUp.Click += new System.EventHandler(this.btnTriggerDistanceUp_Click);
-            // 
             // label57
             // 
             this.label57.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3949,22 +3831,6 @@
             this.label58.TabIndex = 463;
             this.label58.Text = "UTurn Distance";
             this.label58.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // btnDistanceUp
-            // 
-            this.btnDistanceUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDistanceUp.FlatAppearance.BorderSize = 0;
-            this.btnDistanceUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDistanceUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDistanceUp.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnDistanceUp.Image = global::AgOpenGPS.Properties.Resources.UpArrow64;
-            this.btnDistanceUp.Location = new System.Drawing.Point(402, 474);
-            this.btnDistanceUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnDistanceUp.Name = "btnDistanceUp";
-            this.btnDistanceUp.Size = new System.Drawing.Size(59, 69);
-            this.btnDistanceUp.TabIndex = 457;
-            this.btnDistanceUp.UseVisualStyleBackColor = true;
-            this.btnDistanceUp.Click += new System.EventHandler(this.btnDistanceUp_Click);
             // 
             // groupBox7
             // 
@@ -4081,22 +3947,6 @@
             this.lblTriggerDistance.TabIndex = 462;
             this.lblTriggerDistance.Text = "XXX";
             // 
-            // btnDistanceDn
-            // 
-            this.btnDistanceDn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDistanceDn.FlatAppearance.BorderSize = 0;
-            this.btnDistanceDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDistanceDn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDistanceDn.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnDistanceDn.Image = global::AgOpenGPS.Properties.Resources.DnArrow64;
-            this.btnDistanceDn.Location = new System.Drawing.Point(309, 474);
-            this.btnDistanceDn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnDistanceDn.Name = "btnDistanceDn";
-            this.btnDistanceDn.Size = new System.Drawing.Size(59, 69);
-            this.btnDistanceDn.TabIndex = 456;
-            this.btnDistanceDn.UseVisualStyleBackColor = true;
-            this.btnDistanceDn.Click += new System.EventHandler(this.btnDistanceDn_Click);
-            // 
             // lblWhenTrig
             // 
             this.lblWhenTrig.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -4154,12 +4004,75 @@
             this.label54.Text = "UTurn";
             this.label54.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnTriggerDistanceDn
+            // 
+            this.btnTriggerDistanceDn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnTriggerDistanceDn.FlatAppearance.BorderSize = 0;
+            this.btnTriggerDistanceDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTriggerDistanceDn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTriggerDistanceDn.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnTriggerDistanceDn.Image = global::AgOpenGPS.Properties.Resources.DnArrow64;
+            this.btnTriggerDistanceDn.Location = new System.Drawing.Point(96, 474);
+            this.btnTriggerDistanceDn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnTriggerDistanceDn.Name = "btnTriggerDistanceDn";
+            this.btnTriggerDistanceDn.Size = new System.Drawing.Size(59, 69);
+            this.btnTriggerDistanceDn.TabIndex = 460;
+            this.btnTriggerDistanceDn.UseVisualStyleBackColor = true;
+            this.btnTriggerDistanceDn.Click += new System.EventHandler(this.btnTriggerDistanceDn_Click);
+            // 
+            // btnTriggerDistanceUp
+            // 
+            this.btnTriggerDistanceUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnTriggerDistanceUp.FlatAppearance.BorderSize = 0;
+            this.btnTriggerDistanceUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTriggerDistanceUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTriggerDistanceUp.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnTriggerDistanceUp.Image = global::AgOpenGPS.Properties.Resources.UpArrow64;
+            this.btnTriggerDistanceUp.Location = new System.Drawing.Point(186, 474);
+            this.btnTriggerDistanceUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnTriggerDistanceUp.Name = "btnTriggerDistanceUp";
+            this.btnTriggerDistanceUp.Size = new System.Drawing.Size(59, 69);
+            this.btnTriggerDistanceUp.TabIndex = 461;
+            this.btnTriggerDistanceUp.UseVisualStyleBackColor = true;
+            this.btnTriggerDistanceUp.Click += new System.EventHandler(this.btnTriggerDistanceUp_Click);
+            // 
+            // btnDistanceUp
+            // 
+            this.btnDistanceUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDistanceUp.FlatAppearance.BorderSize = 0;
+            this.btnDistanceUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDistanceUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDistanceUp.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnDistanceUp.Image = global::AgOpenGPS.Properties.Resources.UpArrow64;
+            this.btnDistanceUp.Location = new System.Drawing.Point(402, 474);
+            this.btnDistanceUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnDistanceUp.Name = "btnDistanceUp";
+            this.btnDistanceUp.Size = new System.Drawing.Size(59, 69);
+            this.btnDistanceUp.TabIndex = 457;
+            this.btnDistanceUp.UseVisualStyleBackColor = true;
+            this.btnDistanceUp.Click += new System.EventHandler(this.btnDistanceUp_Click);
+            // 
+            // btnDistanceDn
+            // 
+            this.btnDistanceDn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDistanceDn.FlatAppearance.BorderSize = 0;
+            this.btnDistanceDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDistanceDn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDistanceDn.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnDistanceDn.Image = global::AgOpenGPS.Properties.Resources.DnArrow64;
+            this.btnDistanceDn.Location = new System.Drawing.Point(309, 474);
+            this.btnDistanceDn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnDistanceDn.Name = "btnDistanceDn";
+            this.btnDistanceDn.Size = new System.Drawing.Size(59, 69);
+            this.btnDistanceDn.TabIndex = 456;
+            this.btnDistanceDn.UseVisualStyleBackColor = true;
+            this.btnDistanceDn.Click += new System.EventHandler(this.btnDistanceDn_Click);
+            // 
             // tabASteer
             // 
             this.tabASteer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(22)))), ((int)(((byte)(40)))));
             this.tabASteer.Controls.Add(this.chkSteerInvertRelays);
             this.tabASteer.Controls.Add(this.label68);
-            this.tabASteer.Controls.Add(this.btnSendSteerConfigPGN);
             this.tabASteer.Controls.Add(this.cboxMotorDrive);
             this.tabASteer.Controls.Add(this.cboxSteerEnable);
             this.tabASteer.Controls.Add(this.label62);
@@ -4174,9 +4087,10 @@
             this.tabASteer.Controls.Add(this.cboxEncoder);
             this.tabASteer.Controls.Add(this.chkInvertWAS);
             this.tabASteer.Controls.Add(this.label55);
+            this.tabASteer.Controls.Add(this.btnSendSteerConfigPGN);
             this.tabASteer.Location = new System.Drawing.Point(4, 44);
             this.tabASteer.Name = "tabASteer";
-            this.tabASteer.Size = new System.Drawing.Size(787, 618);
+            this.tabASteer.Size = new System.Drawing.Size(787, 593);
             this.tabASteer.TabIndex = 19;
             this.tabASteer.Text = "aSteer";
             this.tabASteer.Enter += new System.EventHandler(this.tabASteer_Enter);
@@ -4211,21 +4125,6 @@
             this.label68.TabIndex = 466;
             this.label68.Text = "Send +  Save";
             this.label68.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnSendSteerConfigPGN
-            // 
-            this.btnSendSteerConfigPGN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSendSteerConfigPGN.BackColor = System.Drawing.Color.Transparent;
-            this.btnSendSteerConfigPGN.FlatAppearance.BorderSize = 0;
-            this.btnSendSteerConfigPGN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSendSteerConfigPGN.Image = global::AgOpenGPS.Properties.Resources.ToolAcceptChange;
-            this.btnSendSteerConfigPGN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSendSteerConfigPGN.Location = new System.Drawing.Point(619, 504);
-            this.btnSendSteerConfigPGN.Name = "btnSendSteerConfigPGN";
-            this.btnSendSteerConfigPGN.Size = new System.Drawing.Size(133, 62);
-            this.btnSendSteerConfigPGN.TabIndex = 465;
-            this.btnSendSteerConfigPGN.UseVisualStyleBackColor = false;
-            this.btnSendSteerConfigPGN.Click += new System.EventHandler(this.btnSendToSteerArduino_Click);
             // 
             // cboxMotorDrive
             // 
@@ -4460,17 +4359,32 @@
             this.label55.Text = "Steer Module";
             this.label55.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnSendSteerConfigPGN
+            // 
+            this.btnSendSteerConfigPGN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSendSteerConfigPGN.BackColor = System.Drawing.Color.Transparent;
+            this.btnSendSteerConfigPGN.FlatAppearance.BorderSize = 0;
+            this.btnSendSteerConfigPGN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSendSteerConfigPGN.Image = global::AgOpenGPS.Properties.Resources.ToolAcceptChange;
+            this.btnSendSteerConfigPGN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnSendSteerConfigPGN.Location = new System.Drawing.Point(619, 504);
+            this.btnSendSteerConfigPGN.Name = "btnSendSteerConfigPGN";
+            this.btnSendSteerConfigPGN.Size = new System.Drawing.Size(133, 62);
+            this.btnSendSteerConfigPGN.TabIndex = 465;
+            this.btnSendSteerConfigPGN.UseVisualStyleBackColor = false;
+            this.btnSendSteerConfigPGN.Click += new System.EventHandler(this.btnSendToSteerArduino_Click);
+            // 
             // tabAMachine
             // 
             this.tabAMachine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(22)))), ((int)(((byte)(40)))));
             this.tabAMachine.Controls.Add(this.label67);
-            this.tabAMachine.Controls.Add(this.btnSendMachinePGN);
             this.tabAMachine.Controls.Add(this.cboxMachInvertRelays);
             this.tabAMachine.Controls.Add(this.groupBox8);
             this.tabAMachine.Controls.Add(this.label56);
+            this.tabAMachine.Controls.Add(this.btnSendMachinePGN);
             this.tabAMachine.Location = new System.Drawing.Point(4, 44);
             this.tabAMachine.Name = "tabAMachine";
-            this.tabAMachine.Size = new System.Drawing.Size(787, 618);
+            this.tabAMachine.Size = new System.Drawing.Size(787, 593);
             this.tabAMachine.TabIndex = 20;
             this.tabAMachine.Text = "aMach";
             this.tabAMachine.Enter += new System.EventHandler(this.tabAMachine_Enter);
@@ -4489,21 +4403,6 @@
             this.label67.TabIndex = 455;
             this.label67.Text = "Send + Save";
             this.label67.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnSendMachinePGN
-            // 
-            this.btnSendMachinePGN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSendMachinePGN.BackColor = System.Drawing.Color.Transparent;
-            this.btnSendMachinePGN.FlatAppearance.BorderSize = 0;
-            this.btnSendMachinePGN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSendMachinePGN.Image = global::AgOpenGPS.Properties.Resources.ToolAcceptChange;
-            this.btnSendMachinePGN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSendMachinePGN.Location = new System.Drawing.Point(620, 491);
-            this.btnSendMachinePGN.Name = "btnSendMachinePGN";
-            this.btnSendMachinePGN.Size = new System.Drawing.Size(133, 62);
-            this.btnSendMachinePGN.TabIndex = 454;
-            this.btnSendMachinePGN.UseVisualStyleBackColor = false;
-            this.btnSendMachinePGN.Click += new System.EventHandler(this.btnSendMachinePGN_Click);
             // 
             // cboxMachInvertRelays
             // 
@@ -4649,23 +4548,20 @@
             this.label56.Text = "Machine Module";
             this.label56.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnOK
+            // btnSendMachinePGN
             // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnOK.FlatAppearance.BorderSize = 0;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnOK.Image = global::AgOpenGPS.Properties.Resources.OK64;
-            this.btnOK.Location = new System.Drawing.Point(710, 9);
-            this.btnOK.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(80, 53);
-            this.btnOK.TabIndex = 452;
-            this.btnOK.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.btnSendMachinePGN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSendMachinePGN.BackColor = System.Drawing.Color.Transparent;
+            this.btnSendMachinePGN.FlatAppearance.BorderSize = 0;
+            this.btnSendMachinePGN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSendMachinePGN.Image = global::AgOpenGPS.Properties.Resources.ToolAcceptChange;
+            this.btnSendMachinePGN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnSendMachinePGN.Location = new System.Drawing.Point(620, 491);
+            this.btnSendMachinePGN.Name = "btnSendMachinePGN";
+            this.btnSendMachinePGN.Size = new System.Drawing.Size(133, 62);
+            this.btnSendMachinePGN.TabIndex = 454;
+            this.btnSendMachinePGN.UseVisualStyleBackColor = false;
+            this.btnSendMachinePGN.Click += new System.EventHandler(this.btnSendMachinePGN_Click);
             // 
             // lblSecTotalWidthMeters
             // 
@@ -4724,17 +4620,35 @@
             this.panelBottom.Controls.Add(this.btnOK);
             this.panelBottom.Controls.Add(this.lblSecTotalWidthMeters);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(203, 643);
+            this.panelBottom.Location = new System.Drawing.Point(203, 642);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(795, 68);
             this.panelBottom.TabIndex = 112;
+            // 
+            // btnOK
+            // 
+            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnOK.FlatAppearance.BorderSize = 0;
+            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOK.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOK.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnOK.Image = global::AgOpenGPS.Properties.Resources.OK64;
+            this.btnOK.Location = new System.Drawing.Point(710, 9);
+            this.btnOK.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(80, 53);
+            this.btnOK.TabIndex = 452;
+            this.btnOK.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // FormConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Cyan;
-            this.ClientSize = new System.Drawing.Size(1000, 713);
+            this.ClientSize = new System.Drawing.Size(1000, 712);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.panelChildForm);
             this.Controls.Add(this.panelLeftSideMenu);
@@ -4761,13 +4675,13 @@
             this.tabVConfig.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.tabVAntenna.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nudMinTurnRadius)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaPivot)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxAntenna)).EndInit();
             this.tabVDimensions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudWheelbase)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMinTurnRadius)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabVGuidance.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
@@ -4847,7 +4761,6 @@
 
         #endregion
         private System.Windows.Forms.Panel panelLeftSideMenu;
-        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Panel panelDataSourcesSubMenu;
         private System.Windows.Forms.Button btnSubFix;
         private System.Windows.Forms.Button btnSubHeading;
@@ -4918,12 +4831,8 @@
         private System.Windows.Forms.RadioButton rbtnFixedRear;
         private System.Windows.Forms.RadioButton rbtnFront;
         private System.Windows.Forms.RadioButton rbtnTrailing;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.NumericUpDown nudAntennaHeight;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.NumericUpDown nudAntennaPivot;
-        private System.Windows.Forms.Label label22;
         private System.Windows.Forms.NumericUpDown nudAntennaOffset;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.GroupBox groupBox9;
