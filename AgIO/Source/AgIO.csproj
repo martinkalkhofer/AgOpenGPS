@@ -262,9 +262,6 @@
     <None Include="btnImages\VehFileSave.png" />
     <None Include="btnImages\VehFileSaveAs.png" />
     <None Include="btnImages\Satellite64.png" />
-    <None Include="btnImages\Connect.png" />
-    <None Include="btnImages\Disconnect.png" />
-    <Content Include="radar-icon.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

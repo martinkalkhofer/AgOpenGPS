@@ -170,7 +170,7 @@ namespace AgIO
             }
             catch
             {
-                TimedMessageBox(2000, "No File Found", "Can't Find Drive");
+                TimedMessageBox(2000, "No File Found", "Can't Find AgOpenGPS");
             }
 
         }

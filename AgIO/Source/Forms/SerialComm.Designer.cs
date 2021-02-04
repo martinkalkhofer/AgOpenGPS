@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Collections.Generic;
 using System.Collections;
+using System.Threading;
 
 namespace AgIO
 {
@@ -193,6 +194,8 @@ namespace AgIO
                 {
                     if (spIMU.BytesToRead > 100) 
                         spIMU.DiscardInBuffer();
+
+                    //Thread.Sleep(30);
 
                     byte a; int length;
 
@@ -1180,156 +1183,6 @@ namespace AgIO
         private delegate void LineReceivedEventHandlerGPS2(string sentence);
 
         #endregion //--------------------------------------------------------
-
-        public void FileSaveComm(string FileName)
-        {
-            commFileName = Path.GetFileNameWithoutExtension(FileName);
-            Properties.Settings.Default.setComm_commName = commFileName;
-            Properties.Settings.Default.Save();
-
-            using (StreamWriter writer = new StreamWriter(FileName))
-            {
-                writer.WriteLine("Version," + Application.ProductVersion.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("Culture," + Properties.Settings.Default.setF_culture.ToString(CultureInfo.InvariantCulture));
-                
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-
-                writer.WriteLine("IsNtripCasterIP," + Properties.Settings.Default.setNTRIP_casterIP.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripCasterPort," + Properties.Settings.Default.setNTRIP_casterPort.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripCasterURL," + Properties.Settings.Default.setNTRIP_casterURL.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripGGAManual," + Properties.Settings.Default.setNTRIP_isGGAManual.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripOn," + Properties.Settings.Default.setNTRIP_isOn.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripTCP," + Properties.Settings.Default.setNTRIP_isTCP.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripManualLat," + Properties.Settings.Default.setNTRIP_manualLat.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripManualLon," + Properties.Settings.Default.setNTRIP_manualLon.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripMount," + Properties.Settings.Default.setNTRIP_mount.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripGGAInterval," + Properties.Settings.Default.setNTRIP_sendGGAInterval.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripSendToUDPPort," + Properties.Settings.Default.setNTRIP_sendToUDPPort.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripUserName," + Properties.Settings.Default.setNTRIP_userName.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripUserPassword," + Properties.Settings.Default.setNTRIP_userPassword.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("IsUDPOn," + Properties.Settings.Default.setUDP_isOn.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("GPSSimLatitude," + Properties.Settings.Default.setGPS_SimLatitude.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("GPSSimLongitude" + "," + Properties.Settings.Default.setGPS_SimLongitude.ToString(CultureInfo.InvariantCulture));
-
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-            }
-
-            //little show to say saved and where
-            var form = new FormTimedMessage(3000, "Saved in ", commDirectory);
-            form.Show();
-
-        }
-
-        public DialogResult FileOpenComm(string fileName)
-        {
-            //make sure the file if fully valid and vehicle matches sections
-            using (StreamReader reader = new StreamReader(fileName))
-            {
-                try
-                {
-                    string line;
-                    Properties.Settings.Default.setComm_commName = fileName;
-                    string[] words;
-                    line = reader.ReadLine(); words = line.Split(',');
-
-
-                    string vers = words[1].Replace('.', '0');
-                    int fileVersion = int.Parse(vers, CultureInfo.InvariantCulture);
-
-                    string assemblyVersion = Application.ProductVersion.ToString(CultureInfo.InvariantCulture);
-                    assemblyVersion = assemblyVersion.Replace('.', '0');
-                    int appVersion = int.Parse(assemblyVersion, CultureInfo.InvariantCulture);
-
-                    appVersion /= 100;
-                    fileVersion /= 100;
-
-                    if (fileVersion < appVersion)
-                    {
-                        var form = new FormTimedMessage(5000, "File Error", "Must be Version " + Application.ProductVersion.ToString(CultureInfo.InvariantCulture) + " or higher");
-                        form.Show();
-                        return DialogResult.Abort;
-                    }
-
-                    else
-                    {
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setF_culture = (words[1]);
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_casterIP = words[1];
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_casterPort = int.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_casterURL = words[1];
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_isGGAManual = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_isOn = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_isTCP = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_manualLat = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_manualLon = double.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_mount = (words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_sendGGAInterval = int.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_sendToUDPPort = int.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_userName = (words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_userPassword = (words[1]);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setUDP_isOn = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setGPS_SimLatitude = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setGPS_SimLongitude = double.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        //fill in the current variables with restored data
-                        commFileName = Path.GetFileNameWithoutExtension(fileName);
-                        Properties.Settings.Default.setComm_commName = commFileName;
-
-                        Properties.Settings.Default.Save();
-                    }
-
-                    return DialogResult.OK;
-                }
-                catch (Exception) //FormatException e || IndexOutOfRangeException e2)
-                {
-                    //WriteErrorLog("Open Vehicle" + e.ToString());
-
-                    //comm is corrupt, reload with all default information
-                    Properties.Settings.Default.Reset();
-                    Properties.Settings.Default.Save();
-                    MessageBox.Show("Shit", "Comm load", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    //Application.Exit();
-                    return DialogResult.Cancel;
-                }
-            }
-        }//end of open file
 
     }//end class
 }//end namespace

@@ -19,9 +19,6 @@ namespace AgIO
         public FormLoop()
         {
             InitializeComponent();
-
-            // Add Message Event handler for Form decoupling from client socket thread
-            updateRTCM_DataEvent = new UpdateRTCM_Data(OnAddMessage);
         }
 
         public bool isKeyboardOn = true;
@@ -348,11 +345,7 @@ namespace AgIO
                     cboxIsTrafficOn.Checked = false;
                 }
             }
-
         }
-
-
-
     }
 }
 
