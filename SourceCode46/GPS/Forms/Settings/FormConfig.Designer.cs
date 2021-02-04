@@ -90,8 +90,7 @@
             this.nudAntennaOffset = new System.Windows.Forms.NumericUpDown();
             this.pboxAntenna = new System.Windows.Forms.PictureBox();
             this.tabVDimensions = new System.Windows.Forms.TabPage();
-            this.label53 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
+            this.nudVehicleTrack = new System.Windows.Forms.NumericUpDown();
             this.btnNextDim = new System.Windows.Forms.Button();
             this.nudWheelbase = new System.Windows.Forms.NumericUpDown();
             this.nudMinTurnRadius = new System.Windows.Forms.NumericUpDown();
@@ -299,6 +298,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxAntenna)).BeginInit();
             this.tabVDimensions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudVehicleTrack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWheelbase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinTurnRadius)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -941,7 +941,7 @@
             // 
             // tabSummary
             // 
-            this.tabSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(22)))), ((int)(((byte)(40)))));
+            this.tabSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.tabSummary.Controls.Add(this.btnVehicleSave);
             this.tabSummary.Controls.Add(this.btnVehicleLoad);
             this.tabSummary.Controls.Add(this.btnVehicleDelete);
@@ -1266,7 +1266,7 @@
             // 
             // tabVConfig
             // 
-            this.tabVConfig.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(42)))));
+            this.tabVConfig.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.tabVConfig.Controls.Add(this.groupBox1);
             this.tabVConfig.Location = new System.Drawing.Point(4, 44);
             this.tabVConfig.Name = "tabVConfig";
@@ -1341,7 +1341,7 @@
             // 
             // tabVAntenna
             // 
-            this.tabVAntenna.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
+            this.tabVAntenna.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.tabVAntenna.Controls.Add(this.btnNext);
             this.tabVAntenna.Controls.Add(this.nudAntennaHeight);
             this.tabVAntenna.Controls.Add(this.nudAntennaPivot);
@@ -1446,9 +1446,8 @@
             // 
             // tabVDimensions
             // 
-            this.tabVDimensions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
-            this.tabVDimensions.Controls.Add(this.label53);
-            this.tabVDimensions.Controls.Add(this.label23);
+            this.tabVDimensions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
+            this.tabVDimensions.Controls.Add(this.nudVehicleTrack);
             this.tabVDimensions.Controls.Add(this.btnNextDim);
             this.tabVDimensions.Controls.Add(this.nudWheelbase);
             this.tabVDimensions.Controls.Add(this.nudMinTurnRadius);
@@ -1461,31 +1460,33 @@
             this.tabVDimensions.Enter += new System.EventHandler(this.tabVDimensions_Enter);
             this.tabVDimensions.Leave += new System.EventHandler(this.tabVDimensions_Leave);
             // 
-            // label53
+            // nudVehicleTrack
             // 
-            this.label53.BackColor = System.Drawing.Color.Transparent;
-            this.label53.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.label53.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label53.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label53.Location = new System.Drawing.Point(28, 381);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(155, 67);
-            this.label53.TabIndex = 52;
-            this.label53.Text = "Wheelbase";
-            this.label53.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label23
-            // 
-            this.label23.BackColor = System.Drawing.Color.Transparent;
-            this.label23.Font = new System.Drawing.Font("Tahoma", 14.25F);
-            this.label23.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label23.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label23.Location = new System.Drawing.Point(506, 427);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(155, 67);
-            this.label23.TabIndex = 53;
-            this.label23.Text = "Min Turn Radius";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.nudVehicleTrack.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudVehicleTrack.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudVehicleTrack.InterceptArrowKeys = false;
+            this.nudVehicleTrack.Location = new System.Drawing.Point(595, 86);
+            this.nudVehicleTrack.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nudVehicleTrack.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudVehicleTrack.Name = "nudVehicleTrack";
+            this.nudVehicleTrack.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.nudVehicleTrack.Size = new System.Drawing.Size(152, 52);
+            this.nudVehicleTrack.TabIndex = 53;
+            this.nudVehicleTrack.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudVehicleTrack.Value = new decimal(new int[] {
+            301,
+            0,
+            0,
+            0});
+            this.nudVehicleTrack.Enter += new System.EventHandler(this.nudVehicleTrack_Enter);
             // 
             // btnNextDim
             // 
@@ -1531,7 +1532,7 @@
             this.nudMinTurnRadius.BackColor = System.Drawing.Color.AliceBlue;
             this.nudMinTurnRadius.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudMinTurnRadius.InterceptArrowKeys = false;
-            this.nudMinTurnRadius.Location = new System.Drawing.Point(509, 372);
+            this.nudMinTurnRadius.Location = new System.Drawing.Point(520, 389);
             this.nudMinTurnRadius.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -1558,16 +1559,16 @@
             // 
             this.pictureBox1.Image = global::AgOpenGPS.Properties.Resources.RadiusWheelBase;
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(220, 54);
+            this.pictureBox1.Location = new System.Drawing.Point(127, 56);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(441, 415);
+            this.pictureBox1.Size = new System.Drawing.Size(469, 415);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 32;
             this.pictureBox1.TabStop = false;
             // 
             // tabVGuidance
             // 
-            this.tabVGuidance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(54)))));
+            this.tabVGuidance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.tabVGuidance.Controls.Add(this.groupBox6);
             this.tabVGuidance.Controls.Add(this.groupBox9);
             this.tabVGuidance.Controls.Add(this.groupBox2);
@@ -1726,7 +1727,7 @@
             // 
             // tabTConfig
             // 
-            this.tabTConfig.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
+            this.tabTConfig.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.tabTConfig.Controls.Add(this.gboxAttachment);
             this.tabTConfig.Location = new System.Drawing.Point(4, 44);
             this.tabTConfig.Name = "tabTConfig";
@@ -1747,7 +1748,7 @@
             this.gboxAttachment.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.gboxAttachment.Location = new System.Drawing.Point(45, 57);
             this.gboxAttachment.Name = "gboxAttachment";
-            this.gboxAttachment.Size = new System.Drawing.Size(669, 356);
+            this.gboxAttachment.Size = new System.Drawing.Size(727, 484);
             this.gboxAttachment.TabIndex = 111;
             this.gboxAttachment.TabStop = false;
             this.gboxAttachment.Text = "Attachment Style";
@@ -1758,12 +1759,12 @@
             this.rbtnTBT.BackColor = System.Drawing.Color.Transparent;
             this.rbtnTBT.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rbtnTBT.FlatAppearance.BorderSize = 0;
-            this.rbtnTBT.FlatAppearance.CheckedBackColor = System.Drawing.Color.Cyan;
+            this.rbtnTBT.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.rbtnTBT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbtnTBT.Image = global::AgOpenGPS.Properties.Resources.ToolChkTBT;
-            this.rbtnTBT.Location = new System.Drawing.Point(348, 48);
+            this.rbtnTBT.Location = new System.Drawing.Point(394, 48);
             this.rbtnTBT.Name = "rbtnTBT";
-            this.rbtnTBT.Size = new System.Drawing.Size(241, 100);
+            this.rbtnTBT.Size = new System.Drawing.Size(294, 135);
             this.rbtnTBT.TabIndex = 112;
             this.rbtnTBT.UseVisualStyleBackColor = false;
             // 
@@ -1773,12 +1774,12 @@
             this.rbtnFixedRear.BackColor = System.Drawing.Color.Transparent;
             this.rbtnFixedRear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rbtnFixedRear.FlatAppearance.BorderSize = 0;
-            this.rbtnFixedRear.FlatAppearance.CheckedBackColor = System.Drawing.Color.Cyan;
+            this.rbtnFixedRear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.rbtnFixedRear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbtnFixedRear.Image = global::AgOpenGPS.Properties.Resources.ToolChkRear;
             this.rbtnFixedRear.Location = new System.Drawing.Point(16, 48);
             this.rbtnFixedRear.Name = "rbtnFixedRear";
-            this.rbtnFixedRear.Size = new System.Drawing.Size(201, 100);
+            this.rbtnFixedRear.Size = new System.Drawing.Size(294, 135);
             this.rbtnFixedRear.TabIndex = 111;
             this.rbtnFixedRear.UseVisualStyleBackColor = false;
             // 
@@ -1788,12 +1789,12 @@
             this.rbtnFront.BackColor = System.Drawing.Color.Transparent;
             this.rbtnFront.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rbtnFront.FlatAppearance.BorderSize = 0;
-            this.rbtnFront.FlatAppearance.CheckedBackColor = System.Drawing.Color.Cyan;
+            this.rbtnFront.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.rbtnFront.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbtnFront.Image = global::AgOpenGPS.Properties.Resources.ToolChkFront;
-            this.rbtnFront.Location = new System.Drawing.Point(16, 212);
+            this.rbtnFront.Location = new System.Drawing.Point(16, 290);
             this.rbtnFront.Name = "rbtnFront";
-            this.rbtnFront.Size = new System.Drawing.Size(201, 100);
+            this.rbtnFront.Size = new System.Drawing.Size(294, 135);
             this.rbtnFront.TabIndex = 110;
             this.rbtnFront.UseVisualStyleBackColor = false;
             // 
@@ -1804,19 +1805,19 @@
             this.rbtnTrailing.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rbtnTrailing.Checked = true;
             this.rbtnTrailing.FlatAppearance.BorderSize = 0;
-            this.rbtnTrailing.FlatAppearance.CheckedBackColor = System.Drawing.Color.Cyan;
+            this.rbtnTrailing.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.rbtnTrailing.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbtnTrailing.Image = global::AgOpenGPS.Properties.Resources.ToolChkTrailing;
-            this.rbtnTrailing.Location = new System.Drawing.Point(348, 212);
+            this.rbtnTrailing.Location = new System.Drawing.Point(394, 290);
             this.rbtnTrailing.Name = "rbtnTrailing";
-            this.rbtnTrailing.Size = new System.Drawing.Size(241, 100);
+            this.rbtnTrailing.Size = new System.Drawing.Size(294, 135);
             this.rbtnTrailing.TabIndex = 109;
             this.rbtnTrailing.TabStop = true;
             this.rbtnTrailing.UseVisualStyleBackColor = false;
             // 
             // tabTHitch
             // 
-            this.tabTHitch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
+            this.tabTHitch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.tabTHitch.Controls.Add(this.btnNext2);
             this.tabTHitch.Controls.Add(this.nudTrailingHitchLength);
             this.tabTHitch.Controls.Add(this.nudDrawbarLength);
@@ -1835,7 +1836,7 @@
             this.btnNext2.BackColor = System.Drawing.Color.Transparent;
             this.btnNext2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnNext2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNext2.Location = new System.Drawing.Point(611, 72);
+            this.btnNext2.Location = new System.Drawing.Point(744, 16);
             this.btnNext2.Name = "btnNext2";
             this.btnNext2.Size = new System.Drawing.Size(31, 28);
             this.btnNext2.TabIndex = 0;
@@ -1846,9 +1847,9 @@
             this.nudTrailingHitchLength.BackColor = System.Drawing.Color.AliceBlue;
             this.nudTrailingHitchLength.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudTrailingHitchLength.InterceptArrowKeys = false;
-            this.nudTrailingHitchLength.Location = new System.Drawing.Point(451, 175);
+            this.nudTrailingHitchLength.Location = new System.Drawing.Point(177, 134);
             this.nudTrailingHitchLength.Maximum = new decimal(new int[] {
-            2000,
+            3000,
             0,
             0,
             0});
@@ -1858,11 +1859,11 @@
             0,
             0});
             this.nudTrailingHitchLength.Name = "nudTrailingHitchLength";
-            this.nudTrailingHitchLength.Size = new System.Drawing.Size(150, 52);
+            this.nudTrailingHitchLength.Size = new System.Drawing.Size(124, 52);
             this.nudTrailingHitchLength.TabIndex = 3;
             this.nudTrailingHitchLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudTrailingHitchLength.Value = new decimal(new int[] {
-            302,
+            3000,
             0,
             0,
             0});
@@ -1873,7 +1874,7 @@
             this.nudDrawbarLength.BackColor = System.Drawing.Color.AliceBlue;
             this.nudDrawbarLength.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudDrawbarLength.InterceptArrowKeys = false;
-            this.nudDrawbarLength.Location = new System.Drawing.Point(61, 175);
+            this.nudDrawbarLength.Location = new System.Drawing.Point(370, 134);
             this.nudDrawbarLength.Maximum = new decimal(new int[] {
             1200,
             0,
@@ -1881,7 +1882,7 @@
             0});
             this.nudDrawbarLength.Name = "nudDrawbarLength";
             this.nudDrawbarLength.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.nudDrawbarLength.Size = new System.Drawing.Size(150, 52);
+            this.nudDrawbarLength.Size = new System.Drawing.Size(124, 52);
             this.nudDrawbarLength.TabIndex = 1;
             this.nudDrawbarLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudDrawbarLength.Value = new decimal(new int[] {
@@ -1896,7 +1897,7 @@
             this.nudTankHitch.BackColor = System.Drawing.Color.AliceBlue;
             this.nudTankHitch.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudTankHitch.InterceptArrowKeys = false;
-            this.nudTankHitch.Location = new System.Drawing.Point(256, 175);
+            this.nudTankHitch.Location = new System.Drawing.Point(565, 134);
             this.nudTankHitch.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -1908,7 +1909,7 @@
             0,
             0});
             this.nudTankHitch.Name = "nudTankHitch";
-            this.nudTankHitch.Size = new System.Drawing.Size(150, 52);
+            this.nudTankHitch.Size = new System.Drawing.Size(124, 52);
             this.nudTankHitch.TabIndex = 2;
             this.nudTankHitch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudTankHitch.Value = new decimal(new int[] {
@@ -1920,16 +1921,17 @@
             // 
             // picboxToolHitch
             // 
-            this.picboxToolHitch.Image = global::AgOpenGPS.Properties.Resources.ToolHitchPageTBT1;
-            this.picboxToolHitch.Location = new System.Drawing.Point(143, 233);
+            this.picboxToolHitch.BackgroundImage = global::AgOpenGPS.Properties.Resources.ToolHitchPageTrailing1;
+            this.picboxToolHitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picboxToolHitch.Location = new System.Drawing.Point(-99, 170);
             this.picboxToolHitch.Name = "picboxToolHitch";
-            this.picboxToolHitch.Size = new System.Drawing.Size(499, 285);
+            this.picboxToolHitch.Size = new System.Drawing.Size(1000, 440);
             this.picboxToolHitch.TabIndex = 0;
             this.picboxToolHitch.TabStop = false;
             // 
             // tabTSections
             // 
-            this.tabTSections.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
+            this.tabTSections.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.tabTSections.Controls.Add(this.btnNext4);
             this.tabTSections.Controls.Add(this.nudCutoffSpeed);
             this.tabTSections.Controls.Add(this.label42);
@@ -2744,7 +2746,7 @@
             // 
             // tabTSwitches
             // 
-            this.tabTSwitches.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
+            this.tabTSwitches.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.tabTSwitches.Controls.Add(this.groupBox3);
             this.tabTSwitches.Location = new System.Drawing.Point(4, 44);
             this.tabTSwitches.Name = "tabTSwitches";
@@ -2818,7 +2820,7 @@
             // 
             // tabTSettings
             // 
-            this.tabTSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
+            this.tabTSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.tabTSettings.Controls.Add(this.label69);
             this.tabTSettings.Controls.Add(this.nudHydLiftLookAhead);
             this.tabTSettings.Controls.Add(this.btnNext3);
@@ -3081,7 +3083,7 @@
             // 
             // tabDFix
             // 
-            this.tabDFix.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
+            this.tabDFix.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.tabDFix.Controls.Add(this.label2);
             this.tabDFix.Controls.Add(this.cboxIsRTK);
             this.tabDFix.Controls.Add(this.groupBox4);
@@ -3201,7 +3203,7 @@
             // 
             // tabDHeading
             // 
-            this.tabDHeading.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
+            this.tabDHeading.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.tabDHeading.Controls.Add(this.button3);
             this.tabDHeading.Controls.Add(this.label15);
             this.tabDHeading.Controls.Add(this.label9);
@@ -3512,7 +3514,7 @@
             // 
             // tabDRoll
             // 
-            this.tabDRoll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
+            this.tabDRoll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.tabDRoll.Controls.Add(this.cboxDataInvertRoll);
             this.tabDRoll.Controls.Add(this.btnResetIMU);
             this.tabDRoll.Controls.Add(this.btnRollZero);
@@ -3726,7 +3728,7 @@
             // 
             // tabUTurn
             // 
-            this.tabUTurn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(22)))), ((int)(((byte)(40)))));
+            this.tabUTurn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.tabUTurn.Controls.Add(this.btnTurnSmoothingUp);
             this.tabUTurn.Controls.Add(this.btnTurnSmoothingDown);
             this.tabUTurn.Controls.Add(this.label59);
@@ -4070,7 +4072,7 @@
             // 
             // tabASteer
             // 
-            this.tabASteer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(22)))), ((int)(((byte)(40)))));
+            this.tabASteer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.tabASteer.Controls.Add(this.chkSteerInvertRelays);
             this.tabASteer.Controls.Add(this.label68);
             this.tabASteer.Controls.Add(this.cboxMotorDrive);
@@ -4376,7 +4378,7 @@
             // 
             // tabAMachine
             // 
-            this.tabAMachine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(22)))), ((int)(((byte)(40)))));
+            this.tabAMachine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.tabAMachine.Controls.Add(this.label67);
             this.tabAMachine.Controls.Add(this.cboxMachInvertRelays);
             this.tabAMachine.Controls.Add(this.groupBox8);
@@ -4613,7 +4615,7 @@
             // 
             // panelBottom
             // 
-            this.panelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(42)))), ((int)(((byte)(60)))));
+            this.panelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.panelBottom.Controls.Add(this.label52);
             this.panelBottom.Controls.Add(this.lblSecTotalWidthInches);
             this.panelBottom.Controls.Add(this.lblSecTotalWidthFeet);
@@ -4680,6 +4682,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxAntenna)).EndInit();
             this.tabVDimensions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudVehicleTrack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWheelbase)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinTurnRadius)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -4947,9 +4950,7 @@
         private System.Windows.Forms.Button btnZeroRoll;
         private System.Windows.Forms.Button btnResetIMU;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label label53;
         private System.Windows.Forms.NumericUpDown nudMinTurnRadius;
-        private System.Windows.Forms.Label label23;
         private System.Windows.Forms.NumericUpDown nudWheelbase;
         private System.Windows.Forms.Button btnNextDim;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -5015,5 +5016,6 @@
         private System.Windows.Forms.CheckBox cboxDataInvertRoll;
         private System.Windows.Forms.Label label69;
         private System.Windows.Forms.NumericUpDown nudHydLiftLookAhead;
+        private System.Windows.Forms.NumericUpDown nudVehicleTrack;
     }
 }
