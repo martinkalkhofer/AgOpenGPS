@@ -22,6 +22,8 @@ namespace AgOpenGPS
             btnJobNew.Text = gStr.gsNew;
             btnJobResume.Text = gStr.gsResume;
 
+            label1.Text = gStr.gsLastFieldUsed;
+
             this.Text = gStr.gsStartNewField;
         }
 

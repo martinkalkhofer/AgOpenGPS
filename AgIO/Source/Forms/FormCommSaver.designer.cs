@@ -31,9 +31,9 @@
             this.cboxEnv = new System.Windows.Forms.ComboBox();
             this.lblLast = new System.Windows.Forms.Label();
             this.tboxName = new System.Windows.Forms.TextBox();
-            this.btnSave = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cboxEnv
@@ -73,18 +73,6 @@
             this.tboxName.Click += new System.EventHandler(this.tboxName_Click);
             this.tboxName.TextChanged += new System.EventHandler(this.tboxName_TextChanged);
             // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSave.Font = new System.Drawing.Font("Tahoma", 15.75F);
-            this.btnSave.Image = global::AgIO.Properties.Resources.FileSave;
-            this.btnSave.Location = new System.Drawing.Point(433, 173);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(127, 71);
-            this.btnSave.TabIndex = 215;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -109,7 +97,22 @@
             this.label2.Text = "Save As:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // FormEnvSaver
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Tahoma", 15.75F);
+            this.btnSave.Image = global::AgIO.Properties.Resources.VehFileSave;
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSave.Location = new System.Drawing.Point(429, 172);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(127, 71);
+            this.btnSave.TabIndex = 215;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // FormCommSaver
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -121,7 +124,7 @@
             this.Controls.Add(this.lblLast);
             this.Controls.Add(this.cboxEnv);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "FormEnvSaver";
+            this.Name = "FormCommSaver";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Save Comm";

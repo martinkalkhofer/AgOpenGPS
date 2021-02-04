@@ -84,7 +84,6 @@
             this.btnDistanceUp.FlatAppearance.BorderSize = 2;
             this.btnDistanceUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDistanceUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDistanceUp.Image = global::AgIO.Properties.Resources.UpArrow64;
             this.btnDistanceUp.Location = new System.Drawing.Point(112, 3);
             this.btnDistanceUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnDistanceUp.Name = "btnDistanceUp";
@@ -101,7 +100,6 @@
             this.btnDistanceDn.FlatAppearance.BorderSize = 2;
             this.btnDistanceDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDistanceDn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDistanceDn.Image = global::AgIO.Properties.Resources.DnArrow64;
             this.btnDistanceDn.Location = new System.Drawing.Point(4, 3);
             this.btnDistanceDn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnDistanceDn.Name = "btnDistanceDn";

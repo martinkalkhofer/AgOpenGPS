@@ -29,7 +29,7 @@ namespace AgOpenGPS
         public double minLookAheadDistance = 2.0;
         public double maxSteerAngle;
         public double maxAngularVelocity;
-        public double hydLiftLookAheadTime, trackWidth;
+        public double hydLiftLookAheadTime;
         
         public double hydLiftLookAheadDistanceLeft, hydLiftLookAheadDistanceRight;
 
@@ -67,8 +67,6 @@ namespace AgOpenGPS
             maxSteerAngle = Properties.Vehicle.Default.setVehicle_maxSteerAngle;
 
             isHydLiftOn = false;
-
-            trackWidth = Properties.Vehicle.Default.setVehicle_trackWidth;
 
             stanleyIntegralGainAB = Properties.Vehicle.Default.stanleyIntegralGainAB;
             stanleyIntegralDistanceAwayTriggerAB = Properties.Vehicle.Default.stanleyIntegralDistanceAwayTriggerAB;

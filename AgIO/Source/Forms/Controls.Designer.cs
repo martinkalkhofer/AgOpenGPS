@@ -222,12 +222,6 @@ namespace AgIO
         {
             SettingsNTRIP();
         }
-
-        private void wizardToolStrip_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void loadToolStrip_Click(object sender, EventArgs e)
         {
             using (FormCommPicker form = new FormCommPicker(this))

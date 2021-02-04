@@ -70,37 +70,37 @@
             this.Boundary.BackColor = System.Drawing.Color.Transparent;
             this.Boundary.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Boundary.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.Boundary.Location = new System.Drawing.Point(33, 90);
+            this.Boundary.Location = new System.Drawing.Point(43, 7);
             this.Boundary.Name = "Boundary";
-            this.Boundary.Size = new System.Drawing.Size(150, 50);
+            this.Boundary.Size = new System.Drawing.Size(142, 24);
             this.Boundary.TabIndex = 203;
             this.Boundary.Text = "Bounds";
-            this.Boundary.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.Boundary.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Thru
             // 
             this.Thru.BackColor = System.Drawing.Color.Transparent;
             this.Thru.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Thru.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.Thru.Location = new System.Drawing.Point(380, 90);
+            this.Thru.Location = new System.Drawing.Point(409, 2);
             this.Thru.Name = "Thru";
             this.Thru.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Thru.Size = new System.Drawing.Size(150, 50);
+            this.Thru.Size = new System.Drawing.Size(80, 35);
             this.Thru.TabIndex = 202;
             this.Thru.Text = "Thru?";
-            this.Thru.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.Thru.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Area
             // 
             this.Area.BackColor = System.Drawing.Color.Transparent;
             this.Area.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Area.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.Area.Location = new System.Drawing.Point(219, 90);
+            this.Area.Location = new System.Drawing.Point(216, 2);
             this.Area.Name = "Area";
-            this.Area.Size = new System.Drawing.Size(150, 50);
+            this.Area.Size = new System.Drawing.Size(150, 35);
             this.Area.TabIndex = 201;
-            this.Area.Text = "Area\r\n2nd";
-            this.Area.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.Area.Text = "Area";
+            this.Area.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // nudBndOffset
             // 
@@ -145,7 +145,7 @@
             this.btnOpenGoogleEarth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpenGoogleEarth.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOpenGoogleEarth.Image = global::AgOpenGPS.Properties.Resources.GoogleEarth;
-            this.btnOpenGoogleEarth.Location = new System.Drawing.Point(211, 19);
+            this.btnOpenGoogleEarth.Location = new System.Drawing.Point(11, 293);
             this.btnOpenGoogleEarth.Name = "btnOpenGoogleEarth";
             this.btnOpenGoogleEarth.Size = new System.Drawing.Size(72, 68);
             this.btnOpenGoogleEarth.TabIndex = 213;
@@ -159,7 +159,7 @@
             this.btnLeftRight.FlatAppearance.BorderSize = 0;
             this.btnLeftRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLeftRight.Image = global::AgOpenGPS.Properties.Resources.BoundaryLeft;
-            this.btnLeftRight.Location = new System.Drawing.Point(75, 122);
+            this.btnLeftRight.Location = new System.Drawing.Point(75, 134);
             this.btnLeftRight.Name = "btnLeftRight";
             this.btnLeftRight.Size = new System.Drawing.Size(91, 84);
             this.btnLeftRight.TabIndex = 67;
@@ -177,7 +177,7 @@
             this.btnGo.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnGo.Image = global::AgOpenGPS.Properties.Resources.OK64;
             this.btnGo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGo.Location = new System.Drawing.Point(124, 255);
+            this.btnGo.Location = new System.Drawing.Point(124, 293);
             this.btnGo.Margin = new System.Windows.Forms.Padding(5);
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(100, 70);
@@ -192,7 +192,7 @@
             this.btnDriveOrExt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDriveOrExt.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDriveOrExt.Image = global::AgOpenGPS.Properties.Resources.AutoSteerOn;
-            this.btnDriveOrExt.Location = new System.Drawing.Point(66, 157);
+            this.btnDriveOrExt.Location = new System.Drawing.Point(66, 178);
             this.btnDriveOrExt.Name = "btnDriveOrExt";
             this.btnDriveOrExt.Size = new System.Drawing.Size(91, 84);
             this.btnDriveOrExt.TabIndex = 212;
@@ -239,9 +239,9 @@
             this.btnCancel.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnCancel.Image = global::AgOpenGPS.Properties.Resources.OK64;
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(447, 19);
+            this.btnCancel.Location = new System.Drawing.Point(490, 293);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(93, 68);
+            this.btnCancel.Size = new System.Drawing.Size(72, 68);
             this.btnCancel.TabIndex = 206;
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnReturn_Click);
@@ -252,7 +252,7 @@
             this.btnDeleteAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteAll.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteAll.Image = global::AgOpenGPS.Properties.Resources.BoundaryDeleteAll;
-            this.btnDeleteAll.Location = new System.Drawing.Point(103, 19);
+            this.btnDeleteAll.Location = new System.Drawing.Point(124, 293);
             this.btnDeleteAll.Name = "btnDeleteAll";
             this.btnDeleteAll.Size = new System.Drawing.Size(72, 68);
             this.btnDeleteAll.TabIndex = 100;
@@ -266,7 +266,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.Image = global::AgOpenGPS.Properties.Resources.BoundaryDelete;
-            this.btnDelete.Location = new System.Drawing.Point(15, 19);
+            this.btnDelete.Location = new System.Drawing.Point(233, 293);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(72, 68);
             this.btnDelete.TabIndex = 65;
@@ -289,28 +289,26 @@
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(2, 2);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1223, 334);
+            this.panelMain.Size = new System.Drawing.Size(1357, 372);
             this.panelMain.TabIndex = 417;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.AutoScroll = true;
-            this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(90)))));
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.88525F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.27049F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.74475F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(26, 140);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(25, 34);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(488, 151);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(488, 253);
             this.tableLayoutPanel1.TabIndex = 215;
             // 
             // btnAdd
@@ -319,9 +317,9 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Image = global::AgOpenGPS.Properties.Resources.AddNew;
-            this.btnAdd.Location = new System.Drawing.Point(317, 19);
+            this.btnAdd.Location = new System.Drawing.Point(368, 294);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(96, 68);
+            this.btnAdd.Size = new System.Drawing.Size(72, 68);
             this.btnAdd.TabIndex = 214;
             this.btnAdd.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -340,7 +338,7 @@
             this.panelDrv.Controls.Add(this.btnGo);
             this.panelDrv.Location = new System.Drawing.Point(871, 4);
             this.panelDrv.Name = "panelDrv";
-            this.panelDrv.Size = new System.Drawing.Size(229, 325);
+            this.panelDrv.Size = new System.Drawing.Size(229, 368);
             this.panelDrv.TabIndex = 418;
             // 
             // label2
@@ -362,7 +360,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(45, 209);
+            this.label1.Location = new System.Drawing.Point(45, 221);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label1.Size = new System.Drawing.Size(154, 27);
@@ -393,7 +391,7 @@
             this.btnCancelDrive.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnCancelDrive.Image = global::AgOpenGPS.Properties.Resources.Cancel64;
             this.btnCancelDrive.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancelDrive.Location = new System.Drawing.Point(8, 260);
+            this.btnCancelDrive.Location = new System.Drawing.Point(8, 298);
             this.btnCancelDrive.Name = "btnCancelDrive";
             this.btnCancelDrive.Size = new System.Drawing.Size(68, 58);
             this.btnCancelDrive.TabIndex = 426;
@@ -410,7 +408,7 @@
             this.panelKML.Controls.Add(this.btnLoadMultiBoundaryFromGE);
             this.panelKML.Location = new System.Drawing.Point(1115, 4);
             this.panelKML.Name = "panelKML";
-            this.panelKML.Size = new System.Drawing.Size(229, 325);
+            this.panelKML.Size = new System.Drawing.Size(229, 368);
             this.panelKML.TabIndex = 419;
             // 
             // label5
@@ -448,7 +446,7 @@
             this.btnCancelKML.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnCancelKML.Image = global::AgOpenGPS.Properties.Resources.Cancel64;
             this.btnCancelKML.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancelKML.Location = new System.Drawing.Point(12, 260);
+            this.btnCancelKML.Location = new System.Drawing.Point(8, 302);
             this.btnCancelKML.Name = "btnCancelKML";
             this.btnCancelKML.Size = new System.Drawing.Size(68, 58);
             this.btnCancelKML.TabIndex = 426;
@@ -464,7 +462,7 @@
             this.panelChoose.Controls.Add(this.btnDriveOrExt);
             this.panelChoose.Location = new System.Drawing.Point(612, 4);
             this.panelChoose.Name = "panelChoose";
-            this.panelChoose.Size = new System.Drawing.Size(229, 325);
+            this.panelChoose.Size = new System.Drawing.Size(229, 368);
             this.panelChoose.TabIndex = 419;
             // 
             // btnCancelChoose
@@ -476,7 +474,7 @@
             this.btnCancelChoose.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnCancelChoose.Image = global::AgOpenGPS.Properties.Resources.Cancel64;
             this.btnCancelChoose.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancelChoose.Location = new System.Drawing.Point(14, 260);
+            this.btnCancelChoose.Location = new System.Drawing.Point(3, 302);
             this.btnCancelChoose.Name = "btnCancelChoose";
             this.btnCancelChoose.Size = new System.Drawing.Size(68, 58);
             this.btnCancelChoose.TabIndex = 425;
@@ -489,7 +487,7 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(96, 108);
+            this.label4.Location = new System.Drawing.Point(96, 129);
             this.label4.Name = "label4";
             this.label4.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label4.Size = new System.Drawing.Size(35, 39);
@@ -503,7 +501,7 @@
             this.btnGetKML.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGetKML.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGetKML.Image = global::AgOpenGPS.Properties.Resources.BoundaryLoadFromGE;
-            this.btnGetKML.Location = new System.Drawing.Point(66, 10);
+            this.btnGetKML.Location = new System.Drawing.Point(66, 31);
             this.btnGetKML.Name = "btnGetKML";
             this.btnGetKML.Size = new System.Drawing.Size(91, 84);
             this.btnGetKML.TabIndex = 213;
@@ -516,7 +514,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Cyan;
-            this.ClientSize = new System.Drawing.Size(1227, 338);
+            this.ClientSize = new System.Drawing.Size(1361, 376);
             this.ControlBox = false;
             this.Controls.Add(this.panelChoose);
             this.Controls.Add(this.panelKML);
@@ -534,7 +532,6 @@
             this.Load += new System.EventHandler(this.FormBoundary_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudBndOffset)).EndInit();
             this.panelMain.ResumeLayout(false);
-            this.panelMain.PerformLayout();
             this.panelDrv.ResumeLayout(false);
             this.panelDrv.PerformLayout();
             this.panelKML.ResumeLayout(false);

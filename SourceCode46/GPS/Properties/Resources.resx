@@ -325,6 +325,9 @@
   <data name="vehiclePage4WD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\vehiclePage4WD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Batman48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\btnImages\Batman48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Simplify" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\Simplify.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -336,6 +339,9 @@
   </data>
   <data name="radar-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\radar-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GPSSignalPoor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\btnImages\GPSSignalPoor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ToolChkFront" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\ToolChkFront.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -460,6 +466,9 @@
   <data name="CurveOn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\CurveOn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="GPSSignalGood" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\btnImages\GPSSignalGood.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ABLineOn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\ABLineOn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -564,6 +573,9 @@
   </data>
   <data name="ArrowRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\ArrowRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gyro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\btnImages\gyro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="WorkSwitch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\WorkSwitch.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

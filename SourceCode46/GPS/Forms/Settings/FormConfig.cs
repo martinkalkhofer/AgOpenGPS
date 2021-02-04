@@ -46,7 +46,6 @@ namespace AgOpenGPS
             nudAntennaPivot.Controls[0].Enabled = false;
             nudLightbarCmPerPixel.Controls[0].Enabled = false;
             nudMinTurnRadius.Controls[0].Enabled = false;
-            nudVehicleTrack.Controls[0].Enabled = false;
             nudSnapDistance.Controls[0].Enabled = false;
             nudWheelbase.Controls[0].Enabled = false;
             nudLineWidth.Controls[0].Enabled = false;
@@ -163,8 +162,8 @@ namespace AgOpenGPS
                 nudLightbarCmPerPixel.Maximum /= 2.54M;
                 nudLightbarCmPerPixel.Minimum /= 2.54M;
 
-                nudVehicleTrack.Maximum /= 2.54M;
-                nudVehicleTrack.Minimum /= 2.54M;
+                //.Maximum /= 2.54M;
+                //.Minimum /= 2.54M;
 
                 //.Maximum /= 2.54M;
                 //.Minimum /= 2.54M;

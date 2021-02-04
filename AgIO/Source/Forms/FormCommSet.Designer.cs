@@ -31,9 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnRescan = new System.Windows.Forms.Button();
-            this.btnSerialOK = new System.Windows.Forms.Button();
             this.btnCloseSerialModule1 = new System.Windows.Forms.Button();
-            this.btnOpenSerialModule1 = new System.Windows.Forms.Button();
             this.txtBoxRecvModule1 = new System.Windows.Forms.TextBox();
             this.cboxModule1Port = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -42,14 +40,16 @@
             this.lblCurrentModule3Port = new System.Windows.Forms.Label();
             this.cboxModule3Port = new System.Windows.Forms.ComboBox();
             this.txtBoxRecvModule3 = new System.Windows.Forms.TextBox();
-            this.btnOpenSerialModule3 = new System.Windows.Forms.Button();
             this.btnCloseSerialModule3 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblCurrentModule2Port = new System.Windows.Forms.Label();
             this.cboxModule2Port = new System.Windows.Forms.ComboBox();
             this.txtBoxRecvModule2 = new System.Windows.Forms.TextBox();
-            this.btnOpenSerialModule2 = new System.Windows.Forms.Button();
             this.btnCloseSerialModule2 = new System.Windows.Forms.Button();
+            this.btnOpenSerialModule2 = new System.Windows.Forms.Button();
+            this.btnOpenSerialModule3 = new System.Windows.Forms.Button();
+            this.btnSerialOK = new System.Windows.Forms.Button();
+            this.btnOpenSerialModule1 = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -65,31 +65,17 @@
             // 
             this.btnRescan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRescan.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnRescan.FlatAppearance.BorderSize = 0;
             this.btnRescan.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnRescan.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRescan.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnRescan.Location = new System.Drawing.Point(12, 464);
+            this.btnRescan.Location = new System.Drawing.Point(12, 445);
             this.btnRescan.Name = "btnRescan";
             this.btnRescan.Size = new System.Drawing.Size(156, 54);
             this.btnRescan.TabIndex = 58;
             this.btnRescan.Text = "Rescan Ports";
             this.btnRescan.UseVisualStyleBackColor = false;
             this.btnRescan.Click += new System.EventHandler(this.btnRescan_Click);
-            // 
-            // btnSerialOK
-            // 
-            this.btnSerialOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSerialOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSerialOK.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.btnSerialOK.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSerialOK.Image = global::AgIO.Properties.Resources.OK64;
-            this.btnSerialOK.Location = new System.Drawing.Point(304, 462);
-            this.btnSerialOK.Name = "btnSerialOK";
-            this.btnSerialOK.Size = new System.Drawing.Size(156, 57);
-            this.btnSerialOK.TabIndex = 59;
-            this.btnSerialOK.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnSerialOK.UseVisualStyleBackColor = true;
-            this.btnSerialOK.Click += new System.EventHandler(this.btnSerialOK_Click);
             // 
             // btnCloseSerialModule1
             // 
@@ -103,19 +89,6 @@
             this.btnCloseSerialModule1.Text = "Disconnect";
             this.btnCloseSerialModule1.UseVisualStyleBackColor = false;
             this.btnCloseSerialModule1.Click += new System.EventHandler(this.btnCloseSerialModule1_Click);
-            // 
-            // btnOpenSerialModule1
-            // 
-            this.btnOpenSerialModule1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnOpenSerialModule1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnOpenSerialModule1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenSerialModule1.Location = new System.Drawing.Point(195, 36);
-            this.btnOpenSerialModule1.Name = "btnOpenSerialModule1";
-            this.btnOpenSerialModule1.Size = new System.Drawing.Size(93, 40);
-            this.btnOpenSerialModule1.TabIndex = 53;
-            this.btnOpenSerialModule1.Text = "Connect";
-            this.btnOpenSerialModule1.UseVisualStyleBackColor = false;
-            this.btnOpenSerialModule1.Click += new System.EventHandler(this.btnOpenSerialModule1_Click);
             // 
             // txtBoxRecvModule1
             // 
@@ -214,22 +187,10 @@
             this.txtBoxRecvModule3.Size = new System.Drawing.Size(240, 27);
             this.txtBoxRecvModule3.TabIndex = 63;
             // 
-            // btnOpenSerialModule3
-            // 
-            this.btnOpenSerialModule3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnOpenSerialModule3.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnOpenSerialModule3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenSerialModule3.Location = new System.Drawing.Point(195, 39);
-            this.btnOpenSerialModule3.Name = "btnOpenSerialModule3";
-            this.btnOpenSerialModule3.Size = new System.Drawing.Size(93, 40);
-            this.btnOpenSerialModule3.TabIndex = 53;
-            this.btnOpenSerialModule3.Text = "Connect";
-            this.btnOpenSerialModule3.UseVisualStyleBackColor = false;
-            this.btnOpenSerialModule3.Click += new System.EventHandler(this.btnOpenSerialModule3_Click);
-            // 
             // btnCloseSerialModule3
             // 
             this.btnCloseSerialModule3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnCloseSerialModule3.FlatAppearance.BorderSize = 0;
             this.btnCloseSerialModule3.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnCloseSerialModule3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCloseSerialModule3.Location = new System.Drawing.Point(337, 39);
@@ -288,22 +249,10 @@
             this.txtBoxRecvModule2.Size = new System.Drawing.Size(240, 27);
             this.txtBoxRecvModule2.TabIndex = 63;
             // 
-            // btnOpenSerialModule2
-            // 
-            this.btnOpenSerialModule2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnOpenSerialModule2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnOpenSerialModule2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenSerialModule2.Location = new System.Drawing.Point(195, 36);
-            this.btnOpenSerialModule2.Name = "btnOpenSerialModule2";
-            this.btnOpenSerialModule2.Size = new System.Drawing.Size(93, 40);
-            this.btnOpenSerialModule2.TabIndex = 53;
-            this.btnOpenSerialModule2.Text = "Connect";
-            this.btnOpenSerialModule2.UseVisualStyleBackColor = false;
-            this.btnOpenSerialModule2.Click += new System.EventHandler(this.btnOpenSerialModule2_Click);
-            // 
             // btnCloseSerialModule2
             // 
             this.btnCloseSerialModule2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnCloseSerialModule2.FlatAppearance.BorderSize = 0;
             this.btnCloseSerialModule2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnCloseSerialModule2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCloseSerialModule2.Location = new System.Drawing.Point(337, 36);
@@ -314,11 +263,70 @@
             this.btnCloseSerialModule2.UseVisualStyleBackColor = false;
             this.btnCloseSerialModule2.Click += new System.EventHandler(this.btnCloseSerialModule2_Click);
             // 
+            // btnOpenSerialModule2
+            // 
+            this.btnOpenSerialModule2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnOpenSerialModule2.FlatAppearance.BorderSize = 0;
+            this.btnOpenSerialModule2.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnOpenSerialModule2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenSerialModule2.Location = new System.Drawing.Point(195, 36);
+            this.btnOpenSerialModule2.Name = "btnOpenSerialModule2";
+            this.btnOpenSerialModule2.Size = new System.Drawing.Size(93, 40);
+            this.btnOpenSerialModule2.TabIndex = 53;
+            this.btnOpenSerialModule2.Text = "Connect";
+            this.btnOpenSerialModule2.UseVisualStyleBackColor = false;
+            this.btnOpenSerialModule2.Click += new System.EventHandler(this.btnOpenSerialModule2_Click);
+            // 
+            // btnOpenSerialModule3
+            // 
+            this.btnOpenSerialModule3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnOpenSerialModule3.FlatAppearance.BorderSize = 0;
+            this.btnOpenSerialModule3.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnOpenSerialModule3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenSerialModule3.Location = new System.Drawing.Point(195, 39);
+            this.btnOpenSerialModule3.Name = "btnOpenSerialModule3";
+            this.btnOpenSerialModule3.Size = new System.Drawing.Size(93, 40);
+            this.btnOpenSerialModule3.TabIndex = 53;
+            this.btnOpenSerialModule3.Text = "Connect";
+            this.btnOpenSerialModule3.UseVisualStyleBackColor = false;
+            this.btnOpenSerialModule3.Click += new System.EventHandler(this.btnOpenSerialModule3_Click);
+            // 
+            // btnSerialOK
+            // 
+            this.btnSerialOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSerialOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSerialOK.FlatAppearance.BorderSize = 0;
+            this.btnSerialOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSerialOK.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.btnSerialOK.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSerialOK.Image = global::AgIO.Properties.Resources.OK64;
+            this.btnSerialOK.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSerialOK.Location = new System.Drawing.Point(303, 443);
+            this.btnSerialOK.Name = "btnSerialOK";
+            this.btnSerialOK.Size = new System.Drawing.Size(156, 57);
+            this.btnSerialOK.TabIndex = 59;
+            this.btnSerialOK.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnSerialOK.UseVisualStyleBackColor = true;
+            this.btnSerialOK.Click += new System.EventHandler(this.btnSerialOK_Click);
+            // 
+            // btnOpenSerialModule1
+            // 
+            this.btnOpenSerialModule1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnOpenSerialModule1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnOpenSerialModule1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenSerialModule1.Location = new System.Drawing.Point(195, 36);
+            this.btnOpenSerialModule1.Name = "btnOpenSerialModule1";
+            this.btnOpenSerialModule1.Size = new System.Drawing.Size(93, 40);
+            this.btnOpenSerialModule1.TabIndex = 53;
+            this.btnOpenSerialModule1.Text = "Connect";
+            this.btnOpenSerialModule1.UseVisualStyleBackColor = false;
+            this.btnOpenSerialModule1.Click += new System.EventHandler(this.btnOpenSerialModule1_Click);
+            // 
             // FormCommSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(472, 531);
+            this.ClientSize = new System.Drawing.Size(471, 512);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);

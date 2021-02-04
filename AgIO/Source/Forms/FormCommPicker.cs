@@ -25,7 +25,7 @@ namespace AgIO
         private void FormCommPicker_Load(object sender, EventArgs e)
         {
             DirectoryInfo dinfo = new DirectoryInfo(mf.commDirectory);
-            FileInfo[] Files = dinfo.GetFiles("*.txt");
+            FileInfo[] Files = dinfo.GetFiles("*.xml");
             if (Files.Length == 0)
             {
                 DialogResult = DialogResult.Ignore;
@@ -45,21 +45,11 @@ namespace AgIO
 
         private void cboxVeh_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DialogResult resul = mf.FileOpenComm(mf.commDirectory + cboxEnv.SelectedItem.ToString() + ".txt");
+            SettingsIO.Import(mf.commDirectory + cboxEnv.SelectedItem.ToString() + ".xml");
 
-            if (resul == DialogResult.OK)
-            {
-                DialogResult = DialogResult.OK;
-            }
-            else if (resul == DialogResult.Abort)
-            {
-                DialogResult = DialogResult.Abort;
-            }
-            else
-            {
-                DialogResult = DialogResult.Cancel;
-            }
             Close();
+
+            mf.LoadSettings();
         }
     }
 }

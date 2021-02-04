@@ -27,7 +27,7 @@ namespace AgIO
         {
             lblLast.Text = "Current " + mf.commFileName;
             DirectoryInfo dinfo = new DirectoryInfo(mf.commDirectory);
-            FileInfo[] Files = dinfo.GetFiles("*.txt");
+            FileInfo[] Files = dinfo.GetFiles("*.xml");
 
             if (Files.Length == 0)
             {
@@ -43,14 +43,14 @@ namespace AgIO
         private void cboxVeh_SelectedIndexChanged(object sender, EventArgs e)
         {
             DialogResult result3 = MessageBox.Show(
-                "Overwrite: " + cboxEnv.SelectedItem.ToString() + ".txt", 
+                "Overwrite: " + cboxEnv.SelectedItem.ToString() + ".xml", 
                 gStr.gsSaveAndReturn,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2);
             if (result3 == DialogResult.Yes)
             {
-                mf.FileSaveComm(mf.commDirectory + cboxEnv.SelectedItem.ToString() + ".txt");
+                SettingsIO.Export(mf.commDirectory + cboxEnv.SelectedItem.ToString() + ".xml");
                 Close();
             }
         }
@@ -68,7 +68,7 @@ namespace AgIO
         {
             if (tboxName.Text.Trim().Length > 0)
             {
-                mf.FileSaveComm(mf.commDirectory + tboxName.Text.Trim() + ".txt");
+                SettingsIO.Export(mf.commDirectory + tboxName.Text.Trim() + ".xml");
                 Close();
             }
         }

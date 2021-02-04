@@ -31,13 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnRescan = new System.Windows.Forms.Button();
-            this.btnSerialOK = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cboxIMU = new System.Windows.Forms.ComboBox();
             this.lblCurrentIMU = new System.Windows.Forms.Label();
             this.btnCloseIMU = new System.Windows.Forms.Button();
             this.tboxReceiveIMU = new System.Windows.Forms.TextBox();
             this.btnOpenIMU = new System.Windows.Forms.Button();
+            this.btnSerialOK = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,21 +61,6 @@
             this.btnRescan.Text = "Rescan Ports";
             this.btnRescan.UseVisualStyleBackColor = false;
             this.btnRescan.Click += new System.EventHandler(this.btnRescan_Click);
-            // 
-            // btnSerialOK
-            // 
-            this.btnSerialOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSerialOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSerialOK.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.btnSerialOK.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSerialOK.Image = global::AgIO.Properties.Resources.OK64;
-            this.btnSerialOK.Location = new System.Drawing.Point(361, 181);
-            this.btnSerialOK.Name = "btnSerialOK";
-            this.btnSerialOK.Size = new System.Drawing.Size(156, 57);
-            this.btnSerialOK.TabIndex = 59;
-            this.btnSerialOK.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnSerialOK.UseVisualStyleBackColor = true;
-            this.btnSerialOK.Click += new System.EventHandler(this.btnSerialOK_Click);
             // 
             // groupBox3
             // 
@@ -154,6 +139,24 @@
             this.btnOpenIMU.Text = "Connect";
             this.btnOpenIMU.UseVisualStyleBackColor = false;
             this.btnOpenIMU.Click += new System.EventHandler(this.btnOpenIMU_Click);
+            // 
+            // btnSerialOK
+            // 
+            this.btnSerialOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSerialOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSerialOK.FlatAppearance.BorderSize = 0;
+            this.btnSerialOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSerialOK.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.btnSerialOK.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSerialOK.Image = global::AgIO.Properties.Resources.OK64;
+            this.btnSerialOK.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSerialOK.Location = new System.Drawing.Point(355, 181);
+            this.btnSerialOK.Name = "btnSerialOK";
+            this.btnSerialOK.Size = new System.Drawing.Size(156, 57);
+            this.btnSerialOK.TabIndex = 59;
+            this.btnSerialOK.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnSerialOK.UseVisualStyleBackColor = true;
+            this.btnSerialOK.Click += new System.EventHandler(this.btnSerialOK_Click);
             // 
             // FormCommSetIMU
             // 

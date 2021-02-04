@@ -83,79 +83,9 @@ namespace AgIO.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ArrowLeft {
-            get {
-                object obj = ResourceManager.GetObject("ArrowLeft", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap ArrowRight {
             get {
                 object obj = ResourceManager.GetObject("ArrowRight", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap back_button {
-            get {
-                object obj = ResourceManager.GetObject("back_button", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Batman48 {
-            get {
-                object obj = ResourceManager.GetObject("Batman48", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap boundaryPause {
-            get {
-                object obj = ResourceManager.GetObject("boundaryPause", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap boundaryPlay {
-            get {
-                object obj = ResourceManager.GetObject("boundaryPlay", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap BoundaryRecord {
-            get {
-                object obj = ResourceManager.GetObject("BoundaryRecord", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap boundaryStop {
-            get {
-                object obj = ResourceManager.GetObject("boundaryStop", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -176,116 +106,6 @@ namespace AgIO.Properties {
         internal static System.Drawing.Bitmap ComPorts {
             get {
                 object obj = ResourceManager.GetObject("ComPorts", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap DataSources {
-            get {
-                object obj = ResourceManager.GetObject("DataSources", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap DisplayDrag {
-            get {
-                object obj = ResourceManager.GetObject("DisplayDrag", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap displayMenu {
-            get {
-                object obj = ResourceManager.GetObject("displayMenu", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap DnArrow64 {
-            get {
-                object obj = ResourceManager.GetObject("DnArrow64", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap DrivePgm {
-            get {
-                object obj = ResourceManager.GetObject("DrivePgm", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap fileMenu {
-            get {
-                object obj = ResourceManager.GetObject("fileMenu", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap FileNew {
-            get {
-                object obj = ResourceManager.GetObject("FileNew", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap FileOpen {
-            get {
-                object obj = ResourceManager.GetObject("FileOpen", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap FileSave {
-            get {
-                object obj = ResourceManager.GetObject("FileSave", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap FileUse {
-            get {
-                object obj = ResourceManager.GetObject("FileUse", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap GPSSignalGood {
-            get {
-                object obj = ResourceManager.GetObject("GPSSignalGood", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -323,9 +143,9 @@ namespace AgIO.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SettingsGear64 {
+        internal static System.Drawing.Bitmap Satellite64 {
             get {
-                object obj = ResourceManager.GetObject("SettingsGear64", resourceCulture);
+                object obj = ResourceManager.GetObject("Satellite64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -333,29 +153,9 @@ namespace AgIO.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SnapLeft {
+        internal static System.Drawing.Bitmap Settings48 {
             get {
-                object obj = ResourceManager.GetObject("SnapLeft", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SnapRight {
-            get {
-                object obj = ResourceManager.GetObject("SnapRight", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SpecialFunctions {
-            get {
-                object obj = ResourceManager.GetObject("SpecialFunctions", resourceCulture);
+                object obj = ResourceManager.GetObject("Settings48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -373,16 +173,6 @@ namespace AgIO.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SwitchOn {
-            get {
-                object obj = ResourceManager.GetObject("SwitchOn", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap UDPConfig {
             get {
                 object obj = ResourceManager.GetObject("UDPConfig", resourceCulture);
@@ -393,9 +183,9 @@ namespace AgIO.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap UpArrow64 {
+        internal static System.Drawing.Bitmap VehFileDelete {
             get {
-                object obj = ResourceManager.GetObject("UpArrow64", resourceCulture);
+                object obj = ResourceManager.GetObject("VehFileDelete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -403,9 +193,9 @@ namespace AgIO.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap WindowDayMode {
+        internal static System.Drawing.Bitmap VehFileLoad {
             get {
-                object obj = ResourceManager.GetObject("WindowDayMode", resourceCulture);
+                object obj = ResourceManager.GetObject("VehFileLoad", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -413,9 +203,19 @@ namespace AgIO.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap WindowNightMode {
+        internal static System.Drawing.Bitmap VehFileSave {
             get {
-                object obj = ResourceManager.GetObject("WindowNightMode", resourceCulture);
+                object obj = ResourceManager.GetObject("VehFileSave", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap VehFileSaveAs {
+            get {
+                object obj = ResourceManager.GetObject("VehFileSaveAs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -43,6 +43,7 @@
       <HintPath>References\RepeatButtonControl.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -56,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CGLM.cs" />
+    <Compile Include="CSettings.cs" />
     <Compile Include="Forms\FormCommPicker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,55 +224,10 @@
     <None Include="btnImages\ArrowRight.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="btnImages\back-button.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\Batman48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\boundaryPause.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\boundaryPlay.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\BoundaryRecord.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\boundaryStop.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="btnImages\Cancel64.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="btnImages\ComPorts.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\DataSources.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\DisplayDrag.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\displayMenu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\DnArrow64.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\fileMenu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\FileNew.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\FileOpen.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\FileSave.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\FileUse.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="btnImages\NtripSettings.png" />
@@ -279,22 +236,7 @@
     <None Include="btnImages\OK64.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="btnImages\radar-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="btnImages\Settings48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\SettingsGear64.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\SnapLeft.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\SnapRight.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="btnImages\SpecialFunctions.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="btnImages\SwitchOff.png" />
@@ -306,20 +248,22 @@
     <None Include="btnImages\UDPConfig.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="btnImages\UpArrow64.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="btnImages\WindowDayMode.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="btnImages\WindowNightMode.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="btnImages\GPSSignalGood.png" />
     <None Include="btnImages\gyro.png" />
-    <None Include="btnImages\DrivePgm.png" />
     <Content Include="AgIO.ico" />
     <None Include="btnImages\AppIcon64.png" />
+    <None Include="btnImages\VehFileDelete.png" />
+    <None Include="btnImages\VehFileLoad.png" />
+    <None Include="btnImages\VehFileSave.png" />
+    <None Include="btnImages\VehFileSaveAs.png" />
+    <None Include="btnImages\Satellite64.png" />
+    <None Include="btnImages\Connect.png" />
+    <None Include="btnImages\Disconnect.png" />
     <Content Include="radar-icon.ico" />
   </ItemGroup>
   <ItemGroup />

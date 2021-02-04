@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnRescan = new System.Windows.Forms.Button();
-            this.btnSerialOK = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnClrGPS = new System.Windows.Forms.Button();
             this.cboxPort = new System.Windows.Forms.ComboBox();
@@ -49,6 +48,7 @@
             this.btnCloseSerial2 = new System.Windows.Forms.Button();
             this.textBoxRcv2 = new System.Windows.Forms.TextBox();
             this.btnOpenSerial2 = new System.Windows.Forms.Button();
+            this.btnSerialOK = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -66,7 +66,7 @@
             this.btnRescan.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnRescan.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRescan.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnRescan.Location = new System.Drawing.Point(399, 295);
+            this.btnRescan.Location = new System.Drawing.Point(353, 318);
             this.btnRescan.Name = "btnRescan";
             this.btnRescan.Size = new System.Drawing.Size(156, 63);
             this.btnRescan.TabIndex = 58;
@@ -74,21 +74,6 @@
             this.btnRescan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnRescan.UseVisualStyleBackColor = false;
             this.btnRescan.Click += new System.EventHandler(this.btnRescan_Click);
-            // 
-            // btnSerialOK
-            // 
-            this.btnSerialOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSerialOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSerialOK.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.btnSerialOK.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSerialOK.Image = global::AgIO.Properties.Resources.OK64;
-            this.btnSerialOK.Location = new System.Drawing.Point(623, 295);
-            this.btnSerialOK.Name = "btnSerialOK";
-            this.btnSerialOK.Size = new System.Drawing.Size(156, 63);
-            this.btnSerialOK.TabIndex = 59;
-            this.btnSerialOK.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnSerialOK.UseVisualStyleBackColor = true;
-            this.btnSerialOK.Click += new System.EventHandler(this.btnSerialOK_Click);
             // 
             // groupBox1
             // 
@@ -104,7 +89,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold);
             this.groupBox1.Location = new System.Drawing.Point(12, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(767, 126);
+            this.groupBox1.Size = new System.Drawing.Size(767, 151);
             this.groupBox1.TabIndex = 64;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "GPS Port 1";
@@ -193,12 +178,12 @@
             this.textBoxRcv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxRcv.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxRcv.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.textBoxRcv.Location = new System.Drawing.Point(7, 88);
+            this.textBoxRcv.Location = new System.Drawing.Point(7, 85);
             this.textBoxRcv.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxRcv.Multiline = true;
             this.textBoxRcv.Name = "textBoxRcv";
             this.textBoxRcv.ReadOnly = true;
-            this.textBoxRcv.Size = new System.Drawing.Size(736, 30);
+            this.textBoxRcv.Size = new System.Drawing.Size(736, 58);
             this.textBoxRcv.TabIndex = 40;
             // 
             // btnOpenSerial
@@ -225,7 +210,7 @@
             this.groupBox2.Controls.Add(this.textBoxRcv2);
             this.groupBox2.Controls.Add(this.btnOpenSerial2);
             this.groupBox2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold);
-            this.groupBox2.Location = new System.Drawing.Point(12, 164);
+            this.groupBox2.Location = new System.Drawing.Point(12, 177);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(767, 120);
             this.groupBox2.TabIndex = 65;
@@ -324,11 +309,29 @@
             this.btnOpenSerial2.UseVisualStyleBackColor = false;
             this.btnOpenSerial2.Click += new System.EventHandler(this.btnOpenSerial2_Click);
             // 
+            // btnSerialOK
+            // 
+            this.btnSerialOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSerialOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSerialOK.FlatAppearance.BorderSize = 0;
+            this.btnSerialOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSerialOK.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.btnSerialOK.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSerialOK.Image = global::AgIO.Properties.Resources.OK64;
+            this.btnSerialOK.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSerialOK.Location = new System.Drawing.Point(619, 318);
+            this.btnSerialOK.Name = "btnSerialOK";
+            this.btnSerialOK.Size = new System.Drawing.Size(156, 63);
+            this.btnSerialOK.TabIndex = 59;
+            this.btnSerialOK.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnSerialOK.UseVisualStyleBackColor = true;
+            this.btnSerialOK.Click += new System.EventHandler(this.btnSerialOK_Click);
+            // 
             // FormCommSetGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(791, 370);
+            this.ClientSize = new System.Drawing.Size(791, 393);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnRescan);

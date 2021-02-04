@@ -41,7 +41,7 @@ namespace AgOpenGPS
 
         private void FormBoundary_Load(object sender, EventArgs e)
         {
-            this.Size = new System.Drawing.Size(566,377);
+            this.Size = new System.Drawing.Size(610,426);
 
             btnLeftRight.Image = mf.bnd.isDrawRightSide ? Properties.Resources.BoundaryRight : Properties.Resources.BoundaryLeft;
 
@@ -49,14 +49,14 @@ namespace AgOpenGPS
             UpdateChart();
             nudBndOffset.Value = (decimal)(mf.tool.toolWidth * 0.5);
 
-            //panelMain.Top = 0;
-            //panelMain.Left = 0;
-            //panelChoose.Top = 2;
-            //panelChoose.Left = 2;
-            //panelDrv.Top = 2;
-            //panelDrv.Left = 2;
-            //panelKML.Top = 2;
-            //panelKML.Left = 2;
+            panelMain.Top = 0;
+            panelMain.Left = 0;
+            panelChoose.Top = 2;
+            panelChoose.Left = 2;
+            panelDrv.Top = 2;
+            panelDrv.Left = 2;
+            panelKML.Top = 2;
+            panelKML.Left = 2;
 
 
             panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -78,7 +78,7 @@ namespace AgOpenGPS
 
             Font backupfont = new Font(Font.FontFamily, 18F, FontStyle.Bold);
 
-            for (int i = 0; i < mf.bnd.bndArr.Count && i < 6; i++)
+            for (int i = 0; i < mf.bnd.bndArr.Count && i < 4; i++)
             {
                 if (mf.bnd.bndArr[i].isSet)
                 {
@@ -86,13 +86,12 @@ namespace AgOpenGPS
                     var a = new Button
                     {
                         Margin = new Padding(6),
-                        Size = new Size(150, 35),
+                        Size = new Size(150, 40),
                         Name = i.ToString(),
                         TextAlign = ContentAlignment.MiddleCenter,
-                        //ForeColor = System.Drawing.SystemColors.ButtonFace
+                        ForeColor = System.Drawing.SystemColors.ButtonFace
                     };
                     a.Click += B_Click;
-                    a.BackColor = System.Drawing.SystemColors.ButtonFace;
                     //a.Font = backupfont;
                     //a.FlatStyle = FlatStyle.Flat;
                     //a.FlatAppearance.BorderColor = Color.Cyan;
@@ -105,13 +104,12 @@ namespace AgOpenGPS
                     var b = new Button
                     {
                         Margin = new Padding(6),
-                        Size = new System.Drawing.Size(150, 35),
+                        Size = new System.Drawing.Size(150, 40),
                         Name = i.ToString(),
                         TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-                        //ForeColor = System.Drawing.SystemColors.ButtonFace
+                        ForeColor = System.Drawing.SystemColors.ButtonFace
                     };
                     b.Click += B_Click;
-                    b.BackColor = System.Drawing.SystemColors.ButtonFace;
                     //b.FlatStyle = FlatStyle.Flat;
                     //b.Font = backupfont;
                     //b.FlatAppearance.BorderColor = BackColor;
@@ -122,14 +120,13 @@ namespace AgOpenGPS
                     var d = new Button
                     {
                         Margin = new Padding(6),
-                        Size = new System.Drawing.Size(80, 35),
+                        Size = new System.Drawing.Size(80, 40),
                         Name = i.ToString(),
                         TextAlign = ContentAlignment.MiddleCenter,
-                        //ForeColor = System.Drawing.SystemColors.ButtonFace
+                        ForeColor = System.Drawing.SystemColors.ButtonFace
                         //Font = backupfont
                     };
                     d.Click += DriveThru_Click;
-                    d.BackColor = System.Drawing.SystemColors.ButtonFace;
                     d.Visible = true;
 
                     tableLayoutPanel1.Controls.Add(a, 0, i);
@@ -179,8 +176,8 @@ namespace AgOpenGPS
                     }
                     else
                     {
-                        a.ForeColor = System.Drawing.SystemColors.ControlText;
-                        b.ForeColor = System.Drawing.SystemColors.ControlText;
+                        a.ForeColor = System.Drawing.SystemColors.ButtonFace;
+                        b.ForeColor = System.Drawing.SystemColors.ButtonFace;
                     }
                 }
             }
@@ -286,6 +283,7 @@ namespace AgOpenGPS
 
             UpdateChart();
             mf.turn.BuildTurnLines();
+
             btnDelete.Enabled = false;
         }
 
@@ -346,7 +344,7 @@ namespace AgOpenGPS
             panelDrv.Visible = false;
             panelKML.Visible = false;
 
-            this.Size = new System.Drawing.Size(566, 377);
+            this.Size = new System.Drawing.Size(610, 426);
 
             UpdateChart();
         }
@@ -363,7 +361,7 @@ namespace AgOpenGPS
             panelDrv.Visible = false;
             panelKML.Visible = false;
 
-            this.Size = new System.Drawing.Size(260, 377);
+            this.Size = new System.Drawing.Size(260, 426);
         }
 
         private void btnLoadBoundaryFromGE_Click(object sender, EventArgs e)
@@ -453,25 +451,34 @@ namespace AgOpenGPS
                                         mf.bnd.bndArr[i].bndLine.Add(bndPt);
                                     }
 
-                                    //build the boundary, make sure is clockwise for outer counter clockwise for inner
-                                    bool isCW = mf.bnd.bndArr[i].CalculateBoundaryArea();
-                                    if (mf.bnd.boundarySelected == 0 && isCW)
-                                    {
-                                        mf.bnd.bndArr[i].ReverseWinding();
-                                    }
+                                    ////build the boundary, make sure is clockwise for outer counter clockwise for inner
+                                    //bool isCW = mf.bnd.bndArr[i].CalculateBoundaryArea();
+                                    //if (i == 0 && !isCW)
+                                    //{
+                                    //    mf.bnd.bndArr[i].ReverseWinding();
+                                    //}
 
-                                    //inner boundaries
-                                    if (mf.bnd.boundarySelected > 0 && !isCW)
-                                    {
-                                        mf.bnd.bndArr[i].ReverseWinding();
-                                    }
+                                    ////inner boundaries
+                                    //if (i > 0 && isCW)
+                                    //{
+                                    //    mf.bnd.bndArr[i].ReverseWinding();
+                                    //}
 
+                                    //mf.bnd.bndArr[i].FixBoundaryLine(i);
+                                    //mf.bnd.bndArr[i].PreCalcBoundaryEarLines();
+                                    //mf.bnd.bndArr[i].PreCalcBoundaryLines();
+                                    //mf.bnd.bndArr[i].isSet = true;
+                                    //mf.fd.UpdateFieldBoundaryGUIAreas();
+
+                                    //fix the points if there are gaps bigger then
+                                    mf.bnd.bndArr[i].CalculateBoundaryHeadings();
+                                    mf.bnd.bndArr[i].PreCalcBoundaryLines();
                                     mf.bnd.bndArr[i].FixBoundaryLine(i);
-                                    mf.bnd.bndArr[i].PreCalcBoundaryEarLines();
+
+                                    //boundary area, pre calcs etc
+                                    mf.bnd.bndArr[i].CalculateBoundaryArea();
                                     mf.bnd.bndArr[i].PreCalcBoundaryLines();
                                     mf.bnd.bndArr[i].isSet = true;
-                                    mf.fd.UpdateFieldBoundaryGUIAreas();
-
 
 
                                     coordinates = "";
@@ -505,7 +512,7 @@ namespace AgOpenGPS
             panelDrv.Visible = false;
             panelKML.Visible = false;
 
-            this.Size = new System.Drawing.Size(566, 377);
+            this.Size = new System.Drawing.Size(610, 426);
 
             UpdateChart();
 

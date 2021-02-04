@@ -32,10 +32,10 @@
             this.btnJobNew = new System.Windows.Forms.Button();
             this.btnDeleteAB = new System.Windows.Forms.Button();
             this.btnJobResume = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnInField = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnJobOpen
@@ -103,7 +103,7 @@
             this.btnJobResume.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnJobResume.Image = global::AgOpenGPS.Properties.Resources.FilePrevious;
             this.btnJobResume.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnJobResume.Location = new System.Drawing.Point(60, 79);
+            this.btnJobResume.Location = new System.Drawing.Point(60, 120);
             this.btnJobResume.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnJobResume.Name = "btnJobResume";
             this.btnJobResume.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -114,18 +114,28 @@
             this.btnJobResume.UseVisualStyleBackColor = false;
             this.btnJobResume.Click += new System.EventHandler(this.btnJobResume_Click);
             // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(70)))));
+            this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F);
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.Location = new System.Drawing.Point(23, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(332, 23);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Last Field Used:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
             // textBox1
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(70)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(110)))));
             this.textBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.textBox1.Location = new System.Drawing.Point(10, 22);
+            this.textBox1.Location = new System.Drawing.Point(12, 46);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(357, 50);
+            this.textBox1.Size = new System.Drawing.Size(357, 56);
             this.textBox1.TabIndex = 88;
-            this.textBox1.Text = "File name goes here\r\nSecond line";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox1.Text = "File name goes here";
             // 
             // btnInField
             // 
@@ -150,7 +160,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(70)))));
-            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(2, 2);
             this.panel1.Name = "panel1";
@@ -165,6 +174,8 @@
             this.ClientSize = new System.Drawing.Size(382, 631);
             this.ControlBox = false;
             this.Controls.Add(this.btnInField);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnDeleteAB);
             this.Controls.Add(this.btnJobResume);
             this.Controls.Add(this.btnJobNew);
@@ -181,9 +192,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Start a field";
             this.Load += new System.EventHandler(this.FormJob_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -193,6 +203,7 @@
         private System.Windows.Forms.Button btnJobNew;
         private System.Windows.Forms.Button btnJobResume;
         private System.Windows.Forms.Button btnDeleteAB;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnInField;
         private System.Windows.Forms.Panel panel1;

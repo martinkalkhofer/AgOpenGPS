@@ -243,9 +243,11 @@
             this.btnSerialCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSerialCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSerialCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnSerialCancel.FlatAppearance.BorderSize = 0;
+            this.btnSerialCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSerialCancel.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSerialCancel.Image = global::AgIO.Properties.Resources.Cancel64;
-            this.btnSerialCancel.Location = new System.Drawing.Point(910, 436);
+            this.btnSerialCancel.Location = new System.Drawing.Point(885, 422);
             this.btnSerialCancel.Name = "btnSerialCancel";
             this.btnSerialCancel.Size = new System.Drawing.Size(88, 76);
             this.btnSerialCancel.TabIndex = 95;
@@ -256,6 +258,8 @@
             this.btnSerialOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSerialOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSerialOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnSerialOK.FlatAppearance.BorderSize = 0;
+            this.btnSerialOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSerialOK.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSerialOK.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnSerialOK.Image = global::AgIO.Properties.Resources.OK64;
@@ -323,7 +327,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(31, 385);
+            this.label13.Location = new System.Drawing.Point(26, 437);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(70, 25);
             this.label13.TabIndex = 105;
@@ -333,7 +337,7 @@
             // 
             this.tboxMount.BackColor = System.Drawing.Color.AliceBlue;
             this.tboxMount.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxMount.Location = new System.Drawing.Point(17, 416);
+            this.tboxMount.Location = new System.Drawing.Point(12, 468);
             this.tboxMount.Name = "tboxMount";
             this.tboxMount.Size = new System.Drawing.Size(341, 33);
             this.tboxMount.TabIndex = 104;
@@ -552,7 +556,7 @@
             // btnGetSourceTable
             // 
             this.btnGetSourceTable.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGetSourceTable.Location = new System.Drawing.Point(64, 455);
+            this.btnGetSourceTable.Location = new System.Drawing.Point(62, 389);
             this.btnGetSourceTable.Name = "btnGetSourceTable";
             this.btnGetSourceTable.Size = new System.Drawing.Size(235, 37);
             this.btnGetSourceTable.TabIndex = 127;

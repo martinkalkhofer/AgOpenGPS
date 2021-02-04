@@ -1066,17 +1066,5 @@ namespace AgOpenGPS.Properties {
                 this["setVehicle_startSpeed"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.9")]
-        public double setVehicle_trackWidth {
-            get {
-                return ((double)(this["setVehicle_trackWidth"]));
-            }
-            set {
-                this["setVehicle_trackWidth"] = value;
-            }
-        }
     }
 }

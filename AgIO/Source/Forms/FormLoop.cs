@@ -170,71 +170,8 @@ namespace AgIO
         //First run
         private void FormLoop_Load(object sender, EventArgs e)
         {
-            if (Settings.Default.setF_workingDirectory == "Default")
-                baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Drive\\";
-            else baseDirectory = Settings.Default.setF_workingDirectory + "\\Drive\\";
 
-            //get the fields directory, if not exist, create
-            commDirectory = baseDirectory + "Comm\\";
-            string dir = Path.GetDirectoryName(commDirectory);
-            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
-
-            if (Properties.Settings.Default.setUDP_isOn) LoadUDPNetwork();
-            LoadLoopback();
-
-            //set baud and port from last time run
-            baudRateGPS = Settings.Default.setPort_baudRateGPS;
-            portNameGPS = Settings.Default.setPort_portNameGPS;
-            wasGPSConnectedLastRun = Settings.Default.setPort_wasGPSConnected;
-            if (wasGPSConnectedLastRun) OpenGPSPort();
-            
-            //try and open
-            OpenGPSPort();
-
-            //same for IMU port
-            portNameIMU = Settings.Default.setPort_portNameIMU;
-            wasIMUConnectedLastRun = Settings.Default.setPort_wasIMUConnected;
-            if (wasIMUConnectedLastRun) OpenIMUPort();
-
-            //same for Module1 port
-            portNameModule1 = Settings.Default.setPort_portNameModule1;
-            wasModule1ConnectedLastRun = Settings.Default.setPort_wasModule1Connected;
-            if (wasModule1ConnectedLastRun) OpenModule1Port();
-
-            //same for Module2 port
-            portNameModule2 = Settings.Default.setPort_portNameModule2;
-            wasModule3ConnectedLastRun = Settings.Default.setPort_wasModule2Connected;
-            if (wasModule3ConnectedLastRun) OpenModule2Port();
-
-            //same for Module3 port
-            portNameModule3 = Settings.Default.setPort_portNameModule3;
-            wasModule3ConnectedLastRun = Settings.Default.setPort_wasModule3Connected;
-            if (wasModule3ConnectedLastRun) OpenModule3Port();
-
-            this.lblWatch.Text = "Wait GPS";
-
-            //start NTRIP if required
-            isNTRIP_RequiredOn = Properties.Settings.Default.setNTRIP_isOn;
-
-            if (isNTRIP_RequiredOn)
-            {
-                btnStartStopNtrip.Visible = true;
-                btnStartStopNtrip.Visible = true;
-                lblWatch.Visible = true;
-                lblNTRIPBytes.Visible = true;
-                lblBytes.Visible = true;
-            }
-            else
-            {
-                btnStartStopNtrip.Visible = false;
-                btnStartStopNtrip.Visible = false;
-                lblWatch.Visible = false;
-                lblNTRIPBytes.Visible = false;
-                lblBytes.Visible = false;
-            }
-
-
-            btnStartStopNtrip.Text = "Off";
+            LoadSettings();
 
             timer1.Enabled = true;
 
@@ -281,6 +218,73 @@ namespace AgIO
                 }
                 finally { recvSocket.Close(); }
             }
+        }
+
+        public void LoadSettings()
+        {
+            if (Settings.Default.setF_workingDirectory == "Default")
+                baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AgOpenGPS\\";
+            else baseDirectory = Settings.Default.setF_workingDirectory + "\\AgOpenGPS\\";
+
+            //get the fields directory, if not exist, create
+            commDirectory = baseDirectory + "Comm\\";
+            string dir = Path.GetDirectoryName(commDirectory);
+            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
+
+            if (Properties.Settings.Default.setUDP_isOn) LoadUDPNetwork();
+            LoadLoopback();
+
+            //set baud and port from last time run
+            baudRateGPS = Settings.Default.setPort_baudRateGPS;
+            portNameGPS = Settings.Default.setPort_portNameGPS;
+            wasGPSConnectedLastRun = Settings.Default.setPort_wasGPSConnected;
+            if (wasGPSConnectedLastRun) OpenGPSPort();
+
+            //try and open
+            OpenGPSPort();
+
+            //same for IMU port
+            portNameIMU = Settings.Default.setPort_portNameIMU;
+            wasIMUConnectedLastRun = Settings.Default.setPort_wasIMUConnected;
+            if (wasIMUConnectedLastRun) OpenIMUPort();
+
+            //same for Module1 port
+            portNameModule1 = Settings.Default.setPort_portNameModule1;
+            wasModule1ConnectedLastRun = Settings.Default.setPort_wasModule1Connected;
+            if (wasModule1ConnectedLastRun) OpenModule1Port();
+
+            //same for Module2 port
+            portNameModule2 = Settings.Default.setPort_portNameModule2;
+            wasModule3ConnectedLastRun = Settings.Default.setPort_wasModule2Connected;
+            if (wasModule3ConnectedLastRun) OpenModule2Port();
+
+            //same for Module3 port
+            portNameModule3 = Settings.Default.setPort_portNameModule3;
+            wasModule3ConnectedLastRun = Settings.Default.setPort_wasModule3Connected;
+            if (wasModule3ConnectedLastRun) OpenModule3Port();
+
+            this.lblWatch.Text = "Wait GPS";
+
+            //start NTRIP if required
+            isNTRIP_RequiredOn = Properties.Settings.Default.setNTRIP_isOn;
+
+            if (isNTRIP_RequiredOn)
+            {
+                btnStartStopNtrip.Visible = true;
+                btnStartStopNtrip.Visible = true;
+                lblWatch.Visible = true;
+                lblNTRIPBytes.Visible = true;
+                lblBytes.Visible = true;
+            }
+            else
+            {
+                btnStartStopNtrip.Visible = false;
+                btnStartStopNtrip.Visible = false;
+                lblWatch.Visible = false;
+                lblNTRIPBytes.Visible = false;
+                lblBytes.Visible = false;
+            }
+            btnStartStopNtrip.Text = "Off";
         }
 
         private void DoTraffic()
