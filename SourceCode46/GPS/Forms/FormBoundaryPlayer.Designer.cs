@@ -188,6 +188,11 @@
             0,
             0,
             131072});
+            this.nudOffset.Minimum = new decimal(new int[] {
+            4999,
+            0,
+            0,
+            -2147352576});
             this.nudOffset.Name = "nudOffset";
             this.nudOffset.Size = new System.Drawing.Size(130, 52);
             this.nudOffset.TabIndex = 149;

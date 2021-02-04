@@ -81,8 +81,8 @@ namespace AgOpenGPS
 
             sbSendText.Append(sbGGA.ToString());
             sbSendText.Append(sbVTG.ToString());
-            //sbSendText.Append(sbHDT.ToString());
-            //sbSendText.Append(sbAVR.ToString());
+            sbSendText.Append(sbHDT.ToString());
+            sbSendText.Append(sbAVR.ToString());
 
             //sbSendText.Append(sbOGI.ToString());
             mf.pn.rawBuffer += sbSendText.ToString();
