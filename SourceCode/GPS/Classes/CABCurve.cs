@@ -273,7 +273,7 @@ namespace AgOpenGPS
 
                     if (isBndExist)
                     {
-                        if (mf.bnd.bndArr[0].IsPointInsideBoundary(tramLineP1))
+                        if (mf.bnd.bndArr[0].IsPointInsideBoundaryEar(tramLineP1))
                         {
                             tramArr.Add(tramLineP1);
 
@@ -821,7 +821,6 @@ namespace AgOpenGPS
                 {
                     //do the pure pursuit from youTurn
                     mf.yt.DistanceFromYouTurnLine();
-                    mf.seq.DoSequenceEvent();
 
                     //now substitute what it thinks are AB line values with auto turn values
                     steerAngleCu = mf.yt.steerAngleYT;

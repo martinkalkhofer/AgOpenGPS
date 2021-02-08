@@ -212,7 +212,7 @@ namespace AgOpenGPS
                     //}
                     
                     //AutoSteerAuto button enable - Ray Bear inspired code - Thx Ray!
-                    if (isJobStarted && ahrs.isAutoSteerAuto && !recPath.isDrivingRecordedPath && 
+                    if (isJobStarted && ahrs.isAutoSteerAuto && 
                         (ABLine.isBtnABLineOn || ct.isContourBtnOn || curve.isBtnCurveOn))
                     {
                         if (mc.steerSwitchValue == 0)
@@ -227,7 +227,7 @@ namespace AgOpenGPS
 
                     //Make sure it is off when it should
                     if ((!ABLine.isBtnABLineOn && !ct.isContourBtnOn && !curve.isBtnCurveOn && isAutoSteerBtnOn) 
-                        || (recPath.isDrivingRecordedPath && isAutoSteerBtnOn)) btnAutoSteer.PerformClick();
+                        ) btnAutoSteer.PerformClick();
 
                     //do all the NTRIP routines
                     DoNTRIPSecondRoutine();
@@ -285,8 +285,8 @@ namespace AgOpenGPS
                         btnContour.Text = InchXTE; //cross track error
                     }
 
-                    lblHz.Text = NMEAHz + "Hz " + (int)(frameTime) + "\r\n" + 
-                        FixQuality + Math.Round(HzTime, MidpointRounding.AwayFromZero) + " Hz";
+                    lblHz.Text = fixUpdateHz + "Hz  ms:" + (frameTime.ToString("N1")) + "\r\n" + 
+                        FixQuality;
 
                     AutoSteerToolBtn.Text = SetSteerAngle + "\r\n" + ActualSteerAngle;
                 } //end every 1/2 second
@@ -1441,15 +1441,13 @@ namespace AgOpenGPS
 
         #region Properties // ---------------------------------------------------------------------
 
-        public string Zone { get { return Convert.ToString(pn.zone); } }
-        public string FixNorthing { get { return Convert.ToString(Math.Round(pn.fix.northing + pn.utmNorth, 2)); } }
-        public string FixEasting { get { return Convert.ToString(Math.Round(pn.fix.easting + pn.utmEast, 2)); } }
+        public string FixNorthing { get { return Convert.ToString(Math.Round(pn.fix.northing, 2)); } }
+        public string FixEasting { get { return Convert.ToString(Math.Round(pn.fix.easting, 2)); } }
         public string Latitude { get { return Convert.ToString(Math.Round(pn.latitude, 7)); } }
         public string Longitude { get { return Convert.ToString(Math.Round(pn.longitude, 7)); } }
 
         public string SatsTracked { get { return Convert.ToString(pn.satellitesTracked); } }
         public string HDOP { get { return Convert.ToString(pn.hdop); } }
-        public string NMEAHz { get { return Convert.ToString(fixUpdateHz); } }
         public string PassNumber { get { return Convert.ToString(ABLine.passNumber); } }
         public string CurveNumber { get { return Convert.ToString(curve.curveNumber); } }
         public string Heading { get { return Convert.ToString(Math.Round(glm.toDegrees(fixHeading), 1)) + "\u00B0"; } }

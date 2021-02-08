@@ -655,7 +655,6 @@ namespace AgOpenGPS
                         vehicle.slowSpeedCutoff = Properties.Vehicle.Default.setVehicle_slowSpeedCutoff;
                         vehicle.vehicleType = Properties.Vehicle.Default.setVehicle_vehicleType;
 
-                        yt.geoFenceDistance = Properties.Vehicle.Default.set_geoFenceDistance;
                         yt.rowSkipsWidth = Properties.Vehicle.Default.set_youSkipWidth;
                         yt.youTurnStartOffset = Properties.Vehicle.Default.set_youTurnDistance;
                         yt.triggerDistanceOffset = Properties.Vehicle.Default.set_youTriggerDistance;
@@ -724,29 +723,22 @@ namespace AgOpenGPS
 
                         string sentence = Properties.Vehicle.Default.seq_FunctionEnter;
                         words = sentence.Split(',');
-                        for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++) int.TryParse(words[i], out seq.seqEnter[i].function);
 
                         sentence = Properties.Vehicle.Default.seq_ActionEnter;
                         words = sentence.Split(',');
-                        for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++) int.TryParse(words[i], out seq.seqEnter[i].action);
 
                         sentence = Properties.Vehicle.Default.seq_DistanceEnter;
                         words = sentence.Split(',');
                         for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
-                            double.TryParse(words[i], NumberStyles.Float, CultureInfo.InvariantCulture, out seq.seqEnter[i].distance);
 
                         sentence = Properties.Vehicle.Default.seq_FunctionExit;
                         words = sentence.Split(',');
-                        for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++) int.TryParse(words[i], out seq.seqExit[i].function);
 
                         sentence = Properties.Vehicle.Default.seq_ActionExit;
                         words = sentence.Split(',');
-                        for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++) int.TryParse(words[i], out seq.seqExit[i].action);
 
                         sentence = Properties.Vehicle.Default.seq_DistanceExit;
                         words = sentence.Split(',');
-                        for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
-                            double.TryParse(words[i], NumberStyles.Float, CultureInfo.InvariantCulture, out seq.seqExit[i].distance);
 
                     }
                     return true;
@@ -1433,19 +1425,15 @@ namespace AgOpenGPS
                     //read the Offsets 
                     line = reader.ReadLine();
                     string[] offs = line.Split(',');
-                    pn.utmEast = int.Parse(offs[0]);
-                    pn.utmNorth = int.Parse(offs[1]);
-                    pn.zone = int.Parse(offs[2]);
 
                     //create a new grid
-                    worldGrid.CreateWorldGrid(pn.actualNorthing - pn.utmNorth, pn.actualEasting - pn.utmEast);
+                    worldGrid.CreateWorldGrid(pn.fix.northing, pn.fix.easting);
 
                     //convergence angle update
                     if (!reader.EndOfStream)
                     {
                         line = reader.ReadLine();
                         line = reader.ReadLine();
-                        pn.convergenceAngle = double.Parse(line, CultureInfo.InvariantCulture);
                     }
 
                     //start positions
@@ -1457,6 +1445,8 @@ namespace AgOpenGPS
 
                         pn.latStart = double.Parse(offs[0], CultureInfo.InvariantCulture);
                         pn.lonStart = double.Parse(offs[1], CultureInfo.InvariantCulture);
+
+                        pn.SetLocalMetersPerDegree();
                     }
                 }
 
@@ -1747,7 +1737,6 @@ namespace AgOpenGPS
 
                             bnd.bndArr.Add(new CBoundaryLines());
                             turn.turnArr.Add(new CTurnLines());
-                            gf.geoFenceArr.Add(new CGeoFenceLines());
 
                             //True or False OR points from older boundary files
                             line = reader.ReadLine();
@@ -1791,12 +1780,32 @@ namespace AgOpenGPS
                                 bnd.bndArr[k].PreCalcBoundaryLines();
                                 if (bnd.bndArr[k].area > 0) bnd.bndArr[k].isSet = true;
                                 else bnd.bndArr[k].isSet = false;
+
+                                double delta = 0;
+                                bnd.bndArr[k].bndLineEar?.Clear();
+
+                                for (int i = 0; i < bnd.bndArr[k].bndLine.Count; i++)
+                                {
+                                    if (i == 0)
+                                    {
+                                        bnd.bndArr[k].bndLineEar.Add(new vec2(bnd.bndArr[k].bndLine[i].easting, bnd.bndArr[k].bndLine[i].northing));
+                                        continue;
+                                    }
+                                    delta += (bnd.bndArr[k].bndLine[i - 1].heading - bnd.bndArr[k].bndLine[i].heading);
+                                    if (Math.Abs(delta) > 0.04)
+                                    {
+                                        bnd.bndArr[k].bndLineEar.Add(new vec2(bnd.bndArr[k].bndLine[i].easting, bnd.bndArr[k].bndLine[i].northing));
+                                        delta = 0;
+                                    }
+                                }
+
+                                bnd.bndArr[k].PreCalcBoundaryEarLines();
+
                             }
                             else
                             {
                                 bnd.bndArr.RemoveAt(bnd.bndArr.Count - 1);
                                 turn.turnArr.RemoveAt(bnd.bndArr.Count - 1);
-                                gf.geoFenceArr.RemoveAt(bnd.bndArr.Count - 1);
                                 k = k - 1;
                             }
                             if (reader.EndOfStream) break;
@@ -1804,8 +1813,6 @@ namespace AgOpenGPS
 
                         CalculateMinMax();
                         turn.BuildTurnLines();
-                        gf.BuildGeoFenceLines();
-                        mazeGrid.BuildMazeGridArray();
                     }
 
                     catch (Exception e)
@@ -1858,7 +1865,7 @@ namespace AgOpenGPS
                                         double.Parse(words[2], CultureInfo.InvariantCulture));
                                     hd.headArr[k].hdLine.Add(vecPt);
 
-                                    if (gf.geoFenceArr[0].IsPointInGeoFenceArea(vecPt)) hd.headArr[0].isDrawList.Add(true);
+                                    if (bnd.bndArr[0].IsPointInsideBoundary(vecPt)) hd.headArr[0].isDrawList.Add(true);
                                     else hd.headArr[0].isDrawList.Add(false);
                                 }
                                 hd.headArr[k].PreCalcHeadLines();
@@ -1880,49 +1887,6 @@ namespace AgOpenGPS
 
             //if (hd.isOn) btnHeadlandOnOff.Image = Properties.Resources.HeadlandOn;
             btnHeadlandOnOff.Image = Properties.Resources.HeadlandOff;
-
-            //Recorded Path
-            fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\RecPath.txt";
-            if (File.Exists(fileAndDirectory))
-            {
-                using (StreamReader reader = new StreamReader(fileAndDirectory))
-                {
-                    try
-                    {
-                        //read header
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        int numPoints = int.Parse(line);
-                        recPath.recList.Clear();
-
-                        while (!reader.EndOfStream)
-                        {
-                            for (int v = 0; v < numPoints; v++)
-                            {
-                                line = reader.ReadLine();
-                                string[] words = line.Split(',');
-                                CRecPathPt point = new CRecPathPt(
-                                    double.Parse(words[0], CultureInfo.InvariantCulture),
-                                    double.Parse(words[1], CultureInfo.InvariantCulture),
-                                    double.Parse(words[2], CultureInfo.InvariantCulture),
-                                    double.Parse(words[3], CultureInfo.InvariantCulture),
-                                    bool.Parse(words[4]));
-
-                                //add the point
-                                recPath.recList.Add(point);
-                            }
-                        }
-                    }
-
-                    catch (Exception e)
-                    {
-                        var form = new FormTimedMessage(2000, gStr.gsRecordedPathFileIsCorrupt, gStr.gsButFieldIsLoaded);
-                        form.Show();
-                        WriteErrorLog("Load Recorded Path" + e.ToString());
-                    }
-                }
-            }
-
 
         }//end of open file
 
@@ -1962,16 +1926,13 @@ namespace AgOpenGPS
 
                 //write out the easting and northing Offsets
                 writer.WriteLine("$Offsets");
-                writer.WriteLine(pn.utmEast.ToString(CultureInfo.InvariantCulture) + "," +
-                    pn.utmNorth.ToString(CultureInfo.InvariantCulture) + "," +
-                    pn.zone.ToString(CultureInfo.InvariantCulture));
+                writer.WriteLine("0,0");
 
                 writer.WriteLine("Convergence");
-                writer.WriteLine(pn.convergenceAngle.ToString(CultureInfo.InvariantCulture));
+                writer.WriteLine("0");
 
                 writer.WriteLine("StartFix");
                 writer.WriteLine(pn.latitude.ToString(CultureInfo.InvariantCulture) + "," + pn.longitude.ToString(CultureInfo.InvariantCulture));
-
             }
         }
 
@@ -2011,12 +1972,10 @@ namespace AgOpenGPS
 
                 //write out the easting and northing Offsets
                 writer.WriteLine("$Offsets");
-                writer.WriteLine(pn.utmEast.ToString(CultureInfo.InvariantCulture) + "," +
-                    pn.utmNorth.ToString(CultureInfo.InvariantCulture) + "," +
-                    pn.zone.ToString(CultureInfo.InvariantCulture));
+                writer.WriteLine("0,0");
 
                 writer.WriteLine("Convergence");
-                writer.WriteLine(pn.convergenceAngle.ToString(CultureInfo.InvariantCulture));
+                writer.WriteLine("0");
 
                 writer.WriteLine("StartFix");
                 writer.WriteLine(pn.latitude.ToString(CultureInfo.InvariantCulture) + "," + pn.longitude.ToString(CultureInfo.InvariantCulture));
@@ -2239,40 +2198,6 @@ namespace AgOpenGPS
             }
         }
 
-        //save the recorded path
-        public void FileSaveRecPath()
-        {
-            //get the directory and make sure it exists, create if not
-            string dirField = fieldsDirectory + currentFieldDirectory + "\\";
-
-            string directoryName = Path.GetDirectoryName(dirField);
-            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
-            { Directory.CreateDirectory(directoryName); }
-
-            //string fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\RecPath.txt";
-            //if (!File.Exists(fileAndDirectory)) FileCreateRecPath();
-
-            //write out the file
-            using (StreamWriter writer = new StreamWriter((dirField + "RecPath.Txt")))
-            {
-                writer.WriteLine("$RecPath");
-                writer.WriteLine(recPath.recList.Count.ToString(CultureInfo.InvariantCulture));
-                if (recPath.recList.Count > 0)
-                {
-                    for (int j = 0; j < recPath.recList.Count; j++)
-                        writer.WriteLine(
-                            Math.Round(recPath.recList[j].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
-                            Math.Round(recPath.recList[j].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
-                            Math.Round(recPath.recList[j].heading, 3).ToString(CultureInfo.InvariantCulture) + "," +
-                            Math.Round(recPath.recList[j].speed, 1).ToString(CultureInfo.InvariantCulture) + "," +
-                            (recPath.recList[j].autoBtnState).ToString());
-
-                    //Clear list
-                    //recPath.recList.Clear();
-                }
-            }
-        }
-
         //save all the flag markers
         public void FileSaveFlags()
         {
@@ -2430,24 +2355,10 @@ namespace AgOpenGPS
         //generate KML file from flag
         public void FileSaveSingleFlagKML2(int flagNumber)
         {
-            double easting = flagPts[flagNumber - 1].easting;
-            double northing = flagPts[flagNumber - 1].northing;
+            double lat = 0;
+            double lon = 0;
 
-            double east = easting;
-            double nort = northing;
-
-            //fix the azimuth error
-            easting = (Math.Cos(pn.convergenceAngle) * east) - (Math.Sin(pn.convergenceAngle) * nort);
-            northing = (Math.Sin(pn.convergenceAngle) * east) + (Math.Cos(pn.convergenceAngle) * nort);
-
-            easting += pn.utmEast;
-            northing += pn.utmNorth;
-
-            UTMToLatLon(easting, northing);
-
-            double lat = utmLat;
-            double lon = utmLon;
-
+            pn.ConvertLocalToWGS84(flagPts[flagNumber - 1].northing, flagPts[flagNumber - 1].easting, out lat, out lon);
 
             //get the directory and make sure it exists, create if not
             string dirField = fieldsDirectory + currentFieldDirectory + "\\";
@@ -2619,8 +2530,8 @@ namespace AgOpenGPS
                 kml.WriteElementString("tessellate", "1");
                 kml.WriteStartElement("coordinates");
 
-                linePts = GetUTMToLatLon(ABLine.lineArr[i].ref1.easting, ABLine.lineArr[i].ref1.northing);
-                linePts += GetUTMToLatLon(ABLine.lineArr[i].ref2.easting, ABLine.lineArr[i].ref2.northing);
+                //linePts = GetUTMToLatLon(ABLine.lineArr[i].ref1.easting, ABLine.lineArr[i].ref1.northing);
+                //linePts += GetUTMToLatLon(ABLine.lineArr[i].ref2.easting, ABLine.lineArr[i].ref2.northing);
                 kml.WriteRaw(linePts);
 
                 kml.WriteEndElement(); // <coordinates>
@@ -2657,7 +2568,7 @@ namespace AgOpenGPS
 
                 for (int j = 0; j < curve.curveArr[i].curvePts.Count; j++)
                 {
-                    linePts += GetUTMToLatLon(curve.curveArr[i].curvePts[j].easting, curve.curveArr[i].curvePts[j].northing);
+                    linePts += pn.GetLocalToWSG84_KML(curve.curveArr[i].curvePts[j].easting, curve.curveArr[i].curvePts[j].northing);
                 }
                 kml.WriteRaw(linePts);
 
@@ -2793,13 +2704,14 @@ namespace AgOpenGPS
                             secPts = "";
                             for (int i = 1; i < triList.Count; i += 2)
                             {
-                                secPts += GetUTMToLatLon(triList[i].easting, triList[i].northing);
+                                secPts += pn.GetLocalToWSG84_KML(triList[i].easting, triList[i].northing);
                             }
                             for (int i = triList.Count - 1; i > 1; i -= 2)
                             {
-                                secPts += GetUTMToLatLon(triList[i].easting, triList[i].northing);
+                                secPts += pn.GetLocalToWSG84_KML(triList[i].easting, triList[i].northing);
                             }
-                            secPts += GetUTMToLatLon(triList[1].easting, triList[1].northing);
+                            secPts += pn.GetLocalToWSG84_KML(triList[1].easting, triList[1].northing);
+
                             kml.WriteRaw(secPts);
                             kml.WriteEndElement(); // <coordinates>
 
@@ -2828,22 +2740,6 @@ namespace AgOpenGPS
             kml.Close();
         }
 
-        public string GetUTMToLatLon(double easting, double northing)
-        {
-            double east = easting;
-            double nort = northing;
-
-            //fix the azimuth error
-            easting = (Math.Cos(pn.convergenceAngle) * east) - (Math.Sin(pn.convergenceAngle) * nort);
-            northing = (Math.Sin(pn.convergenceAngle) * east) + (Math.Cos(pn.convergenceAngle) * nort);
-
-            easting += pn.utmEast;
-            northing += pn.utmNorth;
-
-            UTMToLatLon(easting, northing);
-
-            return (utmLon.ToString("N7", CultureInfo.InvariantCulture) + ',' + utmLat.ToString("N7", CultureInfo.InvariantCulture) + ",0 ");
-        }
 
         public string GetBoundaryPointsLatLon(int bndNum)
         {
@@ -2851,22 +2747,12 @@ namespace AgOpenGPS
 
             for (int i = 0; i < bnd.bndArr[bndNum].bndLine.Count; i++)
             {
-                double easting = bnd.bndArr[bndNum].bndLine[i].easting;
-                double northing = bnd.bndArr[bndNum].bndLine[i].northing;
+                double lat = 0;
+                double lon = 0;
 
-                double east = easting;
-                double nort = northing;
+                pn.ConvertLocalToWGS84(bnd.bndArr[bndNum].bndLine[i].northing, bnd.bndArr[bndNum].bndLine[i].easting, out lat, out lon);
 
-                //fix the azimuth error
-                easting = (Math.Cos(pn.convergenceAngle) * east) - (Math.Sin(pn.convergenceAngle) * nort);
-                northing = (Math.Sin(pn.convergenceAngle) * east) + (Math.Cos(pn.convergenceAngle) * nort);
-
-                easting += pn.utmEast;
-                northing += pn.utmNorth;
-
-                UTMToLatLon(easting, northing);
-
-                sb.Append(utmLon.ToString("N7", CultureInfo.InvariantCulture) + ',' + utmLat.ToString("N7", CultureInfo.InvariantCulture) + ",0 ");
+                sb.Append(lon.ToString("N7", CultureInfo.InvariantCulture) + ',' + lat.ToString("N7", CultureInfo.InvariantCulture) + ",0 ");
             }
             return sb.ToString();
         }

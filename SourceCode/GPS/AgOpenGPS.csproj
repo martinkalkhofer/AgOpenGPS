@@ -120,11 +120,6 @@
     <Compile Include="Classes\CFont.cs" />
     <Compile Include="Classes\CHeadLines.cs" />
     <Compile Include="Classes\CHead.cs" />
-    <Compile Include="Classes\CGeoFence.cs" />
-    <Compile Include="Classes\CGeoFenceLines.cs" />
-    <Compile Include="Classes\CMazeGrid.cs" />
-    <Compile Include="Classes\CMazePath.cs" />
-    <Compile Include="Classes\CRecordedPath.cs" />
     <Compile Include="Classes\CSim.cs" />
     <Compile Include="Classes\CTram.cs" />
     <Compile Include="Classes\CWorkSwitch.cs" />
@@ -141,7 +136,6 @@
     <Compile Include="Classes\CVehicle.cs" />
     <Compile Include="Classes\CWaypoint.cs" />
     <Compile Include="Classes\CWorldGrid.cs" />
-    <Compile Include="Classes\CSequence.cs" />
     <Compile Include="Classes\CTurn.cs" />
     <Compile Include="Classes\CTurnLines.cs" />
     <Compile Include="Classes\CTool.cs" />

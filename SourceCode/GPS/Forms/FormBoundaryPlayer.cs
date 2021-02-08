@@ -28,7 +28,6 @@ namespace AgOpenGPS
             {
                 mf.bnd.bndArr.Add(new CBoundaryLines());
                 mf.turn.turnArr.Add(new CTurnLines());
-                mf.gf.geoFenceArr.Add(new CGeoFenceLines());
 
                 for (int i = 0; i < mf.bnd.bndBeingMadePts.Count; i++)
                 {
@@ -37,6 +36,7 @@ namespace AgOpenGPS
 
                 mf.bnd.bndArr[mf.bnd.boundarySelected].PreCalcBoundaryLines();
                 mf.bnd.bndArr[mf.bnd.boundarySelected].FixBoundaryLine(mf.bnd.boundarySelected, mf.tool.toolWidth);
+                mf.bnd.bndArr[mf.bnd.boundarySelected].PreCalcBoundaryEarLines();
                 mf.bnd.bndArr[mf.bnd.boundarySelected].PreCalcBoundaryLines();
                 mf.bnd.bndArr[mf.bnd.boundarySelected].isSet = true;
                 mf.bnd.bndArr[mf.bnd.boundarySelected].CalculateBoundaryArea();
@@ -51,11 +51,7 @@ namespace AgOpenGPS
             mf.CalculateMinMax();
             mf.FileSaveBoundary();
             mf.turn.BuildTurnLines();
-            mf.gf.BuildGeoFenceLines();
             //mf.hd.BuildSingleSpaceHeadLines();
-
-            //Task.Run(() => mf.mazeGrid.BuildMazeGridArray());
-            mf.mazeGrid.BuildMazeGridArray();
 
             mf.bnd.bndBeingMadePts.Clear();
             //close window

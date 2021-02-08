@@ -309,9 +309,6 @@ namespace AgOpenGPS
         {
             mf.bnd.isOkToAddPoints = false;
             mf.turn.BuildTurnLines();
-            mf.gf.BuildGeoFenceLines();
-            //mf.hd.BuildSingleSpaceHeadLines();
-            mf.mazeGrid.BuildMazeGridArray();
         }
 
         private void btnLeftRight_Click(object sender, EventArgs e)
@@ -340,7 +337,6 @@ namespace AgOpenGPS
                 {
                     mf.bnd.bndArr.RemoveAt(mf.bnd.boundarySelected);
                     mf.turn.turnArr.RemoveAt(mf.bnd.boundarySelected);
-                    mf.gf.geoFenceArr.RemoveAt(mf.bnd.boundarySelected);
                 }
 
                 mf.FileSaveBoundary();
@@ -356,8 +352,6 @@ namespace AgOpenGPS
                 Selectedreset = true;
                 mf.fd.UpdateFieldBoundaryGUIAreas();
                 mf.turn.BuildTurnLines();
-                mf.gf.BuildGeoFenceLines();
-                mf.mazeGrid.BuildMazeGridArray();
 
                 UpdateChart();
             }
@@ -373,7 +367,6 @@ namespace AgOpenGPS
 
             mf.bnd.bndArr.Clear();
             mf.turn.turnArr.Clear();
-            mf.gf.geoFenceArr.Clear();
 
             mf.FileSaveBoundary();
             tableLayoutPanel1.Controls.Clear();
@@ -427,13 +420,11 @@ namespace AgOpenGPS
 
                 mf.bnd.isOkToAddPoints = false;
                 mf.turn.BuildTurnLines();
-                mf.gf.BuildGeoFenceLines();
                 mf.hd.headArr[0].hdLine.Clear();
                 mf.hd.isOn = false;
                 mf.FileSaveHeadland();
 
                 mf.hd.isOn = false;
-                mf.mazeGrid.BuildMazeGridArray();
                 mf.fd.UpdateFieldBoundaryGUIAreas();
             }
             else
@@ -520,25 +511,14 @@ namespace AgOpenGPS
                                 {
                                     mf.bnd.bndArr.Add(new CBoundaryLines());
                                     mf.turn.turnArr.Add(new CTurnLines());
-                                    mf.gf.geoFenceArr.Add(new CGeoFenceLines());
 
                                     foreach (var item in numberSets)
                                     {
                                         string[] fix = item.Split(',');
                                         double.TryParse(fix[0], NumberStyles.Float, CultureInfo.InvariantCulture, out lonK);
                                         double.TryParse(fix[1], NumberStyles.Float, CultureInfo.InvariantCulture, out latK);
-                                        double[] xy = mf.pn.DecDeg2UTM(latK, lonK);
-
-                                        //match new fix to current position
-                                        easting = xy[0] - mf.pn.utmEast;
-                                        northing = xy[1] - mf.pn.utmNorth;
-
-                                        double east = easting;
-                                        double nort = northing;
-
-                                        //fix the azimuth error
-                                        easting = (Math.Cos(-mf.pn.convergenceAngle) * east) - (Math.Sin(-mf.pn.convergenceAngle) * nort);
-                                        northing = (Math.Sin(-mf.pn.convergenceAngle) * east) + (Math.Cos(-mf.pn.convergenceAngle) * nort);
+ 
+                                        mf.pn.ConvertWGS84ToLocal(latK, lonK, out northing, out easting);
 
                                         //add the point to boundary
                                         vec3 bndPt = new vec3(easting, northing, 0);
@@ -549,7 +529,7 @@ namespace AgOpenGPS
                                     mf.bnd.bndArr[i].CalculateBoundaryHeadings();
                                     mf.bnd.bndArr[i].PreCalcBoundaryLines();
                                     mf.bnd.bndArr[i].FixBoundaryLine(i, mf.tool.toolWidth);
-
+                                    mf.bnd.bndArr[i].PreCalcBoundaryEarLines();
                                     //boundary area, pre calcs etc
                                     mf.bnd.bndArr[i].CalculateBoundaryArea();
                                     mf.bnd.bndArr[i].PreCalcBoundaryLines();

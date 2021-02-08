@@ -24,7 +24,7 @@ namespace AgOpenGPS
         private int zoomUpdateCounter = 0;
 
         //data buffer for pixels read from off screen buffer
-        byte[] grnPixels = new byte[125001];
+        byte[] grnPixels = new byte[150001];
 
         // When oglMain is created
         private void oglMain_Load(object sender, EventArgs e)
@@ -369,10 +369,6 @@ namespace AgOpenGPS
                         if (curve.isBtnCurveOn) curve.DrawCurve();
                     }
 
-                    //if (recPath.isRecordOn)
-                    recPath.DrawRecordedLine();
-                    recPath.DrawDubins();
-
                     //draw Boundaries
                     bnd.DrawBoundaryLines();
 
@@ -391,8 +387,6 @@ namespace AgOpenGPS
                             turn.DrawTurnLines();
                         }
                     }
-
-                    if (mc.isOutOfBounds) gf.DrawGeoFenceLines();
 
                     if (hd.isOn) hd.DrawHeadLines();
 
@@ -519,8 +513,8 @@ namespace AgOpenGPS
             oglBack.MakeCurrent();
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
-            //gls.Perspective(6.0f, 1, 1, 5200);
-            Matrix4 mat = Matrix4.CreatePerspectiveFieldOfView(0.104719758f, 1f, 50.0f, 520f);
+            GL.Viewport(0, 0, 500, 300);
+            Matrix4 mat = Matrix4.CreatePerspectiveFieldOfView(0.06f, 1.6666666666f, 50.0f, 520.0f);
             GL.LoadMatrix(ref mat);
             GL.MatrixMode(MatrixMode.Modelview);
         }
@@ -535,13 +529,14 @@ namespace AgOpenGPS
             GL.LoadIdentity();					// Reset The View
 
             //back the camera up
-            GL.Translate(0, 0, -480);
+            GL.Translate(0, 0, -500);
 
             //rotate camera so heading matched fix heading in the world
             GL.Rotate(glm.toDegrees(toolPos.heading), 0, 0, 1);
 
-            //translate to that spot in the world 
-            GL.Translate(-toolPos.easting, -toolPos.northing, 0);
+            GL.Translate(-toolPos.easting - Math.Sin(toolPos.heading) * 15,
+                -toolPos.northing - Math.Cos(toolPos.heading) * 15,
+                0);
 
             //patch color
             GL.Color3(0.0f, 0.5f, 0.0f);
@@ -658,11 +653,11 @@ namespace AgOpenGPS
             if ((rpOnHeight < rpToolHeight && hd.isOn)) rpHeight = rpToolHeight + 2;
             else rpHeight = rpOnHeight + 2;
 
-            if (rpHeight > 240) rpHeight = 240;
+            if (rpHeight > 290) rpHeight = 290;
             if (rpHeight < 8) rpHeight = 8;
 
             //read the whole block of pixels up to max lookahead, one read only
-            GL.ReadPixels(tool.rpXPosition, 250, tool.rpWidth, (int)rpHeight, OpenTK.Graphics.OpenGL.PixelFormat.Green, PixelType.UnsignedByte, grnPixels);
+            GL.ReadPixels(tool.rpXPosition, 0, tool.rpWidth, (int)rpHeight, OpenTK.Graphics.OpenGL.PixelFormat.Green, PixelType.UnsignedByte, grnPixels);
 
             //Paint to context for troubleshooting
             //oglBack.MakeCurrent();
