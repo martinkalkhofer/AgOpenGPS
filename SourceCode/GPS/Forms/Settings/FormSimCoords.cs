@@ -14,14 +14,6 @@ namespace AgOpenGPS
             mf = callingForm as FormGPS;
             InitializeComponent();
 
-            this.label18.Text = gStr.gsLatitude;
-            this.label1.Text = gStr.gsLongitude;
-
-            this.btnGetFieldFix.Text = gStr.gsUseField;
-            this.label7.Text = gStr.gsFieldOrigin;
-            this.label5.Text = gStr.gsGPSCurrentFix;
-            this.btnLoadGPSFix.Text = gStr.gsUseGPS;
-
             this.Text = gStr.gsEnterCoordinatesForSimulator;
 
             nudLatitude.Controls[0].Enabled = false;
@@ -32,22 +24,35 @@ namespace AgOpenGPS
         {
             nudLatitude.Value = (decimal)Properties.Settings.Default.setGPS_SimLatitude;
             nudLongitude.Value = (decimal)Properties.Settings.Default.setGPS_SimLongitude;
-
-            lblLatStart.Text = mf.pn.latStart.ToString("N6");
-            lblLonStart.Text = mf.pn.lonStart.ToString("N6");
-            if (mf.pn.latStart == 0)
-            {
-                btnGetFieldFix.Enabled = false;
-            }
-
-            lblGPSLat.Text = mf.pn.latitude.ToString("N6");
-            lblGPSLon.Text = mf.pn.longitude.ToString("N6");
         }
 
         private void bntOK_Click(object sender, EventArgs e)
         {
-            mf.sim.latitude = (double)nudLatitude.Value;
-            mf.sim.longitude = (double)nudLongitude.Value;
+            if (mf.isJobStarted)
+            {
+                mf.TimedMessageBox(2000, gStr.gsFieldIsOpen, gStr.gsCloseFieldFirst);
+                Close();
+            }
+
+            if (!mf.timerSim.Enabled)
+            {
+                mf.TimedMessageBox(2000, "Simulator is off", "Go Back To Work, No Time For Games");
+                Close();
+            }
+
+            {
+                mf.pn.latStart = (double)nudLatitude.Value;
+                mf.pn.lonStart = (double)nudLongitude.Value;
+
+                mf.pn.latitude = (double)nudLatitude.Value;
+                mf.pn.longitude = (double)nudLongitude.Value;
+
+                mf.sim.latitude = Properties.Settings.Default.setGPS_SimLatitude = (double)nudLatitude.Value;
+                mf.sim.longitude = Properties.Settings.Default.setGPS_SimLongitude = (double)nudLongitude.Value;
+                Properties.Settings.Default.Save();
+            }
+
+            mf.pn.SetLocalMetersPerDegree();
 
             Properties.Settings.Default.setGPS_SimLatitude = mf.sim.latitude;
             Properties.Settings.Default.setGPS_SimLongitude = mf.sim.longitude;
@@ -60,34 +65,16 @@ namespace AgOpenGPS
             Close();
         }
 
-        private void btnGetFieldFix_Click(object sender, EventArgs e)
-        {
-            nudLatitude.Value = (decimal)mf.pn.latStart;
-            nudLongitude.Value = (decimal)mf.pn.lonStart;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            nudLatitude.Value = (decimal)mf.pn.latitude;
-            nudLongitude.Value = (decimal)mf.pn.longitude;
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            lblGPSLat.Text = mf.pn.latitude.ToString("N6");
-            lblGPSLon.Text = mf.pn.longitude.ToString("N6");
-        }
-
 
         private void NudLongitude_Enter(object sender, EventArgs e)
         {
-            mf.KeypadToNUD((NumericUpDown)sender);
+            mf.KeypadToNUD((NumericUpDown)sender, this);
             btnCancel.Focus();
         }
 
         private void NudLatitude_Enter(object sender, EventArgs e)
         {
-            mf.KeypadToNUD((NumericUpDown)sender);
+            mf.KeypadToNUD((NumericUpDown)sender, this);
             btnCancel.Focus();
         }
     }

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MechanikaDesign.WinForms.UI.ColorPicker;
+using System;
 using System.Drawing;
-using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace AgOpenGPS
@@ -11,11 +9,14 @@ namespace AgOpenGPS
     {
         //class variables
         private readonly FormGPS mf = null;
-
-        Color inColor;
+        private readonly Color inColor;
         public Color useThisColor { get; set; }
 
         private bool isUse = true;
+
+        private HslColor colorHsl = HslColor.FromAhsl(0xff);
+        private Color colorRgb = Color.Empty;
+
 
         public FormColorPicker(Form callingForm, Color _inColor)
         {
@@ -30,6 +31,8 @@ namespace AgOpenGPS
 
             useThisColor = inColor;
 
+            UpdateColor(inColor);
+
 
             //this.bntOK.Text = gStr.gsForNow;
             //this.btnSave.Text = gStr.gsToFile;
@@ -39,13 +42,47 @@ namespace AgOpenGPS
         {
             Close();
         }
-
-        private void colorPick_ColorPicked(object sender, EventArgs e)
+        private void colorBox2D_ColorChanged(object sender, ColorChangedEventArgs args)
         {
-            useThisColor = colorPick.SelectedColor;
-            btnNight.BackColor = colorPick.SelectedColor;
-            btnDay.BackColor = colorPick.SelectedColor;
+            HslColor colorHSL = this.colorBox2D.ColorHSL;
+            this.colorHsl = colorHSL;
+            this.colorRgb = this.colorHsl.RgbValue;
+            this.colorSlider.ColorHSL = this.colorHsl;
+
+            useThisColor = colorRgb;
+            btnNight.BackColor = colorRgb;
+            btnDay.BackColor = colorRgb;
         }
+        private void colorSlider_ColorChanged(object sender, MechanikaDesign.WinForms.UI.ColorPicker.ColorChangedEventArgs args)
+        {
+            HslColor colorHSL = this.colorSlider.ColorHSL;
+            this.colorHsl = colorHSL;
+            this.colorRgb = this.colorHsl.RgbValue;
+            this.colorBox2D.ColorHSL = this.colorHsl;
+
+            useThisColor = colorRgb;
+            btnNight.BackColor = colorRgb;
+            btnDay.BackColor = colorRgb;
+        }
+
+        private void UpdateColor(Color col)
+        {
+            this.colorHsl = HslColor.FromColor(col);
+            this.colorRgb = col;
+            //this.lockUpdates = true;
+            //this.numHue.Value = (int)(((decimal)this.colorHsl.H) * 360M);
+            //this.numSaturation.Value = (int)(((decimal)this.colorHsl.S) * 100M);
+            //this.numLuminance.Value = (int)(((decimal)this.colorHsl.L) * 100M);
+            //this.lockUpdates = false;
+            this.colorSlider.ColorHSL = this.colorHsl;
+            this.colorBox2D.ColorHSL = this.colorHsl;
+
+            useThisColor = col;
+            btnNight.BackColor = col;
+            btnDay.BackColor = col;
+        }
+
+
 
         private void FormColorPicker_Load(object sender, EventArgs e)
         {
@@ -84,19 +121,12 @@ namespace AgOpenGPS
             Properties.Settings.Default.Save();
         }
 
-        private void UpdateColor(Color col)
-        {
-            useThisColor = col;
-            btnNight.BackColor = col;
-            btnDay.BackColor = col;
-        }
-
         private void btn00_Click(object sender, EventArgs e)
         {
             if (isUse)
             {
                 useThisColor = btn00.BackColor;
-                UpdateColor(useThisColor);            
+                UpdateColor(useThisColor);
             }
             else
             {
@@ -351,18 +381,15 @@ namespace AgOpenGPS
             if (chkUse.Checked)
             {
                 groupBox1.Text = "Pick New Color and Select Square Below to Save Preset";
+                chkUse.Image = Properties.Resources.ColorUnlocked;
                 isUse = false;
             }
             else
             {
                 isUse = true;
                 groupBox1.Text = "Select Preset Color";
+                chkUse.Image = Properties.Resources.ColorLocked;
             }
         }
     }
 }
-            //// From integer
-            //Color color = Color.FromArgb((byte)(iCol >> 24),
-            //                             (byte)(iCol >> 16),
-            //                             (byte)(iCol >> 8),
-            //                             (byte)(iCol));

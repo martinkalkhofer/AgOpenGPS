@@ -27,7 +27,7 @@ namespace AgOpenGPS
         {
             lblLast.Text = gStr.gsCurrent + mf.vehicleFileName;
             DirectoryInfo dinfo = new DirectoryInfo(mf.vehiclesDirectory);
-            FileInfo[] Files = dinfo.GetFiles("*.txt");
+            FileInfo[] Files = dinfo.GetFiles("*.xml");
 
             if (Files.Length == 0) cboxVeh.Enabled = false;
 
@@ -40,14 +40,15 @@ namespace AgOpenGPS
         private void cboxVeh_SelectedIndexChanged(object sender, EventArgs e)
         {
             DialogResult result3 = MessageBox.Show(
-                "Overwrite: " + cboxVeh.SelectedItem.ToString() + ".txt",
+                "Overwrite: " + cboxVeh.SelectedItem.ToString() + ".xml",
                 gStr.gsSaveAndReturn,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2);
             if (result3 == DialogResult.Yes)
             {
-                mf.FileSaveVehicle(mf.vehiclesDirectory + cboxVeh.SelectedItem.ToString() + ".txt");
+                //mf.FileSaveVehicle(mf.vehiclesDirectory + cboxVeh.SelectedItem.ToString() + ".xml");
+                SettingsIO.ExportAll(mf.vehiclesDirectory + cboxVeh.SelectedItem.ToString() + ".XML");
                 Close();
             }
         }
@@ -65,7 +66,8 @@ namespace AgOpenGPS
         {
             if (tboxName.Text.Trim().Length > 0)
             {
-                mf.FileSaveVehicle(mf.vehiclesDirectory + tboxName.Text.Trim() + ".txt");
+                //mf.FileSaveVehicle(mf.vehiclesDirectory + tboxName.Text.Trim() + ".xml");
+                SettingsIO.ExportAll(mf.vehiclesDirectory + tboxName.Text.Trim() + ".XML");
                 Close();
             }
         }

@@ -44,12 +44,12 @@ namespace AgOpenGPS
             {
                 if (isToolInHeadland)
                 {
-                    mf.mc.machineData[mf.mc.mdHydLift] = 2;
+                    mf.p_239.pgn[mf.p_239.hydLift] = 2;
                     isToolUp = true;
                 }
                 else
                 {
-                    mf.mc.machineData[mf.mc.mdHydLift] = 1;
+                    mf.p_239.pgn[mf.p_239.hydLift] = 1;
                     isToolUp = false;
                 }
             }
@@ -120,7 +120,7 @@ namespace AgOpenGPS
 
                 double pos = mf.section[0].rpSectionWidth;
                 double mOn = (mf.tool.lookAheadDistanceOnPixelsRight - mf.tool.lookAheadDistanceOnPixelsLeft) / mf.tool.rpWidth;
-                double endHeight = (mf.tool.lookAheadDistanceOnPixelsLeft + (mOn * pos))*0.1;
+                double endHeight = (mf.tool.lookAheadDistanceOnPixelsLeft + (mOn * pos)) * 0.1;
 
                 for (int j = 0; j < mf.tool.numOfSections; j++)
                 {
@@ -141,7 +141,7 @@ namespace AgOpenGPS
                     else
                     {
                         pos += mf.section[j].rpSectionWidth;
-                        endHeight = (mf.tool.lookAheadDistanceOnPixelsLeft + (mOn * pos))*0.1;
+                        endHeight = (mf.tool.lookAheadDistanceOnPixelsLeft + (mOn * pos)) * 0.1;
 
                         downR.easting = mf.section[j].rightPoint.easting + (sinAB * endHeight);
                         downR.northing = mf.section[j].rightPoint.northing + (cosAB * endHeight);

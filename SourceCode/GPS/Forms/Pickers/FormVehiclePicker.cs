@@ -26,7 +26,7 @@ namespace AgOpenGPS
         {
             lblLast.Text = gStr.gsCurrent + mf.vehicleFileName;
             DirectoryInfo dinfo = new DirectoryInfo(mf.vehiclesDirectory);
-            FileInfo[] Files = dinfo.GetFiles("*.txt");
+            FileInfo[] Files = dinfo.GetFiles("*.xml");
             if (Files.Length == 0)
             {
                 Close();
@@ -43,7 +43,10 @@ namespace AgOpenGPS
 
         private void cboxVeh_SelectedIndexChanged(object sender, EventArgs e)
         {
-            mf.FileOpenVehicle(mf.vehiclesDirectory + cboxVeh.SelectedItem.ToString() + ".txt");
+            //mf.FileOpenVehicle(mf.vehiclesDirectory + cboxVeh.SelectedItem.ToString() + ".xml");
+            SettingsIO.ImportAll( mf.vehiclesDirectory + cboxVeh.SelectedItem.ToString() + ".XML");
+
+            mf.LoadSettings();
             Close();
         }
     }

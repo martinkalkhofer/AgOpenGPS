@@ -39,6 +39,8 @@
             // btnSouth
             // 
             this.btnSouth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSouth.FlatAppearance.BorderSize = 0;
+            this.btnSouth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSouth.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
             this.btnSouth.Image = global::AgOpenGPS.Properties.Resources.DnArrow64;
             this.btnSouth.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -52,6 +54,8 @@
             // btnNorth
             // 
             this.btnNorth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnNorth.FlatAppearance.BorderSize = 0;
+            this.btnNorth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNorth.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
             this.btnNorth.Image = global::AgOpenGPS.Properties.Resources.UpArrow64;
             this.btnNorth.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -66,6 +70,8 @@
             // 
             this.bntOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bntOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bntOK.FlatAppearance.BorderSize = 0;
+            this.bntOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bntOK.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.bntOK.Image = global::AgOpenGPS.Properties.Resources.FileDontSave;
             this.bntOK.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -83,6 +89,8 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Image = global::AgOpenGPS.Properties.Resources.Cancel64;
             this.btnCancel.Location = new System.Drawing.Point(130, 298);
@@ -98,6 +106,8 @@
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnSave.Image = global::AgOpenGPS.Properties.Resources.FileSave;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -128,6 +138,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(231, 393);
             this.ControlBox = false;
             this.Controls.Add(this.lblSmooth);

@@ -52,6 +52,8 @@
             this.stopButton.BackgroundImage = global::AgOpenGPS.Properties.Resources.Stop;
             this.stopButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.stopButton.Enabled = false;
+            this.stopButton.FlatAppearance.BorderSize = 0;
+            this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stopButton.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stopButton.Location = new System.Drawing.Point(319, 229);
             this.stopButton.Margin = new System.Windows.Forms.Padding(2);
@@ -78,6 +80,8 @@
             this.startButton.BackgroundImage = global::AgOpenGPS.Properties.Resources.Play;
             this.startButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.startButton.Enabled = false;
+            this.startButton.FlatAppearance.BorderSize = 0;
+            this.startButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.startButton.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startButton.Location = new System.Drawing.Point(226, 229);
             this.startButton.Margin = new System.Windows.Forms.Padding(2);
@@ -101,7 +105,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "WebCam";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormWebCam_Load);
             this.ResumeLayout(false);
 

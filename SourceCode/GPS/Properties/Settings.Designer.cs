@@ -12,7 +12,7 @@ namespace AgOpenGPS.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,37 +25,13 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-32")]
+        [global::System.Configuration.DefaultSettingValueAttribute("-63")]
         public double setDisplay_camPitch {
             get {
                 return ((double)(this["setDisplay_camPitch"]));
             }
             set {
                 this["setDisplay_camPitch"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM GPS...")]
-        public string setPort_portNameGPS {
-            get {
-                return ((string)(this["setPort_portNameGPS"]));
-            }
-            set {
-                this["setPort_portNameGPS"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("38400")]
-        public int setPort_baudRate {
-            get {
-                return ((int)(this["setPort_baudRate"]));
-            }
-            set {
-                this["setPort_baudRate"] = value;
             }
         }
         
@@ -73,7 +49,7 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1024, 768")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1005, 730")]
         public global::System.Drawing.Size setWindow_Size {
             get {
                 return ((global::System.Drawing.Size)(this["setWindow_Size"]));
@@ -104,30 +80,6 @@ namespace AgOpenGPS.Properties {
             }
             set {
                 this["setWindow_Minimized"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM Section...")]
-        public string setPort_portNameMachine {
-            get {
-                return ((string)(this["setPort_portNameMachine"]));
-            }
-            set {
-                this["setPort_portNameMachine"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setPort_wasMachineConnected {
-            get {
-                return ((bool)(this["setPort_wasMachineConnected"]));
-            }
-            set {
-                this["setPort_wasMachineConnected"] = value;
             }
         }
         
@@ -193,18 +145,6 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool setF_IsWorkSwitchActiveLow {
-            get {
-                return ((bool)(this["setF_IsWorkSwitchActiveLow"]));
-            }
-            set {
-                this["setF_IsWorkSwitchActiveLow"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool setF_IsWorkSwitchEnabled {
             get {
@@ -212,30 +152,6 @@ namespace AgOpenGPS.Properties {
             }
             set {
                 this["setF_IsWorkSwitchEnabled"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM AS")]
-        public string setPort_portNameAutoSteer {
-            get {
-                return ((string)(this["setPort_portNameAutoSteer"]));
-            }
-            set {
-                this["setPort_portNameAutoSteer"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setPort_wasAutoSteerConnected {
-            get {
-                return ((bool)(this["setPort_wasAutoSteerConnected"]));
-            }
-            set {
-                this["setPort_wasAutoSteerConnected"] = value;
             }
         }
         
@@ -254,24 +170,12 @@ namespace AgOpenGPS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int setIMU_rollZeroX16 {
+        public double setIMU_rollZero {
             get {
-                return ((int)(this["setIMU_rollZeroX16"]));
+                return ((double)(this["setIMU_rollZero"]));
             }
             set {
-                this["setIMU_rollZeroX16"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setMenu_isLogNMEA {
-            get {
-                return ((bool)(this["setMenu_isLogNMEA"]));
-            }
-            set {
-                this["setMenu_isLogNMEA"] = value;
+                this["setIMU_rollZero"] = value;
             }
         }
         
@@ -289,30 +193,6 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public byte setAS_Ko {
-            get {
-                return ((byte)(this["setAS_Ko"]));
-            }
-            set {
-                this["setAS_Ko"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public byte setAS_Kp {
-            get {
-                return ((byte)(this["setAS_Kp"]));
-            }
-            set {
-                this["setAS_Kp"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("30")]
         public byte setAS_lowSteerPWM {
             get {
@@ -325,37 +205,13 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public byte setAS_Kd {
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int setAS_wasOffset {
             get {
-                return ((byte)(this["setAS_Kd"]));
+                return ((int)(this["setAS_wasOffset"]));
             }
             set {
-                this["setAS_Kd"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("127")]
-        public byte setAS_steerAngleOffset {
-            get {
-                return ((byte)(this["setAS_steerAngleOffset"]));
-            }
-            set {
-                this["setAS_steerAngleOffset"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double setF_UserTripAlarm {
-            get {
-                return ((double)(this["setF_UserTripAlarm"]));
-            }
-            set {
-                this["setF_UserTripAlarm"] = value;
+                this["setAS_wasOffset"] = value;
             }
         }
         
@@ -373,7 +229,7 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
         public byte setAS_minSteerPWM {
             get {
                 return ((byte)(this["setAS_minSteerPWM"]));
@@ -397,7 +253,7 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
         public byte setAS_highSteerPWM {
             get {
                 return ((byte)(this["setAS_highSteerPWM"]));
@@ -421,7 +277,7 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("101")]
         public byte setAS_countsPerDegree {
             get {
                 return ((byte)(this["setAS_countsPerDegree"]));
@@ -440,78 +296,6 @@ namespace AgOpenGPS.Properties {
             }
             set {
                 this["setMenu_isPureOn"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Keyhole.txt")]
-        public string setAS_youTurnShape {
-            get {
-                return ((string)(this["setAS_youTurnShape"]));
-            }
-            set {
-                this["setAS_youTurnShape"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("9999")]
-        public int setIP_thisPort {
-            get {
-                return ((int)(this["setIP_thisPort"]));
-            }
-            set {
-                this["setIP_thisPort"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("192.168.1.255")]
-        public string setIP_autoSteerIP {
-            get {
-                return ((string)(this["setIP_autoSteerIP"]));
-            }
-            set {
-                this["setIP_autoSteerIP"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8888")]
-        public int setIP_autoSteerPort {
-            get {
-                return ((int)(this["setIP_autoSteerPort"]));
-            }
-            set {
-                this["setIP_autoSteerPort"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("192.168.1.255")]
-        public string setIP_rateMachineIP {
-            get {
-                return ((string)(this["setIP_rateMachineIP"]));
-            }
-            set {
-                this["setIP_rateMachineIP"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("7777")]
-        public int setIP_rateMachinePort {
-            get {
-                return ((int)(this["setIP_rateMachinePort"]));
-            }
-            set {
-                this["setIP_rateMachinePort"] = value;
             }
         }
         
@@ -565,66 +349,6 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("68wESU")]
-        public string setIMU_UID {
-            get {
-                return ((string)(this["setIMU_UID"]));
-            }
-            set {
-                this["setIMU_UID"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setIMU_isRollFromAutoSteer {
-            get {
-                return ((bool)(this["setIMU_isRollFromAutoSteer"]));
-            }
-            set {
-                this["setIMU_isRollFromAutoSteer"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setIMU_isHeadingCorrectionFromAutoSteer {
-            get {
-                return ((bool)(this["setIMU_isHeadingCorrectionFromAutoSteer"]));
-            }
-            set {
-                this["setIMU_isHeadingCorrectionFromAutoSteer"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public int setPort_NMEAHz {
-            get {
-                return ((int)(this["setPort_NMEAHz"]));
-            }
-            set {
-                this["setPort_NMEAHz"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setIMU_isRollFromAVR {
-            get {
-                return ((bool)(this["setIMU_isRollFromAVR"]));
-            }
-            set {
-                this["setIMU_isRollFromAVR"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("4")]
         public int setDisplay_lightbarCmPerPixel {
             get {
@@ -632,18 +356,6 @@ namespace AgOpenGPS.Properties {
             }
             set {
                 this["setDisplay_lightbarCmPerPixel"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setUDP_isOn {
-            get {
-                return ((bool)(this["setUDP_isOn"]));
-            }
-            set {
-                this["setUDP_isOn"] = value;
             }
         }
         
@@ -697,154 +409,10 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("69.75.31.235")]
-        public string setNTRIP_casterIP {
-            get {
-                return ((string)(this["setNTRIP_casterIP"]));
-            }
-            set {
-                this["setNTRIP_casterIP"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2101")]
-        public int setNTRIP_casterPort {
-            get {
-                return ((int)(this["setNTRIP_casterPort"]));
-            }
-            set {
-                this["setNTRIP_casterPort"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("AZU1")]
-        public string setNTRIP_mount {
-            get {
-                return ((string)(this["setNTRIP_mount"]));
-            }
-            set {
-                this["setNTRIP_mount"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string setNTRIP_userName {
-            get {
-                return ((string)(this["setNTRIP_userName"]));
-            }
-            set {
-                this["setNTRIP_userName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string setNTRIP_userPassword {
-            get {
-                return ((string)(this["setNTRIP_userPassword"]));
-            }
-            set {
-                this["setNTRIP_userPassword"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setNTRIP_isOn {
-            get {
-                return ((bool)(this["setNTRIP_isOn"]));
-            }
-            set {
-                this["setNTRIP_isOn"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        public int setNTRIP_sendGGAInterval {
+        public double setAS_snapDistance {
             get {
-                return ((int)(this["setNTRIP_sendGGAInterval"]));
-            }
-            set {
-                this["setNTRIP_sendGGAInterval"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int setNTRIP_sendToUDPPort {
-            get {
-                return ((int)(this["setNTRIP_sendToUDPPort"]));
-            }
-            set {
-                this["setNTRIP_sendToUDPPort"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("53")]
-        public double setNTRIP_manualLat {
-            get {
-                return ((double)(this["setNTRIP_manualLat"]));
-            }
-            set {
-                this["setNTRIP_manualLat"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-111")]
-        public double setNTRIP_manualLon {
-            get {
-                return ((double)(this["setNTRIP_manualLon"]));
-            }
-            set {
-                this["setNTRIP_manualLon"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("www.rtk2go.com")]
-        public string setNTRIP_casterURL {
-            get {
-                return ((string)(this["setNTRIP_casterURL"]));
-            }
-            set {
-                this["setNTRIP_casterURL"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setNTRIP_isGGAManual {
-            get {
-                return ((bool)(this["setNTRIP_isGGAManual"]));
-            }
-            set {
-                this["setNTRIP_isGGAManual"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("40")]
-        public int setAS_snapDistance {
-            get {
-                return ((int)(this["setAS_snapDistance"]));
+                return ((double)(this["setAS_snapDistance"]));
             }
             set {
                 this["setAS_snapDistance"] = value;
@@ -865,42 +433,6 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double setDistance_TreeSpacing {
-            get {
-                return ((double)(this["setDistance_TreeSpacing"]));
-            }
-            set {
-                this["setDistance_TreeSpacing"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setIMU_isHeadingCorrectionFromExtUDP {
-            get {
-                return ((bool)(this["setIMU_isHeadingCorrectionFromExtUDP"]));
-            }
-            set {
-                this["setIMU_isHeadingCorrectionFromExtUDP"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setIMU_isRollFromOGI {
-            get {
-                return ((bool)(this["setIMU_isRollFromOGI"]));
-            }
-            set {
-                this["setIMU_isRollFromOGI"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool setAS_isAutoSteerAutoOn {
             get {
@@ -908,30 +440,6 @@ namespace AgOpenGPS.Properties {
             }
             set {
                 this["setAS_isAutoSteerAutoOn"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setDisplay_isBatmanOn {
-            get {
-                return ((bool)(this["setDisplay_isBatmanOn"]));
-            }
-            set {
-                this["setDisplay_isBatmanOn"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setAS_isJRK {
-            get {
-                return ((bool)(this["setAS_isJRK"]));
-            }
-            set {
-                this["setAS_isJRK"] = value;
             }
         }
         
@@ -962,24 +470,12 @@ namespace AgOpenGPS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("24")]
-        public double setTram_eqWidth {
+        public double setTram_tramWidth {
             get {
-                return ((double)(this["setTram_eqWidth"]));
+                return ((double)(this["setTram_tramWidth"]));
             }
             set {
-                this["setTram_eqWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.7")]
-        public double setTram_wheelSpacing {
-            get {
-                return ((double)(this["setTram_wheelSpacing"]));
-            }
-            set {
-                this["setTram_wheelSpacing"] = value;
+                this["setTram_tramWidth"] = value;
             }
         }
         
@@ -1033,18 +529,6 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setMenu_isUTurnAlwaysOn {
-            get {
-                return ((bool)(this["setMenu_isUTurnAlwaysOn"]));
-            }
-            set {
-                this["setMenu_isUTurnAlwaysOn"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool setMenu_isCompassOn {
             get {
@@ -1069,37 +553,25 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setNTRIP_isTCP {
+        [global::System.Configuration.DefaultSettingValueAttribute("210, 210, 230")]
+        public global::System.Drawing.Color setDisplay_colorDayFrame {
             get {
-                return ((bool)(this["setNTRIP_isTCP"]));
+                return ((global::System.Drawing.Color)(this["setDisplay_colorDayFrame"]));
             }
             set {
-                this["setNTRIP_isTCP"] = value;
+                this["setDisplay_colorDayFrame"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("230, 230, 230")]
-        public global::System.Drawing.Color setDisplay_colorDayMode {
+        [global::System.Configuration.DefaultSettingValueAttribute("50, 50, 65")]
+        public global::System.Drawing.Color setDisplay_colorNightFrame {
             get {
-                return ((global::System.Drawing.Color)(this["setDisplay_colorDayMode"]));
+                return ((global::System.Drawing.Color)(this["setDisplay_colorNightFrame"]));
             }
             set {
-                this["setDisplay_colorDayMode"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("60, 60, 60")]
-        public global::System.Drawing.Color setDisplay_colorNightMode {
-            get {
-                return ((global::System.Drawing.Color)(this["setDisplay_colorNightMode"]));
-            }
-            set {
-                this["setDisplay_colorNightMode"] = value;
+                this["setDisplay_colorNightFrame"] = value;
             }
         }
         
@@ -1117,25 +589,13 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("90, 90, 90")]
+        [global::System.Configuration.DefaultSettingValueAttribute("130, 130, 150")]
         public global::System.Drawing.Color setDisplay_colorFieldDay {
             get {
                 return ((global::System.Drawing.Color)(this["setDisplay_colorFieldDay"]));
             }
             set {
                 this["setDisplay_colorFieldDay"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setDisplay_isSimple {
-            get {
-                return ((bool)(this["setDisplay_isSimple"]));
-            }
-            set {
-                this["setDisplay_isSimple"] = value;
             }
         }
         
@@ -1177,7 +637,7 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool setDisplay_isAutoDayNight {
             get {
                 return ((bool)(this["setDisplay_isAutoDayNight"]));
@@ -1202,13 +662,13 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool setDisplay_isTermsOn {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setDisplay_isTermsAccepted {
             get {
-                return ((bool)(this["setDisplay_isTermsOn"]));
+                return ((bool)(this["setDisplay_isTermsAccepted"]));
             }
             set {
-                this["setDisplay_isTermsOn"] = value;
+                this["setDisplay_isTermsAccepted"] = value;
             }
         }
         
@@ -1227,36 +687,12 @@ namespace AgOpenGPS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setIMU_isHeadingCorrectionFromBrick {
-            get {
-                return ((bool)(this["setIMU_isHeadingCorrectionFromBrick"]));
-            }
-            set {
-                this["setIMU_isHeadingCorrectionFromBrick"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool setDisplay_isStartFullScreen {
             get {
                 return ((bool)(this["setDisplay_isStartFullScreen"]));
             }
             set {
                 this["setDisplay_isStartFullScreen"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setUDP_isInterAppOn {
-            get {
-                return ((bool)(this["setUDP_isInterAppOn"]));
-            }
-            set {
-                this["setUDP_isInterAppOn"] = value;
             }
         }
         
@@ -1274,25 +710,396 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setNTRIP_isHTTP10 {
-            get {
-                return ((bool)(this["setNTRIP_isHTTP10"]));
-            }
-            set {
-                this["setNTRIP_isHTTP10"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.25")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.06")]
         public double setIMU_fusionWeight {
             get {
                 return ((double)(this["setIMU_fusionWeight"]));
             }
             set {
                 this["setIMU_fusionWeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
+        public double setIMU_rollFilter {
+            get {
+                return ((double)(this["setIMU_rollFilter"]));
+            }
+            set {
+                this["setIMU_rollFilter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("14")]
+        public int setAS_uTurnSmoothing {
+            get {
+                return ((int)(this["setAS_uTurnSmoothing"]));
+            }
+            set {
+                this["setAS_uTurnSmoothing"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setIMU_invertRoll {
+            get {
+                return ((bool)(this["setIMU_invertRoll"]));
+            }
+            set {
+                this["setIMU_invertRoll"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public byte setAS_ackerman {
+            get {
+                return ((byte)(this["setAS_ackerman"]));
+            }
+            set {
+                this["setAS_ackerman"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool setF_IsWorkSwitchActiveLow {
+            get {
+                return ((bool)(this["setF_IsWorkSwitchActiveLow"]));
+            }
+            set {
+                this["setF_IsWorkSwitchActiveLow"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public byte setAS_Kp {
+            get {
+                return ((byte)(this["setAS_Kp"]));
+            }
+            set {
+                this["setAS_Kp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool setSound_isUturnOn {
+            get {
+                return ((bool)(this["setSound_isUturnOn"]));
+            }
+            set {
+                this["setSound_isUturnOn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public string setSound_isHydLiftOn {
+            get {
+                return ((string)(this["setSound_isHydLiftOn"]));
+            }
+            set {
+                this["setSound_isHydLiftOn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("230, 230, 230")]
+        public global::System.Drawing.Color setDisplay_colorTextNight {
+            get {
+                return ((global::System.Drawing.Color)(this["setDisplay_colorTextNight"]));
+            }
+            set {
+                this["setDisplay_colorTextNight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10, 10, 20")]
+        public global::System.Drawing.Color setDisplay_colorTextDay {
+            get {
+                return ((global::System.Drawing.Color)(this["setDisplay_colorTextDay"]));
+            }
+            set {
+                this["setDisplay_colorTextDay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool setTool_isTramOuter {
+            get {
+                return ((bool)(this["setTool_isTramOuter"]));
+            }
+            set {
+                this["setTool_isTramOuter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool setTram_isTramOnBackBuffer {
+            get {
+                return ((bool)(this["setTram_isTramOnBackBuffer"]));
+            }
+            set {
+                this["setTram_isTramOnBackBuffer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9")]
+        public double setDisplay_camZoom {
+            get {
+                return ((double)(this["setDisplay_camZoom"]));
+            }
+            set {
+                this["setDisplay_camZoom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color setDisplay_colorVehicle {
+            get {
+                return ((global::System.Drawing.Color)(this["setDisplay_colorVehicle"]));
+            }
+            set {
+                this["setDisplay_colorVehicle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("75")]
+        public int setDisplay_vehicleOpacity {
+            get {
+                return ((int)(this["setDisplay_vehicleOpacity"]));
+            }
+            set {
+                this["setDisplay_vehicleOpacity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool setDisplay_isVehicleImage {
+            get {
+                return ((bool)(this["setDisplay_isVehicleImage"]));
+            }
+            set {
+                this["setDisplay_isVehicleImage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public string setIMU_isHeadingCorrectionFromAutoSteer {
+            get {
+                return ((string)(this["setIMU_isHeadingCorrectionFromAutoSteer"]));
+            }
+            set {
+                this["setIMU_isHeadingCorrectionFromAutoSteer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool setDisplay_isTextureOn {
+            get {
+                return ((bool)(this["setDisplay_isTextureOn"]));
+            }
+            set {
+                this["setDisplay_isTextureOn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1600")]
+        public double setAB_lineLength {
+            get {
+                return ((double)(this["setAB_lineLength"]));
+            }
+            set {
+                this["setAB_lineLength"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UpdateSettings {
+            get {
+                return ((bool)(this["UpdateSettings"]));
+            }
+            set {
+                this["UpdateSettings"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("70")]
+        public int SetGPS_udpWatchMsec {
+            get {
+                return ((int)(this["SetGPS_udpWatchMsec"]));
+            }
+            set {
+                this["SetGPS_udpWatchMsec"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setF_steerControlsManual {
+            get {
+                return ((bool)(this["setF_steerControlsManual"]));
+            }
+            set {
+                this["setF_steerControlsManual"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setAS_isAngVelGuidance {
+            get {
+                return ((bool)(this["setAS_isAngVelGuidance"]));
+            }
+            set {
+                this["setAS_isAngVelGuidance"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public double setAS_guidanceLookAheadTime {
+            get {
+                return ((double)(this["setAS_guidanceLookAheadTime"]));
+            }
+            set {
+                this["setAS_guidanceLookAheadTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::AgOpenGPS.CFeatureSettings setFeatures {
+            get {
+                return ((global::AgOpenGPS.CFeatureSettings)(this["setFeatures"]));
+            }
+            set {
+                this["setFeatures"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setIMU_isDualAsIMU {
+            get {
+                return ((bool)(this["setIMU_isDualAsIMU"]));
+            }
+            set {
+                this["setIMU_isDualAsIMU"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double setAS_sideHillComp {
+            get {
+                return ((double)(this["setAS_sideHillComp"]));
+            }
+            set {
+                this["setAS_sideHillComp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setIMU_isReverseOn {
+            get {
+                return ((bool)(this["setIMU_isReverseOn"]));
+            }
+            set {
+                this["setIMU_isReverseOn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.15")]
+        public double setGPS_forwardComp {
+            get {
+                return ((double)(this["setGPS_forwardComp"]));
+            }
+            set {
+                this["setGPS_forwardComp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.3")]
+        public double setGPS_reverseComp {
+            get {
+                return ((double)(this["setGPS_reverseComp"]));
+            }
+            set {
+                this["setGPS_reverseComp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int setGPS_ageAlarm {
+            get {
+                return ((int)(this["setGPS_ageAlarm"]));
+            }
+            set {
+                this["setGPS_ageAlarm"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setGPS_isRTK_KillAutoSteer {
+            get {
+                return ((bool)(this["setGPS_isRTK_KillAutoSteer"]));
+            }
+            set {
+                this["setGPS_isRTK_KillAutoSteer"] = value;
             }
         }
     }

@@ -111,7 +111,7 @@ namespace AgOpenGPS
 
             if (!File.Exists(filename))
             {
-                TimedMessageBox(2000, gStr.gsFileError, gStr.gsMissingABCurveFile);
+                TimedMessageBox(2000, gStr.gsFileError, "Missing Curve File");
             }
             else
             {
@@ -164,7 +164,7 @@ namespace AgOpenGPS
                     catch (Exception er)
                     {
                         var form = new FormTimedMessage(2000, gStr.gsCurveLineFileIsCorrupt, gStr.gsButFieldIsLoaded);
-                        form.Show();
+                        form.Show(this);
                         WriteErrorLog("Load Curve Line" + er.ToString());
                     }
                 }
@@ -263,19 +263,13 @@ namespace AgOpenGPS
                             ABLine.lineArr[i].heading = glm.toRadians(double.Parse(words[1], CultureInfo.InvariantCulture));
                             ABLine.lineArr[i].origin.easting = double.Parse(words[2], CultureInfo.InvariantCulture);
                             ABLine.lineArr[i].origin.northing = double.Parse(words[3], CultureInfo.InvariantCulture);
-
-                            ABLine.lineArr[i].ref1.easting = ABLine.lineArr[i].origin.easting - (Math.Sin(ABLine.lineArr[i].heading) * 1000.0);
-                            ABLine.lineArr[i].ref1.northing = ABLine.lineArr[i].origin.northing - (Math.Cos(ABLine.lineArr[i].heading) *1000.0);
-
-                            ABLine.lineArr[i].ref2.easting = ABLine.lineArr[i].origin.easting + (Math.Sin(ABLine.lineArr[i].heading) * 1000.0);
-                            ABLine.lineArr[i].ref2.northing = ABLine.lineArr[i].origin.northing + (Math.Cos(ABLine.lineArr[i].heading) * 1000.0);
                             ABLine.numABLines++;
                         }
                     }
                     catch (Exception er)
                     {
-                        var form = new FormTimedMessage(2000, gStr.gsABLineFileIsCorrupt, "Please delete it!!!");
-                        form.Show();
+                        var form = new FormTimedMessage(2000, "AB Line Corrupt", "Please delete it!!!");
+                        form.Show(this);
                         WriteErrorLog("FieldOpen, Loading ABLine, Corrupt ABLine File" + er);
                     }
                 }
@@ -284,1064 +278,6 @@ namespace AgOpenGPS
             if (ABLine.numABLines == 0) ABLine.numABLineSelected = 0;
             if (ABLine.numABLineSelected > ABLine.numABLines) ABLine.numABLineSelected = ABLine.numABLines;
         }
-
-        //function that save vehicle and section settings
-        public void FileSaveVehicle(string FileName)
-        {
-            vehicleFileName = Path.GetFileNameWithoutExtension(FileName) + " - ";
-            Properties.Vehicle.Default.setVehicle_vehicleName = vehicleFileName;
-            Properties.Vehicle.Default.Save();
-
-            using (StreamWriter writer = new StreamWriter(FileName))
-            {
-                writer.WriteLine("Version," + Application.ProductVersion.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("AntennaHeight," + Properties.Vehicle.Default.setVehicle_antennaHeight.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("AntennaPivot," + Properties.Vehicle.Default.setVehicle_antennaPivot.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("AntennaOffset," + Properties.Vehicle.Default.setVehicle_antennaOffset.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsPivotBehindAntenna," + Properties.Vehicle.Default.setVehicle_isPivotBehindAntenna.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsSteerAxleAhead," + Properties.Vehicle.Default.setVehicle_isSteerAxleAhead.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("Wheelbase," + Properties.Vehicle.Default.setVehicle_wheelbase.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("MinTurningRadius," + Properties.Vehicle.Default.setVehicle_minTurningRadius.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("MinFixStep," + Properties.Settings.Default.setF_minFixStep.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("LowSpeedCutoff," + Properties.Vehicle.Default.setVehicle_slowSpeedCutoff.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("VehicleType," + Properties.Vehicle.Default.setVehicle_vehicleType.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-
-                writer.WriteLine("GeoFenceDistance," + Properties.Vehicle.Default.set_geoFenceDistance.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("UTurnSkipWidth," + Properties.Vehicle.Default.set_youSkipWidth.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("YouTurnDistance," + Properties.Vehicle.Default.set_youTurnDistance.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("youTriggerDistance," + Properties.Vehicle.Default.set_youTriggerDistance.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("YouTurnUseDubins," + Properties.Vehicle.Default.set_youUseDubins.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsMachineControlToAS," + Properties.Vehicle.Default.setVehicle_isMachineControlToAutoSteer.ToString(CultureInfo.InvariantCulture));
-
-                //AutoSteer
-                writer.WriteLine("pidP," + Properties.Settings.Default.setAS_Kp.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("LowSteerPWM," + Properties.Settings.Default.setAS_lowSteerPWM.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("pidD," + Properties.Settings.Default.setAS_Kd.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("pidO," + Properties.Settings.Default.setAS_Ko.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("SteerAngleOffset," + Properties.Settings.Default.setAS_steerAngleOffset.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("minPWM," + Properties.Settings.Default.setAS_minSteerPWM.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("HighSteerPWM," + Properties.Settings.Default.setAS_highSteerPWM.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("CountsPerDegree," + Properties.Settings.Default.setAS_countsPerDegree.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("MaxSteerAngle," + Properties.Vehicle.Default.setVehicle_maxSteerAngle.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("MaxAngularVelocity," + Properties.Vehicle.Default.setVehicle_maxAngularVelocity.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("SnapDistance," + Properties.Settings.Default.setAS_snapDistance.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("isStanleyUsed," + Properties.Vehicle.Default.setVehicle_isStanleyUsed.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("StanleyGain," + Properties.Vehicle.Default.setVehicle_stanleyGain.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("StanleyHeadingError," + Properties.Vehicle.Default.setVehicle_stanleyHeadingErrorGain.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("GoalPointLookAhead," +
-                    Properties.Vehicle.Default.setVehicle_goalPointLookAhead.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("GoalPointLookAheadUTurnMult," +
-                    Properties.Vehicle.Default.setVehicle_goalPointLookAheadUturnMult.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("GoalPointLookAheadMinumum," +
-                    Properties.Vehicle.Default.setVehicle_lookAheadMinimum.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("GoalPointLookAheadDistanceFromLine," +
-                    Properties.Vehicle.Default.setVehicle_lookAheadDistanceFromLine.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("HydLiftLookAhead," + Properties.Vehicle.Default.setVehicle_hydraulicLiftLookAhead.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-
-                //IMU
-                writer.WriteLine("HeadingFromSource," + Properties.Settings.Default.setGPS_headingFromWhichSource);
-                writer.WriteLine("GPSWhichSentence," + Properties.Settings.Default.setGPS_fixFromWhichSentence.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("HeadingFromBrick," + Properties.Settings.Default.setIMU_isHeadingCorrectionFromBrick);
-                writer.WriteLine("RollFromAutoSteer," + Properties.Settings.Default.setIMU_isRollFromAutoSteer);
-                writer.WriteLine("HeadingFromAutoSteer," + Properties.Settings.Default.setIMU_isHeadingCorrectionFromAutoSteer);
-                writer.WriteLine("IMUPitchZero," + Properties.Settings.Default.setIMU_pitchZeroX16.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IMURollZero," + Properties.Settings.Default.setIMU_rollZeroX16.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("IMUFusion," + Properties.Settings.Default.setIMU_fusionWeight.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-
-                //Arduino steer Config
-                writer.WriteLine("ArduinoInclinometer," + Properties.Vehicle.Default.setArdSteer_inclinometer.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("ArduinoMaxPulseCounts," + Properties.Vehicle.Default.setArdSteer_maxPulseCounts.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("ArduinoMaxSpeed," + Properties.Vehicle.Default.setArdSteer_maxSpeed.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("ArduinoMinSpeed," + Properties.Vehicle.Default.setArdSteer_minSpeed.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("ArduinoSetting0," + Properties.Vehicle.Default.setArdSteer_setting0.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("ArduinoSetting1," + Properties.Vehicle.Default.setArdSteer_setting1.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("ArduinoAckermanFix," + Properties.Vehicle.Default.setArdSteer_ackermanFix.ToString(CultureInfo.InvariantCulture));
-
-                //Arduino Machine Config
-                writer.WriteLine("ArdMachineRaiseTime," + Properties.Vehicle.Default.setArdMac_hydRaiseTime.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("ArdMachineLowerTime," + Properties.Vehicle.Default.setArdMac_hydLowerTime.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("ArdMachineEnableHydraulics," + Properties.Vehicle.Default.setArdMac_isHydEnabled.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("ArdSteerSetting2," + Properties.Vehicle.Default.setArdSteer_setting2);
-                writer.WriteLine("ArdMacSetting0," + Properties.Vehicle.Default.setArdMac_setting0);
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-
-                //uturn sequences
-                writer.WriteLine("SequenceFunctionEnter;" + Properties.Vehicle.Default.seq_FunctionEnter);
-                writer.WriteLine("SequenceFunctionExit;" + Properties.Vehicle.Default.seq_FunctionExit);
-                writer.WriteLine("SequenceActionEnter;" + Properties.Vehicle.Default.seq_ActionEnter);
-                writer.WriteLine("SequenceActionExit;" + Properties.Vehicle.Default.seq_ActionExit);
-                writer.WriteLine("SequenceDistanceEnter;" + Properties.Vehicle.Default.seq_DistanceEnter);
-                writer.WriteLine("SequenceDistanceExit;" + Properties.Vehicle.Default.seq_DistanceExit);
-
-                writer.WriteLine("FunctionList;" + Properties.Vehicle.Default.seq_FunctionList);
-                writer.WriteLine("ActionList;" + Properties.Vehicle.Default.seq_ActionList);
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-            }
-
-            //little show to say saved and where
-            var form = new FormTimedMessage(3000, gStr.gsSavedInFolder, vehiclesDirectory);
-            form.Show();
-        }
-
-        //function to open a previously saved field
-        public bool FileOpenVehicle(string filename)
-        {
-            //OpenFileDialog ofd = new OpenFileDialog();
-
-            ////get the directory where the fields are stored
-            //string directoryName = vehiclesDirectory;
-
-            ////make sure the directory exists, if not, create it
-            //if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
-            //{ Directory.CreateDirectory(directoryName); }
-
-            ////the initial directory, fields, for the open dialog
-            //ofd.InitialDirectory = directoryName;
-
-            ////When leaving dialog put windows back where it was
-            //ofd.RestoreDirectory = true;
-
-            ////set the filter to text files only
-            //ofd.Filter = "txt files (*.txt)|*.txt";
-
-            ////was a file selected
-            //if (ofd.ShowDialog() == DialogResult.OK)
-            //{
-            //    //if job started close it
-            //    if (isJobStarted) JobClose();
-
-            //make sure the file if fully valid and vehicle matches sections
-            using (StreamReader reader = new StreamReader(filename))
-            {
-                try
-                {
-                    string line;
-                    Properties.Vehicle.Default.setVehicle_vehicleName = filename;
-                    string[] words;
-                    line = reader.ReadLine(); words = line.Split(',');
-
-                    //file version
-                    string []fullVers = words[1].Split('.');
-                    string vers = fullVers[0] + fullVers[1];
-                    int fileVersion = int.Parse(vers, CultureInfo.InvariantCulture);
-
-                    //assembly version
-                    string assemblyVersion = Application.ProductVersion.ToString(CultureInfo.InvariantCulture);
-                    fullVers = assemblyVersion.Split('.');
-                    int appVersion = int.Parse(fullVers[0]+fullVers[1], CultureInfo.InvariantCulture);
-
-                    if (fileVersion < appVersion)
-                    {
-                        var form = new FormTimedMessage(5000, gStr.gsVehicleFileIsWrongVersion, gStr.gsMustBeVersion + Application.ProductVersion.ToString(CultureInfo.InvariantCulture) + " or higher");
-                        form.Show();
-                        return false;
-                    }
-                    else
-                    {
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_antennaHeight = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_antennaPivot = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_antennaOffset = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_isPivotBehindAntenna = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-
-                        Properties.Vehicle.Default.setVehicle_isSteerAxleAhead = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_wheelbase = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_minTurningRadius = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setF_minFixStep = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_slowSpeedCutoff = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_vehicleType = int.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.set_geoFenceDistance = int.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.set_youSkipWidth = int.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.set_youTurnDistance = int.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.set_youTriggerDistance = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.set_youUseDubins = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_isMachineControlToAutoSteer = bool.Parse(words[1]);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setAS_Kp = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setAS_lowSteerPWM = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setAS_Kd = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setAS_Ko = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setAS_steerAngleOffset = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setAS_minSteerPWM = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setAS_highSteerPWM = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setAS_countsPerDegree = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_maxSteerAngle = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_maxAngularVelocity = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setAS_snapDistance = int.Parse(words[1]);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_isStanleyUsed = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_stanleyGain = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_stanleyHeadingErrorGain = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-
-                        Properties.Vehicle.Default.setVehicle_goalPointLookAhead = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_goalPointLookAheadUturnMult = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_lookAheadMinimum = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_lookAheadDistanceFromLine = double.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_hydraulicLiftLookAhead = double.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setGPS_headingFromWhichSource = (words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setGPS_fixFromWhichSentence = (words[1]);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setIMU_isHeadingCorrectionFromBrick = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setIMU_isRollFromAutoSteer = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setIMU_isHeadingCorrectionFromAutoSteer = bool.Parse(words[1]);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setIMU_pitchZeroX16 = int.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setIMU_rollZeroX16 = int.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setIMU_fusionWeight = double.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setArdSteer_inclinometer = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setArdSteer_maxPulseCounts = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setArdSteer_maxSpeed = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setArdSteer_minSpeed = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setArdSteer_setting0 = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setArdSteer_setting1 = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setArdSteer_ackermanFix = byte.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        //Arduino Machine Config
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setArdMac_hydRaiseTime = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setArdMac_hydLowerTime = byte.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setArdMac_isHydEnabled = byte.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        //if (words[0] == "Empty") Properties.Vehicle.Default.setVehicle_lookAheadDistanceFromLine = 0;
-                        Properties.Vehicle.Default.setArdSteer_setting2 = byte.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        //if (words[0] == "Empty") Properties.Vehicle.Default.setVehicle_lookAheadDistanceFromLine = 0;
-                        Properties.Vehicle.Default.setArdMac_setting0 = byte.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        line = reader.ReadLine(); words = line.Split(';');
-                        Properties.Vehicle.Default.seq_FunctionEnter = words[1];
-                        line = reader.ReadLine(); words = line.Split(';');
-                        Properties.Vehicle.Default.seq_FunctionExit = words[1];
-                        line = reader.ReadLine(); words = line.Split(';');
-                        Properties.Vehicle.Default.seq_ActionEnter = words[1];
-                        line = reader.ReadLine(); words = line.Split(';');
-                        Properties.Vehicle.Default.seq_ActionExit = words[1];
-                        line = reader.ReadLine(); words = line.Split(';');
-                        Properties.Vehicle.Default.seq_DistanceEnter = words[1];
-                        line = reader.ReadLine(); words = line.Split(';');
-                        Properties.Vehicle.Default.seq_DistanceExit = words[1];
-
-                        line = reader.ReadLine(); words = line.Split(';');
-                        Properties.Vehicle.Default.seq_FunctionList = words[1];
-                        line = reader.ReadLine(); words = line.Split(';');
-                        Properties.Vehicle.Default.seq_ActionList = words[1];
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        //fill in the current variables with restored data
-                        vehicleFileName = Path.GetFileNameWithoutExtension(filename) + " - ";
-                        Properties.Vehicle.Default.setVehicle_vehicleName = vehicleFileName;
-
-                        Properties.Settings.Default.Save();
-                        Properties.Vehicle.Default.Save();
-
-                        //from settings grab the vehicle specifics
-                        vehicle.antennaHeight = Properties.Vehicle.Default.setVehicle_antennaHeight;
-                        vehicle.antennaPivot = Properties.Vehicle.Default.setVehicle_antennaPivot;
-                        vehicle.antennaOffset = Properties.Vehicle.Default.setVehicle_antennaOffset;
-                        vehicle.isPivotBehindAntenna = Properties.Vehicle.Default.setVehicle_isPivotBehindAntenna;
-                        vehicle.isSteerAxleAhead = Properties.Vehicle.Default.setVehicle_isSteerAxleAhead;
-
-                        vehicle.wheelbase = Properties.Vehicle.Default.setVehicle_wheelbase;
-                        vehicle.minTurningRadius = Properties.Vehicle.Default.setVehicle_minTurningRadius;
-                        minFixStepDist = Properties.Settings.Default.setF_minFixStep;
-                        vehicle.slowSpeedCutoff = Properties.Vehicle.Default.setVehicle_slowSpeedCutoff;
-                        vehicle.vehicleType = Properties.Vehicle.Default.setVehicle_vehicleType;
-
-                        yt.rowSkipsWidth = Properties.Vehicle.Default.set_youSkipWidth;
-                        yt.youTurnStartOffset = Properties.Vehicle.Default.set_youTurnDistance;
-                        yt.triggerDistanceOffset = Properties.Vehicle.Default.set_youTriggerDistance;
-                        yt.isUsingDubinsTurn = Properties.Vehicle.Default.set_youUseDubins;
-                        mc.isMachineDataSentToAutoSteer = Properties.Vehicle.Default.setVehicle_isMachineControlToAutoSteer;
-
-                        mc.autoSteerSettings[mc.ssKp] = Properties.Settings.Default.setAS_Kp;
-                        mc.autoSteerSettings[mc.ssLowPWM] = Properties.Settings.Default.setAS_lowSteerPWM;
-                        mc.autoSteerSettings[mc.ssKd] = Properties.Settings.Default.setAS_Kd;
-                        mc.autoSteerSettings[mc.ssKo] = Properties.Settings.Default.setAS_Ko;
-                        mc.autoSteerSettings[mc.ssSteerOffset] = Properties.Settings.Default.setAS_steerAngleOffset;
-                        mc.autoSteerSettings[mc.ssMinPWM] = Properties.Settings.Default.setAS_minSteerPWM;
-                        mc.autoSteerSettings[mc.ssHighPWM] = Properties.Settings.Default.setAS_highSteerPWM;
-                        mc.autoSteerSettings[mc.ssCountsPerDegree] = Properties.Settings.Default.setAS_countsPerDegree;
-
-                        vehicle.maxSteerAngle = Properties.Vehicle.Default.setVehicle_maxSteerAngle;
-                        vehicle.maxAngularVelocity = Properties.Vehicle.Default.setVehicle_maxAngularVelocity;
-
-                        isStanleyUsed = Properties.Vehicle.Default.setVehicle_isStanleyUsed;
-                        vehicle.stanleyGain = Properties.Vehicle.Default.setVehicle_stanleyGain;
-                        vehicle.stanleyHeadingErrorGain = Properties.Vehicle.Default.setVehicle_stanleyHeadingErrorGain;
-
-                        vehicle.goalPointLookAheadSeconds = Properties.Vehicle.Default.setVehicle_toolLookAheadOn;
-                        vehicle.goalPointLookAheadMinimumDistance = Properties.Vehicle.Default.setVehicle_lookAheadMinimum;
-                        vehicle.goalPointDistanceMultiplier = Properties.Vehicle.Default.setVehicle_lookAheadDistanceFromLine;
-                        vehicle.goalPointLookAheadUturnMult = Properties.Vehicle.Default.setVehicle_goalPointLookAheadUturnMult;
-
-                        vehicle.hydLiftLookAheadTime = Properties.Vehicle.Default.setVehicle_hydraulicLiftLookAhead;
-
-                        headingFromSource = Properties.Settings.Default.setGPS_headingFromWhichSource;
-                        pn.fixFrom = Properties.Settings.Default.setGPS_fixFromWhichSentence;
-
-                        ahrs.isHeadingCorrectionFromBrick = Properties.Settings.Default.setIMU_isHeadingCorrectionFromBrick;
-                        ahrs.isRollFromAutoSteer = Properties.Settings.Default.setIMU_isRollFromAutoSteer;
-                        ahrs.isHeadingCorrectionFromAutoSteer = Properties.Settings.Default.setIMU_isHeadingCorrectionFromAutoSteer;
-
-                        ahrs.pitchZeroX16 = Properties.Settings.Default.setIMU_pitchZeroX16;
-                        ahrs.rollZeroX16 = Properties.Settings.Default.setIMU_rollZeroX16;
-
-                        ahrs.fusionWeight = Properties.Settings.Default.setIMU_fusionWeight;
-
-                        mc.ardSteerConfig[mc.arHeaderHi] = 127; //PGN - 32750
-                        mc.ardSteerConfig[mc.arHeaderLo] = 238;
-                        mc.ardSteerConfig[mc.arSet0] = Properties.Vehicle.Default.setArdSteer_setting0;
-                        mc.ardSteerConfig[mc.arSet1] = Properties.Vehicle.Default.setArdSteer_setting1;
-                        mc.ardSteerConfig[mc.arMaxSpd] = Properties.Vehicle.Default.setArdSteer_maxSpeed;
-                        mc.ardSteerConfig[mc.arMinSpd] = Properties.Vehicle.Default.setArdSteer_minSpeed;
-                        mc.ardSteerConfig[mc.arAckermanFix] = Properties.Vehicle.Default.setArdSteer_ackermanFix;
-
-                        byte inc = (byte)(Properties.Vehicle.Default.setArdSteer_inclinometer << 6);
-                        mc.ardSteerConfig[mc.arIncMaxPulse] = (byte)(inc + (byte)Properties.Vehicle.Default.setArdSteer_maxPulseCounts);
-
-                        mc.ardSteerConfig[mc.arSet2] = Properties.Vehicle.Default.setArdSteer_setting2; 
-                        mc.ardSteerConfig[mc.ar9] = 0;
-
-                        mc.ardMachineConfig[mc.amHeaderHi] = 127; //PGN - 32760
-                        mc.ardMachineConfig[mc.amHeaderLo] = 248;
-                        mc.ardMachineConfig[mc.amRaiseTime] = Properties.Vehicle.Default.setArdMac_hydRaiseTime;
-                        mc.ardMachineConfig[mc.amLowerTime] = Properties.Vehicle.Default.setArdMac_hydLowerTime;
-                        mc.ardMachineConfig[mc.amEnableHyd] = Properties.Vehicle.Default.setArdMac_isHydEnabled;
-                        mc.ardMachineConfig[mc.amSet0] = Properties.Vehicle.Default.setArdMac_setting0; 
-                        mc.ardMachineConfig[mc.am6] = 0;
-                        mc.ardMachineConfig[mc.am7] = 0;
-                        mc.ardMachineConfig[mc.am8] = 0;
-                        mc.ardMachineConfig[mc.am9] = 0;
-
-                        string sentence = Properties.Vehicle.Default.seq_FunctionEnter;
-                        words = sentence.Split(',');
-
-                        sentence = Properties.Vehicle.Default.seq_ActionEnter;
-                        words = sentence.Split(',');
-
-                        sentence = Properties.Vehicle.Default.seq_DistanceEnter;
-                        words = sentence.Split(',');
-                        for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
-
-                        sentence = Properties.Vehicle.Default.seq_FunctionExit;
-                        words = sentence.Split(',');
-
-                        sentence = Properties.Vehicle.Default.seq_ActionExit;
-                        words = sentence.Split(',');
-
-                        sentence = Properties.Vehicle.Default.seq_DistanceExit;
-                        words = sentence.Split(',');
-
-                    }
-                    return true;
-                }
-                catch (Exception e) //FormatException e || IndexOutOfRangeException e2)
-                {
-                    WriteErrorLog("Open Vehicle" + e.ToString());
-
-                    //vehicle is corrupt, reload with all default information
-                    Properties.Vehicle.Default.Reset();
-                    Properties.Vehicle.Default.Save();
-                    Properties.Settings.Default.Reset();
-                    Properties.Settings.Default.Save();
-                    MessageBox.Show(gStr.gsProgramWillResetToRecoverPleaseRestart, gStr.gsVehicleFileIsCorrupt, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    Application.Restart();
-                    Environment.Exit(0);
-                    return false;
-                }
-            }
-        }//end of open file
-
-        //function that save vehicle and section settings
-        public void FileSaveTool(string FileName)
-        {
-            toolFileName = Path.GetFileNameWithoutExtension(FileName) + " - ";
-            Properties.Vehicle.Default.setVehicle_toolName = toolFileName;
-            Properties.Vehicle.Default.Save();
-
-            using (StreamWriter writer = new StreamWriter(FileName))
-            {
-                writer.WriteLine("Version," + Application.ProductVersion.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("Overlap," + Properties.Vehicle.Default.setVehicle_toolOverlap.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("ToolOffset," + Properties.Vehicle.Default.setVehicle_toolOffset.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("LookAheadOff," + Properties.Vehicle.Default.setVehicle_toolLookAheadOff.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("LookAheadOn," + Properties.Vehicle.Default.setVehicle_toolLookAheadOn.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("TurnOffDelay," + Properties.Vehicle.Default.setVehicle_toolOffDelay.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("ToolMinUnappliedPixels," + Properties.Vehicle.Default.setVehicle_minApplied.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-
-                writer.WriteLine("ToolTrailingHitchLength," + Properties.Vehicle.Default.setTool_toolTrailingHitchLength.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("TankTrailingHitchLength," + Properties.Vehicle.Default.setVehicle_tankTrailingHitchLength.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("HitchLength," + Properties.Vehicle.Default.setVehicle_hitchLength.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("IsToolBehindPivot," + Properties.Vehicle.Default.setTool_isToolBehindPivot.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsToolTrailing," + Properties.Vehicle.Default.setTool_isToolTrailing.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsToolTBT," + Properties.Vehicle.Default.setTool_isToolTBT.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-
-                writer.WriteLine("Spinner1," + Properties.Vehicle.Default.setSection_position1.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner2," + Properties.Vehicle.Default.setSection_position2.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner3," + Properties.Vehicle.Default.setSection_position3.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner4," + Properties.Vehicle.Default.setSection_position4.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner5," + Properties.Vehicle.Default.setSection_position5.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner6," + Properties.Vehicle.Default.setSection_position6.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner7," + Properties.Vehicle.Default.setSection_position7.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner8," + Properties.Vehicle.Default.setSection_position8.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner9," + Properties.Vehicle.Default.setSection_position9.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner10," + Properties.Vehicle.Default.setSection_position10.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner11," + Properties.Vehicle.Default.setSection_position11.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner12," + Properties.Vehicle.Default.setSection_position12.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner13," + Properties.Vehicle.Default.setSection_position13.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner14," + Properties.Vehicle.Default.setSection_position14.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner15," + Properties.Vehicle.Default.setSection_position15.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner16," + Properties.Vehicle.Default.setSection_position16.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Spinner17," + Properties.Vehicle.Default.setSection_position17.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-
-
-                writer.WriteLine("Sections," + Properties.Vehicle.Default.setVehicle_numSections.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("ToolWidth," + Properties.Vehicle.Default.setVehicle_toolWidth.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-
-                writer.WriteLine("WorkSwitch," + Properties.Settings.Default.setF_IsWorkSwitchEnabled.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("ActiveLow," + Properties.Settings.Default.setF_IsWorkSwitchActiveLow.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("SwitchManual," + Properties.Settings.Default.setF_IsWorkSwitchManual.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-            }
-
-            //little show to say saved and where
-            var form = new FormTimedMessage(3000, gStr.gsSavedInFolder, toolsDirectory);
-            form.Show();
-        }        
-
-        //function to open a previously saved field
-        public bool FileOpenTool(string fileName)
-        {
-            //make sure the file if fully valid and vehicle matches sections
-            using (StreamReader reader = new StreamReader(fileName))
-            {
-                try
-                {
-                    string line;
-                    Properties.Vehicle.Default.setVehicle_toolName = fileName;
-                    string[] words;
-                    line = reader.ReadLine(); words = line.Split(',');
-
-                    string vers = words[1].Replace('.', '0');
-                    int fileVersion = int.Parse(vers, CultureInfo.InvariantCulture);
-
-                    string assemblyVersion = Application.ProductVersion.ToString(CultureInfo.InvariantCulture);
-                    assemblyVersion = assemblyVersion.Replace('.', '0');
-                    int appVersion = int.Parse(assemblyVersion, CultureInfo.InvariantCulture);
-
-                    appVersion /= 100;
-                    fileVersion /= 100;
-
-                    if (fileVersion < appVersion)
-                    {
-                        var form = new FormTimedMessage(5000, gStr.gsFileError, gStr.gsMustBeVersion + Application.ProductVersion.ToString(CultureInfo.InvariantCulture) + " or higher");
-                        form.Show();
-                        return false;
-                    }
-
-                    else
-                    {
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_toolOverlap = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_toolOffset = double.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_toolLookAheadOff = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_toolLookAheadOn = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_toolOffDelay = double.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_minApplied = int.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setTool_toolTrailingHitchLength = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_tankTrailingHitchLength = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_hitchLength = double.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setTool_isToolBehindPivot = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setTool_isToolTrailing = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setTool_isToolTBT = bool.Parse(words[1]);
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position1 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position2 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position3 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position4 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position5 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position6 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position7 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position8 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position9 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position10 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position11 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position12 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position13 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position14 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position15 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position16 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setSection_position17 = decimal.Parse(words[1], CultureInfo.InvariantCulture);
-
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_numSections = int.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Vehicle.Default.setVehicle_toolWidth = double.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setF_IsWorkSwitchEnabled = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setF_IsWorkSwitchActiveLow = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setF_IsWorkSwitchManual = bool.Parse(words[1]);
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        //fill in the current variables with restored data
-                        toolFileName = Path.GetFileNameWithoutExtension(fileName) + " - ";
-                        Properties.Vehicle.Default.setVehicle_toolName = toolFileName;
-
-                        Properties.Settings.Default.Save();
-                        Properties.Vehicle.Default.Save();
-
-                        //get the number of sections from settings
-                        tool.numOfSections = Properties.Vehicle.Default.setVehicle_numSections;
-                        tool.numSuperSection = tool.numOfSections + 1;
-
-                        //from settings grab the vehicle specifics
-                        tool.toolOverlap = Properties.Vehicle.Default.setVehicle_toolOverlap;
-                        tool.toolOffset = Properties.Vehicle.Default.setVehicle_toolOffset;
-
-                        tool.lookAheadOffSetting = Properties.Vehicle.Default.setVehicle_toolLookAheadOff;
-                        tool.lookAheadOnSetting = Properties.Vehicle.Default.setVehicle_toolLookAheadOn;
-                        tool.turnOffDelay = Properties.Vehicle.Default.setVehicle_toolOffDelay;
-
-                        tool.toolMinUnappliedPixels = Properties.Vehicle.Default.setVehicle_minApplied;
-
-                        tool.toolTrailingHitchLength = Properties.Vehicle.Default.setTool_toolTrailingHitchLength;
-                        tool.toolTankTrailingHitchLength = Properties.Vehicle.Default.setVehicle_tankTrailingHitchLength;
-                        tool.hitchLength = Properties.Vehicle.Default.setVehicle_hitchLength;
-
-                        tool.isToolBehindPivot = Properties.Vehicle.Default.setTool_isToolBehindPivot;
-                        tool.isToolTrailing = Properties.Vehicle.Default.setTool_isToolTrailing;
-                        tool.isToolTBT = Properties.Vehicle.Default.setTool_isToolTBT;
-
-                        mc.isWorkSwitchEnabled = Properties.Settings.Default.setF_IsWorkSwitchEnabled;
-                        mc.isWorkSwitchActiveLow = Properties.Settings.Default.setF_IsWorkSwitchActiveLow;
-                        mc.isWorkSwitchManual = Properties.Settings.Default.setF_IsWorkSwitchManual;
-
-                        //Set width of section and positions for each section
-                        SectionSetPosition();
-
-                        //Calculate total width and each section width
-                        SectionCalcWidths();
-
-                        //enable disable manual buttons
-                        LineUpManualBtns();
-
-                        return true;
-                    }
-                }
-                catch (Exception e) //FormatException e || IndexOutOfRangeException e2)
-                {
-                    WriteErrorLog("pen Tool" + e.ToString());
-
-                    //vehicle is corrupt, reload with all default information
-                    Properties.Settings.Default.Reset();
-                    Properties.Settings.Default.Save();
-                    MessageBox.Show(gStr.gsProgramWillResetToRecoverPleaseRestart, gStr.gsFileError, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    Application.Restart();
-                    Environment.Exit(0);
-                    return false;
-                }
-            }    //cancelled out of open file
-        }//end of open file
-
-        //function that save vehicle and section settings
-        public void FileSaveEnvironment(string FileName)
-        {
-                envFileName = Path.GetFileNameWithoutExtension(FileName);
-                Properties.Vehicle.Default.setVehicle_envName = envFileName;
-                Properties.Vehicle.Default.Save();
-
-            using (StreamWriter writer = new StreamWriter(FileName))
-            {
-                writer.WriteLine("Version," + Application.ProductVersion.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("Culture," + Properties.Settings.Default.setF_culture.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("CamPitch," + Properties.Settings.Default.setDisplay_camPitch.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsBatmanOn," + Properties.Settings.Default.setDisplay_isBatmanOn.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("LightBarCMPerPixel," + Properties.Settings.Default.setDisplay_lightbarCmPerPixel.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("LineWidth," + Properties.Settings.Default.setDisplay_lineWidth.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("IsCompassOn," + Properties.Settings.Default.setMenu_isCompassOn.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsGridOn," + Properties.Settings.Default.setMenu_isGridOn.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsLightBarOn," + Properties.Settings.Default.setMenu_isLightbarOn.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsLogNMEA," + Properties.Settings.Default.setMenu_isLogNMEA.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsMetric," + Properties.Settings.Default.setMenu_isMetric.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsOGLZoom," + Properties.Settings.Default.setMenu_isOGLZoomOn.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("IsPurePursuitLineOn," + Properties.Settings.Default.setMenu_isPureOn.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsGuideLinesOn," + Properties.Settings.Default.setMenu_isSideGuideLines.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsSimulatorOn," + Properties.Settings.Default.setMenu_isSimulatorOn.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsSkyOn," + Properties.Settings.Default.setMenu_isSkyOn.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsSpeedoOn," + Properties.Settings.Default.setMenu_isSpeedoOn.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsUTurnAlwaysOn," + Properties.Settings.Default.setMenu_isUTurnAlwaysOn.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsAutoDayNightModeOn," + Properties.Settings.Default.setDisplay_isAutoDayNight.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("StartFullScreen," + Properties.Settings.Default.setDisplay_isStartFullScreen.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsRTKOn," + Properties.Settings.Default.setGPS_isRTK.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("NMEA_Hz," + Properties.Settings.Default.setPort_NMEAHz.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-
-                writer.WriteLine("IsNtripCasterIP," + Properties.Settings.Default.setNTRIP_casterIP.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripCasterPort," + Properties.Settings.Default.setNTRIP_casterPort.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripCasterURL," + Properties.Settings.Default.setNTRIP_casterURL.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripGGAManual," + Properties.Settings.Default.setNTRIP_isGGAManual.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripOn," + Properties.Settings.Default.setNTRIP_isOn.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripTCP," + Properties.Settings.Default.setNTRIP_isTCP.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripManualLat," + Properties.Settings.Default.setNTRIP_manualLat.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripManualLon," + Properties.Settings.Default.setNTRIP_manualLon.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripMount," + Properties.Settings.Default.setNTRIP_mount.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripGGAInterval," + Properties.Settings.Default.setNTRIP_sendGGAInterval.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripSendToUDPPort," + Properties.Settings.Default.setNTRIP_sendToUDPPort.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripUserName," + Properties.Settings.Default.setNTRIP_userName.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsNtripUserPassword," + Properties.Settings.Default.setNTRIP_userPassword.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("IsUDPOn," + Properties.Settings.Default.setUDP_isOn.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("GPSSimLatitude," + Properties.Settings.Default.setGPS_SimLatitude.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("GPSSimLongitude" + "," + Properties.Settings.Default.setGPS_SimLongitude.ToString(CultureInfo.InvariantCulture));
-
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-
-
-                writer.WriteLine("FieldColorDay," + Properties.Settings.Default.setDisplay_colorFieldDay.ToArgb().ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("SectionColorDay," + Properties.Settings.Default.setDisplay_colorSectionsDay.ToArgb().ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("FieldColorNight," + Properties.Settings.Default.setDisplay_colorFieldNight.ToArgb().ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("SectionColorNight," + Properties.Settings.Default.setDisplay_colorSectionsNight.ToArgb().ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("DayColor," + Properties.Settings.Default.setDisplay_colorDayMode.ToArgb().ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("NightColor," + Properties.Settings.Default.setDisplay_colorNightMode.ToArgb().ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsSimple," + Properties.Settings.Default.setDisplay_isSimple.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("IsDayMode," + Properties.Settings.Default.setDisplay_isDayMode.ToString(CultureInfo.InvariantCulture));
-                writer.WriteLine("CustomColors," + Properties.Settings.Default.setDisplay_customColors.ToString(CultureInfo.InvariantCulture));
-
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-                writer.WriteLine("Empty," + "10");
-            }
-
-                //little show to say saved and where
-                var form = new FormTimedMessage(3000, gStr.gsSavedInFolder, envDirectory);
-                form.Show();
-            
-        }
-
-        //function to open a previously saved field
-        public DialogResult FileOpenEnvironment(string fileName)
-        {
-            //make sure the file if fully valid and vehicle matches sections
-            using (StreamReader reader = new StreamReader(fileName))
-            {
-                try
-                {
-                    string line;
-                    Properties.Vehicle.Default.setVehicle_envName = fileName;
-                    string[] words;
-                    line = reader.ReadLine(); words = line.Split(',');
-
-
-                    string vers = words[1].Replace('.', '0');
-                    int fileVersion = int.Parse(vers, CultureInfo.InvariantCulture);
-
-                    string assemblyVersion = Application.ProductVersion.ToString(CultureInfo.InvariantCulture);
-                    assemblyVersion = assemblyVersion.Replace('.', '0');
-                    int appVersion = int.Parse(assemblyVersion, CultureInfo.InvariantCulture);
-
-                    appVersion /= 100;
-                    fileVersion /= 100;
-
-                    if (fileVersion < appVersion)
-                    {
-                        var form = new FormTimedMessage(5000, gStr.gsFileError, gStr.gsMustBeVersion + Application.ProductVersion.ToString(CultureInfo.InvariantCulture) + " or higher");
-                        form.Show();
-                        return DialogResult.Abort;
-                    }
-
-                    else
-                    {
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setF_culture = (words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setDisplay_camPitch = double.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setDisplay_isBatmanOn = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setDisplay_lightbarCmPerPixel = int.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setDisplay_lineWidth = int.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_isCompassOn = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_isGridOn = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_isLightbarOn = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_isLogNMEA = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_isMetric = bool.Parse(words[1]);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_isOGLZoomOn = int.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_isPureOn = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_isSideGuideLines = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_isSimulatorOn = bool.Parse(words[1]);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_isSkyOn = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_isSpeedoOn = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_isUTurnAlwaysOn = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setDisplay_isAutoDayNight = bool.Parse(words[1]);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setDisplay_isStartFullScreen = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setGPS_isRTK = bool.Parse(words[1]);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        //if (words[0] == "Empty") Properties.Settings.Default.setPort_NMEAHz = 5;
-                        Properties.Settings.Default.setPort_NMEAHz = int.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_casterIP = words[1];
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_casterPort = int.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_casterURL = words[1];
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_isGGAManual = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_isOn = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_isTCP = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_manualLat = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_manualLon = double.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_mount = (words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_sendGGAInterval = int.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_sendToUDPPort = int.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_userName = (words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setNTRIP_userPassword = (words[1]);
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setUDP_isOn = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setGPS_SimLatitude = double.Parse(words[1], CultureInfo.InvariantCulture);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setGPS_SimLongitude = double.Parse(words[1], CultureInfo.InvariantCulture);
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setDisplay_colorFieldDay = Color.FromArgb(int.Parse(words[1], CultureInfo.InvariantCulture));
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setDisplay_colorSectionsDay = Color.FromArgb(int.Parse(words[1], CultureInfo.InvariantCulture));
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setDisplay_colorFieldNight = Color.FromArgb(int.Parse(words[1], CultureInfo.InvariantCulture));
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setDisplay_colorSectionsNight = Color.FromArgb(int.Parse(words[1], CultureInfo.InvariantCulture));
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setDisplay_colorDayMode = Color.FromArgb(int.Parse(words[1], CultureInfo.InvariantCulture));
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setDisplay_colorNightMode = Color.FromArgb(int.Parse(words[1], CultureInfo.InvariantCulture));
-
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setDisplay_isSimple = bool.Parse(words[1]);
-                        line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setDisplay_isDayMode = bool.Parse(words[1]);
-
-                        line = reader.ReadLine();
-                        Properties.Settings.Default.setDisplay_customColors = line.Substring(13);
-
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-
-                        //fill in the current variables with restored data
-                        envFileName = Path.GetFileNameWithoutExtension(fileName);
-                        Properties.Vehicle.Default.setVehicle_envName = envFileName;
-
-                        Properties.Settings.Default.Save();
-                        Properties.Vehicle.Default.Save();
-                    }
-
-                    return DialogResult.OK;
-                }
-                catch (Exception e) //FormatException e || IndexOutOfRangeException e2)
-                {
-                    WriteErrorLog("Open Vehicle" + e.ToString());
-
-                    //vehicle is corrupt, reload with all default information
-                    Properties.Settings.Default.Reset();
-                    Properties.Settings.Default.Save();
-                    MessageBox.Show(gStr.gsProgramWillResetToRecoverPleaseRestart, gStr.gsLoadEnvironment, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    Application.Restart();
-                    Environment.Exit(0);
-                    return DialogResult.Cancel;
-                }
-            }
-        }//end of open file
 
         //function to open a previously saved field, resume, open exisiting, open named field
         public void FileOpenField(string _openType)
@@ -1419,15 +355,14 @@ namespace AgOpenGPS
 
                     currentFieldDirectory = line.Trim();
 
+                    displayFieldName = currentFieldDirectory;
+
                     //Offset header
                     line = reader.ReadLine();
 
                     //read the Offsets 
                     line = reader.ReadLine();
                     string[] offs = line.Split(',');
-
-                    //create a new grid
-                    worldGrid.CreateWorldGrid(pn.fix.northing, pn.fix.easting);
 
                     //convergence angle update
                     if (!reader.EndOfStream)
@@ -1446,6 +381,16 @@ namespace AgOpenGPS
                         pn.latStart = double.Parse(offs[0], CultureInfo.InvariantCulture);
                         pn.lonStart = double.Parse(offs[1], CultureInfo.InvariantCulture);
 
+                        if (timerSim.Enabled)
+                        {
+                            pn.latitude = pn.latStart;
+                            pn.longitude = pn.lonStart;
+
+                            sim.latitude = Properties.Settings.Default.setGPS_SimLatitude = pn.latitude;
+                            sim.longitude = Properties.Settings.Default.setGPS_SimLongitude = pn.longitude;
+                            Properties.Settings.Default.Save();
+                        }
+
                         pn.SetLocalMetersPerDegree();
                     }
                 }
@@ -1456,7 +401,7 @@ namespace AgOpenGPS
 
                     var form = new FormTimedMessage(2000, gStr.gsFieldFileIsCorrupt, gStr.gsChooseADifferentField);
 
-                    form.Show();
+                    form.Show(this);
                     JobClose();
                     return;
                 }
@@ -1508,7 +453,7 @@ namespace AgOpenGPS
             if (!File.Exists(fileAndDirectory))
             {
                 var form = new FormTimedMessage(2000, gStr.gsMissingSectionFile, gStr.gsButFieldIsLoaded);
-                form.Show();
+                form.Show(this);
                 //return;
             }
             else
@@ -1534,6 +479,8 @@ namespace AgOpenGPS
                             int verts = int.Parse(line);
 
                             section[0].triangleList = new List<vec3>();
+                            section[0].triangleList.Capacity = verts + 1;
+
                             section[0].patchList.Add(section[0].triangleList);
 
 
@@ -1567,8 +514,8 @@ namespace AgOpenGPS
                     {
                         WriteErrorLog("Section file" + e.ToString());
 
-                        var form = new FormTimedMessage(2000, gStr.gsSectionFileIsCorrupt, gStr.gsButFieldIsLoaded);
-                        form.Show();
+                        var form = new FormTimedMessage(2000, "Section File is Corrupt", gStr.gsButFieldIsLoaded);
+                        form.Show(this);
                     }
 
                 }
@@ -1589,7 +536,7 @@ namespace AgOpenGPS
             if (!File.Exists(fileAndDirectory))
             {
                 var form = new FormTimedMessage(2000, gStr.gsMissingContourFile, gStr.gsButFieldIsLoaded);
-                form.Show();
+                form.Show(this);
                 //return;
             }
             
@@ -1612,6 +559,7 @@ namespace AgOpenGPS
                             vec3 vecFix = new vec3(0, 0, 0);
 
                             ct.ptList = new List<vec3>();
+                            ct.ptList.Capacity = verts + 1;
                             ct.stripList.Add(ct.ptList);
 
                             for (int v = 0; v < verts; v++)
@@ -1630,7 +578,7 @@ namespace AgOpenGPS
                         WriteErrorLog("Loading Contour file" + e.ToString());
 
                         var form = new FormTimedMessage(2000, gStr.gsContourFileIsCorrupt, gStr.gsButFieldIsLoaded);
-                        form.Show();
+                        form.Show(this);
                     }
                 }
             }
@@ -1643,7 +591,7 @@ namespace AgOpenGPS
             if (!File.Exists(fileAndDirectory))
             {
                 var form = new FormTimedMessage(2000, gStr.gsMissingFlagsFile, gStr.gsButFieldIsLoaded);
-                form.Show();
+                form.Show(this);
             }
 
             else
@@ -1707,7 +655,7 @@ namespace AgOpenGPS
                     catch (Exception e)
                     {
                         var form = new FormTimedMessage(2000, gStr.gsFlagFileIsCorrupt, gStr.gsButFieldIsLoaded);
-                        form.Show();
+                        form.Show(this);
                         WriteErrorLog("FieldOpen, Loading Flags, Corrupt Flag File" + e.ToString());
                     }
                 }
@@ -1715,11 +663,11 @@ namespace AgOpenGPS
 
             //Boundaries
             //Either exit or update running save
-                fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\Boundary.txt";
+            fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\Boundary.txt";
             if (!File.Exists(fileAndDirectory))
             {
                 var form = new FormTimedMessage(2000, gStr.gsMissingBoundaryFile, gStr.gsButFieldIsLoaded);
-                form.Show();
+                form.Show(this);
             }
             else
             {
@@ -1800,7 +748,6 @@ namespace AgOpenGPS
                                 }
 
                                 bnd.bndArr[k].PreCalcBoundaryEarLines();
-
                             }
                             else
                             {
@@ -1813,16 +760,15 @@ namespace AgOpenGPS
 
                         CalculateMinMax();
                         turn.BuildTurnLines();
+                        if (bnd.bndArr.Count > 0) btnMakeLinesFromBoundary.Visible = true;
                     }
 
                     catch (Exception e)
                     {
                         var form = new FormTimedMessage(2000, gStr.gsBoundaryLineFilesAreCorrupt, gStr.gsButFieldIsLoaded);
-                        form.Show();
+                        form.Show(this);
                         WriteErrorLog("Load Boundary Line" + e.ToString());
                     }
-
-
                 }
             }
 
@@ -1864,9 +810,6 @@ namespace AgOpenGPS
                                         double.Parse(words[1], CultureInfo.InvariantCulture),
                                         double.Parse(words[2], CultureInfo.InvariantCulture));
                                     hd.headArr[k].hdLine.Add(vecPt);
-
-                                    if (bnd.bndArr[0].IsPointInsideBoundary(vecPt)) hd.headArr[0].isDrawList.Add(true);
-                                    else hd.headArr[0].isDrawList.Add(false);
                                 }
                                 hd.headArr[k].PreCalcHeadLines();
                             }
@@ -1876,17 +819,213 @@ namespace AgOpenGPS
                     catch (Exception e)
                     {
                         var form = new FormTimedMessage(2000, "Headland File is Corrupt", "But Field is Loaded");
-                        form.Show();
+                        form.Show(this);
                         WriteErrorLog("Load Headland Loop" + e.ToString());
                     }
                 }
             }
 
             //if (hd.headArr[0].hdLine.Count > 0) hd.isOn = true;
-             hd.isOn = false;
+             //hd.isOn = false;
 
             //if (hd.isOn) btnHeadlandOnOff.Image = Properties.Resources.HeadlandOn;
-            btnHeadlandOnOff.Image = Properties.Resources.HeadlandOff;
+            //btnHeadlandOnOff.Image = Properties.Resources.HeadlandOff;
+
+            if (hd.headArr[0].hdLine.Count > 0)
+            {
+                hd.isOn = true;
+                btnHeadlandOnOff.Image = Properties.Resources.HeadlandOn;
+                btnHeadlandOnOff.Visible = true;
+                btnHydLift.Visible = true;
+                btnHydLift.Image = Properties.Resources.HydraulicLiftOff;
+
+            }
+            else
+            {
+                hd.isOn = false;
+                btnHeadlandOnOff.Image = Properties.Resources.HeadlandOff;
+                btnHeadlandOnOff.Visible = false;
+                btnHydLift.Visible = false;
+            }
+
+            //trams ---------------------------------------------------------------------------------
+            fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\Tram.txt";
+
+            tram.tramBndOuterArr?.Clear();
+            tram.tramBndInnerArr?.Clear();
+            tram.tramList?.Clear();
+            tram.displayMode = 0;
+            btnTramDisplayMode.Visible = false;
+
+            if (File.Exists(fileAndDirectory))
+            {
+                using (StreamReader reader = new StreamReader(fileAndDirectory))
+                {
+                    try
+                    {
+                        //read header
+                        line = reader.ReadLine();//$Tram
+
+                        //outer track of boundary tram
+                        line = reader.ReadLine();
+                        if (line != null)
+                        {
+                            int numPoints = int.Parse(line);
+
+                            if (numPoints > 0)
+                            {
+                                //load the line
+                                for (int i = 0; i < numPoints; i++)
+                                {
+                                    line = reader.ReadLine();
+                                    string[] words = line.Split(',');
+                                    vec2 vecPt = new vec2(
+                                    double.Parse(words[0], CultureInfo.InvariantCulture),
+                                    double.Parse(words[1], CultureInfo.InvariantCulture));
+
+                                    tram.tramBndOuterArr.Add(vecPt);
+                                }
+                                tram.displayMode = 1;
+                            }
+
+                            //inner track of boundary tram
+                            line = reader.ReadLine();
+                            numPoints = int.Parse(line);
+
+                            if (numPoints > 0)
+                            {
+                                //load the line
+                                for (int i = 0; i < numPoints; i++)
+                                {
+                                    line = reader.ReadLine();
+                                    string[] words = line.Split(',');
+                                    vec2 vecPt = new vec2(
+                                    double.Parse(words[0], CultureInfo.InvariantCulture),
+                                    double.Parse(words[1], CultureInfo.InvariantCulture));
+
+                                    tram.tramBndInnerArr.Add(vecPt);
+                                }
+                            }
+
+                            if (!reader.EndOfStream)
+                            {
+                                line = reader.ReadLine();
+                                int numLines = int.Parse(line);
+
+                                for (int k = 0; k < numLines; k++)
+                                {
+                                    line = reader.ReadLine();
+                                    numPoints = int.Parse(line);
+
+                                    tram.tramArr = new List<vec2>();
+                                    tram.tramList.Add(tram.tramArr);
+
+                                    for (int i = 0; i < numPoints; i++)
+                                    {
+                                        line = reader.ReadLine();
+                                        string[] words = line.Split(',');
+                                        vec2 vecPt = new vec2(
+                                        double.Parse(words[0], CultureInfo.InvariantCulture),
+                                        double.Parse(words[1], CultureInfo.InvariantCulture));
+
+                                        tram.tramArr.Add(vecPt);
+                                    }
+                                }
+                            }
+                        }
+
+                        //        bnd.bndArr[k].CalculateBoundaryArea();
+                        //        bnd.bndArr[k].PreCalcBoundaryLines();
+                        //        if (bnd.bndArr[k].area > 0) bnd.bndArr[k].isSet = true;
+                        //        else bnd.bndArr[k].isSet = false;
+
+                        //        double delta = 0;
+                        //        bnd.bndArr[k].bndLineEar?.Clear();
+
+                        //        for (int i = 0; i < bnd.bndArr[k].bndLine.Count; i++)
+                        //        {
+                        //            if (i == 0)
+                        //            {
+                        //                bnd.bndArr[k].bndLineEar.Add(new vec2(bnd.bndArr[k].bndLine[i].easting, bnd.bndArr[k].bndLine[i].northing));
+                        //                continue;
+                        //            }
+                        //            delta += (bnd.bndArr[k].bndLine[i - 1].heading - bnd.bndArr[k].bndLine[i].heading);
+                        //            if (Math.Abs(delta) > 0.04)
+                        //            {
+                        //                bnd.bndArr[k].bndLineEar.Add(new vec2(bnd.bndArr[k].bndLine[i].easting, bnd.bndArr[k].bndLine[i].northing));
+                        //                delta = 0;
+                        //            }
+                        //        }
+
+                        //        bnd.bndArr[k].PreCalcBoundaryEarLines();
+                        //    }
+                        //    else
+                        //    {
+                        //        bnd.bndArr.RemoveAt(bnd.bndArr.Count - 1);
+                        //        turn.turnArr.RemoveAt(bnd.bndArr.Count - 1);
+                        //        k = k - 1;
+                        //    }
+                        //    if (reader.EndOfStream) break;
+                        //}
+
+                        FixTramModeButton();
+                    }
+
+                    catch (Exception e)
+                    {
+                        var form = new FormTimedMessage(2000, "Tram is corrupt", gStr.gsButFieldIsLoaded);
+                        form.Show(this);
+                        WriteErrorLog("Load Boundary Line" + e.ToString());
+                    }
+                }
+            }
+
+
+            FixPanelsAndMenus(true);
+            SetZoom();
+
+            //Recorded Path
+            fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\RecPath.txt";
+            if (File.Exists(fileAndDirectory))
+            {
+                using (StreamReader reader = new StreamReader(fileAndDirectory))
+                {
+                    try
+                    {
+                        //read header
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        int numPoints = int.Parse(line);
+                        recPath.recList.Clear();
+
+                        while (!reader.EndOfStream)
+                        {
+                            for (int v = 0; v < numPoints; v++)
+                            {
+                                line = reader.ReadLine();
+                                string[] words = line.Split(',');
+                                CRecPathPt point = new CRecPathPt(
+                                    double.Parse(words[0], CultureInfo.InvariantCulture),
+                                    double.Parse(words[1], CultureInfo.InvariantCulture),
+                                    double.Parse(words[2], CultureInfo.InvariantCulture),
+                                    double.Parse(words[3], CultureInfo.InvariantCulture),
+                                    bool.Parse(words[4]));
+
+                                //add the point
+                                recPath.recList.Add(point);
+                            }
+                        }
+                    }
+
+                    catch (Exception e)
+                    {
+                        var form = new FormTimedMessage(2000, gStr.gsRecordedPathFileIsCorrupt, gStr.gsButFieldIsLoaded);
+                        form.Show(this);
+                        WriteErrorLog("Load Recorded Path" + e.ToString());
+                    }
+                }
+            }
+
 
         }//end of open file
 
@@ -1902,7 +1041,7 @@ namespace AgOpenGPS
             if (!isJobStarted)
             {
                 using (var form = new FormTimedMessage(3000, gStr.gsFieldNotOpen, gStr.gsCreateNewField))
-                { form.Show(); }
+                { form.Show(this); }
                 return;
             }
             string myFileName, dirField;
@@ -1947,7 +1086,7 @@ namespace AgOpenGPS
             //if (!isJobStarted)
             //{
             //    using (var form = new FormTimedMessage(3000, "Ooops, Job Not Started", "Start a Job First"))
-            //    { form.Show(); }
+            //    { form.Show(this); }
             //    return;
             //}
 
@@ -2145,6 +1284,59 @@ namespace AgOpenGPS
             }
         }
 
+        //save tram
+        public void FileSaveTram()
+        {
+            //get the directory and make sure it exists, create if not
+            string dirField = fieldsDirectory + currentFieldDirectory + "\\";
+
+            string directoryName = Path.GetDirectoryName(dirField);
+            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
+            { Directory.CreateDirectory(directoryName); }
+
+            //write out the file
+            using (StreamWriter writer = new StreamWriter(dirField + "Tram.Txt"))
+            {
+                writer.WriteLine("$Tram");
+
+                if (tram.tramBndOuterArr.Count > 0)
+                {
+                    //outer track of outer boundary tram
+                    writer.WriteLine(tram.tramBndOuterArr.Count.ToString(CultureInfo.InvariantCulture));
+
+                    for (int i = 0; i < tram.tramBndOuterArr.Count; i++)
+                    {
+                        writer.WriteLine(Math.Round(tram.tramBndOuterArr[i].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                            Math.Round(tram.tramBndOuterArr[i].northing, 3).ToString(CultureInfo.InvariantCulture));
+                    }
+
+                    //inner track of outer boundary tram
+                    writer.WriteLine(tram.tramBndInnerArr.Count.ToString(CultureInfo.InvariantCulture));
+
+                    for (int i = 0; i < tram.tramBndInnerArr.Count; i++)
+                    {
+                        writer.WriteLine(Math.Round(tram.tramBndInnerArr[i].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                            Math.Round(tram.tramBndInnerArr[i].northing, 3).ToString(CultureInfo.InvariantCulture));
+                    }
+                }
+
+                if (tram.tramList.Count > 0)
+                {
+                    writer.WriteLine(tram.tramList.Count.ToString(CultureInfo.InvariantCulture));
+                    for (int i = 0; i < tram.tramList.Count; i++)
+                    {
+                        writer.WriteLine(tram.tramList[i].Count.ToString(CultureInfo.InvariantCulture));
+                        for (int h = 0; h < tram.tramList[i].Count; h++)
+                        {
+                            writer.WriteLine(Math.Round(tram.tramList[i][h].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                                Math.Round(tram.tramList[i][h].northing, 3).ToString(CultureInfo.InvariantCulture));
+                        }
+                    }
+                }
+            }
+        }
+
+
         //save the headland
         public void FileSaveHeadland()
         {
@@ -2195,6 +1387,40 @@ namespace AgOpenGPS
                 //write paths # of sections
                 writer.WriteLine("$RecPath");
                 writer.WriteLine("0");
+            }
+        }
+
+        //save the recorded path
+        public void FileSaveRecPath()
+        {
+            //get the directory and make sure it exists, create if not
+            string dirField = fieldsDirectory + currentFieldDirectory + "\\";
+
+            string directoryName = Path.GetDirectoryName(dirField);
+            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
+            { Directory.CreateDirectory(directoryName); }
+
+            //string fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\RecPath.txt";
+            //if (!File.Exists(fileAndDirectory)) FileCreateRecPath();
+
+            //write out the file
+            using (StreamWriter writer = new StreamWriter((dirField + "RecPath.Txt")))
+            {
+                writer.WriteLine("$RecPath");
+                writer.WriteLine(recPath.recList.Count.ToString(CultureInfo.InvariantCulture));
+                if (recPath.recList.Count > 0)
+                {
+                    for (int j = 0; j < recPath.recList.Count; j++)
+                        writer.WriteLine(
+                            Math.Round(recPath.recList[j].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                            Math.Round(recPath.recList[j].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                            Math.Round(recPath.recList[j].heading, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                            Math.Round(recPath.recList[j].speed, 1).ToString(CultureInfo.InvariantCulture) + "," +
+                            (recPath.recList[j].autoBtnState).ToString());
+
+                    //Clear list
+                    //recPath.recList.Clear();
+                }
             }
         }
 
@@ -2335,7 +1561,7 @@ namespace AgOpenGPS
         //save nmea sentences
         public void FileSaveNMEA()
         {
-            using (StreamWriter writer = new StreamWriter((fieldsDirectory + "\\NMEA_log.txt"), true))
+            using (StreamWriter writer = new StreamWriter("zAOG_log.txt", true))
             {
                 writer.Write(pn.logNMEASentence.ToString());
             }
@@ -2505,6 +1731,51 @@ namespace AgOpenGPS
             kml.WriteStartElement("kml", "http://www.opengis.net/kml/2.2");
             kml.WriteStartElement("Document");
 
+            //Boundary  ----------------------------------------------------------------------
+            kml.WriteStartElement("Folder");
+            kml.WriteElementString("name", "Boundaries");
+
+            for (int i = 0; i < bnd.bndArr.Count; i++)
+            {
+                kml.WriteStartElement("Placemark");
+                if (i == 0) kml.WriteElementString("name", currentFieldDirectory);
+
+                //lineStyle
+                kml.WriteStartElement("Style");
+                kml.WriteStartElement("LineStyle");
+                if (i == 0) kml.WriteElementString("color", "ffdd00dd");
+                else kml.WriteElementString("color", "ff4d3ffd");
+                kml.WriteElementString("width", "4");
+                kml.WriteEndElement(); // <LineStyle>
+
+                kml.WriteStartElement("PolyStyle");
+                if (i == 0) kml.WriteElementString("color", "407f3f55");
+                else kml.WriteElementString("color", "703f38f1");
+                kml.WriteEndElement(); // <PloyStyle>
+                kml.WriteEndElement(); //Style
+
+                kml.WriteStartElement("Polygon");
+                kml.WriteElementString("tessellate", "1");
+                kml.WriteStartElement("outerBoundaryIs");
+                kml.WriteStartElement("LinearRing");
+
+                //coords
+                kml.WriteStartElement("coordinates");
+                string bndPts = "";
+                if (bnd.bndArr[i].bndLine.Count > 3)
+                    bndPts = GetBoundaryPointsLatLon(i);
+                kml.WriteRaw(bndPts);
+                kml.WriteEndElement(); // <coordinates>
+
+                kml.WriteEndElement(); // <Linear>
+                kml.WriteEndElement(); // <OuterBoundary>
+                kml.WriteEndElement(); // <Polygon>
+                kml.WriteEndElement(); // <Placemark>
+            }
+
+            kml.WriteEndElement(); // <Folder>  
+            //End of Boundary
+
             //guidance lines AB
             kml.WriteStartElement("Folder");
             kml.WriteElementString("name", "AB_Lines");
@@ -2530,8 +1801,10 @@ namespace AgOpenGPS
                 kml.WriteElementString("tessellate", "1");
                 kml.WriteStartElement("coordinates");
 
-                //linePts = GetUTMToLatLon(ABLine.lineArr[i].ref1.easting, ABLine.lineArr[i].ref1.northing);
-                //linePts += GetUTMToLatLon(ABLine.lineArr[i].ref2.easting, ABLine.lineArr[i].ref2.northing);
+                linePts = pn.GetLocalToWSG84_KML(ABLine.lineArr[i].origin.easting - (Math.Sin(ABLine.lineArr[i].heading) * ABLine.abLength),
+                    ABLine.lineArr[i].origin.northing - (Math.Cos(ABLine.lineArr[i].heading) * ABLine.abLength));
+                linePts += pn.GetLocalToWSG84_KML(ABLine.lineArr[i].origin.easting + (Math.Sin(ABLine.lineArr[i].heading) * ABLine.abLength),
+                    ABLine.lineArr[i].origin.northing + (Math.Cos(ABLine.lineArr[i].heading) * ABLine.abLength));
                 kml.WriteRaw(linePts);
 
                 kml.WriteEndElement(); // <coordinates>
@@ -2579,6 +1852,40 @@ namespace AgOpenGPS
             }
             kml.WriteEndElement(); // <Folder>   
 
+            //Recorded Path
+            kml.WriteStartElement("Folder");
+            kml.WriteElementString("name", "Recorded Path");
+            kml.WriteElementString("visibility", "1");
+
+            linePts = "";
+            kml.WriteStartElement("Placemark");
+            kml.WriteElementString("visibility", "1");
+
+            kml.WriteElementString("name", "Path " + 1);
+            kml.WriteStartElement("Style");
+
+            kml.WriteStartElement("LineStyle");
+            kml.WriteElementString("color", "ff44ffff");
+            kml.WriteElementString("width", "2");
+            kml.WriteEndElement(); // <LineStyle>
+            kml.WriteEndElement(); //Style
+
+            kml.WriteStartElement("LineString");
+            kml.WriteElementString("tessellate", "1");
+            kml.WriteStartElement("coordinates");
+
+            for (int j = 0; j < recPath.recList.Count; j++)
+            {
+                linePts += pn.GetLocalToWSG84_KML(recPath.recList[j].easting, recPath.recList[j].northing);
+            }
+            kml.WriteRaw(linePts);
+
+            kml.WriteEndElement(); // <coordinates>
+            kml.WriteEndElement(); // <LineString>
+
+            kml.WriteEndElement(); // <Placemark>
+            kml.WriteEndElement(); // <Folder>
+
             //flags  *************************************************************************
             kml.WriteStartElement("Folder");
             kml.WriteElementString("name", "Flags");
@@ -2601,7 +1908,7 @@ namespace AgOpenGPS
                 kml.WriteEndElement(); //IconStyle
                 kml.WriteEndElement(); //Style
 
-                kml.WriteElementString("name", (i+1).ToString());
+                kml.WriteElementString("name", ((i + 1).ToString() + " " + flagPts[i].notes));
                 kml.WriteStartElement("Point");
                 kml.WriteElementString("coordinates", flagPts[i].longitude.ToString(CultureInfo.InvariantCulture) +
                     "," + flagPts[i].latitude.ToString(CultureInfo.InvariantCulture) + ",0");
@@ -2610,51 +1917,6 @@ namespace AgOpenGPS
             }
             kml.WriteEndElement(); // <Folder>   
             //End of Flags
-
-                //Boundary  ----------------------------------------------------------------------
-            kml.WriteStartElement("Folder");
-            kml.WriteElementString("name", "Boundaries");
-
-            for (int i = 0; i < bnd.bndArr.Count; i++)
-            {
-                kml.WriteStartElement("Placemark");
-                if (i == 0) kml.WriteElementString("name", currentFieldDirectory);
-
-                //lineStyle
-                kml.WriteStartElement("Style");
-                kml.WriteStartElement("LineStyle");
-                if (i == 0) kml.WriteElementString("color", "ffdd00dd");
-                else kml.WriteElementString("color", "ff4d3ffd");
-                kml.WriteElementString("width", "4");
-                kml.WriteEndElement(); // <LineStyle>
-
-                kml.WriteStartElement("PolyStyle");
-                if (i == 0)   kml.WriteElementString("color", "407f3f55");
-                else kml.WriteElementString("color", "703f38f1");
-                kml.WriteEndElement(); // <PloyStyle>
-                kml.WriteEndElement(); //Style
-
-                kml.WriteStartElement("Polygon");
-                kml.WriteElementString("tessellate", "1");
-                kml.WriteStartElement("outerBoundaryIs");
-                kml.WriteStartElement("LinearRing");
-
-                //coords
-                kml.WriteStartElement("coordinates");
-                string bndPts = "";
-                if (bnd.bndArr[i].bndLine.Count > 3)
-                    bndPts = GetBoundaryPointsLatLon(i);
-                kml.WriteRaw(bndPts);
-                kml.WriteEndElement(); // <coordinates>
-
-                kml.WriteEndElement(); // <Linear>
-                kml.WriteEndElement(); // <OuterBoundary>
-                kml.WriteEndElement(); // <Polygon>
-                kml.WriteEndElement(); // <Placemark>
-            }
-
-            kml.WriteEndElement(); // <Folder>  
-            //End of Boundary
 
             //Sections  ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
             kml.WriteStartElement("Folder");
@@ -2739,7 +2001,6 @@ namespace AgOpenGPS
             //Write the XML to file and close the kml
             kml.Close();
         }
-
 
         public string GetBoundaryPointsLatLon(int bndNum)
         {

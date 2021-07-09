@@ -54,6 +54,7 @@
             0,
             0});
             this.nudPass.Name = "nudPass";
+            this.nudPass.ReadOnly = true;
             this.nudPass.Size = new System.Drawing.Size(120, 85);
             this.nudPass.TabIndex = 5;
             this.nudPass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -62,7 +63,7 @@
             0,
             0,
             0});
-            this.nudPass.Enter += new System.EventHandler(this.NudPass_Enter);
+            this.nudPass.Click += new System.EventHandler(this.NudPass_Click);
             // 
             // lblHz
             // 
@@ -79,6 +80,9 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOk.BackColor = System.Drawing.Color.Transparent;
+            this.btnOk.FlatAppearance.BorderSize = 0;
+            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.btnOk.Image = global::AgOpenGPS.Properties.Resources.OK64;
             this.btnOk.Location = new System.Drawing.Point(341, 361);
@@ -87,7 +91,7 @@
             this.btnOk.Size = new System.Drawing.Size(129, 80);
             this.btnOk.TabIndex = 1;
             this.btnOk.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.UseVisualStyleBackColor = false;
             this.btnOk.Click += new System.EventHandler(this.BtnOk_Click);
             // 
             // nudSpacing
@@ -106,6 +110,7 @@
             0,
             0});
             this.nudSpacing.Name = "nudSpacing";
+            this.nudSpacing.ReadOnly = true;
             this.nudSpacing.Size = new System.Drawing.Size(166, 85);
             this.nudSpacing.TabIndex = 252;
             this.nudSpacing.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -114,7 +119,7 @@
             0,
             0,
             0});
-            this.nudSpacing.Enter += new System.EventHandler(this.NudSpacing_Enter);
+            this.nudSpacing.Click += new System.EventHandler(this.NudSpacing_Click);
             // 
             // label1
             // 
@@ -131,7 +136,10 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BackColor = System.Drawing.Color.Transparent;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnCancel.Image = global::AgOpenGPS.Properties.Resources.Cancel64;
@@ -141,12 +149,14 @@
             this.btnCancel.Size = new System.Drawing.Size(91, 81);
             this.btnCancel.TabIndex = 2;
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // FormMakeBndCon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.BackgroundImage = global::AgOpenGPS.Properties.Resources.MakeBoundaryContour;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(484, 461);

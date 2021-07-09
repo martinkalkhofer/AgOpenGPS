@@ -1,8 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Drawing;
-using System.Globalization;
-using System.Threading;
+﻿using System;
 using System.Windows.Forms;
 
 namespace AgOpenGPS
@@ -15,7 +11,7 @@ namespace AgOpenGPS
 
             InitializeComponent();
 
-            this.Text = gStr.gsEnteraValue;
+            this.Text = "Enter a Value";
             //fill in the display
             keyboardString.Text = currentString.ToString();
         }
@@ -84,7 +80,7 @@ namespace AgOpenGPS
             }
 
             //if its a character just add it
-            else 
+            else
             {
                 keyboardString.Text += e.KeyChar;
             }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
@@ -21,8 +20,6 @@ namespace AgOpenGPS
             btnJobOpen.Text = gStr.gsOpen;
             btnJobNew.Text = gStr.gsNew;
             btnJobResume.Text = gStr.gsResume;
-
-            label1.Text = gStr.gsLastFieldUsed;
 
             this.Text = gStr.gsStartNewField;
         }
@@ -57,6 +54,8 @@ namespace AgOpenGPS
                 textBox1.Text = "";
                 btnJobResume.Enabled = false;
                 mf.currentFieldDirectory = "";
+
+
                 Properties.Settings.Default.setF_CurrentDir = "";
                 Properties.Settings.Default.Save();
             }
@@ -64,18 +63,18 @@ namespace AgOpenGPS
             {
                 textBox1.Text = mf.currentFieldDirectory;
             }
+
+            mf.CloseTopMosts();
         }
 
         private void btnJobTouch_Click(object sender, EventArgs e)
         {
             mf.filePickerFileAndDirectory = "";
 
-            using (var form = new FormTouchPick(mf))
+            using (FormTouchPick form = new FormTouchPick(mf))
             {
-                var result = form.ShowDialog();
-
                 //returns full field.txt file dir name
-                if (result == DialogResult.Yes)
+                if (form.ShowDialog() == DialogResult.Yes)
                 {
                     mf.FileOpenField(mf.filePickerFileAndDirectory);
                     Close();
@@ -91,12 +90,10 @@ namespace AgOpenGPS
         {
             mf.filePickerFileAndDirectory = "";
 
-            using (var form = new FormFilePicker(mf))
+            using (FormFilePicker form = new FormFilePicker(mf))
             {
-                var result = form.ShowDialog();
-
                 //returns full field.txt file dir name
-                if (result == DialogResult.Yes)
+                if (form.ShowDialog(this) == DialogResult.Yes)
                 {
                     mf.FileOpenField(mf.filePickerFileAndDirectory);
                     Close();
@@ -117,9 +114,9 @@ namespace AgOpenGPS
 
             foreach (string dir in dirs)
             {
-                double northingOffset = 0;
-                double eastingOffset = 0;
-                
+                double lat = 0;
+                double lon = 0;
+
                 string fieldDirectory = Path.GetFileName(dir);
                 string filename = dir + "\\Field.txt";
                 string line;
@@ -132,7 +129,7 @@ namespace AgOpenGPS
                         try
                         {
                             //Date time line
-                            for (int i = 0; i < 4; i++)
+                            for (int i = 0; i < 8; i++)
                             {
                                 line = reader.ReadLine();
                             }
@@ -143,99 +140,30 @@ namespace AgOpenGPS
                                 line = reader.ReadLine();
                                 string[] offs = line.Split(',');
 
-                                eastingOffset = (double.Parse(offs[0], CultureInfo.InvariantCulture));
-                                northingOffset = (double.Parse(offs[1], CultureInfo.InvariantCulture));
+                                lat = (double.Parse(offs[0], CultureInfo.InvariantCulture));
+                                lon = (double.Parse(offs[1], CultureInfo.InvariantCulture));
+
+                                double dist = GetDistance(lon, lat, mf.pn.longitude, mf.pn.latitude);
+
+                                if (dist < 500)
+                                {
+                                    numFields++;
+                                    if (string.IsNullOrEmpty(infieldList))
+                                        infieldList += Path.GetFileName(dir);
+                                    else
+                                        infieldList += "," + Path.GetFileName(dir);
+                                }
                             }
+
                         }
                         catch (Exception)
                         {
-                            var form = new FormTimedMessage(2000, gStr.gsFieldFileIsCorrupt, gStr.gsChooseADifferentField);
+                            FormTimedMessage form = new FormTimedMessage(2000, gStr.gsFieldFileIsCorrupt, gStr.gsChooseADifferentField);
                         }
                     }
 
-                    //grab the boundary
-                    filename = dir + "\\Boundary.txt";
-
-                    if (File.Exists(filename))
-                    {
-                        List<vec3> pointList = new List<vec3>();
-
-                        using (StreamReader reader = new StreamReader(filename))
-                        {
-                            try
-                            {
-
-                                //read header
-                                line = reader.ReadLine();//Boundary
-
-                                if (!reader.EndOfStream) //empty boundary field
-                                {
-                                    //True or False OR points from older boundary files
-                                    line = reader.ReadLine();
 
 
-                                    //Check for older boundary files, then above line string is num of points
-                                    if (line == "True" || line == "False")
-                                    {
-                                        line = reader.ReadLine(); //number of points
-                                    }
-
-                                    //Check for latest boundary files, then above line string is num of points
-                                    if (line == "True" || line == "False")
-                                    {
-                                        line = reader.ReadLine(); //number of points
-                                    }
-
-                                    int numPoints = int.Parse(line);
-                                    vec2[] linePoints = new vec2[numPoints];
-
-                                    if (numPoints > 0)
-                                    {
-                                        //load the line
-                                        for (int i = 0; i < numPoints; i++)
-                                        {
-                                            line = reader.ReadLine();
-                                            string[] words = line.Split(',');
-                                            vec2 vecPt = new vec2(
-                                            double.Parse(words[0], CultureInfo.InvariantCulture) + eastingOffset,
-                                            double.Parse(words[1], CultureInfo.InvariantCulture) + northingOffset);
-
-                                            linePoints[i] = vecPt;
-                                        }
-
-                                        int j = linePoints.Length - 1;
-                                        bool oddNodes = false;
-                                        double x = mf.pn.fix.easting;
-                                        double y = mf.pn.fix.northing;
-
-                                        for (int i = 0; i < linePoints.Length; i++)
-                                        {
-                                            if ((linePoints[i].northing < y && linePoints[j].northing >= y
-                                            || linePoints[j].northing < y && linePoints[i].northing >= y)
-                                            && (linePoints[i].easting <= x || linePoints[j].easting <= x))
-                                            {
-                                                oddNodes ^= (linePoints[i].easting + (y - linePoints[i].northing) /
-                                                (linePoints[j].northing - linePoints[i].northing) * (linePoints[j].easting - linePoints[i].easting) < x);
-                                            }
-                                            j = i;
-                                        }
-
-                                        if (oddNodes)
-                                        {
-                                            numFields++;
-                                            if (string.IsNullOrEmpty(infieldList))
-                                                infieldList += Path.GetFileName(dir); 
-                                            else
-                                                infieldList += "," + Path.GetFileName(dir);
-                                        }
-                                    }
-                                }
-                            }
-                            catch (Exception)
-                            {
-                            }
-                        }
-                    }
                 }
             }
 
@@ -245,12 +173,10 @@ namespace AgOpenGPS
 
                 if (numFields > 1)
                 {
-                    using (var form = new FormDrivePicker(mf, infieldList))
+                    using (FormDrivePicker form = new FormDrivePicker(mf, infieldList))
                     {
-                        var result = form.ShowDialog();
-
                         //returns full field.txt file dir name
-                        if (result == DialogResult.Yes)
+                        if (form.ShowDialog(this) == DialogResult.Yes)
                         {
                             mf.FileOpenField(mf.filePickerFileAndDirectory);
                             Close();
@@ -270,10 +196,28 @@ namespace AgOpenGPS
             }
             else //no fields found
             {
-                var form2 = new FormTimedMessage(2000, gStr.gsNoFieldsFound, gStr.gsFieldNotOpen);
-                form2.Show();
+                FormTimedMessage form2 = new FormTimedMessage(2000, gStr.gsNoFieldsFound, gStr.gsFieldNotOpen);
+                form2.Show(this);
             }
 
+        }
+
+        public double GetDistance(double longitude, double latitude, double otherLongitude, double otherLatitude)
+        {
+            double d1 = latitude * (Math.PI / 180.0);
+            double num1 = longitude * (Math.PI / 180.0);
+            double d2 = otherLatitude * (Math.PI / 180.0);
+            double num2 = otherLongitude * (Math.PI / 180.0) - num1;
+            double d3 = Math.Pow(Math.Sin((d2 - d1) / 2.0), 2.0) + Math.Cos(d1) * Math.Cos(d2) * Math.Pow(Math.Sin(num2 / 2.0), 2.0);
+
+            return 6376500.0 * (2.0 * Math.Atan2(Math.Sqrt(d3), Math.Sqrt(1.0 - d3)));
+        }
+
+        private void btnFromKML_Click(object sender, EventArgs e)
+        {
+            //back to FormGPS
+            DialogResult = DialogResult.No;
+            Close();
         }
     }
 }

@@ -19,15 +19,7 @@ namespace AgOpenGPS
             InitializeComponent();
 
             label1.Text = gStr.gsEnterFieldName;
-            label2.Text = gStr.gsDateWillBeAdded;
             label3.Text = gStr.gsBasedOnField;
-            label4.Text = gStr.gsEnterTask;
-            label5.Text = gStr.gsEnterVehicleUsed;
-
-            chkHeadland.Text = gStr.gsHeadland;
-            chkFlags.Text = gStr.gsFlags;
-            chkGuidanceLines.Text = gStr.gsGuidance;
-            chkApplied.Text = gStr.gsMapping;
 
             this.Text = gStr.gsSaveAs;
             lblTemplateChosen.Text = gStr.gsNoneUsed;
@@ -37,14 +29,14 @@ namespace AgOpenGPS
         {
             btnSave.Enabled = false;
             lblTemplateChosen.Text = Properties.Settings.Default.setF_CurrentDir;
-            //tboxVehicle.Text = mf.vehicleFileName + " " + mf.toolFileName;
             lblFilename.Text = "";
+            mf.CloseTopMosts();
         }
 
         private void tboxFieldName_TextChanged(object sender, EventArgs e)
         {
-            var textboxSender = (TextBox)sender;
-            var cursorPosition = textboxSender.SelectionStart;
+            TextBox textboxSender = (TextBox)sender;
+            int cursorPosition = textboxSender.SelectionStart;
             textboxSender.Text = Regex.Replace(textboxSender.Text, glm.fileRegex, "");
             textboxSender.SelectionStart = cursorPosition;
 
@@ -57,30 +49,9 @@ namespace AgOpenGPS
                 btnSave.Enabled = true;
             }
 
-            lblFilename.Text = tboxFieldName.Text.Trim() + " " + tboxTask.Text.Trim()
-                + " " + tboxVehicle.Text.Trim() + " " + DateTime.Now.ToString("yyyy.MMM.dd HH_mm", CultureInfo.InvariantCulture);
-        }
-
-        private void tboxTask_TextChanged(object sender, EventArgs e)
-        {
-            var textboxSender = (TextBox)sender;
-            var cursorPosition = textboxSender.SelectionStart;
-            textboxSender.Text = Regex.Replace(textboxSender.Text, glm.fileRegex, "");
-            textboxSender.SelectionStart = cursorPosition;
-
-            lblFilename.Text = tboxFieldName.Text.Trim() + " " + tboxTask.Text.Trim()
-                + " " + tboxVehicle.Text.Trim() + " " + DateTime.Now.ToString("yyyy.MMM.dd HH_mm", CultureInfo.InvariantCulture);
-        }
-
-        private void tboxVehicle_TextChanged(object sender, EventArgs e)
-        {
-            var textboxSender = (TextBox)sender;
-            var cursorPosition = textboxSender.SelectionStart;
-            textboxSender.Text = Regex.Replace(textboxSender.Text, glm.fileRegex, "");
-            textboxSender.SelectionStart = cursorPosition;
-
-            lblFilename.Text = tboxFieldName.Text.Trim() + " " + tboxTask.Text.Trim()
-                + " " + tboxVehicle.Text.Trim() + " " + DateTime.Now.ToString("yyyy.MMM.dd HH_mm", CultureInfo.InvariantCulture);
+            lblFilename.Text = tboxFieldName.Text.Trim();
+            lblFilename.Text += " " + DateTime.Now.ToString("MMM.dd", CultureInfo.InvariantCulture);
+            lblFilename.Text += " " + DateTime.Now.ToString("HH_mm", CultureInfo.InvariantCulture);
         }
 
         private void btnSerialCancel_Click(object sender, EventArgs e)
@@ -101,19 +72,16 @@ namespace AgOpenGPS
 
             mf.currentFieldDirectory = tboxFieldName.Text.Trim() + " ";
 
-            //task
-            if (!String.IsNullOrEmpty(tboxTask.Text.Trim())) mf.currentFieldDirectory += tboxTask.Text.Trim() + " ";
-
-            //vehicle
-            if (!String.IsNullOrEmpty(tboxVehicle.Text.Trim())) mf.currentFieldDirectory += tboxVehicle.Text.Trim() + " ";
-
             //date
-            mf.currentFieldDirectory += String.Format("{0}", DateTime.Now.ToString("yyyy.MMM.dd HH_mm", CultureInfo.InvariantCulture));
+            mf.currentFieldDirectory += " " + DateTime.Now.ToString("MMM.dd", CultureInfo.InvariantCulture);
+            mf.currentFieldDirectory += " " + DateTime.Now.ToString("HH_mm", CultureInfo.InvariantCulture);
 
             //get the directory and make sure it exists, create if not
             string dirNewField = mf.fieldsDirectory + mf.currentFieldDirectory + "\\";
 
             mf.menustripLanguage.Enabled = false;
+
+            mf.displayFieldName = mf.currentFieldDirectory;
 
             // create from template
             string directoryName = Path.GetDirectoryName(dirNewField);
@@ -155,8 +123,8 @@ namespace AgOpenGPS
                 {
                     mf.WriteErrorLog("While Opening Field" + ex);
 
-                    var form = new FormTimedMessage(2000, gStr.gsFieldFileIsCorrupt, gStr.gsChooseADifferentField);
-                    form.Show();
+                    FormTimedMessage form = new FormTimedMessage(2000, gStr.gsFieldFileIsCorrupt, gStr.gsChooseADifferentField);
+                    form.Show(this);
                     mf.JobClose();
                     return;
                 }
@@ -189,13 +157,13 @@ namespace AgOpenGPS
 
                 if (chkApplied.Checked)
                 {
-                     fileToCopy = templateDirectoryName + "\\Contour.txt";
-                     destinationDirectory = directoryName + "\\Contour.txt";
+                    fileToCopy = templateDirectoryName + "\\Contour.txt";
+                    destinationDirectory = directoryName + "\\Contour.txt";
                     if (File.Exists(fileToCopy))
                         File.Copy(fileToCopy, destinationDirectory);
 
-                     fileToCopy = templateDirectoryName + "\\Sections.txt";
-                     destinationDirectory = directoryName + "\\Sections.txt";
+                    fileToCopy = templateDirectoryName + "\\Sections.txt";
+                    destinationDirectory = directoryName + "\\Sections.txt";
                     if (File.Exists(fileToCopy))
                         File.Copy(fileToCopy, destinationDirectory);
                 }
@@ -208,8 +176,8 @@ namespace AgOpenGPS
                     //mf.FileCreateElevation();
                 }
 
-                 fileToCopy = templateDirectoryName + "\\Boundary.txt";
-                 destinationDirectory = directoryName + "\\Boundary.txt";
+                fileToCopy = templateDirectoryName + "\\Boundary.txt";
+                destinationDirectory = directoryName + "\\Boundary.txt";
                 if (File.Exists(fileToCopy))
                     File.Copy(fileToCopy, destinationDirectory);
 
@@ -265,7 +233,7 @@ namespace AgOpenGPS
 
                 //now open the newly cloned field
                 mf.FileOpenField(dirNewField + myFileName);
-                mf.Text = "AgOpenGPS - " + mf.currentFieldDirectory;
+                mf.displayFieldName = mf.currentFieldDirectory;
             }
 
             DialogResult = DialogResult.OK;
@@ -276,7 +244,7 @@ namespace AgOpenGPS
         {
             if (mf.isKeyboardOn)
             {
-                mf.KeyboardToText((TextBox)sender);
+                mf.KeyboardToText((TextBox)sender, this);
                 btnSerialCancel.Focus();
             }
         }
@@ -285,7 +253,7 @@ namespace AgOpenGPS
         {
             if (mf.isKeyboardOn)
             {
-                mf.KeyboardToText((TextBox)sender);
+                mf.KeyboardToText((TextBox)sender, this);
                 btnSerialCancel.Focus();
             }
         }
@@ -294,7 +262,7 @@ namespace AgOpenGPS
         {
             if (mf.isKeyboardOn)
             {
-                mf.KeyboardToText((TextBox)sender);
+                mf.KeyboardToText((TextBox)sender, this);
                 btnSerialCancel.Focus();
             }
         }

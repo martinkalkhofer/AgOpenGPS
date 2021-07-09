@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AgOpenGPS
@@ -23,35 +16,42 @@ namespace AgOpenGPS
 
             InitializeComponent();
 
-            this.Text = gStr.gsEditABLine;
-            label2.Text = gStr.gsABHeading;
+            this.Text = gStr.gsEditABCurve;
             nudMinTurnRadius.Controls[0].Enabled = false;
         }
 
         private void FormEditAB_Load(object sender, EventArgs e)
         {
+            label1.Text = mf.unitsInCm;
+            label2.Text = mf.unitsFtM;
 
             //btnLeft.Text = "-"+Properties.Settings.Default.setDisplay_snapDistanceSmall.ToString() + "cm";
-            label2.Text = "\u00BD";
+            lblHalfWidth.Text = (mf.tool.toolWidth * 0.5 * mf.m2FtOrM).ToString("N2");
 
+            if (mf.isMetric)
+            {
+                nudMinTurnRadius.DecimalPlaces = 0;
+                nudMinTurnRadius.Value = (int)((double)Properties.Settings.Default.setAS_snapDistance * mf.cm2CmOrIn);
+            }
+            else
+            {
+                nudMinTurnRadius.DecimalPlaces = 1;
+                nudMinTurnRadius.Value = (decimal)Math.Round(((double)Properties.Settings.Default.setAS_snapDistance * mf.cm2CmOrIn), 1);
+            }
 
-            snapAdj = Properties.Settings.Default.setAS_snapDistance * 0.01;
-            nudMinTurnRadius.Value = Properties.Settings.Default.setAS_snapDistance;
 
             btnCancel.Focus();
-            mf.curve.isEditing = true;
-            mf.layoutPanelRight.Enabled = false;
         }
 
         private void nudMinTurnRadius_Enter(object sender, EventArgs e)
         {
-            mf.KeypadToNUD((NumericUpDown)sender);
+            mf.KeypadToNUD((NumericUpDown)sender, this);
             btnCancel.Focus();
         }
 
         private void nudMinTurnRadius_ValueChanged(object sender, EventArgs e)
         {
-            snapAdj = (double)nudMinTurnRadius.Value * 0.01;
+            snapAdj = (double)nudMinTurnRadius.Value * mf.inOrCm2Cm * 0.01;
         }
 
         private void btnAdjRight_Click(object sender, EventArgs e)
@@ -66,8 +66,6 @@ namespace AgOpenGPS
 
         private void bntOk_Click(object sender, EventArgs e)
         {
-            mf.curve.isEditing = false;
-
             if (mf.curve.refList.Count > 0)
             {
                 //array number is 1 less since it starts at zero
@@ -78,7 +76,7 @@ namespace AgOpenGPS
                     mf.curve.curveArr[idx].aveHeading = mf.curve.aveLineHeading;
                     mf.curve.curveArr[idx].curvePts.Clear();
                     //write out the Curve Points
-                    foreach (var item in mf.curve.refList)
+                    foreach (vec3 item in mf.curve.refList)
                     {
                         mf.curve.curveArr[idx].curvePts.Add(item);
                     }
@@ -87,15 +85,14 @@ namespace AgOpenGPS
                 //save entire list
                 mf.FileSaveCurveLines();
                 mf.curve.moveDistance = 0;
+                mf.curve.isCurveValid = false;
 
-                mf.layoutPanelRight.Enabled = true;
                 Close();
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            mf.curve.isEditing = false;
             int last = mf.curve.numCurveLineSelected;
             mf.FileLoadCurveLines();
             if (mf.curve.curveArr.Count > 0)
@@ -111,13 +108,15 @@ namespace AgOpenGPS
                 }
                 mf.curve.isCurveSet = true;
             }
-            mf.layoutPanelRight.Enabled = true;
 
+            mf.curve.isCurveValid = false;
             Close();
         }
 
         private void btnSwapAB_Click(object sender, EventArgs e)
         {
+            mf.curve.isCurveValid = false;
+            mf.curve.lastSecond = 0;
             int cnt = mf.curve.refList.Count;
             if (cnt > 0)
             {
@@ -146,25 +145,29 @@ namespace AgOpenGPS
         private void btnContourPriority_Click(object sender, EventArgs e)
         {
             if (mf.curve.isBtnCurveOn)
-            {
-                mf.curve.SnapABCurve();
-            }
+                mf.curve.MoveABCurve(mf.isStanleyUsed ? mf.gyd.distanceFromCurrentLinePivot : mf.curve.distanceFromCurrentLinePivot);
         }
 
         private void btnRightHalfWidth_Click(object sender, EventArgs e)
         {
-            double dist = mf.tool.toolWidth - mf.tool.toolOverlap;
+            double dist = mf.tool.toolWidth;
 
-            mf.curve.MoveABCurve(dist*0.5);
+            mf.curve.MoveABCurve(dist * 0.5);
 
         }
 
         private void btnLeftHalfWidth_Click(object sender, EventArgs e)
         {
-            double dist = mf.tool.toolWidth - mf.tool.toolOverlap;
+            double dist = mf.tool.toolWidth;
 
-            mf.curve.MoveABCurve(-dist*0.5);
+            mf.curve.MoveABCurve(-dist * 0.5);
 
+        }
+
+        private void btnNosave_Click(object sender, EventArgs e)
+        {
+            mf.curve.isCurveValid = false;
+            Close();
         }
     }
 }

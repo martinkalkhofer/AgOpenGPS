@@ -39,22 +39,21 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.lblVersion = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 11.25F);
-            this.label6.Location = new System.Drawing.Point(422, 254);
+            this.label6.Location = new System.Drawing.Point(337, 591);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(129, 18);
             this.label6.TabIndex = 16;
@@ -83,7 +82,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 11.25F);
-            this.label3.Location = new System.Drawing.Point(421, 313);
+            this.label3.Location = new System.Drawing.Point(12, 587);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(119, 18);
             this.label3.TabIndex = 15;
@@ -102,10 +101,10 @@
             // linkLabelGit
             // 
             this.linkLabelGit.AutoSize = true;
-            this.linkLabelGit.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabelGit.Location = new System.Drawing.Point(422, 272);
+            this.linkLabelGit.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabelGit.Location = new System.Drawing.Point(337, 609);
             this.linkLabelGit.Name = "linkLabelGit";
-            this.linkLabelGit.Size = new System.Drawing.Size(278, 16);
+            this.linkLabelGit.Size = new System.Drawing.Size(345, 19);
             this.linkLabelGit.TabIndex = 11;
             this.linkLabelGit.TabStop = true;
             this.linkLabelGit.Text = "https://github.com/farmerbriantee/AgOpenGPS";
@@ -115,7 +114,7 @@
             // 
             this.linkLabelCombineForum.AutoSize = true;
             this.linkLabelCombineForum.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabelCombineForum.Location = new System.Drawing.Point(421, 335);
+            this.linkLabelCombineForum.Location = new System.Drawing.Point(12, 609);
             this.linkLabelCombineForum.Name = "linkLabelCombineForum";
             this.linkLabelCombineForum.Size = new System.Drawing.Size(258, 19);
             this.linkLabelCombineForum.TabIndex = 12;
@@ -126,8 +125,10 @@
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = global::AgOpenGPS.Properties.Resources.OK64;
-            this.button1.Location = new System.Drawing.Point(619, 480);
+            this.button1.Location = new System.Drawing.Point(862, 558);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(110, 70);
             this.button1.TabIndex = 10;
@@ -136,71 +137,42 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(423, 24);
+            this.label7.Font = new System.Drawing.Font("Tahoma", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(339, 10);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(234, 13);
+            this.label7.Size = new System.Drawing.Size(413, 19);
             this.label7.TabIndex = 25;
-            this.label7.Text = "AgOpenGPS is protected under the MIT License";
+            this.label7.Text = "AgOpenGPS is protected under the GPLv3 License";
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(422, 98);
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(338, 104);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(268, 39);
+            this.label10.Size = new System.Drawing.Size(634, 47);
             this.label10.TabIndex = 26;
-            this.label10.Text = "You must make sure that they, too, receive or can get \r\nthe source code.  And you" +
-    " must show them these terms\r\nso they know their rights.";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(422, 148);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(307, 52);
-            this.label8.TabIndex = 27;
-            this.label8.Text = "This software is for discussion and learning of Precision Ag\r\nalgorithms and tech" +
-    "niques. It is not in any way to be used on\r\nany physical equipment and is meant " +
-    "for use by a simulator only.\r\n\r\n";
-            // 
-            // label12
-            // 
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(12, 135);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(296, 50);
-            this.label12.TabIndex = 29;
-            this.label12.Text = "Any use of AgOpenGPS on real physical equipment is not allowed and is not recomme" +
-    "nded in any way, neither off road or on road.\r\n";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(422, 201);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(274, 26);
-            this.label13.TabIndex = 30;
-            this.label13.Text = "AgOpenGPS is strictly an example of C# programming for\r\ndemonstration purposes on" +
-    "ly.\r\n";
+            this.label10.Text = "You must make sure that they, too, receive or can get the source code.  And you m" +
+    "ust show them these terms so they know their rights. Don\'t steal others work and" +
+    " call it your own.";
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(422, 48);
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(338, 46);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(268, 39);
+            this.label9.Size = new System.Drawing.Size(576, 53);
             this.label9.TabIndex = 31;
-            this.label9.Text = "If you distribute copies of this program, whether gratis or\r\nfor a fee, you must " +
-    "pass on to the recipients the same\r\nfreedoms that you received.  ";
+            this.label9.Text = "If you distribute copies of this FREE program, whether gratis or for a fee, impro" +
+    "ved, changed, you must pass on to the recipients the same freedoms that you rece" +
+    "ived as Outlined in the GPLv3 License.";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Tahoma", 11.25F);
-            this.label11.Location = new System.Drawing.Point(32, 235);
+            this.label11.Location = new System.Drawing.Point(12, 183);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(299, 288);
+            this.label11.Size = new System.Drawing.Size(299, 360);
             this.label11.TabIndex = 32;
             this.label11.Text = resources.GetString("label11.Text");
             // 
@@ -208,7 +180,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Tahoma", 11.25F);
-            this.label14.Location = new System.Drawing.Point(14, 195);
+            this.label14.Location = new System.Drawing.Point(14, 144);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(188, 18);
             this.label14.TabIndex = 33;
@@ -234,7 +206,7 @@
             this.button4.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.Image = global::AgOpenGPS.Properties.Resources.Settings48;
             this.button4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button4.Location = new System.Drawing.Point(619, 379);
+            this.button4.Location = new System.Drawing.Point(862, 465);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(110, 62);
             this.button4.TabIndex = 126;
@@ -246,26 +218,45 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Tahoma", 11.25F);
-            this.label15.Location = new System.Drawing.Point(461, 399);
+            this.label15.Location = new System.Drawing.Point(728, 492);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(137, 18);
             this.label15.TabIndex = 127;
             this.label15.Text = "Enable Terms Form";
             // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(337, 168);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(609, 229);
+            this.label12.TabIndex = 128;
+            this.label12.Text = resources.GetString("label12.Text");
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(340, 414);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(271, 129);
+            this.label2.TabIndex = 129;
+            this.label2.Text = "Copyright (c) 2021, Brian Tischler\r\nAll rights reserved.\r\n\r\nAny use of AgOpenGPS " +
+    "is not recommended for real physical equipment.. No safties are built in or impl" +
+    "ied.";
+            // 
             // Form_About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(741, 562);
+            this.ClientSize = new System.Drawing.Size(984, 644);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -297,14 +288,13 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label2;
     }
 }

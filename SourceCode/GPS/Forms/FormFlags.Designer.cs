@@ -54,13 +54,14 @@
             // btnSouth
             // 
             this.btnSouth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSouth.FlatAppearance.BorderSize = 0;
             this.btnSouth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSouth.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
             this.btnSouth.Image = global::AgOpenGPS.Properties.Resources.DnArrow64;
             this.btnSouth.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSouth.Location = new System.Drawing.Point(192, 12);
+            this.btnSouth.Location = new System.Drawing.Point(192, 5);
             this.btnSouth.Name = "btnSouth";
-            this.btnSouth.Size = new System.Drawing.Size(94, 52);
+            this.btnSouth.Size = new System.Drawing.Size(94, 59);
             this.btnSouth.TabIndex = 195;
             this.btnSouth.UseVisualStyleBackColor = true;
             this.btnSouth.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnSouth_MouseDown);
@@ -68,13 +69,14 @@
             // btnNorth
             // 
             this.btnNorth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnNorth.FlatAppearance.BorderSize = 0;
             this.btnNorth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNorth.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
             this.btnNorth.Image = global::AgOpenGPS.Properties.Resources.UpArrow64;
             this.btnNorth.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNorth.Location = new System.Drawing.Point(65, 12);
+            this.btnNorth.Location = new System.Drawing.Point(65, 5);
             this.btnNorth.Name = "btnNorth";
-            this.btnNorth.Size = new System.Drawing.Size(94, 52);
+            this.btnNorth.Size = new System.Drawing.Size(94, 59);
             this.btnNorth.TabIndex = 196;
             this.btnNorth.UseVisualStyleBackColor = true;
             this.btnNorth.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnNorth_MouseDown);
@@ -214,6 +216,7 @@
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnExit.FlatAppearance.BorderSize = 0;
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnExit.Image = global::AgOpenGPS.Properties.Resources.OK64;
@@ -231,6 +234,7 @@
             // 
             this.btnDeleteFlag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteFlag.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDeleteFlag.FlatAppearance.BorderSize = 0;
             this.btnDeleteFlag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteFlag.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnDeleteFlag.Image = global::AgOpenGPS.Properties.Resources.FlagDelete;
@@ -248,16 +252,18 @@
             this.btnDriveToFlag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDriveToFlag.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnDriveToFlag.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnDriveToFlag.FlatAppearance.BorderSize = 0;
             this.btnDriveToFlag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDriveToFlag.Font = new System.Drawing.Font("Tahoma", 14.25F);
             this.btnDriveToFlag.Image = global::AgOpenGPS.Properties.Resources.AutoSteerConf;
             this.btnDriveToFlag.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnDriveToFlag.Location = new System.Drawing.Point(118, 225);
+            this.btnDriveToFlag.Location = new System.Drawing.Point(109, 238);
             this.btnDriveToFlag.Name = "btnDriveToFlag";
-            this.btnDriveToFlag.Size = new System.Drawing.Size(78, 79);
+            this.btnDriveToFlag.Size = new System.Drawing.Size(78, 55);
             this.btnDriveToFlag.TabIndex = 212;
             this.btnDriveToFlag.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnDriveToFlag.UseVisualStyleBackColor = true;
+            this.btnDriveToFlag.Visible = false;
             this.btnDriveToFlag.Click += new System.EventHandler(this.btnDriveToFlag_Click);
             // 
             // lblHeading
@@ -346,7 +352,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Flags";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormFlags_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

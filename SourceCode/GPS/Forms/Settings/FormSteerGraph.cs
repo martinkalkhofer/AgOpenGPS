@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -34,10 +33,8 @@ namespace AgOpenGPS
         {
             {
                 //word 0 - steerangle, 1 - pwmDisplay
-#pragma warning disable CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
-                dataSteerAngle = mf.actualSteerAngleDisp.ToString();
+                dataSteerAngle = mf.mc.actualSteerAngleChart.ToString();
                 dataPWM = mf.guidanceLineSteerAngle.ToString();
-#pragma warning restore CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
 
                 lblSteerAng.Text = mf.ActualSteerAngle;
                 lblPWM.Text = mf.SetSteerAngle;

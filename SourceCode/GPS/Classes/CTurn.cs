@@ -262,7 +262,7 @@ namespace AgOpenGPS
 
             if (mf.bnd.bndArr.Count == 0)
             {
-                mf.TimedMessageBox(1500, " No Boundaries", "No Turn Lines Made");
+                //mf.TimedMessageBox(1500, " No Boundaries", "No Turn Lines Made");
                 return;
             }
 
@@ -270,7 +270,7 @@ namespace AgOpenGPS
             vec3 point = new vec3();
 
             //determine how wide a headland space
-            double totalHeadWidth = mf.yt.triggerDistanceOffset;
+            double totalHeadWidth = mf.yt.uturnDistanceFromBoundary;
 
             //outside boundary - count the points from the boundary
             turnArr[0].turnLine.Clear();
@@ -290,7 +290,7 @@ namespace AgOpenGPS
                     turnArr[0].turnLine.Add(tPnt);
                 }
             }
-            turnArr[0].FixTurnLine(totalHeadWidth, mf.bnd.bndArr[0].bndLine, mf.tool.toolWidth * 0.25);
+            turnArr[0].FixTurnLine(totalHeadWidth, mf.bnd.bndArr[0].bndLine, mf.tool.toolWidth * 0.33);
             turnArr[0].PreCalcTurnLines();
 
             //inside boundaries
@@ -316,7 +316,7 @@ namespace AgOpenGPS
                         turnArr[j].turnLine.Add(tPnt);
                     }
                 }
-                turnArr[j].FixTurnLine(totalHeadWidth, mf.bnd.bndArr[j].bndLine, mf.tool.toolWidth * 0.4);
+                turnArr[j].FixTurnLine(totalHeadWidth, mf.bnd.bndArr[j].bndLine, mf.tool.toolWidth * 0.33);
                 turnArr[j].PreCalcTurnLines();
             }
 
@@ -338,9 +338,8 @@ namespace AgOpenGPS
                     int ptCount = mf.turn.turnArr[i].turnLine.Count;
                     if (ptCount < 1) continue;
 
-                    GL.Begin(PrimitiveType.LineStrip);
+                    GL.Begin(PrimitiveType.LineLoop);
                     for (int h = 0; h < ptCount; h++) GL.Vertex3(mf.turn.turnArr[i].turnLine[h].easting, mf.turn.turnArr[i].turnLine[h].northing, 0);
-                    GL.Vertex3(mf.turn.turnArr[i].turnLine[0].easting, mf.turn.turnArr[i].turnLine[0].northing, 0);
                     GL.End();
                 }
             }

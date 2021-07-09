@@ -11,11 +11,21 @@ namespace AgOpenGPS
         {
             InitializeComponent();
 
-            this.label7.Text = gStr.gsReturn;
-            this.label1.Text = gStr.gsSaveAndExit;
-            this.label3.Text = gStr.gsSaveAs;
+            if (closing)
+            {
+                btnOk.Image = Properties.Resources.ExitAOG;
+            }
+            else
+            {
+                btnOk.Image = Properties.Resources.FieldClose;
+                label3.Text = "Close";
+            }
 
-            if (closing) btnSaveAs.Enabled = false;
+            if (closing)
+            {
+                btnSaveAs.Visible = false;
+                label4.Visible = false;
+            }
         }
 
         private void btnOk_Click(object sender, EventArgs e)

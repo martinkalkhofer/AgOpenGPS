@@ -35,20 +35,18 @@ namespace AgOpenGPS
                 LinkData = "https://agopengps.discourse.group/"
             };
             linkLabelCombineForum.Links.Add(linkCf);
-
-            cboxStart.Checked = Properties.Settings.Default.setDisplay_isTermsOn;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.setDisplay_isTermsOn = cboxStart.Checked;
+            Properties.Settings.Default.setDisplay_isTermsAccepted = true;
             Properties.Settings.Default.Save();
             Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.setDisplay_isTermsOn = true;
+            Properties.Settings.Default.setDisplay_isTermsAccepted = false;
             Properties.Settings.Default.Save();
             Close();
         }

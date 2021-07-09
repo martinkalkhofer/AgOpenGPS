@@ -20,7 +20,7 @@ namespace AgOpenGPS
             min = _min;
             InitializeComponent();
 
-            this.Text = gStr.gsEnteraValue;
+            this.Text = "Enter Value";
             //fill in the display
             tboxNumber.Text = currentValue.ToString();
 
@@ -46,7 +46,7 @@ namespace AgOpenGPS
             }
 
             //clear the error as user entered new values
-            if(tboxNumber.Text == gStr.gsError)
+            if (tboxNumber.Text == gStr.gsError)
             {
                 tboxNumber.Text = "";
                 lblMin.ForeColor = SystemColors.ControlText;
@@ -183,6 +183,14 @@ namespace AgOpenGPS
             tboxNumber.Text = tryNumber.ToString();
 
             isFirstKey = false;
+        }
+
+        private void tboxNumber_Click(object sender, EventArgs e)
+        {
+            if (isFirstKey)
+            {
+                isFirstKey = false;
+            }
         }
     }
 }

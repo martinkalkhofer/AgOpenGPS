@@ -17,9 +17,12 @@ namespace AgOpenGPS
             InitializeComponent();
 
             //btnStop.Text = gStr.gsDone;
-            btnPausePlay.Text = gStr.gsRecord;
+            //btnPausePlay.Text = gStr.gsRecord;
             label1.Text = gStr.gsArea + ":";
             this.Text = gStr.gsStopRecordPauseBoundary;
+            nudOffset.Controls[0].Enabled = false;
+            lblOffset.Text = gStr.gsOffset;
+
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -34,12 +37,23 @@ namespace AgOpenGPS
                     mf.bnd.bndArr[mf.bnd.boundarySelected].bndLine.Add(mf.bnd.bndBeingMadePts[i]);
                 }
 
-                mf.bnd.bndArr[mf.bnd.boundarySelected].PreCalcBoundaryLines();
-                mf.bnd.bndArr[mf.bnd.boundarySelected].FixBoundaryLine(mf.bnd.boundarySelected, mf.tool.toolWidth);
+                //build the boundary, make sure is clockwise for outer counter clockwise for inner
+                bool isCW = mf.bnd.bndArr[mf.bnd.boundarySelected].CalculateBoundaryArea();
+                if (mf.bnd.boundarySelected == 0 && isCW)
+                {
+                    mf.bnd.bndArr[mf.bnd.boundarySelected].ReverseWinding();
+                }
+
+                //inner boundaries
+                if (mf.bnd.boundarySelected > 0 && !isCW)
+                {
+                    mf.bnd.bndArr[mf.bnd.boundarySelected].ReverseWinding();
+                }
+
+                mf.bnd.bndArr[mf.bnd.boundarySelected].FixBoundaryLine(mf.bnd.boundarySelected);
                 mf.bnd.bndArr[mf.bnd.boundarySelected].PreCalcBoundaryEarLines();
                 mf.bnd.bndArr[mf.bnd.boundarySelected].PreCalcBoundaryLines();
                 mf.bnd.bndArr[mf.bnd.boundarySelected].isSet = true;
-                mf.bnd.bndArr[mf.bnd.boundarySelected].CalculateBoundaryArea();
                 mf.fd.UpdateFieldBoundaryGUIAreas();
             }
 
@@ -52,6 +66,7 @@ namespace AgOpenGPS
             mf.FileSaveBoundary();
             mf.turn.BuildTurnLines();
             //mf.hd.BuildSingleSpaceHeadLines();
+            mf.btnMakeLinesFromBoundary.Visible = true;
 
             mf.bnd.bndBeingMadePts.Clear();
             //close window
@@ -65,7 +80,7 @@ namespace AgOpenGPS
             {
                 mf.bnd.isOkToAddPoints = false;
                 btnPausePlay.Image = Properties.Resources.BoundaryRecord;
-                btnPausePlay.Text = gStr.gsRecord;
+                //btnPausePlay.Text = gStr.gsRecord;
                 btnAddPoint.Enabled = true;
                 btnDeleteLast.Enabled = true;
             }
@@ -73,7 +88,7 @@ namespace AgOpenGPS
             {
                 mf.bnd.isOkToAddPoints = true;
                 btnPausePlay.Image = Properties.Resources.boundaryPause;
-                btnPausePlay.Text = gStr.gsPause;
+                //btnPausePlay.Text = gStr.gsPause;
                 btnAddPoint.Enabled = false;
                 btnDeleteLast.Enabled = false;
             }
@@ -83,8 +98,11 @@ namespace AgOpenGPS
         private void FormBoundaryPlayer_Load(object sender, EventArgs e)
         {
             //mf.bnd.isOkToAddPoints = false;
+            nudOffset.Value = (decimal)(mf.tool.toolWidth * 0.5);
             btnPausePlay.Image = Properties.Resources.BoundaryRecord;
-            nudOffset.Value = (decimal)mf.bnd.createBndOffset;
+            btnLeftRight.Image = mf.bnd.isDrawRightSide ? Properties.Resources.BoundaryRight : Properties.Resources.BoundaryLeft;
+            mf.bnd.createBndOffset = (double)nudOffset.Value;
+            mf.bnd.isBndBeingMade = true;
             mf.Focus();
         }
 
@@ -117,9 +135,9 @@ namespace AgOpenGPS
 
         private void btnAddPoint_Click(object sender, EventArgs e)
         {
-        
+
             mf.bnd.isOkToAddPoints = true;
-                mf.AddBoundaryPoint();
+            mf.AddBoundaryPoint();
             mf.bnd.isOkToAddPoints = false;
             lblPoints.Text = mf.bnd.bndBeingMadePts.Count.ToString();
 
@@ -150,11 +168,18 @@ namespace AgOpenGPS
             mf.Focus();
         }
 
-        private void nudOffset_Enter(object sender, EventArgs e)
+        private void nudOffset_Click(object sender, EventArgs e)
         {
-            mf.KeypadToNUD((NumericUpDown)sender);
+            mf.KeypadToNUD((NumericUpDown)sender, this);
             btnPausePlay.Focus();
             mf.bnd.createBndOffset = (double)nudOffset.Value;
+        }
+
+        private void btnLeftRight_Click(object sender, EventArgs e)
+        {
+            mf.bnd.isDrawRightSide = !mf.bnd.isDrawRightSide;
+            btnLeftRight.Image = mf.bnd.isDrawRightSide ? Properties.Resources.BoundaryRight : Properties.Resources.BoundaryLeft;
+
         }
     }
 }

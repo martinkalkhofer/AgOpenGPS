@@ -1,10 +1,7 @@
 ﻿//Please, if you use this, share the improvements
 
 using System;
-using System.Drawing;
 using System.Globalization;
-using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace AgOpenGPS
@@ -14,9 +11,7 @@ namespace AgOpenGPS
         //access to the main GPS form and all its variables
         private readonly FormGPS mf = null;
 
-        private double upDnHeading = 0;
-        private bool isFullPanel;
-        private int originalSelected = 0;
+        private int originalLine = 0;
 
         public FormABLine(Form callingForm)
         {
@@ -30,349 +25,340 @@ namespace AgOpenGPS
         private void FormABLine_Load(object sender, EventArgs e)
         {
             //tboxABLineName.Enabled = false;
-            btnAddToFile.Enabled = false;
-            btnAddAndGo.Enabled = false;
-            btnAPoint.Enabled = false;
-            btnBPoint.Enabled = false;
-            cboxHeading.Enabled = false;
-            tboxHeading.Enabled = false;
-            tboxABLineName.Text = "";
-            tboxABLineName.Enabled = false;
-            
+            //btnAddToFile.Enabled = false;
+            //btnAddAndGo.Enabled = false;
+            //btnAPoint.Enabled = false;
+            //btnBPoint.Enabled = false;
+            //cboxHeading.Enabled = false;
+            //tboxHeading.Enabled = false;
+            //tboxABLineName.Text = "";
+            //tboxABLineName.Enabled = false;
+
             //small window
-            ShowFullPanel(true);
+            //ShowFullPanel(true);
 
-            originalSelected = mf.ABLine.numABLineSelected;
+            panelPick.Top = 3;
+            panelPick.Left = 3;
+            panelAPlus.Top = 3;
+            panelAPlus.Left = 3;
+            panelName.Top = 3;
+            panelName.Left = 3;
 
-            //different start based on AB line already set or not
-            if (mf.ABLine.isABLineSet)
+            panelEditName.Top = 3;
+            panelEditName.Left = 3;
+
+            panelPick.Visible = true;
+            panelAPlus.Visible = false;
+            panelName.Visible = false;
+            panelEditName.Visible = false;
+
+            this.Size = new System.Drawing.Size(470, 360);
+
+            originalLine = mf.ABLine.numABLineSelected;
+
+            mf.ABLine.isABLineBeingSet = false;
+            UpdateLineList();
+            if (lvLines.Items.Count > 0 && originalLine > 0)
             {
-                //AB line is on screen and set
-                upDnHeading = Math.Round(glm.toDegrees(mf.ABLine.abHeading), 6);
-                this.tboxHeading.TextChanged -= new System.EventHandler(this.tboxHeading_TextChanged);
-                tboxHeading.Text = upDnHeading.ToString(CultureInfo.InvariantCulture);
-                this.tboxHeading.TextChanged += new System.EventHandler(this.tboxHeading_TextChanged);
+                lvLines.Items[originalLine - 1].EnsureVisible();
+                lvLines.Items[originalLine - 1].Selected = true;
+                lvLines.Select();
             }
-            else
-            {
-                //no AB line
-                btnAPoint.Enabled = false;
-                btnBPoint.Enabled = false;
-                upDnHeading = Math.Round(glm.toDegrees(mf.fixHeading), 6);
-                //mf.ABLine.tramPassEvery = 0;
-                //mf.ABLine.tramBasedOn = 0;
-            }
+        }
 
+        private void UpdateLineList()
+        {
             lvLines.Clear();
             ListViewItem itm;
 
-            foreach (var item in mf.ABLine.lineArr)
+            foreach (CABLines item in mf.ABLine.lineArr)
             {
                 itm = new ListViewItem(item.Name);
                 lvLines.Items.Add(itm);
             }
 
             // go to bottom of list - if there is a bottom
-            if (lvLines.Items.Count > 0) lvLines.Items[lvLines.Items.Count - 1].EnsureVisible();
+            if (lvLines.Items.Count > 0)
+            {
+                lvLines.Items[lvLines.Items.Count - 1].EnsureVisible();
+                lvLines.Items[lvLines.Items.Count - 1].Selected = true;
+                lvLines.Select();
+            }
         }
+        private void btnCancel_APlus_Click(object sender, EventArgs e)
+        {
+            panelPick.Visible = true;
+            panelAPlus.Visible = false;
+            panelEditName.Visible = false;
 
+            textBox1.Enter -= textBox1_Enter;
+            panelName.Visible = false;
+            textBox1.Enter += textBox1_Enter;
+
+            this.Size = new System.Drawing.Size(470, 360);
+
+            UpdateLineList();
+            mf.ABLine.isABLineBeingSet = false;
+            btnBPoint.BackColor = System.Drawing.Color.Transparent;
+        }
 
         private void btnAPoint_Click(object sender, EventArgs e)
         {
-            vec3 fix = new vec3();
-            fix = mf.pivotAxlePos;
+            vec3 fix = new vec3(mf.pivotAxlePos);
 
-            tboxHeading.Enabled = true;
-            btnNewABLine.Image = Properties.Resources.OK64;
-            btnNewABLine.Text = "+";
-            cboxHeading.Enabled = true;
-            btnNewABLine.Enabled = true;
-            btnCancel.Focus();
+            mf.ABLine.desPoint1.easting = fix.easting + Math.Cos(fix.heading) * mf.tool.toolOffset;
+            mf.ABLine.desPoint1.northing = fix.northing - Math.Sin(fix.heading) * mf.tool.toolOffset;
+            mf.ABLine.desHeading = fix.heading;
 
+            mf.ABLine.desPoint2.easting = 99999;
+            mf.ABLine.desPoint2.northing = 99999;
 
-            mf.ABLine.moveDistance = 0;
-            mf.ABLine.refPoint1.easting = fix.easting;
-            mf.ABLine.refPoint1.northing = fix.northing;
-            mf.ABLine.abHeading = fix.heading;
-            mf.ABLine.SetABLineByHeading();
+            nudHeading.Enabled = true;
+            nudHeading.Value = (decimal)(glm.toDegrees(mf.ABLine.desHeading));
 
+            BuildDesLine();
+
+            btnBPoint.Enabled = true;
             btnAPoint.Enabled = false;
-            upDnHeading = Math.Round(glm.toDegrees(mf.fixHeading), 1);
-            this.tboxHeading.TextChanged -= new System.EventHandler(this.tboxHeading_TextChanged);
-            tboxHeading.Text = upDnHeading.ToString();
-            this.tboxHeading.TextChanged += new System.EventHandler(this.tboxHeading_TextChanged);
 
-            ShowFullPanel(false);
+            btnEnter_APlus.Enabled = true;
+            mf.ABLine.isABLineBeingSet = true;
         }
 
         private void btnBPoint_Click(object sender, EventArgs e)
         {
-            mf.ABLine.SetABLineByBPoint();
-            upDnHeading = Math.Round(glm.toDegrees(mf.fixHeading), 3);
+            vec3 fix = new vec3(mf.pivotAxlePos);
 
-            //update the default
-            //if (mf.ABLine.tramPassEvery == 0) mf.mc.machineData[mf.mc.rdTramLine] = 0;
+            btnBPoint.BackColor = System.Drawing.Color.Teal;
 
-            this.tboxHeading.TextChanged -= new System.EventHandler(this.tboxHeading_TextChanged);
-            tboxHeading.Text = glm.toDegrees(mf.ABLine.abHeading).ToString("N4");
-            this.tboxHeading.TextChanged += new System.EventHandler(this.tboxHeading_TextChanged);
-            //mf.ABLine.SetABLineByHeading();
+            mf.ABLine.desPoint2.easting = fix.easting + Math.Cos(fix.heading) * mf.tool.toolOffset;
+            mf.ABLine.desPoint2.northing = fix.northing - Math.Sin(fix.heading) * mf.tool.toolOffset;
 
-            //ShowSavedPanel(true);
-            //tboxABLineName.BackColor = Color.LightGreen;
+            // heading based on AB points
+            mf.ABLine.desHeading = Math.Atan2(mf.ABLine.desPoint2.easting - mf.ABLine.desPoint1.easting,
+                mf.ABLine.desPoint2.northing - mf.ABLine.desPoint1.northing);
+            if (mf.ABLine.desHeading < 0) mf.ABLine.desHeading += glm.twoPI;
+
+            nudHeading.Value = (decimal)(glm.toDegrees(mf.ABLine.desHeading));
+
+            BuildDesLine();
         }
 
+        private void nudHeading_Click(object sender, EventArgs e)
+        {
+            if (mf.KeypadToNUD((NumericUpDown)sender, this))
+            {
+                BuildDesLine();
+            }
+        }
 
-        //private void btnPlus90_Click(object sender, EventArgs e)
-        //{
-        //    mf.ABLine.moveDistance = 0;
-        //    upDnHeading += 90;
-        //    if (upDnHeading > 359.999999) upDnHeading -= 360;
-        //    mf.ABLine.abHeading = glm.toRadians(upDnHeading);
-        //    mf.ABLine.SetABLineByHeading();
-        //    tboxHeading.Text = Convert.ToString(upDnHeading, CultureInfo.InvariantCulture);
-        //}
+        private void BuildDesLine()
+        {
+            mf.ABLine.desHeading = glm.toRadians((double)nudHeading.Value);
+
+            //sin x cos z for endpoints, opposite for additional lines
+            mf.ABLine.desP1.easting = mf.ABLine.desPoint1.easting - (Math.Sin(mf.ABLine.desHeading) * mf.ABLine.abLength);
+            mf.ABLine.desP1.northing = mf.ABLine.desPoint1.northing - (Math.Cos(mf.ABLine.desHeading) * mf.ABLine.abLength);
+            mf.ABLine.desP2.easting = mf.ABLine.desPoint1.easting + (Math.Sin(mf.ABLine.desHeading) * mf.ABLine.abLength);
+            mf.ABLine.desP2.northing = mf.ABLine.desPoint1.northing + (Math.Cos(mf.ABLine.desHeading) * mf.ABLine.abLength);
+        }
+
+        private void textBox1_Enter(object sender, EventArgs e)
+        {
+            if (mf.isKeyboardOn)
+            {
+                mf.KeyboardToText((TextBox)sender, this);
+                btnAdd.Focus();
+            }
+        }
+
+        private void btnAddTime_Click(object sender, EventArgs e)
+        {
+
+            textBox1.Text += DateTime.Now.ToString("hh:mm:ss", CultureInfo.InvariantCulture);
+            mf.ABLine.desName = textBox1.Text;
+        }
+
+        private void btnEnter_APlus_Click(object sender, EventArgs e)
+        {
+            panelAPlus.Visible = false;
+            panelName.Visible = true;
+
+            mf.ABLine.desName = "AB " +
+                (Math.Round(glm.toDegrees(mf.ABLine.desHeading), 1)).ToString(CultureInfo.InvariantCulture) +
+                "\u00B0 " + mf.FindDirection(mf.ABLine.desHeading);
+
+            textBox1.Text = mf.ABLine.desName;
+
+        }
 
         private void BtnNewABLine_Click(object sender, EventArgs e)
         {
-            //is button for adding ABLine set
-            if (btnNewABLine.Text == "+")
+            lvLines.SelectedItems.Clear();
+            panelPick.Visible = false;
+            panelAPlus.Visible = true;
+            panelName.Visible = false;
+
+            btnAPoint.Enabled = true;
+            btnBPoint.Enabled = false;
+            nudHeading.Enabled = false;
+
+            btnEnter_APlus.Enabled = false;
+
+            this.Size = new System.Drawing.Size(270, 360);
+
+        }
+        private void btnEditName_Click(object sender, EventArgs e)
+        {
+            if (lvLines.SelectedItems.Count > 0)
             {
-                btnNewABLine.Text = "";
-                btnNewABLine.Image = Properties.Resources.AddNew;
-                ShowFullPanel(true);
-                tboxABLineName.BackColor = Color.LightGreen;
-                //create a name
-                tboxABLineName.Enabled = true;
+                int idx = lvLines.SelectedIndices[0];
+                textBox2.Text = mf.ABLine.lineArr[idx].Name;
 
-                tboxHeading.Enabled = false;
-
-                btnAddToFile.Enabled = true;
-                btnAddAndGo.Enabled = true;
-
-                btnAPoint.Enabled = false;
-                btnBPoint.Enabled = false;
-                cboxHeading.Enabled = false;
-                btnNewABLine.Enabled = false;
-                btnTurnOffAB.Enabled = false;
-                btnNewABLine.Enabled = false;
-
-                lvLines.Enabled = false;
-                btnAddToFile.Focus();
-                tboxABLineName.Text = (Math.Round(glm.toDegrees(mf.ABLine.abHeading), 1)).ToString(CultureInfo.InvariantCulture) 
-                    + "\u00B0" +
-                    mf.FindDirection(mf.ABLine.abHeading) + DateTime.Now.ToString("hh:mm:ss", CultureInfo.InvariantCulture);
+                panelPick.Visible = false;
+                panelEditName.Visible = true;
+                this.Size = new System.Drawing.Size(270, 360);
             }
-            else // or used to initiate a new line
+        }
+
+        private void btnSaveEditName_Click(object sender, EventArgs e)
+        {
+            if (textBox2.Text.Trim() == "") textBox2.Text = "No Name " + DateTime.Now.ToString("hh:mm:ss", CultureInfo.InvariantCulture);
+
+            int idx = lvLines.SelectedIndices[0];
+
+            textBox2.Enter -= textBox2_Enter;
+            panelEditName.Visible = false;
+            textBox2.Enter += textBox2_Enter;
+
+            panelPick.Visible = true;
+
+            mf.ABLine.lineArr[idx].Name = textBox2.Text.Trim();
+            mf.FileSaveABLines();
+
+            this.Size = new System.Drawing.Size(470, 360);
+
+            UpdateLineList();
+            lvLines.Focus();
+            mf.ABLine.isABLineBeingSet = false;
+
+        }
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            mf.ABLine.lineArr.Add(new CABLines());
+            mf.ABLine.numABLines = mf.ABLine.lineArr.Count;
+            mf.ABLine.numABLineSelected = mf.ABLine.numABLines;
+
+            //index to last one. 
+            int idx = mf.ABLine.lineArr.Count - 1;
+
+            mf.ABLine.lineArr[idx].heading = mf.ABLine.desHeading;
+            //calculate the new points for the reference line and points
+            mf.ABLine.lineArr[idx].origin.easting = mf.ABLine.desPoint1.easting;
+            mf.ABLine.lineArr[idx].origin.northing = mf.ABLine.desPoint1.northing;
+
+            //name
+            if (textBox2.Text.Trim() == "") textBox2.Text = "No Name " + DateTime.Now.ToString("hh:mm:ss", CultureInfo.InvariantCulture);
+
+            mf.ABLine.lineArr[idx].Name = textBox1.Text.Trim();
+
+            mf.FileSaveABLines();
+
+            panelPick.Visible = true;
+            panelAPlus.Visible = false;
+
+            textBox1.Enter -= textBox1_Enter;
+            panelName.Visible = false;
+            textBox1.Enter += textBox1_Enter;
+
+            this.Size = new System.Drawing.Size(470, 360);
+
+            UpdateLineList();
+            lvLines.Focus();
+            mf.ABLine.isABLineBeingSet = false;
+        }
+
+        private void btnDuplicate_Click(object sender, EventArgs e)
+        {
+            if (lvLines.SelectedItems.Count > 0)
             {
-                this.tboxHeading.TextChanged -= new System.EventHandler(this.tboxHeading_TextChanged);
-                tboxHeading.Text = "";
-                this.tboxHeading.TextChanged += new System.EventHandler(this.tboxHeading_TextChanged);
-                tboxHeading.Enabled = false;
+                int idx = lvLines.SelectedIndices[0];
 
-                mf.ABLine.DeleteAB();
-                lvLines.SelectedItems.Clear();
 
-                btnAPoint.Enabled = true;
-                btnBPoint.Enabled = false;
-                cboxHeading.Enabled = false;
-                btnNewABLine.Enabled = false;
-                btnTurnOffAB.Enabled = false;
+                panelPick.Visible = false;
+                panelName.Visible = true;
+                this.Size = new System.Drawing.Size(270, 360);
 
-                //mf.ABLine.tramPassEvery = 0;
-                //mf.ABLine.tramBasedOn = 0;
+                panelAPlus.Visible = false;
+                panelName.Visible = true;
+
+                mf.ABLine.desHeading = mf.ABLine.lineArr[idx].heading;
+
+                //calculate the new points for the reference line and points                
+                mf.ABLine.desPoint1.easting = mf.ABLine.lineArr[idx].origin.easting;
+                mf.ABLine.desPoint1.northing = mf.ABLine.lineArr[idx].origin.northing;
+
+                mf.ABLine.desName = mf.ABLine.lineArr[idx].Name + " Copy";
+
+                textBox1.Text = mf.ABLine.desName;
+            }
+
+        }
+
+
+        private void btnListUse_Click(object sender, EventArgs e)
+        {
+            mf.ABLine.moveDistance = 0;
+            //reset to generate new reference
+            mf.ABLine.isABValid = false;
+
+            if (lvLines.SelectedItems.Count > 0)
+            {
+                int idx = lvLines.SelectedIndices[0];
+                mf.ABLine.numABLineSelected = idx + 1;
+
+                mf.ABLine.abHeading = mf.ABLine.lineArr[idx].heading;
+                mf.ABLine.refPoint1 = mf.ABLine.lineArr[idx].origin;
+
+                mf.ABLine.SetABLineByHeading();
+
+                mf.EnableYouTurnButtons();
+
+                //Go back with Line enabled
+                Close();
+            }
+
+            //no item selected
+            else
+            {
+                mf.btnABLine.Image = Properties.Resources.ABLineOff;
+                mf.ABLine.isBtnABLineOn = false;
                 mf.ABLine.isABLineSet = false;
                 mf.ABLine.isABLineLoaded = false;
-
-                ShowFullPanel(false);
+                mf.ABLine.numABLineSelected = 0;
+                mf.DisableYouTurnButtons();
+                if (mf.isAutoSteerBtnOn) mf.btnAutoSteer.PerformClick();
+                if (mf.yt.isYouTurnBtnOn) mf.btnAutoYouTurn.PerformClick();
+                Close();
             }
         }
-
-        private void BtnUpABHeadingBy1_Click(object sender, EventArgs e)
+        private void btnSwapAB_Click(object sender, EventArgs e)
         {
-            mf.ABLine.moveDistance = 0;
-            upDnHeading -= 0.1;
-            upDnHeading = Math.Round(upDnHeading, 1);
-            if (upDnHeading < 0)
+            if (lvLines.SelectedItems.Count > 0)
             {
-                upDnHeading += 360;
+                mf.ABLine.isABValid = false;
+                int idx = lvLines.SelectedIndices[0];
+
+
+                mf.ABLine.lineArr[idx].heading += Math.PI;
+                if (mf.ABLine.lineArr[idx].heading > glm.twoPI) mf.ABLine.lineArr[idx].heading -= glm.twoPI;
+
+
+                mf.FileSaveABLines();
+
+                UpdateLineList();
+                lvLines.Focus();
             }
-            mf.ABLine.abHeading = glm.toRadians(upDnHeading);
-            tboxHeading.Text = Convert.ToString(upDnHeading, CultureInfo.InvariantCulture);
-        }
-
-        private void BtnDnABHeadingBy1_Click(object sender, EventArgs e)
-        {
-            mf.ABLine.moveDistance = 0;
-
-            upDnHeading += 0.1;
-            upDnHeading = Math.Round(upDnHeading, 1);
-            if ((upDnHeading) > 359.9)
-            {
-                upDnHeading -= 360;
-            }
-            //upDnHeading = (int)upDnHeading;
-            mf.ABLine.abHeading = glm.toRadians(upDnHeading);
-            tboxHeading.Text = Convert.ToString(upDnHeading, CultureInfo.InvariantCulture);
-        }
-
-        private void TboxHeading_Enter(object sender, EventArgs e)
-        {
-            tboxHeading.Text = "";
-
-            using (var form = new FormNumeric(0, 360, upDnHeading))
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    upDnHeading = form.ReturnValue;
-                    tboxHeading.Text = upDnHeading.ToString();
-                    //mf.ABLine.abHeading = glm.toRadians(Math.Round(upDnHeading, 6));
-                    //mf.ABLine.SetABLineByHeading();
-                }
-            }
-
-            btnTurnOffAB.Focus();
-
-        }
-
-        private void tboxHeading_TextChanged(object sender, EventArgs e)
-        {
-            var textboxSender = (TextBox)sender;
-            var cursorPosition = textboxSender.SelectionStart;
-            textboxSender.Text = Regex.Replace(textboxSender.Text, "[^0-9.]", "");
-            textboxSender.SelectionStart = cursorPosition;
-            string line = tboxHeading.Text.Trim();
-            if (line?.Length == 0) line = "0";
-            if (line == ".") line = "0";
-            upDnHeading = double.Parse(line, CultureInfo.InvariantCulture);
-            mf.ABLine.abHeading = glm.toRadians(Math.Round(upDnHeading, 6));
-            mf.ABLine.SetABLineByHeading();
-            //ShowSavedPanel(true);
-            tboxABLineName.BackColor = Color.LightGreen;
-        }
-
-        private void btnAddToFile_Click(object sender, EventArgs e)
-        {
-            if (mf.ABLine.isABLineSet)
-            {
-                if (tboxABLineName.Text.Length > 0)
-                {
-                    mf.ABLine.lineArr.Add(new CABLines());
-                    mf.ABLine.numABLines = mf.ABLine.lineArr.Count;
-                    mf.ABLine.numABLineSelected = mf.ABLine.numABLines;
-
-                    //index to last one. 
-                    int idx = mf.ABLine.lineArr.Count - 1;
-
-                    mf.ABLine.lineArr[idx].heading = mf.ABLine.abHeading;
-                    //calculate the new points for the reference line and points
-                    mf.ABLine.lineArr[idx].origin.easting = mf.ABLine.refPoint1.easting;
-                    mf.ABLine.lineArr[idx].origin.northing = mf.ABLine.refPoint1.northing;
-
-                    //sin x cos z for endpoints, opposite for additional lines
-                    mf.ABLine.lineArr[idx].ref1.easting = mf.ABLine.lineArr[idx].origin.easting - (Math.Sin(mf.ABLine.lineArr[idx].heading) *   1600.0);
-                    mf.ABLine.lineArr[idx].ref1.northing = mf.ABLine.lineArr[idx].origin.northing - (Math.Cos(mf.ABLine.lineArr[idx].heading) * 1600.0);
-                    mf.ABLine.lineArr[idx].ref2.easting = mf.ABLine.lineArr[idx].origin.easting + (Math.Sin(mf.ABLine.lineArr[idx].heading) *   1600.0);
-                    mf.ABLine.lineArr[idx].ref2.northing = mf.ABLine.lineArr[idx].origin.northing + (Math.Cos(mf.ABLine.lineArr[idx].heading) * 1600.0);
-
-
-                    mf.ABLine.lineArr[idx].Name = tboxABLineName.Text.Trim();
-
-                    //update the list box
-                    ListViewItem itm;
-                    itm = new ListViewItem(mf.ABLine.lineArr[idx].Name);
-                    lvLines.Items.Add(itm);
-
-                    // go to bottom of list - if there is a bottom
-                    if (lvLines.Items.Count > 0) lvLines.Items[lvLines.Items.Count - 1].EnsureVisible();
-
-                    mf.FileSaveABLines();
-
-                    tboxABLineName.BackColor = SystemColors.ControlLight;
-                    tboxABLineName.Text = "";
-
-                    btnAddToFile.Enabled = false;
-                    btnAddAndGo.Enabled = false;
-                    btnNewABLine.Enabled = true;
-
-                    tboxABLineName.Enabled = false;
-                    btnTurnOffAB.Enabled = true;
-                    lvLines.Enabled = false;
-                    tboxABLineName.Enabled = false;
-                    lvLines.Enabled = true;
-                    lvLines.Focus();
-                }
-                else
-                {
-                    //MessageBox.Show("Currently no ABCurve name\n      create ABCurve name");
-                    var form2 = new FormTimedMessage(2000, gStr.gsNoNameEntered, gStr.gsEnterLineName);
-                    form2.Show();
-                }
-            }
-            else
-            {
-                //MessageBox.Show("Currently no ABCurve name\n      create ABCurve name");
-                var form2 = new FormTimedMessage(2000, gStr.gsNoABLineActive, gStr.gsPleaseCompleteABLine);
-                form2.Show();
-            }
-
-            tboxABLineName.Clear();
-        }
-
-        private void btnAddAndGo_Click(object sender, EventArgs e)
-        {
-            if (mf.ABLine.isABLineSet)
-            {
-                if (tboxABLineName.Text.Length > 0)
-                {
-                    mf.ABLine.lineArr.Add(new CABLines());
-                    mf.ABLine.numABLines = mf.ABLine.lineArr.Count;
-                    mf.ABLine.numABLineSelected = mf.ABLine.numABLines;
-
-                    //index to last one. 
-                    int idx = mf.ABLine.lineArr.Count - 1;
-
-                    mf.ABLine.lineArr[idx].heading = mf.ABLine.abHeading;
-                    //calculate the new points for the reference line and points
-                    mf.ABLine.lineArr[idx].origin.easting = mf.ABLine.refPoint1.easting;
-                    mf.ABLine.lineArr[idx].origin.northing = mf.ABLine.refPoint1.northing;
-
-                    //sin x cos z for endpoints, opposite for additional lines
-                    mf.ABLine.lineArr[idx].ref1.easting = mf.ABLine.lineArr[idx].origin.easting - (Math.Sin(mf.ABLine.lineArr[idx].heading) *   1600.0);
-                    mf.ABLine.lineArr[idx].ref1.northing = mf.ABLine.lineArr[idx].origin.northing - (Math.Cos(mf.ABLine.lineArr[idx].heading) * 1600.0);
-                    mf.ABLine.lineArr[idx].ref2.easting = mf.ABLine.lineArr[idx].origin.easting + (Math.Sin(mf.ABLine.lineArr[idx].heading) *   1600.0);
-                    mf.ABLine.lineArr[idx].ref2.northing = mf.ABLine.lineArr[idx].origin.northing + (Math.Cos(mf.ABLine.lineArr[idx].heading) * 1600.0);
-
-
-                    mf.ABLine.lineArr[idx].Name = tboxABLineName.Text.Trim();
-
-                    mf.FileSaveABLines();
-
-                    //Often only 1 ABLine so just return to field
-                    //if (mf.ABLine.numABLines == 1)
-                    mf.ABLine.abHeading = mf.ABLine.lineArr[idx].heading;
-                    mf.ABLine.refPoint1 = mf.ABLine.lineArr[idx].origin;
-                    mf.ABLine.SetABLineByHeading();
-                    mf.EnableYouTurnButtons();
-
-                    Close();//Go back with Line enabled
-                }
-                else
-                {
-                    //MessageBox.Show("Currently no ABCurve name\n      create ABCurve name");
-                    var form2 = new FormTimedMessage(2000, gStr.gsNoNameEntered, gStr.gsEnterLineName);
-                    form2.Show();
-                }
-            }
-            else
-            {
-                //MessageBox.Show("Currently no ABCurve name\n      create ABCurve name");
-                var form2 = new FormTimedMessage(2000, gStr.gsNoABLineActive, gStr.gsPleaseCompleteABLine);
-                form2.Show();
-            }
-
-            tboxABLineName.Clear();
         }
 
         private void btnListDelete_Click(object sender, EventArgs e)
@@ -399,165 +385,31 @@ namespace AgOpenGPS
                 if (mf.isAutoSteerBtnOn) mf.btnAutoSteer.PerformClick();
                 if (mf.yt.isYouTurnBtnOn) mf.btnAutoYouTurn.PerformClick();
             }
-        }
+            UpdateLineList();
+            lvLines.Focus();
 
-        private void btnListUse_Click(object sender, EventArgs e)
-        {
-            mf.ABLine.moveDistance = 0;
-
-            int idx = lvLines.SelectedIndices[0];
-            mf.ABLine.numABLineSelected = idx + 1;
-
-            if (lvLines.SelectedItems.Count > 0)
-            {
-                mf.ABLine.abHeading = mf.ABLine.lineArr[idx].heading;
-                mf.ABLine.refPoint1 = mf.ABLine.lineArr[idx].origin;
-
-                mf.ABLine.SetABLineByHeading();
-
-                mf.EnableYouTurnButtons();
-
-                //Go back with Line enabled
-                Close();
-            }
-
-            //no item selected
-            else
-            {
-                return;
-            }
-        }
-
-        private void btnTurnOffAB_Click(object sender, EventArgs e)
-        {
-            //mf.ABLine.tramPassEvery = 0;
-            //mf.ABLine.tramBasedOn = 0;
-            mf.btnABLine.Image = Properties.Resources.ABLineOff;
-            mf.ABLine.isBtnABLineOn = false;
-            mf.ABLine.isABLineSet = false;
-            mf.ABLine.isABLineLoaded = false;
-            mf.ABLine.numABLineSelected = 0;
-            mf.DisableYouTurnButtons();
-            if (mf.isAutoSteerBtnOn) mf.btnAutoSteer.PerformClick();
-            if (mf.yt.isYouTurnBtnOn) mf.btnAutoYouTurn.PerformClick();
-            Close();
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            lblFixHeading.Text = Convert.ToString(Math.Round(glm.toDegrees(mf.fixHeading), 1)) + "°";
-            lblKeepGoing.Text = "";
-
-            if (!isFullPanel)
-            {
-                //make sure we go at least 3 or so meters before allowing B reference point
-                if (!btnAPoint.Enabled && !btnBPoint.Enabled)
-                {
-                    double pointAToFixDistance =
-                    Math.Pow(mf.ABLine.refPoint1.easting - mf.pn.fix.easting, 2)
-                    + Math.Pow(mf.ABLine.refPoint1.northing - mf.pn.fix.northing, 2);
-
-                    if (pointAToFixDistance > 100) btnBPoint.Enabled = true;
-                    else lblKeepGoing.Text = Convert.ToInt16(100 - pointAToFixDistance).ToString();
-                }
-            }
-            else
-            {
-                int count = lvLines.SelectedItems.Count;
-                if (count > 0)
-                {
-                    btnListDelete.Enabled = true;
-                    btnListUse.Enabled = true;
-                }
-                else
-                {
-                    btnListDelete.Enabled = false;
-                    btnListUse.Enabled = false;
-                }
-            }
-        }
-
-        private void tboxABLineName_Enter(object sender, EventArgs e)
-        {
-            tboxABLineName.Text = "";
         }
 
         private void FormABLine_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (this.Width < 300) e.Cancel = true;
-        }
-
-        private void lvLines_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //mf.ABLine.numABLineSelected = idx + 1;
-
-            if (lvLines.SelectedItems.Count > 0)
-            {
-                int idx = lvLines.SelectedIndices[0];
-                mf.ABLine.abHeading = mf.ABLine.lineArr[idx].heading;
-                mf.ABLine.refPoint1 = mf.ABLine.lineArr[idx].origin;
-
-                mf.ABLine.SetABLineByHeading();
-
-            }
-            //lvLines.SelectedItems.Clear();
-        }
-
-        private void ShowFullPanel(bool showPanel)
-        {
-            if (showPanel)
-            {
-                isFullPanel = true;
-                this.Size = new System.Drawing.Size(438, 411);
-                lvLines.Visible = true;
-                label3.Visible = true;
-                tboxABLineName.Visible = true;
-                btnListDelete.Visible = true;
-                btnListUse.Visible = true;
-                btnAddToFile.Visible = true;
-                btnAddAndGo.Visible = true;
-
-                btnAPoint.Visible = false ;
-                btnBPoint.Visible = false;
-                tboxHeading.Visible = false;
-                cboxHeading.Visible = false;
-            }
-            else   //hide the panel
-            {
-                isFullPanel = false;
-                this.Size = new System.Drawing.Size(313, 411);
-                lvLines.Visible = false;
-                label3.Visible = false;
-                tboxABLineName.Visible = false;
-                btnListDelete.Visible = false;
-                btnListUse.Visible = false;
-                btnAddToFile.Visible = false;
-                btnAddAndGo.Visible = false;
-
-                btnAPoint.Visible = true;
-                btnBPoint.Visible = true;
-                tboxHeading.Visible = true;
-                cboxHeading.Visible = true;
-            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            mf.ABLine.numABLines = mf.ABLine.lineArr.Count;
-            if (mf.ABLine.numABLineSelected > mf.ABLine.numABLines) mf.ABLine.numABLineSelected = mf.ABLine.numABLines;
+            //mf.ABLine.numABLines = mf.ABLine.lineArr.Count;
+            //if (mf.ABLine.numABLineSelected > mf.ABLine.numABLines) mf.ABLine.numABLineSelected = mf.ABLine.numABLines;
 
+            //if (mf.ABLine.numABLines < originalSelected) mf.ABLine.numABLineSelected = 0;
+            //else mf.ABLine.numABLineSelected = originalSelected;
 
-            if (mf.ABLine.numABLines < originalSelected) mf.ABLine.numABLineSelected = 0;
-            else mf.ABLine.numABLineSelected = originalSelected;
-
-            if (mf.ABLine.numABLineSelected > 0)
-            {
-                mf.ABLine.abHeading = mf.ABLine.lineArr[mf.ABLine.numABLineSelected - 1].heading;
-                mf.ABLine.refPoint1 = mf.ABLine.lineArr[mf.ABLine.numABLineSelected - 1].origin;
-                mf.ABLine.SetABLineByHeading();
-                Close();
-            }
-            else
+            //if (mf.ABLine.numABLineSelected > 0)
+            //{
+            //    mf.ABLine.abHeading = mf.ABLine.lineArr[mf.ABLine.numABLineSelected - 1].heading;
+            //    mf.ABLine.refPoint1 = mf.ABLine.lineArr[mf.ABLine.numABLineSelected - 1].origin;
+            //    mf.ABLine.SetABLineByHeading();
+            //    Close();
+            //}
+            //else
             {
                 //mf.ABLine.tramPassEvery = 0;
                 //mf.ABLine.tramBasedOn = 0;
@@ -570,17 +422,23 @@ namespace AgOpenGPS
                 if (mf.isAutoSteerBtnOn) mf.btnAutoSteer.PerformClick();
                 if (mf.yt.isYouTurnBtnOn) mf.btnAutoYouTurn.PerformClick();
                 Close();
+                mf.ABLine.isABValid = false;
             }
-
         }
 
-        private void cboxHeading_SelectedIndexChanged(object sender, EventArgs e)
+        private void textBox2_Enter(object sender, EventArgs e)
         {
-
-            //this.tboxHeading.TextChanged -= new System.EventHandler(this.tboxHeading_TextChanged);
-            tboxHeading.Text = cboxHeading.SelectedItem.ToString();
-            //this.tboxHeading.TextChanged += new System.EventHandler(this.tboxHeading_TextChanged);
-
+            if (mf.isKeyboardOn)
+            {
+                mf.KeyboardToText((TextBox)sender, this);
+                btnSaveEditName.Focus();
+            }
         }
+
+        private void btnAddTimeEdit_Click(object sender, EventArgs e)
+        {
+            textBox2.Text += DateTime.Now.ToString(" hh:mm:ss", CultureInfo.InvariantCulture);
+        }
+
     }
 }

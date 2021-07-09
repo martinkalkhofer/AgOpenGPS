@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AgOpenGPS
@@ -24,31 +17,59 @@ namespace AgOpenGPS
             InitializeComponent();
 
             this.Text = gStr.gsEditABLine;
-            label2.Text = gStr.gsABHeading;
             nudMinTurnRadius.Controls[0].Enabled = false;
         }
 
         private void FormEditAB_Load(object sender, EventArgs e)
         {
-            snapAdj = Properties.Settings.Default.setAS_snapDistance * 0.01;
-            nudMinTurnRadius.Value = Properties.Settings.Default.setAS_snapDistance;
+            if (mf.isMetric)
+            {
+                nudMinTurnRadius.DecimalPlaces = 0;
+                nudMinTurnRadius.Value = (int)((double)Properties.Settings.Default.setAS_snapDistance * mf.cm2CmOrIn);
+            }
+            else
+            {
+                nudMinTurnRadius.DecimalPlaces = 1;
+                nudMinTurnRadius.Value = (decimal)Math.Round(((double)Properties.Settings.Default.setAS_snapDistance * mf.cm2CmOrIn), 1);
+            }
 
-            tboxHeading.Text = Math.Round(glm.toDegrees(mf.ABLine.abHeading), 3).ToString("N3");
+            label1.Text = mf.unitsInCm;
             btnCancel.Focus();
-            mf.ABLine.isEditing = true;
-            mf.layoutPanelRight.Enabled = true;
-            label3.Text = "\u00BD";
+            lblHalfSnapFtM.Text = mf.unitsFtM;
+            lblHalfWidth.Text = (mf.tool.toolWidth * 0.5 * mf.m2FtOrM).ToString("N2");
+            tboxHeading.Text = Math.Round(glm.toDegrees(mf.ABLine.abHeading), 5).ToString();
+        }
+
+        private void tboxHeading_Enter(object sender, EventArgs e)
+        {
+            tboxHeading.Text = "";
+
+            using (FormNumeric form = new FormNumeric(0, 360, Math.Round(glm.toDegrees(mf.ABLine.abHeading), 5)))
+            {
+                DialogResult result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    tboxHeading.Text = ((double)form.ReturnValue).ToString();
+                    mf.ABLine.abHeading = glm.toRadians((double)form.ReturnValue);
+                    mf.ABLine.SetABLineByHeading();
+                }
+                else tboxHeading.Text = Math.Round(glm.toDegrees(mf.ABLine.abHeading), 5).ToString();
+
+            }
+
+            mf.ABLine.isABValid = false;
+            btnCancel.Focus();
         }
 
         private void nudMinTurnRadius_Enter(object sender, EventArgs e)
         {
-            mf.KeypadToNUD((NumericUpDown)sender);
+            mf.KeypadToNUD((NumericUpDown)sender, this);
             btnCancel.Focus();
         }
 
         private void nudMinTurnRadius_ValueChanged(object sender, EventArgs e)
         {
-            snapAdj = (double)nudMinTurnRadius.Value * 0.01;
+            snapAdj = (double)nudMinTurnRadius.Value * mf.inOrCm2Cm * 0.01;
         }
 
         private void btnAdjRight_Click(object sender, EventArgs e)
@@ -63,36 +84,27 @@ namespace AgOpenGPS
 
         private void bntOk_Click(object sender, EventArgs e)
         {
-            mf.ABLine.isEditing = false;
-
             //index to last one. 
             int idx = mf.ABLine.numABLineSelected - 1;
 
             if (idx >= 0)
             {
-
                 mf.ABLine.lineArr[idx].heading = mf.ABLine.abHeading;
                 //calculate the new points for the reference line and points
                 mf.ABLine.lineArr[idx].origin.easting = mf.ABLine.refPoint1.easting;
                 mf.ABLine.lineArr[idx].origin.northing = mf.ABLine.refPoint1.northing;
-
-                //sin x cos z for endpoints, opposite for additional lines
-                mf.ABLine.lineArr[idx].ref1.easting = mf.ABLine.lineArr[idx].origin.easting - (Math.Sin(mf.ABLine.lineArr[idx].heading) *   1600.0);
-                mf.ABLine.lineArr[idx].ref1.northing = mf.ABLine.lineArr[idx].origin.northing - (Math.Cos(mf.ABLine.lineArr[idx].heading) * 1600.0);
-                mf.ABLine.lineArr[idx].ref2.easting = mf.ABLine.lineArr[idx].origin.easting + (Math.Sin(mf.ABLine.lineArr[idx].heading) *   1600.0);
-                mf.ABLine.lineArr[idx].ref2.northing = mf.ABLine.lineArr[idx].origin.northing + (Math.Cos(mf.ABLine.lineArr[idx].heading) * 1600.0);
             }
 
             mf.FileSaveABLines();
             mf.ABLine.moveDistance = 0;
 
-            mf.layoutPanelRight.Enabled = true;
+            mf.panelRight.Enabled = true;
+            mf.ABLine.isABValid = false;
             Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            mf.ABLine.isEditing = false;
             int last = mf.ABLine.numABLineSelected;
             mf.FileLoadABLines();
 
@@ -104,7 +116,8 @@ namespace AgOpenGPS
             mf.ABLine.isABLineLoaded = true;
             mf.ABLine.moveDistance = 0;
 
-            mf.layoutPanelRight.Enabled = true;
+            mf.panelRight.Enabled = true;
+            mf.ABLine.isABValid = false;
             Close();
         }
 
@@ -113,71 +126,50 @@ namespace AgOpenGPS
             mf.ABLine.abHeading += Math.PI;
             if (mf.ABLine.abHeading > glm.twoPI) mf.ABLine.abHeading -= glm.twoPI;
 
-            mf.ABLine.refABLineP1.easting = mf.ABLine.refPoint1.easting - (Math.Sin(mf.ABLine.abHeading) *   1600.0);
-            mf.ABLine.refABLineP1.northing = mf.ABLine.refPoint1.northing - (Math.Cos(mf.ABLine.abHeading) * 1600.0);
-            mf.ABLine.refABLineP2.easting = mf.ABLine.refPoint1.easting + (Math.Sin(mf.ABLine.abHeading) *   1600.0);
-            mf.ABLine.refABLineP2.northing = mf.ABLine.refPoint1.northing + (Math.Cos(mf.ABLine.abHeading) * 1600.0);
+            mf.ABLine.refABLineP1.easting = mf.ABLine.refPoint1.easting - (Math.Sin(mf.ABLine.abHeading) * mf.ABLine.abLength);
+            mf.ABLine.refABLineP1.northing = mf.ABLine.refPoint1.northing - (Math.Cos(mf.ABLine.abHeading) * mf.ABLine.abLength);
+            mf.ABLine.refABLineP2.easting = mf.ABLine.refPoint1.easting + (Math.Sin(mf.ABLine.abHeading) * mf.ABLine.abLength);
+            mf.ABLine.refABLineP2.northing = mf.ABLine.refPoint1.northing + (Math.Cos(mf.ABLine.abHeading) * mf.ABLine.abLength);
 
             mf.ABLine.refPoint2.easting = mf.ABLine.refABLineP2.easting;
             mf.ABLine.refPoint2.northing = mf.ABLine.refABLineP2.northing;
-
-            if (mf.tram.displayMode > 0) mf.ABLine.BuildTram();
-
-            tboxHeading.Text = Math.Round(glm.toDegrees(mf.ABLine.abHeading), 3).ToString("N3");
-        }
-
-        private void btnBPoint_Click(object sender, EventArgs e)
-        {
-            mf.ABLine.SetABLineByBPoint();
-            tboxHeading.Text = Math.Round(glm.toDegrees(mf.ABLine.abHeading), 3).ToString("N3");
-
-            //update the default
-            //if (mf.ABLine.tramPassEvery == 0) mf.mc.machineData[mf.mc.rdTramLine] = 0;
-
-            tboxHeading.Text = Math.Round(glm.toDegrees(mf.ABLine.abHeading), 3).ToString("N3");
-        }
-
-        private void tboxHeading_Enter(object sender, EventArgs e)
-        {
-            tboxHeading.Text = "";
-
-            using (var form = new FormNumeric(0, 360, Math.Round(glm.toDegrees(mf.ABLine.abHeading), 5)))
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    tboxHeading.Text = ((double)form.ReturnValue).ToString("N3");
-                    mf.ABLine.abHeading = glm.toRadians((double)form.ReturnValue);
-                    mf.ABLine.SetABLineByHeading();
-                }
-            }
-
-            btnCancel.Focus();
-
+            tboxHeading.Text = Math.Round(glm.toDegrees(mf.ABLine.abHeading), 5).ToString();
+            mf.ABLine.isABValid = false;
         }
 
         private void btnContourPriority_Click(object sender, EventArgs e)
         {
             if (mf.ABLine.isABLineSet)
             {
-                mf.ABLine.SnapABLine();
+                mf.ABLine.MoveABLine(mf.ABLine.distanceFromCurrentLinePivot);
             }
         }
 
         private void btnRightHalfWidth_Click(object sender, EventArgs e)
         {
-            double dist = mf.tool.toolWidth - mf.tool.toolOverlap;
+            double dist = mf.tool.toolWidth;
 
             mf.ABLine.MoveABLine(dist * 0.5);
-
         }
 
         private void btnLeftHalfWidth_Click(object sender, EventArgs e)
         {
-            double dist = mf.tool.toolWidth - mf.tool.toolOverlap;
+            double dist = mf.tool.toolWidth;
 
-            mf.ABLine.MoveABLine(-dist*0.5);
+            mf.ABLine.MoveABLine(-dist * 0.5);
+        }
 
+        private void btnNoSave_Click(object sender, EventArgs e)
+        {
+            mf.ABLine.isABValid = false;
+            Close();
+        }
+
+        private void cboxDegrees_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mf.ABLine.abHeading = glm.toRadians(double.Parse(cboxDegrees.SelectedItem.ToString()));
+            mf.ABLine.SetABLineByHeading();
+            tboxHeading.Text = Math.Round(glm.toDegrees(mf.ABLine.abHeading), 5).ToString();
         }
     }
 }

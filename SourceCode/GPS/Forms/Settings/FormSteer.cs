@@ -8,7 +8,10 @@ namespace AgOpenGPS
     {
         private readonly FormGPS mf = null;
 
-        bool toSend = false;
+        private bool toSend = false, isSA = false;
+        private int counter = 0, cntr;
+        private vec3 startFix;
+        private double diameter, steerAngleRight, dist;
 
         //Form stuff
         public FormSteer(Form callingForm)
@@ -16,29 +19,17 @@ namespace AgOpenGPS
             mf = callingForm as FormGPS;
             InitializeComponent();
 
-            this.btnFreeDrive.Text = gStr.gsDrive;
-            this.tabGain.Text = gStr.gsGain;
-            this.label29.Text = gStr.gsSidehillDraftGain;
-            //this.label22.Text = gStr.gsOutputGain;
-            this.label41.Text = gStr.gsMinimumPWMDrive;
-            this.label7.Text = gStr.gsProportionalGain;
-            label1.Text = gStr.gsChooseType;
+            //this.label41.Text = "Min PWM";
+            //this.label7.Text = "Gain";
+            //this.label33.Text = "Low PWM";
 
-            this.tabSteer.Text = gStr.gsSteer;
-            this.label25.Text = gStr.gsCountsPerDegree;
-            //this.label45.Text = gStr.gsMaxIntegralValue;
-            this.label19.Text = gStr.gsMaxSteerAngleInDegrees;
-            //this.label33.Text = gStr.gsIntegralGain;
-            this.label10.Text = gStr.gsWheelAngleSensorZero;
+            //this.tabSteer.Text = gStr.gsSteer;
+            //this.label25.Text = gStr.gsCountsPerDegree;
+            //this.label19.Text = gStr.gsMaxSteerAngleInDegrees;
+            //this.label15.Text = gStr.gsIntegralGain;
+            //this.label2.Text = gStr.gsUTurnLookAheadMultiplier;
+            //this.label37.Text = gStr.gsLookAheadInSeconds;
 
-            this.tabLook.Text = "Pure P";
-            this.label2.Text = gStr.gsUTurnLookAheadMultiplier;
-            this.label37.Text = gStr.gsLookAheadInSeconds;
-            this.label4.Text = gStr.gsLookAheadOfflineMultiplier;
-            this.label6.Text = gStr.gsMinLookAheadInMeters;
-
-            this.tabStan.Text = "Stanley";
-            this.btnChart.Text = gStr.gsSteerChart;
             this.label3.Text = gStr.gsAgressiveness;
             this.label5.Text = gStr.gsOvershootReduction;
             this.Text = gStr.gsAutoSteerConfiguration;
@@ -46,11 +37,27 @@ namespace AgOpenGPS
 
         private void FormSteer_Load(object sender, EventArgs e)
         {
-            hsbarSteerAngleSensorZero.Value = Properties.Settings.Default.setAS_steerAngleOffset - 127;
-            lblSteerAngleSensorZero.Text = hsbarSteerAngleSensorZero.Value.ToString();
+            //WAS Zero, CPD
+            hsbarWasOffset.ValueChanged -= hsbarSteerAngleSensorZero_ValueChanged;
+            hsbarCountsPerDegree.ValueChanged -= hsbarCountsPerDegree_ValueChanged;
 
+            hsbarWasOffset.Value = Properties.Settings.Default.setAS_wasOffset;
             hsbarCountsPerDegree.Value = Properties.Settings.Default.setAS_countsPerDegree;
+
             lblCountsPerDegree.Text = hsbarCountsPerDegree.Value.ToString();
+            lblSteerAngleSensorZero.Text = (hsbarWasOffset.Value / (double)(hsbarCountsPerDegree.Value)).ToString("N2");
+
+            hsbarWasOffset.ValueChanged += hsbarSteerAngleSensorZero_ValueChanged;
+            hsbarCountsPerDegree.ValueChanged += hsbarCountsPerDegree_ValueChanged;
+
+            hsbarAckerman.ValueChanged -= hsbarAckerman_ValueChanged;
+            hsbarAckerman.Value = Properties.Settings.Default.setAS_ackerman;
+            lblAckerman.Text = hsbarAckerman.Value.ToString();
+            hsbarAckerman.ValueChanged += hsbarAckerman_ValueChanged;
+
+            //min pwm, kP
+            hsbarMinPWM.ValueChanged -= hsbarMinPWM_ValueChanged;
+            hsbarProportionalGain.ValueChanged -= hsbarProportionalGain_ValueChanged;
 
             hsbarMinPWM.Value = Properties.Settings.Default.setAS_minSteerPWM;
             lblMinPWM.Text = hsbarMinPWM.Value.ToString();
@@ -58,317 +65,402 @@ namespace AgOpenGPS
             hsbarProportionalGain.Value = Properties.Settings.Default.setAS_Kp;
             lblProportionalGain.Text = hsbarProportionalGain.Value.ToString();
 
-            //hsbarOutputGain.Value = Properties.Settings.Default.setAS_Ko;
-            //lblOutputGain.Text = hsbarOutputGain.Value.ToString();
+            hsbarMinPWM.ValueChanged += hsbarMinPWM_ValueChanged;
+            hsbarProportionalGain.ValueChanged += hsbarProportionalGain_ValueChanged;
 
-            hsbarSidehillDraftGain.Value = Properties.Settings.Default.setAS_Kd;
-            lblSidehillDraftGain.Text = hsbarSidehillDraftGain.Value.ToString();
 
+            //low steer, high steer
             hsbarLowSteerPWM.ValueChanged -= hsbarLowSteerPWM_ValueChanged;
-            hsbarHighSteerPWM.ValueChanged -= hsbarMinPWM_ValueChanged;
+            hsbarHighSteerPWM.ValueChanged -= hsbarHighSteerPWM_ValueChanged;
 
             hsbarLowSteerPWM.Value = Properties.Settings.Default.setAS_lowSteerPWM;
-            lblLowSteerPWM.Text = (mf.mc.autoSteerSettings[mf.mc.ssLowPWM]).ToString();
+            lblLowSteerPWM.Text = hsbarLowSteerPWM.Value.ToString();
 
             hsbarHighSteerPWM.Value = Properties.Settings.Default.setAS_highSteerPWM;
             lblHighSteerPWM.Text = hsbarHighSteerPWM.Value.ToString();
 
             hsbarLowSteerPWM.ValueChanged += hsbarLowSteerPWM_ValueChanged;
-            hsbarHighSteerPWM.ValueChanged += hsbarMinPWM_ValueChanged;
+            hsbarHighSteerPWM.ValueChanged += hsbarHighSteerPWM_ValueChanged;
 
 
-            mf.vehicle.maxSteerAngle = Properties.Vehicle.Default.setVehicle_maxSteerAngle;
-            hsbarMaxSteerAngle.Value = (Int16)mf.vehicle.maxSteerAngle;
+
+
+            hsbarMaxSteerAngle.Value = (Int16)Properties.Vehicle.Default.setVehicle_maxSteerAngle;
             lblMaxSteerAngle.Text = hsbarMaxSteerAngle.Value.ToString();
 
-            mf.vehicle.goalPointLookAheadSeconds = Properties.Vehicle.Default.setVehicle_goalPointLookAhead;
-            hsbarLookAhead.Value = (Int16)(mf.vehicle.goalPointLookAheadSeconds * 10);
-            lblLookAhead.Text = mf.vehicle.goalPointLookAheadSeconds.ToString();
+            mf.vehicle.stanleyDistanceErrorGain = Properties.Vehicle.Default.stanleyDistanceErrorGain;
+            hsbarStanleyGain.Value = (Int16)(mf.vehicle.stanleyDistanceErrorGain * 10);
+            lblStanleyGain.Text = mf.vehicle.stanleyDistanceErrorGain.ToString();
 
-            mf.vehicle.goalPointLookAheadMinimumDistance = Properties.Vehicle.Default.setVehicle_lookAheadMinimum;
-            hsbarLookAheadMin.Value = (Int16)(mf.vehicle.goalPointLookAheadMinimumDistance * 10);
-            lblLookAheadMinimum.Text = mf.vehicle.goalPointLookAheadMinimumDistance.ToString();
-
-            mf.vehicle.goalPointDistanceMultiplier = Properties.Vehicle.Default.setVehicle_lookAheadDistanceFromLine;
-            hsbarDistanceFromLine.Value = (Int16)(mf.vehicle.goalPointDistanceMultiplier * 10);
-            lblDistanceFromLine.Text = (mf.vehicle.goalPointDistanceMultiplier + 1).ToString();
-
-            hsbarLookAheadUturnMult.Value = (Int16)(mf.vehicle.goalPointLookAheadUturnMult * 10);
-            lblLookAheadUturnMult.Text = mf.vehicle.goalPointLookAheadUturnMult.ToString();
-
-            mf.vehicle.stanleyGain = Properties.Vehicle.Default.setVehicle_stanleyGain;
-            hsbarStanleyGain.Value = (Int16)(mf.vehicle.stanleyGain * 10);
-            lblStanleyGain.Text = mf.vehicle.stanleyGain.ToString();
-
-            mf.vehicle.stanleyHeadingErrorGain = Properties.Vehicle.Default.setVehicle_stanleyHeadingErrorGain;
+            mf.vehicle.stanleyHeadingErrorGain = Properties.Vehicle.Default.stanleyHeadingErrorGain;
             hsbarHeadingErrorGain.Value = (Int16)(mf.vehicle.stanleyHeadingErrorGain * 10);
             lblHeadingErrorGain.Text = mf.vehicle.stanleyHeadingErrorGain.ToString();
 
+            hsbarIntegral.Value = (int)(Properties.Vehicle.Default.stanleyIntegralGainAB * 100);
+            lblIntegralPercent.Text = ((int)(mf.vehicle.stanleyIntegralGainAB * 100)).ToString();
+
+            hsbarIntegralPurePursuit.Value = (int)(Properties.Vehicle.Default.purePursuitIntegralGainAB * 100);
+            lblPureIntegral.Text = ((int)(mf.vehicle.purePursuitIntegralGain * 100)).ToString();
+
+            hsbarSideHillComp.Value = (int)(Properties.Settings.Default.setAS_sideHillComp * 100);
+
+
+            //nudIntDistance.Value = (int)(Properties.Vehicle.Default.stanleyIntegralDistanceAwayTriggerAB * 100);
+
+            mf.vehicle.goalPointLookAhead = Properties.Vehicle.Default.setVehicle_goalPointLookAhead;
+            hsbarLookAhead.Value = (Int16)(mf.vehicle.goalPointLookAhead * 10);
+            lblLookAhead.Text = mf.vehicle.goalPointLookAhead.ToString();
+
+            hsbarLookAheadMult.Value = (Int16)(mf.vehicle.goalPointLookAheadMult * 10);
+            lblLookAheadMult.Text = mf.vehicle.goalPointLookAheadMult.ToString();
+
             //make sure free drive is off
-            btnFreeDrive.BackColor = Color.Red;
-            mf.ast.isInFreeDriveMode = false;
+            btnFreeDrive.Image = Properties.Resources.SteerDriveOff;
+            mf.vehicle.ast.isInFreeDriveMode = false;
             btnSteerAngleDown.Enabled = false;
             btnSteerAngleUp.Enabled = false;
             //hSBarFreeDrive.Value = 0;
-            mf.ast.driveFreeSteerAngle = 0;
-
-            if (mf.isStanleyUsed) btnStanley.Text = "Stanley";
-            else btnStanley.Text = "Pure P";
+            mf.vehicle.ast.driveFreeSteerAngle = 0;
 
             toSend = false;
+
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+
+            if (isSA)
+            {
+                //bool isSame = Math.PI - Math.Abs(Math.Abs(cH - mf.gpsHeading) - Math.PI) < (glm.PIBy2+0.1);
+                dist = glm.Distance(startFix, mf.pivotAxlePos);
+                cntr++;
+                if (dist > diameter)
+                {
+                    diameter = dist;
+                    cntr = 0;
+                }
+                lblDiameter.Text = diameter.ToString("N2") + " m";
+
+                if (cntr > 9)
+                {
+                    steerAngleRight = Math.Atan(mf.vehicle.wheelbase / (diameter / 2));
+                    steerAngleRight = glm.toDegrees(steerAngleRight);
+                    //steerAngleLeft = Math.Atan(mf.vehicle.wheelbase / (diameter / 2 ));
+                    //steerAngleLeft = glm.toDegrees(steerAngleLeft);
+
+                    lblCalcSteerAngleInner.Text = steerAngleRight.ToString("N1") + "\u00B0";
+                    //lblCalcSteerAngleOuter.Text = steerAngleLeft.ToString("N1") + "\u00B0";
+                    lblDiameter.Text = diameter.ToString("N2") + " m";
+                    btnStartSA.Image = Properties.Resources.BoundaryRecord;
+                    isSA = false;
+                }
+            }
+
+            double actAng = mf.mc.actualSteerAngleDegrees * 5;
+            if (actAng > 0)
+            {
+                if (actAng > 99) actAng = 99;
+                pbarRight.Value = (int)actAng;
+                pbarLeft.Value = 0;
+            }
+            else
+            {
+                if (actAng < -99) actAng = -99;
+                pbarRight.Value = 0;
+                pbarLeft.Value = (int)-actAng;
+            }
+
+
+
+            lblSteerAngle.Text = mf.SetSteerAngle;
+            lblSteerAngleActual.Text = mf.mc.actualSteerAngleDegrees.ToString("N1") + "\u00B0";
+            lblActualSteerAngleUpper.Text = lblSteerAngleActual.Text;
+            double err = (mf.mc.actualSteerAngleDegrees - mf.guidanceLineSteerAngle * 0.01);
+            lblError.Text = Math.Abs(err).ToString("N1") + "\u00B0";
+            if (err > 0) lblError.ForeColor = Color.OrangeRed;
+            else lblError.ForeColor = Color.LightGreen;
+
+            lblPWMDisplay.Text = mf.mc.pwmDisplay.ToString();
+            counter++;
+            if (toSend && counter > 4)
+            {
+                Properties.Settings.Default.setAS_countsPerDegree = mf.p_252.pgn[mf.p_252.countsPerDegree] = unchecked((byte)hsbarCountsPerDegree.Value);
+                Properties.Settings.Default.setAS_ackerman = mf.p_252.pgn[mf.p_252.ackerman] = unchecked((byte)hsbarAckerman.Value);
+
+                Properties.Settings.Default.setAS_wasOffset = hsbarWasOffset.Value;
+                mf.p_252.pgn[mf.p_252.wasOffsetHi] = unchecked((byte)(hsbarWasOffset.Value >> 8));
+                mf.p_252.pgn[mf.p_252.wasOffsetLo] = unchecked((byte)(hsbarWasOffset.Value));
+
+                Properties.Settings.Default.setAS_highSteerPWM = mf.p_252.pgn[mf.p_252.highPWM] = unchecked((byte)hsbarHighSteerPWM.Value);
+                Properties.Settings.Default.setAS_lowSteerPWM = mf.p_252.pgn[mf.p_252.lowPWM] = unchecked((byte)hsbarLowSteerPWM.Value);
+                Properties.Settings.Default.setAS_Kp = mf.p_252.pgn[mf.p_252.gainProportional] = unchecked((byte)hsbarProportionalGain.Value);
+                Properties.Settings.Default.setAS_minSteerPWM = mf.p_252.pgn[mf.p_252.minPWM] = unchecked((byte)hsbarMinPWM.Value);
+
+                Properties.Settings.Default.Save();
+                Properties.Vehicle.Default.Save();
+
+                mf.SendPgnToLoop(mf.p_252.pgn);
+                toSend = false;
+                counter = 0;
+            }
+
+            if (hsbarMinPWM.Value > hsbarLowSteerPWM.Value) lblMinPWM.ForeColor = Color.OrangeRed;
+            else lblMinPWM.ForeColor = SystemColors.ControlText;
         }
 
         private void FormSteer_FormClosing(object sender, FormClosingEventArgs e)
         {
-            mf.ast.isInFreeDriveMode = false;
+            mf.vehicle.ast.isInFreeDriveMode = false;
+
+            Properties.Vehicle.Default.setVehicle_goalPointLookAhead = mf.vehicle.goalPointLookAhead;
+            Properties.Vehicle.Default.stanleyHeadingErrorGain = mf.vehicle.stanleyHeadingErrorGain;
+            Properties.Vehicle.Default.stanleyDistanceErrorGain = mf.vehicle.stanleyDistanceErrorGain;
+            Properties.Vehicle.Default.stanleyIntegralGainAB = mf.vehicle.stanleyIntegralGainAB;
+            Properties.Vehicle.Default.purePursuitIntegralGainAB = mf.vehicle.purePursuitIntegralGain;
+            Properties.Vehicle.Default.setVehicle_goalPointLookAheadMult = mf.vehicle.goalPointLookAheadMult;
+            Properties.Vehicle.Default.setVehicle_maxSteerAngle = mf.vehicle.maxSteerAngle;
+
+            Properties.Settings.Default.setAS_countsPerDegree = mf.p_252.pgn[mf.p_252.countsPerDegree] = unchecked((byte)hsbarCountsPerDegree.Value);
+            Properties.Settings.Default.setAS_ackerman = mf.p_252.pgn[mf.p_252.ackerman] = unchecked((byte)hsbarAckerman.Value);
+
+            Properties.Settings.Default.setAS_wasOffset = hsbarWasOffset.Value;
+            mf.p_252.pgn[mf.p_252.wasOffsetHi] = unchecked((byte)(hsbarWasOffset.Value >> 8));
+            mf.p_252.pgn[mf.p_252.wasOffsetLo] = unchecked((byte)(hsbarWasOffset.Value));
+
+            Properties.Settings.Default.setAS_highSteerPWM = mf.p_252.pgn[mf.p_252.highPWM] = unchecked((byte)hsbarHighSteerPWM.Value);
+            Properties.Settings.Default.setAS_lowSteerPWM = mf.p_252.pgn[mf.p_252.lowPWM] = unchecked((byte)hsbarLowSteerPWM.Value);
+            Properties.Settings.Default.setAS_Kp = mf.p_252.pgn[mf.p_252.gainProportional] = unchecked((byte)hsbarProportionalGain.Value);
+            Properties.Settings.Default.setAS_minSteerPWM = mf.p_252.pgn[mf.p_252.minPWM] = unchecked((byte)hsbarMinPWM.Value);
+
             Properties.Settings.Default.Save();
             Properties.Vehicle.Default.Save();
+
+            //save current vehicle
+            SettingsIO.ExportAll(mf.vehiclesDirectory + mf.vehicleFileName + ".XML");
         }
 
-        //Stanley Page tab
-        private void hsbarStanleyGain_ValueChanged(object sender, EventArgs e)
+        #region Gain
+        private void hsbarMinPWM_ValueChanged(object sender, EventArgs e)
         {
-            mf.vehicle.stanleyGain = hsbarStanleyGain.Value * 0.1;
-            lblStanleyGain.Text = mf.vehicle.stanleyGain.ToString();
-            Properties.Vehicle.Default.setVehicle_stanleyGain = mf.vehicle.stanleyGain;
-        }
-
-        private void hsbarHeadingErrorGain_ValueChanged(object sender, EventArgs e)
-        {
-            mf.vehicle.stanleyHeadingErrorGain = hsbarHeadingErrorGain.Value * 0.1;
-            lblHeadingErrorGain.Text = mf.vehicle.stanleyHeadingErrorGain.ToString();
-            Properties.Vehicle.Default.setVehicle_stanleyHeadingErrorGain = mf.vehicle.stanleyHeadingErrorGain;
-        }
-
-        //Scrollbars
-        private void hsbarLookAhead_ValueChanged(object sender, EventArgs e)
-        {
-            mf.vehicle.goalPointLookAheadSeconds = hsbarLookAhead.Value * 0.1;
-            lblLookAhead.Text = mf.vehicle.goalPointLookAheadSeconds.ToString();
-            Properties.Vehicle.Default.setVehicle_goalPointLookAhead = mf.vehicle.goalPointLookAheadSeconds;
-            //mf.AutoSteerSettingsOutToPort();
-        }
-
-        private void hsbarLookAheadUturnMult_ValueChanged(object sender, EventArgs e)
-        {
-            mf.vehicle.goalPointLookAheadUturnMult = hsbarLookAheadUturnMult.Value * 0.1;
-            lblLookAheadUturnMult.Text = mf.vehicle.goalPointLookAheadUturnMult.ToString();
-            Properties.Vehicle.Default.setVehicle_goalPointLookAheadUturnMult = mf.vehicle.goalPointLookAheadUturnMult;
-        }
-
-        private void hsbarDistanceFromLine_ValueChanged(object sender, EventArgs e)
-        {
-            mf.vehicle.goalPointDistanceMultiplier = hsbarDistanceFromLine.Value * 0.1;
-            lblDistanceFromLine.Text = (mf.vehicle.goalPointDistanceMultiplier + 1).ToString();
-            Properties.Vehicle.Default.setVehicle_lookAheadDistanceFromLine = mf.vehicle.goalPointDistanceMultiplier;
-        }
-
-        private void hsbarLookAheadMin_ValueChanged(object sender, EventArgs e)
-        {
-            mf.vehicle.goalPointLookAheadMinimumDistance = hsbarLookAheadMin.Value * 0.1;
-            lblLookAheadMinimum.Text = mf.vehicle.goalPointLookAheadMinimumDistance.ToString();
-            Properties.Vehicle.Default.setVehicle_lookAheadMinimum = mf.vehicle.goalPointLookAheadMinimumDistance;
-        }
-
-        private void hsbarCountsPerDegree_ValueChanged(object sender, EventArgs e)
-        {
-            mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree] = unchecked((byte)hsbarCountsPerDegree.Value);
-            lblCountsPerDegree.Text = (mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree]).ToString();
-            Properties.Settings.Default.setAS_countsPerDegree = mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree];
+            lblMinPWM.Text = unchecked((byte)hsbarMinPWM.Value).ToString();
             toSend = true;
+            counter = 0;
+        }
+
+        private void hsbarProportionalGain_ValueChanged(object sender, EventArgs e)
+        {
+            lblProportionalGain.Text = unchecked((byte)hsbarProportionalGain.Value).ToString();
+            toSend = true;
+            counter = 0;
+        }
+
+        private void hsbarLowSteerPWM_ValueChanged(object sender, EventArgs e)
+        {
+            if (hsbarLowSteerPWM.Value > hsbarHighSteerPWM.Value) hsbarHighSteerPWM.Value = hsbarLowSteerPWM.Value;
+            lblLowSteerPWM.Text = unchecked((byte)hsbarLowSteerPWM.Value).ToString();
+            toSend = true;
+            counter = 0;
+        }
+
+        private void hsbarHighSteerPWM_ValueChanged(object sender, EventArgs e)
+        {
+            if (hsbarLowSteerPWM.Value > hsbarHighSteerPWM.Value) hsbarLowSteerPWM.Value = hsbarHighSteerPWM.Value;
+            lblHighSteerPWM.Text = unchecked((byte)hsbarHighSteerPWM.Value).ToString();
+            toSend = true;
+            counter = 0;
+        }
+        #endregion
+
+        #region Steer
+
+        private void hsbarAckerman_ValueChanged(object sender, EventArgs e)
+        {
+            lblAckerman.Text = unchecked((byte)hsbarAckerman.Value).ToString();
+            toSend = true;
+            counter = 0;
         }
 
         private void hsbarMaxSteerAngle_ValueChanged(object sender, EventArgs e)
         {
             mf.vehicle.maxSteerAngle = hsbarMaxSteerAngle.Value;
             lblMaxSteerAngle.Text = hsbarMaxSteerAngle.Value.ToString();
-            Properties.Vehicle.Default.setVehicle_maxSteerAngle = mf.vehicle.maxSteerAngle;
+        }
+
+        private void hsbarCountsPerDegree_ValueChanged(object sender, EventArgs e)
+        {
+            lblCountsPerDegree.Text = unchecked((byte)hsbarCountsPerDegree.Value).ToString();
+            lblSteerAngleSensorZero.Text = (hsbarWasOffset.Value / (double)(hsbarCountsPerDegree.Value)).ToString("N2");
+            toSend = true;
+            counter = 0;
         }
 
         private void hsbarSteerAngleSensorZero_ValueChanged(object sender, EventArgs e)
         {
-            lblSteerAngleSensorZero.Text = hsbarSteerAngleSensorZero.Value.ToString();
-            mf.mc.autoSteerSettings[mf.mc.ssSteerOffset] = unchecked((byte)(127 + hsbarSteerAngleSensorZero.Value));
-            Properties.Settings.Default.setAS_steerAngleOffset = mf.mc.autoSteerSettings[mf.mc.ssSteerOffset];
+            lblSteerAngleSensorZero.Text = (hsbarWasOffset.Value / (double)(hsbarCountsPerDegree.Value)).ToString("N2");
             toSend = true;
+            counter = 0;
         }
 
-        //Stanley Parameters
-
-        private void hsbarMinPWM_ValueChanged(object sender, EventArgs e)
+        private void btnZeroWAS_Click(object sender, EventArgs e)
         {
-            mf.mc.autoSteerSettings[mf.mc.ssMinPWM] = unchecked((byte)hsbarMinPWM.Value);
-            lblMinPWM.Text = (mf.mc.autoSteerSettings[mf.mc.ssMinPWM]).ToString();
-            Properties.Settings.Default.setAS_minSteerPWM = mf.mc.autoSteerSettings[mf.mc.ssMinPWM];
-            toSend = true;
+            int offset = (int)(hsbarCountsPerDegree.Value * -mf.mc.actualSteerAngleDegrees + hsbarWasOffset.Value);
+            if (Math.Abs(offset) > 3900) mf.TimedMessageBox(2000, "Exceeded Range", "Excessive Steer Angle - Cannot Zero");
+            else
+            {
+                hsbarWasOffset.Value += (int)(hsbarCountsPerDegree.Value * -mf.mc.actualSteerAngleDegrees);
+            }
         }
 
-        private void hsbarProportionalGain_ValueChanged(object sender, EventArgs e)
+        private void btnWASZeroReset_Click(object sender, EventArgs e)
         {
-            mf.mc.autoSteerSettings[mf.mc.ssKp] = unchecked((byte)hsbarProportionalGain.Value);
-            lblProportionalGain.Text = (mf.mc.autoSteerSettings[mf.mc.ssKp]).ToString();
-            Properties.Settings.Default.setAS_Kp = mf.mc.autoSteerSettings[mf.mc.ssKp];
-            toSend = true;
+            hsbarWasOffset.Value = 0;
         }
 
-        //private void hsbarOutputGain_ValueChanged(object sender, EventArgs e)
-        //{
-        //    mf.mc.autoSteerSettings[mf.mc.ssKo] = unchecked((byte)hsbarOutputGain.Value);
-        //    lblOutputGain.Text = (mf.mc.autoSteerSettings[mf.mc.ssKo]).ToString();
-        //    Properties.Settings.Default.setAS_Ko = mf.mc.autoSteerSettings[mf.mc.ssKo];
-        //    toSend = true;
-        //}
-
-        private void hsbarSidehillDraftGain_ValueChanged(object sender, EventArgs e)
+        private void btnStartSA_Click(object sender, EventArgs e)
         {
-            mf.mc.autoSteerSettings[mf.mc.ssKd] = unchecked((byte)hsbarSidehillDraftGain.Value);
-            lblSidehillDraftGain.Text = (mf.mc.autoSteerSettings[mf.mc.ssKd]).ToString();
-            Properties.Settings.Default.setAS_Kd = mf.mc.autoSteerSettings[mf.mc.ssKd];
-            toSend = true;
+            if (!isSA)
+            {
+                isSA = true;
+                startFix = mf.pivotAxlePos;
+                dist = 0;
+                diameter = 0;
+                cntr = 0;
+                btnStartSA.Image = Properties.Resources.boundaryStop;
+                lblDiameter.Text = "0";
+                lblCalcSteerAngleInner.Text = "Drive Steady";
+                //lblCalcSteerAngleOuter.Text = "Consistent Steering Angle!!";
+            }
+            else
+            {
+                isSA = false;
+                lblCalcSteerAngleInner.Text = "0.0" + "\u00B0";
+                //lblCalcSteerAngleOuter.Text = "0.0" + "\u00B0";
+                btnStartSA.Image = Properties.Resources.BoundaryRecord;
+            }
+
         }
 
-        private void hsbarLowSteerPWM_ValueChanged(object sender, EventArgs e)
+        #endregion
+
+        # region Stanley
+
+        private void hsbarStanleyGain_ValueChanged(object sender, EventArgs e)
         {
-            if (hsbarLowSteerPWM.Value > hsbarHighSteerPWM.Value) hsbarHighSteerPWM.Value = hsbarLowSteerPWM.Value;
-            mf.mc.autoSteerSettings[mf.mc.ssLowPWM] = unchecked((byte)hsbarLowSteerPWM.Value);
-            lblLowSteerPWM.Text = (mf.mc.autoSteerSettings[mf.mc.ssLowPWM]).ToString();
-            Properties.Settings.Default.setAS_lowSteerPWM = mf.mc.autoSteerSettings[mf.mc.ssLowPWM];
-            toSend = true;
+            mf.vehicle.stanleyDistanceErrorGain = hsbarStanleyGain.Value * 0.1;
+            lblStanleyGain.Text = mf.vehicle.stanleyDistanceErrorGain.ToString();
         }
 
-        private void hsbarHighSteerPWM_ValueChanged(object sender, EventArgs e)
+        private void hsbarHeadingErrorGain_ValueChanged(object sender, EventArgs e)
         {
-            if (hsbarLowSteerPWM.Value > hsbarHighSteerPWM.Value) hsbarLowSteerPWM.Value = hsbarHighSteerPWM.Value;
-            mf.mc.autoSteerSettings[mf.mc.ssHighPWM] = unchecked((byte)hsbarHighSteerPWM.Value);
-            lblHighSteerPWM.Text = (mf.mc.autoSteerSettings[mf.mc.ssHighPWM]).ToString();
-            Properties.Settings.Default.setAS_highSteerPWM = mf.mc.autoSteerSettings[mf.mc.ssHighPWM];
-            toSend = true;
+            mf.vehicle.stanleyHeadingErrorGain = hsbarHeadingErrorGain.Value * 0.1;
+            lblHeadingErrorGain.Text = mf.vehicle.stanleyHeadingErrorGain.ToString();
         }
 
-        //FREE DRIVE SECTION
+        private void hsbarIntegral_ValueChanged(object sender, EventArgs e)
+        {
+            mf.vehicle.stanleyIntegralGainAB = hsbarIntegral.Value * 0.01;
+            lblIntegralPercent.Text = hsbarIntegral.Value.ToString();
+        }
+        private void nudIntDistance_Enter(object sender, EventArgs e)
+        {
+            if (mf.KeypadToNUD((NumericUpDown)sender, this))
+            {
+                //mf.vehicle.stanleyIntegralDistanceAwayTriggerAB = ((double)nudIntDistance.Value)*0.01;
+                Properties.Vehicle.Default.stanleyIntegralDistanceAwayTriggerAB = mf.vehicle.stanleyIntegralDistanceAwayTriggerAB;
+            }
+        }
 
-        //private void hSBarFreeDrive_ValueChanged(object sender, EventArgs e)
-        //{
-        //    mf.ast.driveFreeSteerAngle = (Int16)hSBarFreeDrive.Value;
-        //}
+        #endregion
 
+        #region Pure
+        private void hsbarIntegralPurePursuit_ValueChanged(object sender, EventArgs e)
+        {
+            mf.vehicle.purePursuitIntegralGain = hsbarIntegralPurePursuit.Value * 0.01;
+            lblPureIntegral.Text = hsbarIntegralPurePursuit.Value.ToString();
+        }
+
+        private void hsbarSideHillComp_ValueChanged(object sender, EventArgs e)
+        {
+            double deg = (double)hsbarSideHillComp.Value;
+            deg *= 0.01;
+            lblSideHillComp.Text = (deg.ToString("N2") + "\u00B0");
+            Properties.Settings.Default.setAS_sideHillComp = deg;
+            mf.gyd.sideHillCompFactor = deg;
+        }
+
+
+        private void hsbarLookAhead_ValueChanged(object sender, EventArgs e)
+        {
+            mf.vehicle.goalPointLookAhead = hsbarLookAhead.Value * 0.1;
+            lblLookAhead.Text = mf.vehicle.goalPointLookAhead.ToString();
+            //mf.AutoSteerSettingsOutToPort();
+        }
+
+        private void hsbarLookAheadMult_ValueChanged(object sender, EventArgs e)
+        {
+            mf.vehicle.goalPointLookAheadMult = hsbarLookAheadMult.Value * 0.1;
+            lblLookAheadMult.Text = mf.vehicle.goalPointLookAheadMult.ToString();
+        }
+
+        private void expandWindow_Click(object sender, EventArgs e)
+        {
+            if (this.Height > 462)
+                this.Size = new System.Drawing.Size(378, 462);
+            else
+                this.Size = new System.Drawing.Size(378, 639);
+
+        }
+
+        #endregion
+
+        #region Free Drive
         private void btnFreeDrive_Click(object sender, EventArgs e)
         {
-            if (mf.ast.isInFreeDriveMode)
+            if (mf.vehicle.ast.isInFreeDriveMode)
             {
                 //turn OFF free drive mode
-                btnFreeDrive.BackColor = Color.Red;
-                mf.ast.isInFreeDriveMode = false;
+                btnFreeDrive.Image = Properties.Resources.SteerDriveOff;
+                btnFreeDrive.BackColor = Color.FromArgb(50, 50, 70);
+                mf.vehicle.ast.isInFreeDriveMode = false;
                 btnSteerAngleDown.Enabled = false;
                 btnSteerAngleUp.Enabled = false;
                 //hSBarFreeDrive.Value = 0;
-                mf.ast.driveFreeSteerAngle = 0;
+                mf.vehicle.ast.driveFreeSteerAngle = 0;
             }
             else
             {
                 //turn ON free drive mode
-                btnFreeDrive.BackColor = Color.LimeGreen;
-                mf.ast.isInFreeDriveMode = true;
+                btnFreeDrive.Image = Properties.Resources.SteerDriveOn;
+                btnFreeDrive.BackColor = Color.LightGreen;
+                mf.vehicle.ast.isInFreeDriveMode = true;
                 btnSteerAngleDown.Enabled = true;
                 btnSteerAngleUp.Enabled = true;
                 //hSBarFreeDrive.Value = 0;
-                mf.ast.driveFreeSteerAngle = 0;
+                mf.vehicle.ast.driveFreeSteerAngle = 0;
                 lblSteerAngle.Text = "0";
             }
         }
 
         private void btnFreeDriveZero_Click(object sender, EventArgs e)
         {
-            if (mf.ast.driveFreeSteerAngle == 0)
-                mf.ast.driveFreeSteerAngle = 5;
-            else mf.ast.driveFreeSteerAngle = 0;
+            if (mf.vehicle.ast.driveFreeSteerAngle == 0)
+                mf.vehicle.ast.driveFreeSteerAngle = 5;
+            else mf.vehicle.ast.driveFreeSteerAngle = 0;
             //hSBarFreeDrive.Value = mf.ast.driveFreeSteerAngle;
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void btnMax_Click(object sender, EventArgs e)
-        {
-            if (Height < 600) Height = 650;
-            else Height = 400;
-        }
-
-        private void btnChart_Click(object sender, EventArgs e)
-        {
-            mf.steerChartStripMenu.PerformClick();
-        }
-
-        private void BtnStanley_Click(object sender, EventArgs e)
-        {
-            mf.isStanleyUsed = !mf.isStanleyUsed;
-            if (mf.isStanleyUsed) btnStanley.Text = "Stanley";
-            else btnStanley.Text = "Pure P";
-            Properties.Vehicle.Default.setVehicle_isStanleyUsed = mf.isStanleyUsed;
-            Properties.Vehicle.Default.Save();
-        }
-
-        int counter = 0;
-        private void Timer1_Tick(object sender, EventArgs e)
-        {
-            double angleSteer = mf.actualSteerAngleDisp * 0.01;
-            lblSteerAngle.Text = mf.SetSteerAngle;
-            lblSteerAngleActual.Text = (mf.actualSteerAngleDisp*0.01).ToString("N1") + "\u00B0";
-
-            double err = (mf.actualSteerAngleDisp * 0.01 - mf.guidanceLineSteerAngle * 0.01);
-            lblError.Text = Math.Abs(err).ToString("N1") + "\u00B0";
-            if (err > 0) lblError.ForeColor = Color.DarkRed;
-            else lblError.ForeColor = Color.DarkGreen;
-            
-            lblPWMDisplay.Text = mf.mc.pwmDisplay.ToString();
-
-            counter++;
-            if (toSend && counter > 6)
-            {
-                Properties.Settings.Default.Save();
-                Properties.Vehicle.Default.Save();
-                mf.SendSteerSettingsOutAutoSteerPort();
-                toSend = false;
-                counter = 0;
-            }
-
-            if (mf.checksumSent - mf.checksumRecd == 0)
-            {
-                lblSent.BackColor = Color.LightGreen;
-                lblRecd.BackColor = Color.LightGreen;
-            }
-            else
-            {
-                lblSent.BackColor = Color.Salmon;
-                lblRecd.BackColor = Color.Salmon;
-            }
-
-            lblSent.Text = mf.checksumSent.ToString();
-            lblRecd.Text = mf.checksumRecd.ToString();
-
-            if (hsbarMinPWM.Value > hsbarLowSteerPWM.Value) lblMinPWM.ForeColor = Color.Red;
-            else lblMinPWM.ForeColor = Color.Black;
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.Save();
-            Properties.Vehicle.Default.Save();
-            mf.SendSteerSettingsOutAutoSteerPort();
-        }
 
         private void btnSteerAngleUp_MouseDown(object sender, MouseEventArgs e)
         {
-            mf.ast.driveFreeSteerAngle++;
-            if (mf.ast.driveFreeSteerAngle > 40) mf.ast.driveFreeSteerAngle = 40;
+            mf.vehicle.ast.driveFreeSteerAngle++;
+            if (mf.vehicle.ast.driveFreeSteerAngle > 40) mf.vehicle.ast.driveFreeSteerAngle = 40;
         }
 
         private void btnSteerAngleDown_MouseDown(object sender, MouseEventArgs e)
         {
-            mf.ast.driveFreeSteerAngle--;
-            if (mf.ast.driveFreeSteerAngle < -40) mf.ast.driveFreeSteerAngle = -40;
+            mf.vehicle.ast.driveFreeSteerAngle--;
+            if (mf.vehicle.ast.driveFreeSteerAngle < -40) mf.vehicle.ast.driveFreeSteerAngle = -40;
         }
+        #endregion
     }
 }

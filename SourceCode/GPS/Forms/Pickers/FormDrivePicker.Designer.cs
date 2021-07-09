@@ -74,10 +74,10 @@
             this.btnOpenExistingLv.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOpenExistingLv.Image = global::AgOpenGPS.Properties.Resources.FileOpen;
             this.btnOpenExistingLv.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnOpenExistingLv.Location = new System.Drawing.Point(730, 330);
+            this.btnOpenExistingLv.Location = new System.Drawing.Point(669, 330);
             this.btnOpenExistingLv.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnOpenExistingLv.Name = "btnOpenExistingLv";
-            this.btnOpenExistingLv.Size = new System.Drawing.Size(227, 63);
+            this.btnOpenExistingLv.Size = new System.Drawing.Size(288, 63);
             this.btnOpenExistingLv.TabIndex = 92;
             this.btnOpenExistingLv.Text = "Use Selected";
             this.btnOpenExistingLv.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -113,7 +113,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormFilePicker";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormFilePicker_Load);
             this.ResumeLayout(false);
 

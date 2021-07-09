@@ -39,13 +39,14 @@
             // tboxNumber
             // 
             this.tboxNumber.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxNumber.Location = new System.Drawing.Point(208, 7);
+            this.tboxNumber.Location = new System.Drawing.Point(191, 7);
             this.tboxNumber.Name = "tboxNumber";
             this.tboxNumber.ReadOnly = true;
-            this.tboxNumber.Size = new System.Drawing.Size(246, 52);
+            this.tboxNumber.Size = new System.Drawing.Size(263, 52);
             this.tboxNumber.TabIndex = 1;
             this.tboxNumber.Text = "234.5643";
             this.tboxNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tboxNumber.Click += new System.EventHandler(this.tboxNumber_Click);
             // 
             // lblMax
             // 
@@ -60,7 +61,7 @@
             // lblMin
             // 
             this.lblMin.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMin.Location = new System.Drawing.Point(205, 62);
+            this.lblMin.Location = new System.Drawing.Point(195, 62);
             this.lblMin.Name = "lblMin";
             this.lblMin.Size = new System.Drawing.Size(125, 36);
             this.lblMin.TabIndex = 7;
@@ -78,14 +79,14 @@
             // 
             // btnDistanceUp
             // 
-            this.btnDistanceUp.BackColor = System.Drawing.SystemColors.Control;
+            this.btnDistanceUp.BackColor = System.Drawing.Color.Transparent;
             this.btnDistanceUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnDistanceUp.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
-            this.btnDistanceUp.FlatAppearance.BorderSize = 2;
+            this.btnDistanceUp.FlatAppearance.BorderSize = 0;
             this.btnDistanceUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDistanceUp.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDistanceUp.Image = global::AgOpenGPS.Properties.Resources.UpArrow64;
-            this.btnDistanceUp.Location = new System.Drawing.Point(112, 3);
+            this.btnDistanceUp.Location = new System.Drawing.Point(95, 3);
             this.btnDistanceUp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnDistanceUp.Name = "btnDistanceUp";
             this.btnDistanceUp.Size = new System.Drawing.Size(91, 92);
@@ -95,10 +96,10 @@
             // 
             // btnDistanceDn
             // 
-            this.btnDistanceDn.BackColor = System.Drawing.SystemColors.Control;
+            this.btnDistanceDn.BackColor = System.Drawing.Color.Transparent;
             this.btnDistanceDn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnDistanceDn.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
-            this.btnDistanceDn.FlatAppearance.BorderSize = 2;
+            this.btnDistanceDn.FlatAppearance.BorderSize = 0;
             this.btnDistanceDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDistanceDn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDistanceDn.Image = global::AgOpenGPS.Properties.Resources.DnArrow64;
@@ -130,7 +131,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Enter a Value";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormNumeric_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

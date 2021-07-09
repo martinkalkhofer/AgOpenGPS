@@ -119,20 +119,30 @@
   </resheader>
   <data name="label11.Text" xml:space="preserve">
     <value>Andreas Ortner, Austria
+Daniel P, Netherlands
+Richard Klasens, Netherlands
+Matthias Hammer, Germany
+Jaap van den Handel, Netherlands
+Josep Vilamitjana, Catalonia - Graphics
+David Cox, Canada
+
 Wilhelm Eder, Germany
-MTZ8302, Germany
 Kevin Bouwman, USA
 Petar Starcev Serbia, Novi Sad
 Ray Bear - AutoAuto
-Daniel P - Multi Curve
 Maxime Emprou - Languages and Code
 Giianluca Ravazzolo - Italian Translation
 Travis Martin - Switch and Github
-Richard Klasens, Tram Lines and testing
 AlexBrooy - Ukrainian Translation
 Marek Barát - Slovak Translation
 Tilman Puls - Germany - German Translation
 
 And many others, Thank You so much!</value>
+  </data>
+  <data name="label12.Text" xml:space="preserve">
+    <value>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL &lt;COPYRIGHT HOLDER&gt; BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</value>
   </data>
 </root>

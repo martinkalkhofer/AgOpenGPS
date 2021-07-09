@@ -68,9 +68,12 @@ namespace AgOpenGPS
         {
             //count the points from the boundary
             int lineCount = turnLine.Count;
-            double distance = 0;
+
+            totalHeadWidth *= totalHeadWidth;
+            spacing *= spacing;
 
             //int headCount = mf.bndArr[inTurnNum].bndLine.Count;
+            double distance;
             int bndCount = curBnd.Count;
 
             //remove the points too close to boundary
@@ -79,7 +82,7 @@ namespace AgOpenGPS
                 for (int j = 0; j < lineCount; j++)
                 {
                     //make sure distance between headland and boundary is not less then width
-                    distance = glm.Distance(curBnd[i], turnLine[j]);
+                    distance = glm.DistanceSquared(curBnd[i], turnLine[j]);
                     if (distance < (totalHeadWidth * 0.99))
                     {
                         turnLine.RemoveAt(j);
@@ -89,20 +92,6 @@ namespace AgOpenGPS
                 }
             }
 
-            //make sure distance isn't too small between points on turnLine
-            bndCount = turnLine.Count;
-
-            //double spacing = mf.tool.toolWidth * 0.25;
-            for (int i = 0; i < bndCount - 1; i++)
-            {
-                distance = glm.Distance(turnLine[i], turnLine[i + 1]);
-                if (distance < spacing)
-                {
-                    turnLine.RemoveAt(i + 1);
-                    bndCount = turnLine.Count;
-                    i--;
-                }
-            }
 
             //make sure distance isn't too big between points on Turn
             bndCount = turnLine.Count;
@@ -110,12 +99,25 @@ namespace AgOpenGPS
             {
                 int j = i + 1;
                 if (j == bndCount) j = 0;
-                distance = glm.Distance(turnLine[i], turnLine[j]);
-                if (distance > (spacing * 1.25))
+                distance = glm.DistanceSquared(turnLine[i], turnLine[j]);
+                if (distance > (spacing * 1.8))
                 {
                     vec3 pointB = new vec3((turnLine[i].easting + turnLine[j].easting) / 2.0, (turnLine[i].northing + turnLine[j].northing) / 2.0, turnLine[i].heading);
 
                     turnLine.Insert(j, pointB);
+                    bndCount = turnLine.Count;
+                    i--;
+                }
+            }
+
+            //make sure distance isn't too small between points on turnLine
+            bndCount = turnLine.Count;
+            for (int i = 0; i < bndCount - 1; i++)
+            {
+                distance = glm.DistanceSquared(turnLine[i], turnLine[i + 1]);
+                if (distance < spacing)
+                {
+                    turnLine.RemoveAt(i + 1);
                     bndCount = turnLine.Count;
                     i--;
                 }
@@ -224,7 +226,7 @@ namespace AgOpenGPS
             GL.LineWidth(1);
             GL.Color3(0.8555f, 0.9232f, 0.60f);
             GL.PointSize(2);
-            GL.Begin(PrimitiveType.Points);
+            GL.Begin(PrimitiveType.LineLoop);
             for (int h = 0; h < ptCount; h++) GL.Vertex3(turnLine[h].easting, turnLine[h].northing, 0);
             GL.Vertex3(turnLine[0].easting, turnLine[0].northing, 0);
             GL.End();
